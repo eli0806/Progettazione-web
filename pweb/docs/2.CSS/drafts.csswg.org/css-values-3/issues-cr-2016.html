@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<title>CSS Values and Units Level 3 Disposition of Comments for 2016-09-29 CR</title>
+<style>
+  .a  { background: lightgreen }
+  .d  { background: lightblue  }
+  .r  { background: orange     }
+  .fo { background: red        }
+  .open   { border: solid red; padding: 0.2em; }
+  :target { box-shadow: 0.25em 0.25em 0.25em;  }
+</style>
+
+<h1>CSS Values and Units Level 3 Disposition of Comments for 2016-09-29 CR</h1>
+
+<p>Review document: <a href="https://www.w3.org/TR/2016/CR-css-values-3-20160929/">https://www.w3.org/TR/2016/CR-css-values-3-20160929/</a>
+
+<p>Editor's draft: <a href="http://dev.w3.org/csswg/css-values-3/">http://dev.w3.org/csswg/css-values-3/</a></p>
+
+
+
+<p>The following color coding convention is used for comments:</p>
+
+<ul>
+ <li class="a">Accepted or Rejected and positive response
+ <li class="r">Rejected and no response
+ <li class="fo">Rejected and negative response
+ <li class="d">Deferred
+ <li class="oi">Out-of-Scope or Invalid and not verified
+</ul>
+
+<p class=open>Open issues are marked like this</p>
+
+<p>An issue can be closed as <code>Accepted</code>, <code>OutOfScope</code>,
+<code>Invalid</code>, <code>Rejected</code>, or <code>Retracted</code>.
+<code>Verified</code> indicates commentor's acceptance of the response.</p>
+<pre class='a' id='issue-1'>
+Issue 1. <a href='issues-cr-2016.html#issue-1'>#</a>
+Summary:  Drop 3-component syntax from &lt;position> for disambiguation
+From:     fantasai
+Comment:  <a href='https://lists.w3.org/Archives/Public/www-style/2017Feb/0052.html'>https://lists.w3.org/Archives/Public/www-style/2017Feb/0052.html</a>
+Changes:  <a href='https://hg.csswg.org/drafts/diff/90dad9ebbc6a/css-values-3/Overview.bs'>https://hg.csswg.org/drafts/diff/90dad9ebbc6a/css-values-3/Overview.bs</a>
+Closed:   Accepted
+Verified: <a href='https://lists.w3.org/Archives/Public/www-style/2017May/0003.html'>https://lists.w3.org/Archives/Public/www-style/2017May/0003.html</a>
+Resolved: <a href='https://lists.w3.org/Archives/Public/www-style/2017Feb/0052.html'>https://lists.w3.org/Archives/Public/www-style/2017Feb/0052.html</a></pre>
+<pre class='r' id='issue-2'>
+Issue 2. <a href='issues-cr-2016.html#issue-2'>#</a>
+Summary:  # multiplier is confused with *
+From:     Simon Sapin
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/381'>https://github.com/w3c/csswg-drafts/issues/381</a>
+Response: <a href='https://github.com/w3c/csswg-drafts/issues/381#issuecomment-301952385'>https://github.com/w3c/csswg-drafts/issues/381#issuecomment-301952385</a>
+Closed:   Rejected
+Resolved: Editor discretion</pre>
+<pre class='r' id='issue-3'>
+Issue 3. <a href='issues-cr-2016.html#issue-3'>#</a>
+Summary:  Add comma-optional list notation
+From:     Jarek Foksa
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/385'>https://github.com/w3c/csswg-drafts/issues/385</a>
+Response: <a href='https://github.com/w3c/csswg-drafts/issues/385#issuecomment-243825038'>https://github.com/w3c/csswg-drafts/issues/385#issuecomment-243825038</a>
+Closed:   Rejected in favor of [ foo+ ]# which is functionally equivalent
+Resolved: <a href='https://lists.w3.org/Archives/Public/www-style/2016Sep/0000.html'>https://lists.w3.org/Archives/Public/www-style/2016Sep/0000.html</a></pre>
+<pre class='a' id='issue-4'>
+Issue 4. <a href='issues-cr-2016.html#issue-4'>#</a>
+Summary:  When to clamp negative calc() when negative lengths not allowed
+From:     Emilio
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/434'>https://github.com/w3c/csswg-drafts/issues/434</a>
+Response: <a href='https://github.com/w3c/csswg-drafts/issues/434#issuecomment-362787638'>https://github.com/w3c/csswg-drafts/issues/434#issuecomment-362787638</a>
+Changes:  <a href='https://github.com/w3c/csswg-drafts/commit/f50df1824c8cfed895a63fb3b30baa0d73327a90'>https://github.com/w3c/csswg-drafts/commit/f50df1824c8cfed895a63fb3b30baa0d73327a90</a>
+Closed:   Accepted
+Resolved: <a href='https://lists.w3.org/Archives/Public/www-style/2017Dec/0018.html'>https://lists.w3.org/Archives/Public/www-style/2017Dec/0018.html</a></pre>
+<pre class='a' id='issue-5'>
+Issue 5. <a href='issues-cr-2016.html#issue-5'>#</a>
+Summary:  Ambiguous parsing of zero in &lt;integer> | &lt;length>
+From:     Xidorn Quan
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/489'>https://github.com/w3c/csswg-drafts/issues/489</a>
+Changes:  <a href='https://github.com/w3c/csswg-drafts/commit/b6b1b24b6cf0440adafd78ff5b9f1b65ecd26d7c'>https://github.com/w3c/csswg-drafts/commit/b6b1b24b6cf0440adafd78ff5b9f1b65ecd26d7c</a>
+Closed:   Accepted
+Resolved: <a href='https://lists.w3.org/Archives/Public/www-style/2017May/0057.html'>https://lists.w3.org/Archives/Public/www-style/2017May/0057.html</a></pre>
+<pre class='a' id='issue-6'>
+Issue 6. <a href='issues-cr-2016.html#issue-6'>#</a>
+Summary:  Duplicate References
+From:     Momdo
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/559'>https://github.com/w3c/csswg-drafts/issues/559</a>
+Response: <a href='https://github.com/w3c/csswg-drafts/issues/559#issuecomment-314914033'>https://github.com/w3c/csswg-drafts/issues/559#issuecomment-314914033</a>
+Closed:   Accepted
+Resolved: Editorial</pre>
+<pre class='a' id='issue-7'>
+Issue 7. <a href='issues-cr-2016.html#issue-7'>#</a>
+Summary:  Switch [...]! multiplier to ?? combinator
+From:     fantasai
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/687'>https://github.com/w3c/csswg-drafts/issues/687</a>
+Response: <a href='https://github.com/w3c/csswg-drafts/issues/687#issuecomment-310175183'>https://github.com/w3c/csswg-drafts/issues/687#issuecomment-310175183</a>
+Closed:   Retracted
+Verified: <a href='https://github.com/w3c/csswg-drafts/issues/687#event-1133504923'>https://github.com/w3c/csswg-drafts/issues/687#event-1133504923</a></pre>
+<pre class='a' id='issue-8'>
+Issue 8. <a href='issues-cr-2016.html#issue-8'>#</a>
+Summary:  Categorize high-res screens with low-res screens, not print.
+From:     Patrick Lauke
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/708'>https://github.com/w3c/csswg-drafts/issues/708</a>
+Response: <a href='https://github.com/w3c/csswg-drafts/issues/708#issuecomment-260529072'>https://github.com/w3c/csswg-drafts/issues/708#issuecomment-260529072</a>
+Closed:   Accepted
+Resolved: <a href='https://lists.w3.org/Archives/Public/www-style/2016Nov/0085.html'>https://lists.w3.org/Archives/Public/www-style/2016Nov/0085.html</a></pre>
+<pre class='a' id='issue-9'>
+Issue 9. <a href='issues-cr-2016.html#issue-9'>#</a>
+Summary:  Undefined value of rem when no root element
+From:     Xidorn Quan
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/936'>https://github.com/w3c/csswg-drafts/issues/936</a>
+Response: <a href='https://github.com/w3c/csswg-drafts/issues/936#issuecomment-290571695'>https://github.com/w3c/csswg-drafts/issues/936#issuecomment-290571695</a>
+Closed:   Accepted
+Resolved: Editor discretion</pre>
+<pre class='a' id='issue-10'>
+Issue 10. <a href='issues-cr-2016.html#issue-10'>#</a>
+Summary:  url() missing from index
+From:     Praveeen Puglia
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/1014'>https://github.com/w3c/csswg-drafts/issues/1014</a>
+Changes:  <a href='https://github.com/w3c/csswg-drafts/commit/f7f942e9672b199892ba76e7bad9d8242f389f4f'>https://github.com/w3c/csswg-drafts/commit/f7f942e9672b199892ba76e7bad9d8242f389f4f</a>
+Closed:   Accepted
+Resolved: Editorial</pre>
+<pre class='a' id='issue-11'>
+Issue 11. <a href='issues-cr-2016.html#issue-11'>#</a>
+Summary:  Clarify interpretation of 0 inside calc()
+From:     Michael Giuffrida
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/1114'>https://github.com/w3c/csswg-drafts/issues/1114</a>
+Response: <a href='https://github.com/w3c/csswg-drafts/issues/1114#issuecomment-287236248'>https://github.com/w3c/csswg-drafts/issues/1114#issuecomment-287236248</a>
+Changes:  <a href='https://github.com/w3c/csswg-drafts/commit/1024dc3fcd3ea9c8fb45dbec7406a6c80117b0d5'>https://github.com/w3c/csswg-drafts/commit/1024dc3fcd3ea9c8fb45dbec7406a6c80117b0d5</a>
+Closed:   Accepted
+Resolved: Editorial</pre>
+<pre class='a' id='issue-12'>
+Issue 12. <a href='issues-cr-2016.html#issue-12'>#</a>
+Summary:  calc() divisors should support numeric expressions
+From:     Anthony Ramine
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/1241'>https://github.com/w3c/csswg-drafts/issues/1241</a>
+Response: <a href='https://github.com/w3c/csswg-drafts/issues/1241#issuecomment-294843757'>https://github.com/w3c/csswg-drafts/issues/1241#issuecomment-294843757</a>
+Closed:   Accepted
+Resolved: <a href='https://lists.w3.org/Archives/Public/www-style/2017May/0057.html'>https://lists.w3.org/Archives/Public/www-style/2017May/0057.html</a></pre>
+<pre class='a' id='issue-13'>
+Issue 13. <a href='issues-cr-2016.html#issue-13'>#</a>
+Summary:  Was change intentional for print media with unusual viewing distances?
+From:     fantasai
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/708#issuecomment-302240095'>https://github.com/w3c/csswg-drafts/issues/708#issuecomment-302240095</a>
+Response: <a href='https://github.com/w3c/csswg-drafts/issues/708#issuecomment-303779713'>https://github.com/w3c/csswg-drafts/issues/708#issuecomment-303779713</a>
+Closed:   Accepted
+Resolved: <a href='https://lists.w3.org/Archives/Public/www-style/2017May/0057.html'>https://lists.w3.org/Archives/Public/www-style/2017May/0057.html</a>
+Verified: <a href='https://github.com/w3c/csswg-drafts/issues/708#issuecomment-312419658'>https://github.com/w3c/csswg-drafts/issues/708#issuecomment-312419658</a></pre>
+<pre class='a' id='issue-14'>
+Issue 14. <a href='issues-cr-2016.html#issue-14'>#</a>
+Summary:  Restrict unitless 0 for angles to specific functions that need it
+From:     Tab Atkins
+Comment:  <a href='https://lists.w3.org/Archives/Public/www-style/2017Apr/0027.html'>https://lists.w3.org/Archives/Public/www-style/2017Apr/0027.html</a>
+Closed:   Accepted
+Resolved: <a href='https://lists.w3.org/Archives/Public/www-style/2017Apr/0027.html'>https://lists.w3.org/Archives/Public/www-style/2017Apr/0027.html</a></pre>
+<pre class='a' id='issue-15'>
+Issue 15. <a href='issues-cr-2016.html#issue-15'>#</a>
+Summary:  Consideration of scrollbars in viewport unit computation not implemented
+From:     David Baron
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/1766'>https://github.com/w3c/csswg-drafts/issues/1766</a>
+Closed:   Accepted
+Resolved: <a href='https://lists.w3.org/Archives/Public/www-style/2017Sep/0014.html'>https://lists.w3.org/Archives/Public/www-style/2017Sep/0014.html</a></pre>
+<pre class='a' id='issue-16'>
+Issue 16. <a href='issues-cr-2016.html#issue-16'>#</a>
+Summary:  CSS2 and css-values conflict on empty url()s
+From:     Sam Sneddon
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/2211'>https://github.com/w3c/csswg-drafts/issues/2211</a>
+Response: <a href='https://github.com/w3c/csswg-drafts/issues/2211#issuecomment-399200005'>https://github.com/w3c/csswg-drafts/issues/2211#issuecomment-399200005</a>
+Closed:   Accepted
+Resolved: <a href='https://lists.w3.org/Archives/Public/www-style/2018Jul/0018.html'>https://lists.w3.org/Archives/Public/www-style/2018Jul/0018.html</a></pre>
+<script>
+(function () {
+    var sheet = document.styleSheets[0];
+    function addCheckbox(className) {
+        var element = document.querySelector('*.' + className);
+        var label = document.createElement('label');
+        label.innerHTML = element.innerHTML;
+        element.innerHTML = null;
+        var check = document.createElement('input');
+        check.type = 'checkbox';
+        if (className == 'open') {
+            check.checked = false;
+            sheet.insertRule('pre:not(.open)' + '{}', sheet.cssRules.length);
+            check.onchange = function (e) {
+                rule.style.display = this.checked ? 'none' : 'block';
+            }
+        }
+        else {
+            check.checked = true;
+            sheet.insertRule('pre.' + className + '{}', sheet.cssRules.length);
+            check.onchange = function (e) {
+                rule.style.display = this.checked ? 'block' : 'none';
+            }
+        }
+        var rule = sheet.cssRules[sheet.cssRules.length - 1];
+        element.appendChild(label);
+        label.insertBefore(check, label.firstChild);
+    }
+    ['a', 'd', 'fo', 'oi', 'r', 'open'].forEach(addCheckbox);
+}());
+</script>

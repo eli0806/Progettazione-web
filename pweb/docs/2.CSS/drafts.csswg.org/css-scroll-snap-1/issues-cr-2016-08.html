@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<title>CSS Scroll Snap Level 1 Disposition of Comments for 2017-08-24 CR</title>
+<style>
+  .a  { background: lightgreen }
+  .d  { background: lightblue  }
+  .r  { background: orange     }
+  .fo { background: red        }
+  .open   { border: solid red; padding: 0.2em; }
+  :target { box-shadow: 0.25em 0.25em 0.25em;  }
+</style>
+
+<h1>CSS Scroll Snap Level 1 Disposition of Comments for 2017-08-24 CR</h1>
+
+<p>Review document: <a href="https://www.w3.org/TR/2017/CR-css-scroll-snap-1-20170824/">https://www.w3.org/TR/2017/CR-css-scroll-snap-1-20170824/</a>
+
+<p>Editor's draft: <a href="http://dev.w3.org/csswg/css-scroll-snap-1/">http://dev.w3.org/csswg/css-scroll-snap-1/</a></p>
+
+
+
+<p>The following color coding convention is used for comments:</p>
+
+<ul>
+ <li class="a">Accepted or Rejected and positive response
+ <li class="r">Rejected and no response
+ <li class="fo">Rejected and negative response
+ <li class="d">Deferred
+ <li class="oi">Out-of-Scope or Invalid and not verified
+</ul>
+
+<p class=open>Open issues are marked like this</p>
+
+<p>An issue can be closed as <code>Accepted</code>, <code>OutOfScope</code>,
+<code>Invalid</code>, <code>Rejected</code>, or <code>Retracted</code>.
+<code>Verified</code> indicates commentor's acceptance of the response.</p>
+<pre class='a' id='issue-1'>
+Issue 1. <a href='issues-cr-2016-08.html#issue-1'>#</a>
+Summary:  Consider more specific guidance for scroll-into-view
+From:     fantasai
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/1707'>https://github.com/w3c/csswg-drafts/issues/1707</a>
+Response: <a href='https://github.com/w3c/csswg-drafts/issues/1707#issuecomment-342565591'>https://github.com/w3c/csswg-drafts/issues/1707#issuecomment-342565591</a>
+Changes:  <a href='https://github.com/w3c/csswg-drafts/commit/17f6d8d8dc1e0f7f20db04db2a8cb50452177337'>https://github.com/w3c/csswg-drafts/commit/17f6d8d8dc1e0f7f20db04db2a8cb50452177337</a>
+Closed:   Accepted
+Verified: Commenter is editor
+Resolved: TPAC 2017</pre>
+<pre class='a' id='issue-2'>
+Issue 2. <a href='issues-cr-2016-08.html#issue-2'>#</a>
+Summary:  Stray reference to point value of scroll-snap-type
+From:     alrdytaken
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/1759'>https://github.com/w3c/csswg-drafts/issues/1759</a>
+Response: <a href='https://github.com/w3c/csswg-drafts/issues/1759#issuecomment-349104842'>https://github.com/w3c/csswg-drafts/issues/1759#issuecomment-349104842</a>
+Changes:  <a href='https://github.com/w3c/csswg-drafts/commit/adc3d074d52e6edad3422b94ff6acd3d1e38ba0f'>https://github.com/w3c/csswg-drafts/commit/adc3d074d52e6edad3422b94ff6acd3d1e38ba0f</a>
+Closed:   Accepted
+Resolved: Editorial</pre>
+<pre class='r' id='issue-3'>
+Issue 3. <a href='issues-cr-2016-08.html#issue-3'>#</a>
+Summary:  Define term for boxes that create scroll snap areas
+From:     alrdytaken
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/1760'>https://github.com/w3c/csswg-drafts/issues/1760</a>
+Response: <a href='https://github.com/w3c/csswg-drafts/issues/1760#issuecomment-349105752'>https://github.com/w3c/csswg-drafts/issues/1760#issuecomment-349105752</a>
+Closed:   Rejected
+Resolved: Editorial</pre>
+<pre class='a' id='issue-4'>
+Issue 4. <a href='issues-cr-2016-08.html#issue-4'>#</a>
+Summary:  Rename scroll-snap-margin to scroll-margin?
+From:     Alan Stearns
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/1954'>https://github.com/w3c/csswg-drafts/issues/1954</a>
+Changes:  <a href='https://github.com/w3c/csswg-drafts/commit/0b1ff98e52898d61044780f86d56384602397914'>https://github.com/w3c/csswg-drafts/commit/0b1ff98e52898d61044780f86d56384602397914</a>
+Closed:   Accepted
+Verified: Commenter declared resolution 'cuz he's the WG chair.
+Resolved: Telecon 2017-12-06</pre>
+<script>
+(function () {
+    var sheet = document.styleSheets[0];
+    function addCheckbox(className) {
+        var element = document.querySelector('*.' + className);
+        var label = document.createElement('label');
+        label.innerHTML = element.innerHTML;
+        element.innerHTML = null;
+        var check = document.createElement('input');
+        check.type = 'checkbox';
+        if (className == 'open') {
+            check.checked = false;
+            sheet.insertRule('pre:not(.open)' + '{}', sheet.cssRules.length);
+            check.onchange = function (e) {
+                rule.style.display = this.checked ? 'none' : 'block';
+            }
+        }
+        else {
+            check.checked = true;
+            sheet.insertRule('pre.' + className + '{}', sheet.cssRules.length);
+            check.onchange = function (e) {
+                rule.style.display = this.checked ? 'block' : 'none';
+            }
+        }
+        var rule = sheet.cssRules[sheet.cssRules.length - 1];
+        element.appendChild(label);
+        label.insertBefore(check, label.firstChild);
+    }
+    ['a', 'd', 'fo', 'oi', 'r', 'open'].forEach(addCheckbox);
+}());
+</script>

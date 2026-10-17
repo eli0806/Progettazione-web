@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<title>CSS Flexible Box Layout Level 3 Disposition of Comments for 2015-05-14 LCWD</title>
+<style>
+  .a  { background: lightgreen }
+  .d  { background: lightblue  }
+  .r  { background: orange     }
+  .fo { background: red        }
+  .open   { border: solid red; padding: 0.2em; }
+  :target { box-shadow: 0.25em 0.25em 0.25em;  }
+</style>
+
+<h1>CSS Flexible Box Layout Level 3 Disposition of Comments for 2015-05-14 LCWD</h1>
+
+<p>Review document: <a href="http://www.w3.org/TR/2015/WD-css-flexbox-1-20150514/">http://www.w3.org/TR/2015/WD-css-flexbox-1-20150514/</a>
+
+<p>Editor's draft: <a href="http://dev.w3.org/csswg/css-flexbox-1/">http://dev.w3.org/csswg/css-flexbox-1/</a></p>
+
+
+
+<p>The following color coding convention is used for comments:</p>
+
+<ul>
+ <li class="a">Accepted or Rejected and positive response
+ <li class="r">Rejected and no response
+ <li class="fo">Rejected and negative response
+ <li class="d">Deferred
+ <li class="oi">Out-of-Scope or Invalid and not verified
+</ul>
+
+<p class=open>Open issues are marked like this</p>
+
+<p>An issue can be closed as <code>Accepted</code>, <code>OutOfScope</code>,
+<code>Invalid</code>, <code>Rejected</code>, or <code>Retracted</code>.
+<code>Verified</code> indicates commentor's acceptance of the response.</p>
+<pre class='a' id='issue-1'>
+Issue 1. <a href='issues-lc-20150514.html#issue-1'>#</a>
+Summary:  min/max-content sizes of flex containers incorrectly defined
+From:     fantasai
+Comment:  <a href='https://lists.w3.org/Archives/Public/www-style/2015Jul/0429.html'>https://lists.w3.org/Archives/Public/www-style/2015Jul/0429.html</a>
+Response: <a href='https://lists.w3.org/Archives/Public/www-style/2015Aug/0212.html'>https://lists.w3.org/Archives/Public/www-style/2015Aug/0212.html</a>
+Response: <a href='https://lists.w3.org/Archives/Public/www-style/2015Nov/0189.html'>https://lists.w3.org/Archives/Public/www-style/2015Nov/0189.html</a>
+Closed:   Accepted
+Resolved: Bugfix
+Verified: reporter is spec editor</pre>
+<pre class='a' id='issue-2'>
+Issue 2. <a href='issues-lc-20150514.html#issue-2'>#</a>
+Summary:  Should min/max-content sizes of flex containers include flex-basis?
+From:     fantasai
+Comment:  <a href='https://lists.w3.org/Archives/Public/www-style/2015Aug/0212.html'>https://lists.w3.org/Archives/Public/www-style/2015Aug/0212.html</a>
+Response: <a href='https://lists.w3.org/Archives/Public/www-style/2015Sep/0007.html'>https://lists.w3.org/Archives/Public/www-style/2015Sep/0007.html</a>
+Closed:   Retracted
+Resolved: <a href='https://lists.w3.org/Archives/Public/www-style/2015Sep/0038.html'>https://lists.w3.org/Archives/Public/www-style/2015Sep/0038.html</a>
+Verified: reporter is spec editor</pre>
+<pre class='a' id='issue-3'>
+Issue 3. <a href='issues-lc-20150514.html#issue-3'>#</a>
+Summary:  Can percentages resolve given min-size: auto?
+From:     Daniel Holbert
+Comment:  <a href='https://lists.w3.org/Archives/Public/www-style/2015Mar/0031.html'>https://lists.w3.org/Archives/Public/www-style/2015Mar/0031.html</a>
+Comment:  <a href='https://lists.w3.org/Archives/Public/www-style/2015Aug/0205.html'>https://lists.w3.org/Archives/Public/www-style/2015Aug/0205.html</a>
+Response: <a href='https://lists.w3.org/Archives/Public/www-style/2015Dec/0014.html'>https://lists.w3.org/Archives/Public/www-style/2015Dec/0014.html</a>
+Closed:   Accepted
+Resolved: <a href='https://lists.w3.org/Archives/Public/www-style/2015Sep/0038.html'>https://lists.w3.org/Archives/Public/www-style/2015Sep/0038.html</a>
+Verified: reporter participated in task force that proposed resolution</pre>
+<pre class='oi' id='issue-4'>
+Issue 4. <a href='issues-lc-20150514.html#issue-4'>#</a>
+Summary:  Quirks mode percentage size resolution, 'flex: 1', and intrinsic heights
+From:     Christian Biesinger
+Comment:  <a href='https://lists.w3.org/Archives/Public/www-style/2015Aug/0027.html'>https://lists.w3.org/Archives/Public/www-style/2015Aug/0027.html</a>
+Response: <a href='https://lists.w3.org/Archives/Public/www-style/2015Aug/0232.html'>https://lists.w3.org/Archives/Public/www-style/2015Aug/0232.html</a>
+Closed:   Invalid</pre>
+<pre class='a' id='issue-5'>
+Issue 5. <a href='issues-lc-20150514.html#issue-5'>#</a>
+Summary:  Static position of abspos incompatible with css-align definition
+From:     Christian Biesinger
+Comment:  <a href='https://lists.w3.org/Archives/Public/www-style/2015Jul/0357.html'>https://lists.w3.org/Archives/Public/www-style/2015Jul/0357.html</a>
+Response: <a href='https://lists.w3.org/Archives/Public/www-style/2015Dec/0018.html'>https://lists.w3.org/Archives/Public/www-style/2015Dec/0018.html</a>
+Closed:   Accepted
+Resolved: <a href='https://lists.w3.org/Archives/Public/www-style/2015Dec/0142.html'>https://lists.w3.org/Archives/Public/www-style/2015Dec/0142.html</a>
+Verified: <a href='http://krijnhoetmer.nl/irc-logs/css/20151202#l-49'>http://krijnhoetmer.nl/irc-logs/css/20151202#l-49</a></pre>
+<pre class='a' id='issue-6'>
+Issue 6. <a href='issues-lc-20150514.html#issue-6'>#</a>
+Summary:  Do flex item determination before anonymous box fixup.
+From:     fantasai
+Comment:  <a href='https://lists.w3.org/Archives/Public/www-style/2015Jul/0246.html'>https://lists.w3.org/Archives/Public/www-style/2015Jul/0246.html</a>
+Closed:   Accepted
+Resolved: <a href='https://lists.w3.org/Archives/Public/www-style/2015Sep/0038.html'>https://lists.w3.org/Archives/Public/www-style/2015Sep/0038.html</a>
+Verified: reporter is spec editor</pre>
+<pre class='a' id='issue-7'>
+Issue 7. <a href='issues-lc-20150514.html#issue-7'>#</a>
+Summary:  Clarify % margin/padding behavior
+From:     Daniel Holbert
+Comment:  <a href='https://lists.w3.org/Archives/Public/www-style/2015Jul/0052.html'>https://lists.w3.org/Archives/Public/www-style/2015Jul/0052.html</a>
+Response: <a href='https://lists.w3.org/Archives/Public/www-style/2015Nov/0190.html'>https://lists.w3.org/Archives/Public/www-style/2015Nov/0190.html</a>
+Closed:   Accepted
+Resolved: Editorial</pre>
+<pre class='a' id='issue-8'>
+Issue 8. <a href='issues-lc-20150514.html#issue-8'>#</a>
+Summary:  Add a11y requirements to authoring tools
+From:     fantasai
+Comment:  <a href='https://lists.w3.org/Archives/Public/www-style/2015Jun/0180.html'>https://lists.w3.org/Archives/Public/www-style/2015Jun/0180.html</a>
+Response: <a href='https://lists.w3.org/Archives/Public/www-style/2015Aug/0348.html'>https://lists.w3.org/Archives/Public/www-style/2015Aug/0348.html</a>
+Closed:   Accepted
+Resolved: <a href='https://lists.w3.org/Archives/Public/www-style/2015Sep/0064.html'>https://lists.w3.org/Archives/Public/www-style/2015Sep/0064.html</a>
+Verified: reporter is spec editor</pre>
+<pre class='a' id='issue-9'>
+Issue 9. <a href='issues-lc-20150514.html#issue-9'>#</a>
+Summary:  Editorial Comments 
+From:     timeless
+Comment:  <a href='https://lists.w3.org/Archives/Public/www-style/2015Jun/0075.html'>https://lists.w3.org/Archives/Public/www-style/2015Jun/0075.html</a>
+Comment:  <a href='https://lists.w3.org/Archives/Public/www-style/2015Jun/0085.html'>https://lists.w3.org/Archives/Public/www-style/2015Jun/0085.html</a>
+Response: <a href='https://lists.w3.org/Archives/Public/www-style/2015Aug/0344.html'>https://lists.w3.org/Archives/Public/www-style/2015Aug/0344.html</a>
+Response: <a href='https://lists.w3.org/Archives/Public/www-style/2015Aug/0346.html'>https://lists.w3.org/Archives/Public/www-style/2015Aug/0346.html</a>
+Closed:   Accepted
+Resolved: Editorial</pre>
+<pre class='a' id='issue-10'>
+Issue 10. <a href='issues-lc-20150514.html#issue-10'>#</a>
+Summary:  Broken Styling
+From:     Ryan Prichard
+Comment:  <a href='https://lists.w3.org/Archives/Public/www-style/2015Jun/0020.html'>https://lists.w3.org/Archives/Public/www-style/2015Jun/0020.html</a>
+Response: <a href='https://lists.w3.org/Archives/Public/www-style/2015Jun/0027.html'>https://lists.w3.org/Archives/Public/www-style/2015Jun/0027.html</a>
+Closed:   Accepted
+Note:     Bug appears to have disappeared?
+Resolved: Editorial</pre>
+<pre class='a' id='issue-11'>
+Issue 11. <a href='issues-lc-20150514.html#issue-11'>#</a>
+Summary:  Blink objects to percentage-margin change
+From:     Tab Atkins Jr.
+Comment:  <a href='https://lists.w3.org/Archives/Public/www-style/2015Feb/0521.html'>https://lists.w3.org/Archives/Public/www-style/2015Feb/0521.html</a>
+Note:     Accepting this reversal will require a corresponding change to Grid.
+Closed:   Accepted
+Notes:    Amended spec to allow both behaviors, as the CSSWG had no consensus.
+Verified: reporter is editor
+Minutes:  <a href='https://lists.w3.org/Archives/Public/www-style/2015Sep/0038.html'>https://lists.w3.org/Archives/Public/www-style/2015Sep/0038.html</a>
+          <a href='https://lists.w3.org/Archives/Public/www-style/2015Sep/0113.html'>https://lists.w3.org/Archives/Public/www-style/2015Sep/0113.html</a>
+Resolved: <a href='https://lists.w3.org/Archives/Public/www-style/2015Dec/0233.html'>https://lists.w3.org/Archives/Public/www-style/2015Dec/0233.html</a></pre>
+<pre class='a' id='issue-12'>
+Issue 12. <a href='issues-lc-20150514.html#issue-12'>#</a>
+Summary:  Intrinsic Cross size of flex container totally wrong
+From:     fantasai
+Comment:  <a href='https://lists.w3.org/Archives/Public/www-style/2015Aug/0253.html'>https://lists.w3.org/Archives/Public/www-style/2015Aug/0253.html</a>
+Response: <a href='https://lists.w3.org/Archives/Public/www-style/2015Dec/0055.html'>https://lists.w3.org/Archives/Public/www-style/2015Dec/0055.html</a>
+Closed:   Accepted
+Resolved: <a href='https://lists.w3.org/Archives/Public/www-style/2015Dec/0233.html'>https://lists.w3.org/Archives/Public/www-style/2015Dec/0233.html</a>
+Verified: reporter is spec editor</pre>
+<pre class='a' id='issue-13'>
+Issue 13. <a href='issues-lc-20150514.html#issue-13'>#</a>
+Summary:  Revert omitted flex-basis 0 -> 0% change
+From      fantasai
+Comment:  <a href='https://lists.w3.org/Archives/Public/www-style/2015Jul/0429.html'>https://lists.w3.org/Archives/Public/www-style/2015Jul/0429.html</a>
+Response: <a href='https://lists.w3.org/Archives/Public/www-style/2015Aug/0212.html'>https://lists.w3.org/Archives/Public/www-style/2015Aug/0212.html</a>
+Closed:   Accepted
+Resolved: <a href='https://lists.w3.org/Archives/Public/www-style/2015Sep/0064.html'>https://lists.w3.org/Archives/Public/www-style/2015Sep/0064.html</a>
+Verified: reporter is spec editor</pre>
+<pre class='r' id='issue-14'>
+Issue 14. <a href='issues-lc-20150514.html#issue-14'>#</a>
+Summary:  Use first available baseline instead of first item's baseline
+From:     timeless
+Comment:  <a href='https://lists.w3.org/Archives/Public/www-style/2015Aug/0345.html'>https://lists.w3.org/Archives/Public/www-style/2015Aug/0345.html</a>
+Response: 
+Closed:   Rejected
+Resolved: <a href='https://lists.w3.org/Archives/Public/www-style/2015Sep/0064.html'>https://lists.w3.org/Archives/Public/www-style/2015Sep/0064.html</a></pre>
+<pre class='r' id='issue-15'>
+Issue 15. <a href='issues-lc-20150514.html#issue-15'>#</a>
+Summary:  Add a tab-order property
+From:     Bo Campbell
+Comment:  <a href='https://lists.w3.org/Archives/Public/www-style/2015Aug/0285.html'>https://lists.w3.org/Archives/Public/www-style/2015Aug/0285.html</a>
+Response: <a href='https://lists.w3.org/Archives/Public/www-style/2015Aug/0347.html'>https://lists.w3.org/Archives/Public/www-style/2015Aug/0347.html</a>
+Closed:   Rejected</pre>
+<pre class=' open' id='issue-16'>
+Issue 16. <a href='issues-lc-20150514.html#issue-16'>#</a>
+Summary:  Are abspos whose containing block is flexbox affected by % resolution change?
+From:     Mats Palmgren
+Comment:  <a href='https://lists.w3.org/Archives/Public/www-style/2015May/0154.html'>https://lists.w3.org/Archives/Public/www-style/2015May/0154.html</a>
+Open:     Depends on issue #11
+Note:     WG appears to lean towards consistency within grid/flex over consistency within abspos</pre>
+<pre class='d' id='issue-18'>
+Issue 18. <a href='issues-lc-20150514.html#issue-18'>#</a>
+Summary:  Minimum spacing between flex items vs. around flex items
+From:     Den
+Comment:  <a href='https://lists.w3.org/Archives/Public/www-style/2015Jul/0108.html'>https://lists.w3.org/Archives/Public/www-style/2015Jul/0108.html</a>
+Response: <a href='https://lists.w3.org/Archives/Public/www-style/2015Jul/0109.html'>https://lists.w3.org/Archives/Public/www-style/2015Jul/0109.html</a>
+Response: <a href='https://lists.w3.org/Archives/Public/www-style/2015Jul/0151.html'>https://lists.w3.org/Archives/Public/www-style/2015Jul/0151.html</a>
+Closed:   Deferred</pre>
+<pre class='a' id='issue-19'>
+Issue 19. <a href='issues-lc-20150514.html#issue-19'>#</a>
+Summary:  Blockify internal table elements instead of wrapping them in anonymous boxes
+From:     fantasai
+Comment:  <a href='https://lists.w3.org/Archives/Public/www-style/2015Jul/0246.html'>https://lists.w3.org/Archives/Public/www-style/2015Jul/0246.html</a>
+Response: 
+Closed:   Accepted
+Resolved: <a href='https://lists.w3.org/Archives/Public/www-style/2015Sep/0038.html'>https://lists.w3.org/Archives/Public/www-style/2015Sep/0038.html</a>
+Verified: reporter is spec editor</pre>
+<pre class='a' id='issue-20'>
+Issue 20. <a href='issues-lc-20150514.html#issue-20'>#</a>
+Summary:  Applies-to error for justify-items
+From:     Javier Fernandez
+Comment:  <a href='https://lists.w3.org/Archives/Public/www-style/2015Jul/0413.html'>https://lists.w3.org/Archives/Public/www-style/2015Jul/0413.html</a>
+Response: <a href='https://lists.w3.org/Archives/Public/www-style/2015Jul/0425.html'>https://lists.w3.org/Archives/Public/www-style/2015Jul/0425.html</a>
+Closed:   Accepted
+Resolved: Bugfix</pre>
+<pre class='a' id='issue-21'>
+Issue 21. <a href='issues-lc-20150514.html#issue-21'>#</a>
+Summary:  Interaction of min-height: auto and scrollbars
+From:     Christian Biesinger
+Comment:  <a href='https://lists.w3.org/Archives/Public/www-style/2015Aug/0022.html'>https://lists.w3.org/Archives/Public/www-style/2015Aug/0022.html</a>
+Response: <a href='https://lists.w3.org/Archives/Public/www-style/2015Aug/0023.html'>https://lists.w3.org/Archives/Public/www-style/2015Aug/0023.html</a>
+Closed:   Question
+Verified: <a href='https://lists.w3.org/Archives/Public/www-style/2015Aug/0024.html'>https://lists.w3.org/Archives/Public/www-style/2015Aug/0024.html</a></pre>
+<pre class='a' id='issue-22'>
+Issue 22. <a href='issues-lc-20150514.html#issue-22'>#</a>
+Summary:  Editorial comments
+From:     timeless
+Comment:  <a href='https://lists.w3.org/Archives/Public/www-style/2015Jun/0075.html'>https://lists.w3.org/Archives/Public/www-style/2015Jun/0075.html</a>
+Comment:  <a href='https://lists.w3.org/Archives/Public/www-style/2015Jun/0085.html'>https://lists.w3.org/Archives/Public/www-style/2015Jun/0085.html</a>
+Response: <a href='https://lists.w3.org/Archives/Public/www-style/2015Aug/0344.html'>https://lists.w3.org/Archives/Public/www-style/2015Aug/0344.html</a>
+Response: <a href='https://lists.w3.org/Archives/Public/www-style/2015Aug/0346.html'>https://lists.w3.org/Archives/Public/www-style/2015Aug/0346.html</a>
+Closed:   Accepted
+Resolved: Editorial</pre>
+<pre class='oi' id='issue-23'>
+Issue 23. <a href='issues-lc-20150514.html#issue-23'>#</a>
+Summary:  Typo?
+From:     Christian Biesinger
+Comment:  <a href='https://lists.w3.org/Archives/Public/www-style/2015Sep/0224.html'>https://lists.w3.org/Archives/Public/www-style/2015Sep/0224.html</a>
+Response: <a href='https://lists.w3.org/Archives/Public/www-style/2015Sep/0225.html'>https://lists.w3.org/Archives/Public/www-style/2015Sep/0225.html</a>
+Closed:   Invalid</pre>
+<pre class='oi' id='issue-24'>
+Issue 24. <a href='issues-lc-20150514.html#issue-24'>#</a>
+Summary:  Breaking lines at max-height/width not defined
+From:     Christian Biesinger
+Comment:  <a href='https://lists.w3.org/Archives/Public/www-style/2015Oct/0099.html'>https://lists.w3.org/Archives/Public/www-style/2015Oct/0099.html</a>
+Response: <a href='https://lists.w3.org/Archives/Public/www-style/2015Dec/0021.html'>https://lists.w3.org/Archives/Public/www-style/2015Dec/0021.html</a>
+Closed:   Invalid</pre>
+<pre class='oi' id='issue-25'>
+Issue 25. <a href='issues-lc-20150514.html#issue-25'>#</a>
+Summary:  &lt;textarea> as flex container
+From:     John Waterson
+Comment:  <a href='https://lists.w3.org/Archives/Public/www-style/2015Oct/0115.html'>https://lists.w3.org/Archives/Public/www-style/2015Oct/0115.html</a>
+Response: <a href='https://lists.w3.org/Archives/Public/www-style/2015Oct/0116.html'>https://lists.w3.org/Archives/Public/www-style/2015Oct/0116.html</a>
+Response: <a href='https://lists.w3.org/Archives/Public/www-style/2015Dec/0024.html'>https://lists.w3.org/Archives/Public/www-style/2015Dec/0024.html</a>
+Closed:   OutOfScope</pre>
+<pre class='a' id='issue-26'>
+Issue 26. <a href='issues-lc-20150514.html#issue-26'>#</a>
+Summary:  Percentages resolving against definite max-height
+From:     Tab and fantasai
+Comment:  <a href='https://lists.w3.org/Archives/Public/www-style/2015Nov/0067.html'>https://lists.w3.org/Archives/Public/www-style/2015Nov/0067.html</a>
+Response: <a href='https://lists.w3.org/Archives/Public/www-style/2015Dec/0029.html'>https://lists.w3.org/Archives/Public/www-style/2015Dec/0029.html</a>
+Closed:   Invalid
+Verified: <a href='https://lists.w3.org/Archives/Public/www-style/2015Dec/0029.html'>https://lists.w3.org/Archives/Public/www-style/2015Dec/0029.html</a></pre>
+<pre class='a' id='issue-27'>
+Issue 27. <a href='issues-lc-20150514.html#issue-27'>#</a>
+Summary:  Fragmentation rule forces break-inside: avoid
+From:     fantasai
+Comment:  <a href='https://lists.w3.org/Archives/Public/www-style/2015Dec/0163.html'>https://lists.w3.org/Archives/Public/www-style/2015Dec/0163.html</a>
+Closed:   Accepted
+Resolved: <a href='https://lists.w3.org/Archives/Public/www-style/2015Dec/0233.html'>https://lists.w3.org/Archives/Public/www-style/2015Dec/0233.html</a>
+Verified: Reporter is spec editor</pre>
+<script>
+(function () {
+    var sheet = document.styleSheets[0];
+    function addCheckbox(className) {
+        var element = document.querySelector('*.' + className);
+        var label = document.createElement('label');
+        label.innerHTML = element.innerHTML;
+        element.innerHTML = null;
+        var check = document.createElement('input');
+        check.type = 'checkbox';
+        if (className == 'open') {
+            check.checked = false;
+            sheet.insertRule('pre:not(.open)' + '{}', sheet.cssRules.length);
+            check.onchange = function (e) {
+                rule.style.display = this.checked ? 'none' : 'block';
+            }
+        }
+        else {
+            check.checked = true;
+            sheet.insertRule('pre.' + className + '{}', sheet.cssRules.length);
+            check.onchange = function (e) {
+                rule.style.display = this.checked ? 'block' : 'none';
+            }
+        }
+        var rule = sheet.cssRules[sheet.cssRules.length - 1];
+        element.appendChild(label);
+        label.insertBefore(check, label.firstChild);
+    }
+    ['a', 'd', 'fo', 'oi', 'r', 'open'].forEach(addCheckbox);
+}());
+</script>

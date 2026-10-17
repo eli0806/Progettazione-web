@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<title>CSS Flexible Box Layout Level 1 Disposition of Comments for 2016-03-01 CR</title>
+<style>
+  .a  { background: lightgreen }
+  .d  { background: lightblue  }
+  .r  { background: orange     }
+  .fo { background: red        }
+  .open   { border: solid red; padding: 0.2em; }
+  :target { box-shadow: 0.25em 0.25em 0.25em;  }
+</style>
+
+<h1>CSS Flexible Box Layout Level 1 Disposition of Comments for 2016-03-01 CR</h1>
+
+<p>Review document: <a href="https://www.w3.org/TR/2016/CR-css-flexbox-1-20160301/">https://www.w3.org/TR/2016/CR-css-flexbox-1-20160301/</a>
+
+<p>Editor's draft: <a href="http://dev.w3.org/csswg/css-flexbox-1/">http://dev.w3.org/csswg/css-flexbox-1/</a></p>
+
+
+
+<p>The following color coding convention is used for comments:</p>
+
+<ul>
+ <li class="a">Accepted or Rejected and positive response
+ <li class="r">Rejected and no response
+ <li class="fo">Rejected and negative response
+ <li class="d">Deferred
+ <li class="oi">Out-of-Scope or Invalid and not verified
+</ul>
+
+<p class=open>Open issues are marked like this</p>
+
+<p>An issue can be closed as <code>Accepted</code>, <code>OutOfScope</code>,
+<code>Invalid</code>, <code>Rejected</code>, or <code>Retracted</code>.
+<code>Verified</code> indicates commentor's acceptance of the response.</p>
+<pre class='a' id='issue-1'>
+Issue 1. <a href='issues-cr-20160301.html#issue-1'>#</a>
+Summary:  Clarify that spatial navigation can honor 'order'
+From:     Cynthia Shelly
+Comment:  [a11y telecon]
+Response: [a11y telecon]
+Closed:   Accepted
+Resolved: SF F2F</pre>
+<pre class='a' id='issue-2'>
+Issue 2. <a href='issues-cr-20160301.html#issue-2'>#</a>
+Summary:  Clarify in 9.8 that auto-height flex containers can also create definiteness
+From:     Christian Biesinger
+Comment:  <a href='https://lists.w3.org/Archives/Public/www-style/2016Mar/0121.html'>https://lists.w3.org/Archives/Public/www-style/2016Mar/0121.html</a>
+Response: <a href='https://lists.w3.org/Archives/Public/www-style/2016Apr/0037.html'>https://lists.w3.org/Archives/Public/www-style/2016Apr/0037.html</a>
+Changes:  <a href='https://hg.csswg.org/drafts/rev/88ade2efb4e8'>https://hg.csswg.org/drafts/rev/88ade2efb4e8</a>
+Closed:   Accepted
+Verified: <a href='https://lists.w3.org/Archives/Public/www-style/2016Apr/0038.html'>https://lists.w3.org/Archives/Public/www-style/2016Apr/0038.html</a>
+Resolved: Editorial</pre>
+<pre class='a' id='issue-3'>
+Issue 3. <a href='issues-cr-20160301.html#issue-3'>#</a>
+Summary:  Define how child percentages factor into intrinsic size calculations
+From:     Christian Biesinger
+Comment:  <a href='https://lists.w3.org/Archives/Public/www-style/2016Mar/0322.html'>https://lists.w3.org/Archives/Public/www-style/2016Mar/0322.html</a>
+Response: <a href='https://lists.w3.org/Archives/Public/www-style/2016Apr/0039.html'>https://lists.w3.org/Archives/Public/www-style/2016Apr/0039.html</a>
+Changes:  <a href='https://hg.csswg.org/drafts/rev/75be56c11fda'>https://hg.csswg.org/drafts/rev/75be56c11fda</a>
+Comment:  <a href='https://lists.w3.org/Archives/Public/www-style/2016Apr/0044.html'>https://lists.w3.org/Archives/Public/www-style/2016Apr/0044.html</a>
+Response: <a href='https://lists.w3.org/Archives/Public/www-style/2016Apr/0050.html'>https://lists.w3.org/Archives/Public/www-style/2016Apr/0050.html</a>
+Closed:   Accepted
+Resolved: Editor's discretion (due to review from the competent people above)</pre>
+<pre class='oi' id='issue-4'>
+Issue 4. <a href='issues-cr-20160301.html#issue-4'>#</a>
+Summary:  Aren't absolutely-positioned flex containers always definite?
+From:     Christian Biesinger
+Comment:  <a href='https://lists.w3.org/Archives/Public/www-style/2016Mar/0180.html'>https://lists.w3.org/Archives/Public/www-style/2016Mar/0180.html</a>
+Response: <a href='https://lists.w3.org/Archives/Public/www-style/2016Apr/0040.html'>https://lists.w3.org/Archives/Public/www-style/2016Apr/0040.html</a>
+Note:     Added example of “other formula” to Sizing.
+Changes:  <a href='https://hg.csswg.org/drafts/rev/89ee7fd37001'>https://hg.csswg.org/drafts/rev/89ee7fd37001</a>
+Closed:   Invalid
+Resolved: Editor's discretion</pre>
+<pre class='a' id='issue-5'>
+Issue 5. <a href='issues-cr-20160301.html#issue-5'>#</a>
+Summary:  Does 9.8 make some sizes *indefinite* that were previously definite
+From:     Christian Biesinger
+Comment:  <a href='https://lists.w3.org/Archives/Public/www-style/2016Feb/0319.html'>https://lists.w3.org/Archives/Public/www-style/2016Feb/0319.html</a>
+Response: <a href='https://lists.w3.org/Archives/Public/www-style/2016Apr/0041.html'>https://lists.w3.org/Archives/Public/www-style/2016Apr/0041.html</a>
+Closed:   Invalid
+Verified: in person</pre>
+<pre class='a' id='issue-6'>
+Issue 6. <a href='issues-cr-20160301.html#issue-6'>#</a>
+Summary:  What about unresolvable percentages?
+From:     Christian Biesinger
+Comment:  <a href='https://lists.w3.org/Archives/Public/www-style/2016Feb/0008.html'>https://lists.w3.org/Archives/Public/www-style/2016Feb/0008.html</a>
+Response: <a href='https://lists.w3.org/Archives/Public/www-style/2016Apr/0042.html'>https://lists.w3.org/Archives/Public/www-style/2016Apr/0042.html</a>
+Changes:  <a href='https://hg.csswg.org/drafts/rev/342ac9d5c892'>https://hg.csswg.org/drafts/rev/342ac9d5c892</a>
+Closed:   Accepted
+Resolved: Editorial</pre>
+<pre class='oi' id='issue-7'>
+Issue 7. <a href='issues-cr-20160301.html#issue-7'>#</a>
+Summary:  Why is a flex item with definite flex basis not definite in an indefinite container?
+From:     Christian Biesinger
+Comment:  <a href='https://lists.w3.org/Archives/Public/www-style/2016Feb/0316.html'>https://lists.w3.org/Archives/Public/www-style/2016Feb/0316.html</a>
+Response: <a href='https://lists.w3.org/Archives/Public/www-style/2016Apr/0043.html'>https://lists.w3.org/Archives/Public/www-style/2016Apr/0043.html</a>
+Closed:   Invalid</pre>
+<pre class='a' id='issue-8'>
+Issue 8. <a href='issues-cr-20160301.html#issue-8'>#</a>
+Summary:  Clarify that inflexible items with definite basis are definite
+From:     fantasai
+Response: <a href='https://lists.w3.org/Archives/Public/www-style/2016Apr/0043.html'>https://lists.w3.org/Archives/Public/www-style/2016Apr/0043.html</a>
+Changes:  <a href='https://hg.csswg.org/drafts/rev/fbcbe170c119'>https://hg.csswg.org/drafts/rev/fbcbe170c119</a>
+Comment:  <a href='https://lists.w3.org/Archives/Public/www-style/2016Apr/0047.html'>https://lists.w3.org/Archives/Public/www-style/2016Apr/0047.html</a>
+Response: <a href='https://lists.w3.org/Archives/Public/www-style/2016Apr/0049.html'>https://lists.w3.org/Archives/Public/www-style/2016Apr/0049.html</a>
+Closed:   Accepted
+Verified: Reporter is editor
+Resolved: Editorial</pre>
+<pre class='a' id='issue-9'>
+Issue 9. <a href='issues-cr-20160301.html#issue-9'>#</a>
+Summary:  Make Implied Minimum Size section easier to understand
+From:     fantasai
+Changes:  <a href='https://hg.csswg.org/drafts/rev/25641c92d33f'>https://hg.csswg.org/drafts/rev/25641c92d33f</a>
+Closed:   Accepted
+Verified: Reporter is editor
+Resolved: Editorial</pre>
+<pre class='a' id='issue-10'>
+Issue 10. <a href='issues-cr-20160301.html#issue-10'>#</a>
+Summary:  Flexbox's definite/indefinite size definitions are out-of-date
+From:     Daniel Holbert
+Comment:  <a href='https://lists.w3.org/Archives/Public/www-style/2016Mar/0434.html'>https://lists.w3.org/Archives/Public/www-style/2016Mar/0434.html</a>
+Response: <a href='https://lists.w3.org/Archives/Public/www-style/2016Mar/0439.html'>https://lists.w3.org/Archives/Public/www-style/2016Mar/0439.html</a>
+Closed:   Accepted
+Resolved: Bugfix</pre>
+<pre class='a' id='issue-11'>
+Issue 11. <a href='issues-cr-20160301.html#issue-11'>#</a>
+Summary:  Define “inflexible”
+From:     Christian Biesinger
+Comment:  <a href='https://lists.w3.org/Archives/Public/www-style/2016Apr/0054.html'>https://lists.w3.org/Archives/Public/www-style/2016Apr/0054.html</a>
+Response: <a href='https://lists.w3.org/Archives/Public/www-style/2016Apr/0057.html'>https://lists.w3.org/Archives/Public/www-style/2016Apr/0057.html</a>
+Closed:   Accepted
+Resolved: Bugfix</pre>
+<pre class='a' id='issue-12'>
+Issue 12. <a href='issues-cr-20160301.html#issue-12'>#</a>
+Summary:  'order' effects on abspos unimplemented
+From:     fantasai
+Comment:  <a href='https://lists.w3.org/Archives/Public/www-style/2016Apr/0186.html'>https://lists.w3.org/Archives/Public/www-style/2016Apr/0186.html</a>
+Response: <a href='https://lists.w3.org/Archives/Public/www-style/2016Apr/0347.html'>https://lists.w3.org/Archives/Public/www-style/2016Apr/0347.html</a>
+Closed:   Accepted
+Resolved: <a href='https://lists.w3.org/Archives/Public/www-style/2016Apr/0351.html'>https://lists.w3.org/Archives/Public/www-style/2016Apr/0351.html</a></pre>
+<pre class='a' id='issue-13'>
+Issue 13. <a href='issues-cr-20160301.html#issue-13'>#</a>
+Summary:  Sync baselines section with Box Alignment
+From:     fantasai
+Closed:   Accepted
+Resolved: Bugfix</pre>
+<pre class='a' id='issue-14'>
+Issue 14. <a href='issues-cr-20160301.html#issue-14'>#</a>
+Summary:  Clarify alignment property effects on static position, esp wrt stretch
+From:     Christian Biesinger
+Comment:  <a href='https://lists.w3.org/Archives/Public/www-style/2015Mar/0538.html'>https://lists.w3.org/Archives/Public/www-style/2015Mar/0538.html</a>
+Response: <a href='https://lists.w3.org/Archives/Public/www-style/2016Apr/0368.html'>https://lists.w3.org/Archives/Public/www-style/2016Apr/0368.html</a>
+Closed:   Accepted
+Resolved: Editorial</pre>
+<pre class='a' id='issue-15'>
+Issue 15. <a href='issues-cr-20160301.html#issue-15'>#</a>
+Summary:  Make intrinsic sizes definite for percentage resolution
+From:     Christian Biesinger
+Comment:  <a href='https://lists.w3.org/Archives/Public/www-style/2016May/0050.html'>https://lists.w3.org/Archives/Public/www-style/2016May/0050.html</a>
+Response: <a href='https://lists.w3.org/Archives/Public/www-style/2016May/0135.html'>https://lists.w3.org/Archives/Public/www-style/2016May/0135.html</a>
+Closed:   Accepted
+Resolved: SF F2F</pre>
+<script>
+(function () {
+    var sheet = document.styleSheets[0];
+    function addCheckbox(className) {
+        var element = document.querySelector('*.' + className);
+        var label = document.createElement('label');
+        label.innerHTML = element.innerHTML;
+        element.innerHTML = null;
+        var check = document.createElement('input');
+        check.type = 'checkbox';
+        if (className == 'open') {
+            check.checked = false;
+            sheet.insertRule('pre:not(.open)' + '{}', sheet.cssRules.length);
+            check.onchange = function (e) {
+                rule.style.display = this.checked ? 'none' : 'block';
+            }
+        }
+        else {
+            check.checked = true;
+            sheet.insertRule('pre.' + className + '{}', sheet.cssRules.length);
+            check.onchange = function (e) {
+                rule.style.display = this.checked ? 'block' : 'none';
+            }
+        }
+        var rule = sheet.cssRules[sheet.cssRules.length - 1];
+        element.appendChild(label);
+        label.insertBefore(check, label.firstChild);
+    }
+    ['a', 'd', 'fo', 'oi', 'r', 'open'].forEach(addCheckbox);
+}());
+</script>

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<title>CSS Cascading and Inheritance Level 4 Disposition of Comments for 2016-01-14 CR</title>
+<style>
+  .a  { background: lightgreen }
+  .d  { background: lightblue  }
+  .r  { background: orange     }
+  .fo { background: red        }
+  .open   { border: solid red; padding: 0.2em; }
+  :target { box-shadow: 0.25em 0.25em 0.25em;  }
+</style>
+
+<h1>CSS Cascading and Inheritance Level 4 Disposition of Comments for 2016-01-14 CR</h1>
+
+<p>Review document: <a href="https://www.w3.org/TR/2016/CR-css-cascade-4-20160114/">https://www.w3.org/TR/2016/CR-css-cascade-4-20160114/</a>
+
+<p>Editor's draft: <a href="http://dev.w3.org/csswg/css-cascade-4/">http://dev.w3.org/csswg/css-cascade-4/</a></p>
+
+
+
+<p>The following color coding convention is used for comments:</p>
+
+<ul>
+ <li class="a">Accepted or Rejected and positive response
+ <li class="r">Rejected and no response
+ <li class="fo">Rejected and negative response
+ <li class="d">Deferred
+ <li class="oi">Out-of-Scope or Invalid and not verified
+</ul>
+
+<p class=open>Open issues are marked like this</p>
+
+<p>An issue can be closed as <code>Accepted</code>, <code>OutOfScope</code>,
+<code>Invalid</code>, <code>Rejected</code>, or <code>Retracted</code>.
+<code>Verified</code> indicates commentor's acceptance of the response.</p>
+<pre class='a' id='issue-1'>
+Issue 1. <a href='issues-cr-2016.html#issue-1'>#</a>
+Summary:  Confusion over 'revert'
+From:     Shane Stevens
+Comment:  Revert depending on rolling back cascading and inheritance is hard
+Response: It only affects the cascaded value, not the inherited value. Will clarify.
+Changes:
+Closed:   Accepted
+Verified: TPAC 2016
+Resolved: Editorial</pre>
+<pre class='a' id='issue-2'>
+Issue 2. <a href='issues-cr-2016.html#issue-2'>#</a>
+Summary:  Need precise definition of aliasing
+From:     Manish Goregaokar
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/866'>https://github.com/w3c/csswg-drafts/issues/866</a>
+Response: <a href='https://github.com/w3c/csswg-drafts/issues/866#issuecomment-399214678'>https://github.com/w3c/csswg-drafts/issues/866#issuecomment-399214678</a>
+Changes:  <a href='https://github.com/w3c/csswg-drafts/commit/2ae2276b115ead42ab9d6a004ed4fb0152c4f6cc'>https://github.com/w3c/csswg-drafts/commit/2ae2276b115ead42ab9d6a004ed4fb0152c4f6cc</a>
+Changes:  <a href='https://github.com/w3c/csswg-drafts/commit/0907a7d4fa3bf4ed4578c4f4e6e483ea8d07cc55'>https://github.com/w3c/csswg-drafts/commit/0907a7d4fa3bf4ed4578c4f4e6e483ea8d07cc55</a>
+Closed:   Accepted
+Resolved: <a href='https://lists.w3.org/Archives/Public/www-style/2018May/0044.html'>https://lists.w3.org/Archives/Public/www-style/2018May/0044.html</a></pre>
+<pre class='d' id='issue-3'>
+Issue 3. <a href='issues-cr-2016.html#issue-3'>#</a>
+Summary:  Define interaction of variables and animations
+From:     Greg Whitworth
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/1079'>https://github.com/w3c/csswg-drafts/issues/1079</a>
+Response: <a href='https://github.com/w3c/csswg-drafts/issues/1079#issuecomment-399216813'>https://github.com/w3c/csswg-drafts/issues/1079#issuecomment-399216813</a>
+Closed:   Deferred / OutOfScope
+Notes:    Seems more of a Variables issue.
+Resolved: Editor discretion</pre>
+<pre class='a' id='issue-4'>
+Issue 4. <a href='issues-cr-2016.html#issue-4'>#</a>
+Summary:  Define animating all property
+From:     François Remy
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/1566'>https://github.com/w3c/csswg-drafts/issues/1566</a>
+Response: <a href='https://github.com/w3c/csswg-drafts/issues/1566#issuecomment-311222210'>https://github.com/w3c/csswg-drafts/issues/1566#issuecomment-311222210</a>
+Response: <a href='https://github.com/w3c/csswg-drafts/issues/1566#issuecomment-311407951'>https://github.com/w3c/csswg-drafts/issues/1566#issuecomment-311407951</a>
+Closed:   Invalid
+Verified: <a href='https://github.com/w3c/csswg-drafts/issues/1566#issuecomment-311232731'>https://github.com/w3c/csswg-drafts/issues/1566#issuecomment-311232731</a></pre>
+<pre class='d' id='issue-5'>
+Issue 5. <a href='issues-cr-2016.html#issue-5'>#</a>
+Summary:  Elements in the flat tree don't have values
+From:     Emilio Cobos Álvarez
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/1964'>https://github.com/w3c/csswg-drafts/issues/1964</a>
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/2562'>https://github.com/w3c/csswg-drafts/issues/2562</a>
+Response: <a href='https://github.com/w3c/csswg-drafts/issues/2562#issuecomment-413772975'>https://github.com/w3c/csswg-drafts/issues/2562#issuecomment-413772975</a>
+Closed:   Deferred / OutOfScope</pre>
+<script>
+(function () {
+    var sheet = document.styleSheets[0];
+    function addCheckbox(className) {
+        var element = document.querySelector('*.' + className);
+        var label = document.createElement('label');
+        label.innerHTML = element.innerHTML;
+        element.innerHTML = null;
+        var check = document.createElement('input');
+        check.type = 'checkbox';
+        if (className == 'open') {
+            check.checked = false;
+            sheet.insertRule('pre:not(.open)' + '{}', sheet.cssRules.length);
+            check.onchange = function (e) {
+                rule.style.display = this.checked ? 'none' : 'block';
+            }
+        }
+        else {
+            check.checked = true;
+            sheet.insertRule('pre.' + className + '{}', sheet.cssRules.length);
+            check.onchange = function (e) {
+                rule.style.display = this.checked ? 'block' : 'none';
+            }
+        }
+        var rule = sheet.cssRules[sheet.cssRules.length - 1];
+        element.appendChild(label);
+        label.insertBefore(check, label.firstChild);
+    }
+    ['a', 'd', 'fo', 'oi', 'r', 'open'].forEach(addCheckbox);
+}());
+</script>

@@ -1,0 +1,326 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>CSS Scroll State Container Queries Explainer</title>
+<style>
+body { max-width: 50em; margin: 2em auto; padding: 0 1em; font-family: sans-serif; line-height: 1.6; }
+code { background: #f4f4f4; padding: .1em .3em; border-radius: 3px; }
+pre { background: #f4f4f4; padding: 1em; overflow: auto; border-radius: 3px; }
+pre code { background: none; padding: 0; }
+img { max-width: 100%; }
+.admonition { border-left: 4px solid #888; padding: 0.5em 1em; margin: 1em 0; background: #f8f9fa; border-radius: 3px; }
+.admonition-title { font-weight: bold; margin: 0 0 0.25em; }
+.admonition.note, .admonition.tip { border-color: #0969da; }
+.admonition.important { border-color: #8250df; }
+.admonition.warning, .admonition.caution { border-color: #d1242f; }
+</style>
+<h1>CSS Scroll State Container Queries Explainer</h1>
+<h2>Introduction</h2>
+<p>Level 5 of CSS Conditional Rules introduces Container Queries for querying size and
+style of containers to style their descendants depending on layout and computed
+styles respectively. There are requests to allow to query other states
+associated with a container, in particular various scroll based states.</p>
+<h2>Background and Motivation</h2>
+<p>Certain scroll-based states are only available for styling through javascript
+events. These include whether a sticky positioned element is stuck in the sense
+that it has an position offset applied, whether a scroll-snap-aligned element
+is snapped to its scroll snap container or not. Exposing these states in CSS
+would make it simpler for authors to create effects on snapped elements, or
+have sticky positioned elements change their appearance when stuck.</p>
+<p>This article talks about the need for support for styling scroll-snapped
+elements:
+<a href="https://web.dev/state-of-css-2022/#scroll-snap-features-are-too-limited">https://web.dev/state-of-css-2022/#scroll-snap-features-are-too-limited</a>.
+In particular, see: <a href="https://web.dev/state-of-css-2022/#snap-target">https://web.dev/state-of-css-2022/#snap-target</a>.
+This article also talks about the lack of being able to style snapped elements,
+using intersection observers as a javascript alternative:
+<a href="https://blog.logrocket.com/style-scroll-snap-points-css/">https://blog.logrocket.com/style-scroll-snap-points-css/</a>.</p>
+<p>These ideas have been explored before. For instance, see
+<a href="https://github.com/w3c/csswg-drafts/issues/5979">this github issue</a>, and
+<a href="https://github.com/argyleink/ScrollSnapExplainers/blob/main/css-snap-target/readme.md">this explainer</a>
+for <code>:snapped</code> pseudo classes. That explainer pre-dates the container queries
+specification and implementation that has happened recently.</p>
+<p>One major argument against exposing this state to style resolution is that it
+introduces cycles in rendering updates since layout influences scroll positions
+which influence this state which again can influence layout through style
+depending on this state (see
+<a href="https://github.com/w3c/csswg-drafts/issues/5979#issuecomment-899765136">this comment</a>
+and onwards).</p>
+<p>There is a <a href="https://github.com/w3c/csswg-drafts/issues/6402#issuecomment-1812973013">resolution</a>
+to add scroll-state() queries.</p>
+<h2>Container Queries vs Pseudo Classes</h2>
+<p>Container queries are an alternative to using pseudo classes for these states.
+There are pros and cons of using new pseudo classes. Container queries would
+naturally limit the style depending on this state to be applied in the stuck or
+snapped element's subtree, while a pseudo class could arbitrarily be used to
+style sibling subtrees and even ancestors (using <code>:has()</code>) unless the use in
+selectors are restricted to certain combinators. One can argue that using
+pseudo classes would make it more likely to end up in situations where layout
+cycles are an issue.</p>
+<p>Containers already have the container-type property which can be used to
+explicitly choose which elements can be queried for state, which could also
+help avoiding cycles issues. It would also allow for more performant
+implementations in that fewer elements need to be checked for state.  When size
+containers were introduced, there was a conscious choice to introduce an
+explicit container-type instead of implicitly deduce a size container from the
+<code>contain</code> property. For a pseudo class approach, we would either have to
+introduce an explicit state property or deduce that an element is allowed to
+match based on another property. E.g. <code>:stuck</code> allowed for <code>position:sticky</code>.</p>
+<p>In the discussion in:
+<a href="https://github.com/w3c/csswg-drafts/issues/5979">https://github.com/w3c/csswg-drafts/issues/5979</a>,
+container queries are brought up as an alternative to pseudo classes. That
+issue is also talking about containment, whether container queries should be
+used instead of pseudo classes, and the fact that the need for an extra loop
+after snapshotting  could be hooked into the same HTML rendering update as for
+scroll driven animations.</p>
+<h2>States to Query</h2>
+<p>This explainer tries to capture scroll-based state queries and the following
+sections cover each of them. The commonality is that they all rely on scroll
+positions and sizes.</p>
+<h3>Stuck Sticky-positioned Elements</h3>
+<p>Introduce a container-type <code>sticky</code> to allow sticky positioned elements as
+query containers for querying whether the sticky positioned has an offset
+applied to fulfill the constraint for a given inset property. For instance:</p>
+<pre><code class="language-html">&lt;style&gt;
+#sticky {
+  container-name: my-menu;
+  container-type: sticky;
+  position: sticky;
+  top: 0px;
+  height: 100px;
+}
+
+#sticky-child {
+  background-color: orange;
+  color: white;
+  height: 100%;
+}
+
+@container my-menu scroll-state(stuck: top) {
+  #sticky-child { width: 50%; }
+}
+&lt;/style&gt;
+&lt;div id=&quot;sticky&quot;&gt;
+  &lt;div id=&quot;sticky-child&quot;&gt;
+    Sticky
+  &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+<p>There is a question whether the query should match when the applied offset is
+still 0, but it is exactly aligned with the edge of where an offset would start
+to take effect.</p>
+<h4>Use Cases and Author Requests</h4>
+<ul>
+<li>Demo that changes class through javascript based on the scrollTop value:
+<a href="https://codepen.io/JGallardo/pen/ZEBbeP">Header (Logo pops in)</a></li>
+<li><a href="https://davidwalsh.name/detect-sticky">Article using IntersectionObserver</a>,
+but stating there should ideally be a :stuck pseudo</li>
+<li><a href="https://developer.chrome.com/blog/sticky-headers/">Using IntersectionObserver to fire custom sticky-change events</a></li>
+<li><a href="https://codepen.io/bhupendra1011/pen/GRKxWMM">Another demo using IntersectionObserver</a></li>
+</ul>
+<h4>Chrome Prototype Demo</h4>
+<p><video width="400px" src="https://lilles.github.io/explainers/sticky.mov" controls muted></video></p>
+<h3>Scroll-snapped Elements</h3>
+<p>Introduce a container-type <code>snapped</code> to allow scroll-snap-aligned elements to
+be queried for whether they are currently
+<a href="../css-scroll-snap/index.html#scroll-snap">snapped</a> in a given
+direction. For instance:</p>
+<pre><code class="language-css">@container scroll-state(snapped: block) {
+  #snap-child {
+    outline: 5px solid yellow;
+  }
+}
+</code></pre>
+<h4>Use Cases and Author Requests</h4>
+<p>In general being able to highlight the scroll snapped element, for instance in
+a carousel.</p>
+<ul>
+<li><a href="https://github.com/w3c/csswg-drafts/issues/7430">Author request on github</a></li>
+</ul>
+<h3>Scrollable</h3>
+<p>Query whether a container has <a href="../css-overflow-3/index.html#scrollable-overflow-region">scrollable overflow</a>.
+Can be used to indicate there is content to scroll to in a given direction.</p>
+<h3>Scrolled</h3>
+<p>Query the direction of <a href="../css-scroll-snap-1/index.html#scroll-types">the most recent relative scroll</a>.
+For instance:</p>
+<pre><code class="language-css">@container scroll-state(scrolled: top) {
+  .scrolling-up {
+    translate: 0 0;
+  }
+}
+</code></pre>
+<h4>Workaround</h4>
+<p>A workaround solution to create queries based on scrolling direction
+is described in <a href="https://www.bram.us/2024/09/29/solved-by-css-scroll-driven-animations-hide-a-header-when-scrolling-up-show-it-again-when-scrolling-down/">Solved by CSS Scroll-Driven Animations: hide a header when
+scrolling down, show it again when scrolling up</a>,
+uses a <code>transition-delay</code> trick to get the active scroll direction.</p>
+<h4>Use Cases and Author Requests</h4>
+<p>To hide/show or partially collapse some content based on the direction of
+scrolling.</p>
+<ul>
+<li><a href="https://github.com/w3c/csswg-drafts/issues/6400">Author request on github</a></li>
+</ul>
+<h4>Active scroll direction</h4>
+<p>The proposed <code>scrolled</code> feature
+matches the state of the most recent relative scroll direction.
+Web authors might also want to create queries
+based on the active scroll direction, not only the most recent one,
+similar to <a href="../cssom-view/index.html#eventdef-document-scrollend">scrollend event</a>.</p>
+<p>This needs further discussion with the working group.</p>
+<h4>Programmatic scrolling</h4>
+<p>The question about which programmatic scrolls should affect scroll direction
+feature is discussed in <a href="https://github.com/w3c/csswg-drafts/issues/12394">the issue</a>.</p>
+<h3>Anchor position fallback</h3>
+<p>In earlier exploration of anchor positioning, it was suggested that container
+queries could be used to style the contents of an anchor positioned element
+based on which <a href="../css-anchor-position-1/index.html#fallback-rule"><code>@position-fallback</code></a>
+is used.</p>
+<p>This needs further exploration.</p>
+<h2>Proposed Syntax</h2>
+<p>Add a new scroll-state() function to <code>@container</code> similar to <code>style()</code> where
+<code>state:value</code> pairs, and logical combinations of them, can be queried.
+<code>&lt;state-feature&gt;</code> will be similar to
+<a href="index.html#typedef-style-feature"><code>&lt;style-feature&gt;</code></a>
+in that it takes a state name and value separated by a colon.</p>
+<p>Add a new <a href="index.html#container-type"><code>container-type</code></a>
+for each state which can be combined with size container types:</p>
+<ul>
+<li><code>stuck</code></li>
+<li><code>snapped</code></li>
+</ul>
+<p>Query values for <code>stuck</code>:</p>
+<ul>
+<li><code>none</code></li>
+<li><code>top</code></li>
+<li><code>left</code></li>
+<li><code>right</code></li>
+<li><code>bottom</code></li>
+<li><code>inset-block-start</code></li>
+<li><code>inset-block-end</code></li>
+<li><code>inset-inline-start</code></li>
+<li><code>inset-inline-end</code></li>
+</ul>
+<p>Query values for <code>snapped</code>:</p>
+<ul>
+<li><code>none</code></li>
+<li><code>x</code></li>
+<li><code>y</code></li>
+<li><code>block</code></li>
+<li><code>inline</code></li>
+<li><code>both</code></li>
+</ul>
+<p>Query values for <code>scrollable</code>:</p>
+<ul>
+<li><code>none</code></li>
+<li><code>top</code></li>
+<li><code>right</code></li>
+<li><code>bottom</code></li>
+<li><code>left</code></li>
+<li><code>block-start</code></li>
+<li><code>inline-start</code></li>
+<li><code>block-end</code></li>
+<li><code>inline-end</code></li>
+<li><code>x</code></li>
+<li><code>y</code></li>
+<li><code>block</code></li>
+<li><code>inline</code></li>
+</ul>
+<p>Query values for <code>direction</code>:</p>
+<ul>
+<li><code>none</code></li>
+<li><code>top</code></li>
+<li><code>right</code></li>
+<li><code>bottom</code></li>
+<li><code>left</code></li>
+<li><code>block-start</code></li>
+<li><code>inline-start</code></li>
+<li><code>block-end</code></li>
+<li><code>inline-end</code></li>
+<li><code>x</code></li>
+<li><code>y</code></li>
+<li><code>block</code></li>
+<li><code>inline</code></li>
+</ul>
+<p>A query with only a state name (boolean context) would match if the state is
+different from <code>none</code>.</p>
+<h2>Containment Requirements</h2>
+<p>The proposed approach to handling layout cycles is to have a two-pass rendering
+update if necessary like scroll-driven animations have. See the
+<a href="scroll_state_explainer.html#layout-cycles">Layout Cycles</a> section below for details. There is strictly no
+need to have containment applied to the new container-types to have a
+predictable rendering, but it would help authors to avoid flickering issues.
+The question is whether it makes sense to enforce containment if containment is
+not enough to fix all flickering issues.</p>
+<p>By flickering issues we mean cases where the stuck styling would cause the
+sticky position to no longer be stuck and the following rendering update would
+lose that style and cause it to be stuck again. Similarly a scroll-snapped
+element could be made no longer snapped through style changes affecting layout
+and scroll position.</p>
+<h2>Layout Cycles</h2>
+<p>The scroll based state queries have the same issue with potential layout cycles
+that scroll-driven animations have. Whether an element has a sticky position
+offset or is scroll-snapped is not known until after layout, and state queries
+affect styles inside the containers which may affect whether the sticky element
+has a sticky position offset or not.</p>
+<p>It is possible that a lot of these cycles could be avoided if enough
+containment is applied, but that would not allow for inline-size containment
+(require full size containment), and also nesting sticky positioned elements
+would be a problematic case.</p>
+<p>More importantly, there is the problem of applying scroll based state queries
+on the first frame, which regardless requires finishing layout before the query
+containers' state can be found which would require another pass regardless of
+containment requirements.</p>
+<p>The scroll-driven animations spec specifies a set of stale timelines which
+makes it possible to apply the current timeline based on newly created
+timelines, or timelines that changed because of layout changes, to the same
+frame that the timeline was created or changed. It is however limited to a
+single extra update, specified as
+<a href="../scroll-animations/index.html#html-processing-model-event-loop">modifications to the HTML event loop</a>.</p>
+<p>It should be possible to do scroll based state queries using the exact same
+timing for updating state query state and detect if there is a need for a
+second pass to update the rendering based on the updated state.</p>
+<h2>Transitions</h2>
+<p>The two-pass rendering update introduces a side-effect of starting transitions
+which can be unfortunate, especially for the first rendered frame. This is
+already an observable effect for scroll-driven animations, which can be seen
+in the example below.</p>
+<pre><code class="language-html">&lt;!DOCTYPE html&gt;
+&lt;style&gt;
+  #timeline {
+    scroll-timeline: --scroll y;
+    width: 400px;
+    height: 400px;
+    overflow-y: scroll;
+  }
+  @keyframes w {
+    0% {
+      width: 300px;
+    }
+    100% {
+      width: 400px;
+    }
+  }
+  #container {
+    container-type: inline-size;
+    position: fixed;
+    animation-timeline: --scroll;
+    animation-name: w;
+    width: 200px;
+    height: 200px;
+  }
+  #target {
+    height: 100%;
+    background-color: green;
+    transition: background-color 4s;
+  }
+  #target { background-color: green; }
+  @container (width &gt; 200px) {
+    #target { background-color: lime; }
+  }
+&lt;/style&gt;
+&lt;div id=&quot;timeline&quot;&gt;
+  &lt;div id=&quot;container&quot;&gt;
+    &lt;div id=&quot;target&quot;&gt;&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div style=&quot;height:2000px&quot;&gt;&lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+

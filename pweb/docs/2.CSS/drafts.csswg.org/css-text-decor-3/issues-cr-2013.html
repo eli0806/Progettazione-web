@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<title>CSS Text Decoration Level 3 Disposition of Comments for 2013-08-01 CR</title>
+<style>
+  .a  { background: lightgreen }
+  .d  { background: lightblue  }
+  .r  { background: orange     }
+  .fo { background: red        }
+  .open   { border: solid red; padding: 0.2em; }
+  :target { box-shadow: 0.25em 0.25em 0.25em;  }
+</style>
+
+<h1>CSS Text Decoration Level 3 Disposition of Comments for 2013-08-01 CR</h1>
+
+<p>Review document: <a href="https://www.w3.org/TR/2013/CR-css-text-decor-3-20130801/">https://www.w3.org/TR/2013/CR-css-text-decor-3-20130801/</a>
+
+<p>Editor's draft: <a href="http://dev.w3.org/csswg/css-text-decor-3/">http://dev.w3.org/csswg/css-text-decor-3/</a></p>
+
+
+
+<p>The following color coding convention is used for comments:</p>
+
+<ul>
+ <li class="a">Accepted or Rejected and positive response
+ <li class="r">Rejected and no response
+ <li class="fo">Rejected and negative response
+ <li class="d">Deferred
+ <li class="oi">Out-of-Scope or Invalid and not verified
+</ul>
+
+<p class=open>Open issues are marked like this</p>
+
+<p>An issue can be closed as <code>Accepted</code>, <code>OutOfScope</code>,
+<code>Invalid</code>, <code>Rejected</code>, or <code>Retracted</code>.
+<code>Verified</code> indicates commentor's acceptance of the response.</p>
+<pre class='a' id='issue-1'>
+Issue 1. <a href='issues-cr-2013.html#issue-1'>#</a>
+Summary:  Allow UA to skip ink by default
+From:     Edward O'Connor
+Comment:  <a href='https://www.w3.org/mid/m2iositu9t.fsf@eoconnor.apple.com'>https://www.w3.org/mid/m2iositu9t.fsf@eoconnor.apple.com</a>
+Response: <a href='https://lists.w3.org/Archives/Public/www-style/2016Dec/0088.html'>https://lists.w3.org/Archives/Public/www-style/2016Dec/0088.html</a>
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/727'>https://github.com/w3c/csswg-drafts/issues/727</a>
+Response: <a href='https://github.com/w3c/csswg-drafts/issues/727#issuecomment-337748467'>https://github.com/w3c/csswg-drafts/issues/727#issuecomment-337748467</a>
+Changes:  <a href='https://hg.csswg.org/drafts/diff/776c8197d091/css-text-decor/Overview.bs'>https://hg.csswg.org/drafts/diff/776c8197d091/css-text-decor/Overview.bs</a>
+Closed:   Accepted
+Resolved: <a href='https://lists.w3.org/Archives/Public/www-style/2017Feb/0069.html'>https://lists.w3.org/Archives/Public/www-style/2017Feb/0069.html</a>
+Verified: <a href='https://github.com/w3c/csswg-drafts/issues/727#issuecomment-338185006'>https://github.com/w3c/csswg-drafts/issues/727#issuecomment-338185006</a></pre>
+<pre class='d' id='issue-2'>
+Issue 2. <a href='issues-cr-2013.html#issue-2'>#</a>
+Summary:  text-decoration-color doesn't handle SVG fills
+From:     Tavmjong Bah
+Comment:  <a href='https://www.w3.org/mid/1400592192.22096.52.camel@localhost.localdomain'>https://www.w3.org/mid/1400592192.22096.52.camel@localhost.localdomain</a>
+Response:
+Closed:   Deferred to FXTF Paint
+Resolved: Editor discretion</pre>
+<pre class='d' id='issue-3'>
+Issue 3. <a href='issues-cr-2013.html#issue-3'>#</a>
+Summary:  Allow specifying position and thickness of underlines
+From:     Lea Verou
+Comment:  <a href='https://www.w3.org/mid/9500A3A5-957D-462D-B30C-E5C548ADEB0E@verou.me'>https://www.w3.org/mid/9500A3A5-957D-462D-B30C-E5C548ADEB0E@verou.me</a>
+Response: <a href='https://www.w3.org/mid/53BE565D.5090905@inkedblade.net'>https://www.w3.org/mid/53BE565D.5090905@inkedblade.net</a>
+Closed:   Deferred to L4
+Resolved: <a href='https://lists.w3.org/Archives/Public/www-style/2017Feb/0049.html'>https://lists.w3.org/Archives/Public/www-style/2017Feb/0049.html</a></pre>
+<pre class='r' id='issue-4'>
+Issue 4. <a href='issues-cr-2013.html#issue-4'>#</a>
+Summary:  Allow arbitrary decorations
+From:     Sebastian Zartner
+Comment:  <a href='https://www.w3.org/mid/CAERejNbMCrZiBbCSRjA_1mZ3qOZyQ9PTDoH+TxvX4gp_2eSnpg@mail.gmail.com'>https://www.w3.org/mid/CAERejNbMCrZiBbCSRjA_1mZ3qOZyQ9PTDoH+TxvX4gp_2eSnpg@mail.gmail.com</a>
+Response: <a href='https://www.w3.org/mid/CAAWBYDB-xMb46nMf3piNNU_fcyry0hUoKh=WfPmZma3CA=c8Gg@mail.gmail.com'>https://www.w3.org/mid/CAAWBYDB-xMb46nMf3piNNU_fcyry0hUoKh=WfPmZma3CA=c8Gg@mail.gmail.com</a>
+Closed:   Rejected
+Note:     Proposal is way ahead of its time; use cases may be addressed in
+          future specs, unknown as yet which ones.
+Resolved: <a href='https://lists.w3.org/Archives/Public/www-style/2017Feb/0049.html'>https://lists.w3.org/Archives/Public/www-style/2017Feb/0049.html</a></pre>
+<pre class='r' id='issue-5'>
+Issue 5. <a href='issues-cr-2013.html#issue-5'>#</a>
+Summary:  text-shadow should apply to inline images
+From:     Axel Dahmen
+Comment:  <a href='https://www.w3.org/mid/maatmk$bq8$1@ger.gmane.org'>https://www.w3.org/mid/maatmk$bq8$1@ger.gmane.org</a>
+Response: <a href='https://lists.w3.org/Archives/Public/www-style/2016Dec/0087.html'>https://lists.w3.org/Archives/Public/www-style/2016Dec/0087.html</a>
+Closed:   Rejected
+Resolved: <a href='https://lists.w3.org/Archives/Public/www-style/2017Feb/0049.html'>https://lists.w3.org/Archives/Public/www-style/2017Feb/0049.html</a></pre>
+<pre class='a' id='issue-6'>
+Issue 6. <a href='issues-cr-2013.html#issue-6'>#</a>
+Summary:  Don't underline leading/trailing spaces
+From:     Florian Rivoal
+Comment:  <a href='https://www.w3.org/mid/3A25BF98-130D-43F1-A883-90EAC8EDECB5@rivoal.net'>https://www.w3.org/mid/3A25BF98-130D-43F1-A883-90EAC8EDECB5@rivoal.net</a>
+Response: <a href='https://www.w3.org/mid/CADhPm3u5pTm7eTDQ-skjhfMA6nfHSewvnrtoYOxXVSj22HxXKw@mail.gmail.com'>https://www.w3.org/mid/CADhPm3u5pTm7eTDQ-skjhfMA6nfHSewvnrtoYOxXVSj22HxXKw@mail.gmail.com</a>
+Changes:  <a href='https://hg.csswg.org/drafts/diff/dad5fcc900d7/css-text-decor/Overview.bs'>https://hg.csswg.org/drafts/diff/dad5fcc900d7/css-text-decor/Overview.bs</a>
+Closed:   Accepted
+Resolved: <a href='https://www.w3.org/mid/CADhPm3u5pTm7eTDQ-skjhfMA6nfHSewvnrtoYOxXVSj22HxXKw@mail.gmail.com'>https://www.w3.org/mid/CADhPm3u5pTm7eTDQ-skjhfMA6nfHSewvnrtoYOxXVSj22HxXKw@mail.gmail.com</a>
+Verified: <a href='https://www.w3.org/mid/CADhPm3u5pTm7eTDQ-skjhfMA6nfHSewvnrtoYOxXVSj22HxXKw@mail.gmail.com'>https://www.w3.org/mid/CADhPm3u5pTm7eTDQ-skjhfMA6nfHSewvnrtoYOxXVSj22HxXKw@mail.gmail.com</a></pre>
+<pre class='a' id='issue-7'>
+Issue 7. <a href='issues-cr-2013.html#issue-7'>#</a>
+Summary:  Error in computed value of 'text-shadow'
+From:     David Baron
+Comment:  <a href='https://www.w3.org/mid/20150326151542.GA19304@pescadero.dbaron.org'>https://www.w3.org/mid/20150326151542.GA19304@pescadero.dbaron.org</a>
+Response: <a href='https://www.w3.org/mid/CAAWBYDB9UDyk+8v53t5kDjcTsJZJ0E8BFa5RPn3nYqh1=0VgtA@mail.gmail.com'>https://www.w3.org/mid/CAAWBYDB9UDyk+8v53t5kDjcTsJZJ0E8BFa5RPn3nYqh1=0VgtA@mail.gmail.com</a>
+Changes:  <a href='https://github.com/w3c/csswg-drafts/commit/fe04a357105875cf26b30bf9375c8b310a517524'>https://github.com/w3c/csswg-drafts/commit/fe04a357105875cf26b30bf9375c8b310a517524</a>
+Closed:   Accepted
+Resolved: Bugfix</pre>
+<pre class='a' id='issue-8'>
+Issue 8. <a href='issues-cr-2013.html#issue-8'>#</a>
+Summary:  s/above/outside/ for emphasis marks
+From:     Xidorn Quan
+Comment:  <a href='https://www.w3.org/mid/CAMdq698Cn7Yg5+bQO8NN1YrnpZak_yXQVYRc8HUQB3OB0_x9RA@mail.gmail.com'>https://www.w3.org/mid/CAMdq698Cn7Yg5+bQO8NN1YrnpZak_yXQVYRc8HUQB3OB0_x9RA@mail.gmail.com</a>
+Response: <a href='https://www.w3.org/mid/E1CA333C-15C7-44F5-BDA1-23BBF16E5DE5@gmail.com'>https://www.w3.org/mid/E1CA333C-15C7-44F5-BDA1-23BBF16E5DE5@gmail.com</a>
+Changes:  <a href='https://github.com/w3c/csswg-drafts/commit/a9432fa2c1e8e80418bcd30538a739854d39a7bd'>https://github.com/w3c/csswg-drafts/commit/a9432fa2c1e8e80418bcd30538a739854d39a7bd</a>
+Closed:   Accepted
+Resolved: Editorial</pre>
+<pre class='a' id='issue-9'>
+Issue 9. <a href='issues-cr-2013.html#issue-9'>#</a>
+Summary:  Clarify position of emphasis marks over auto-hidden ruby
+From:     Xidorn Quan
+Comment:  <a href='https://lists.w3.org/Archives/Public/www-style/2015Nov/0193.html'>https://lists.w3.org/Archives/Public/www-style/2015Nov/0193.html</a>
+Comment:  <a href='https://lists.w3.org/Archives/Public/www-style/2015Nov/0230.html'>https://lists.w3.org/Archives/Public/www-style/2015Nov/0230.html</a>
+Comment:  <a href='https://lists.w3.org/Archives/Public/www-style/2016Dec/0116.html'>https://lists.w3.org/Archives/Public/www-style/2016Dec/0116.html</a>
+Comment:  <a href='https://lists.w3.org/Archives/Public/www-style/2017Apr/0020.html'>https://lists.w3.org/Archives/Public/www-style/2017Apr/0020.html</a>
+Response: <a href='https://lists.w3.org/Archives/Public/www-style/2017Oct/0036.html'>https://lists.w3.org/Archives/Public/www-style/2017Oct/0036.html</a>
+Changes:  <a href='https://hg.csswg.org/drafts/rev/cbcdad5472a0'>https://hg.csswg.org/drafts/rev/cbcdad5472a0</a>
+Changes:  <a href='https://hg.csswg.org/drafts/rev/a11c1f2e8f39'>https://hg.csswg.org/drafts/rev/a11c1f2e8f39</a>
+Closed:   Accepted
+Resolved: =WG= Resolve.
+Verified: <a href='https://lists.w3.org/Archives/Public/www-style/2017Oct/0037.html'>https://lists.w3.org/Archives/Public/www-style/2017Oct/0037.html</a>
+Notes:    See follow-up in <a href='https://github.com/w3c/csswg-drafts/issues/1918'>https://github.com/w3c/csswg-drafts/issues/1918</a></pre>
+<pre class='a' id='issue-10'>
+Issue 10. <a href='issues-cr-2013.html#issue-10'>#</a>
+Summary:  Clarify whether emphasis marks are upright or sideways for sideways-rl/lr
+From:     Xidorn Quan
+Comment:  <a href='https://lists.w3.org/Archives/Public/www-style/2015Nov/0285.html'>https://lists.w3.org/Archives/Public/www-style/2015Nov/0285.html</a>
+Response: <a href='https://lists.w3.org/Archives/Public/www-style/2016Dec/0089.html'>https://lists.w3.org/Archives/Public/www-style/2016Dec/0089.html</a>
+Changes:  <a href='https://hg.csswg.org/drafts/diff/d895ae89479b/css-text-decor/Overview.bs'>https://hg.csswg.org/drafts/diff/d895ae89479b/css-text-decor/Overview.bs</a>
+Closed:   Accepted
+Resolved: <a href='https://lists.w3.org/Archives/Public/www-style/2017Feb/0049.html'>https://lists.w3.org/Archives/Public/www-style/2017Feb/0049.html</a></pre>
+<pre class='a' id='issue-11'>
+Issue 11. <a href='issues-cr-2013.html#issue-11'>#</a>
+Summary:  UA rules for text-emphasis-position should handle Japanese within Chinese
+From:     Xidorn Quan
+Comment:  <a href='https://lists.w3.org/Archives/Public/www-style/2015Nov/0311.html'>https://lists.w3.org/Archives/Public/www-style/2015Nov/0311.html</a>
+Response: <a href='https://www.w3.org/mid/5654DED1.8070706@inkedblade.net'>https://www.w3.org/mid/5654DED1.8070706@inkedblade.net</a>
+Changes:  <a href='https://hg.csswg.org/drafts/rev/51a999522cc2'>https://hg.csswg.org/drafts/rev/51a999522cc2</a>
+Closed:   Accepted =i18n= Review
+Resolved: <a href='https://lists.w3.org/Archives/Public/www-style/2017Feb/0049.html'>https://lists.w3.org/Archives/Public/www-style/2017Feb/0049.html</a></pre>
+<pre class='a' id='issue-12'>
+Issue 12. <a href='issues-cr-2013.html#issue-12'>#</a>
+Summary:  Are there emphasis mark position preferences for Korean?
+From:     fantasai
+Comment:  <a href='https://www.w3.org/mid/5654DED1.8070706@inkedblade.net'>https://www.w3.org/mid/5654DED1.8070706@inkedblade.net</a>
+Comment:  <a href='https://github.com/w3c/klreq/issues/20'>https://github.com/w3c/klreq/issues/20</a>
+Response: <a href='https://github.com/w3c/klreq/issues/20#issuecomment-337779644'>https://github.com/w3c/klreq/issues/20#issuecomment-337779644</a>
+Changes:  <a href='https://hg.csswg.org/drafts/rev/22c74858f801'>https://hg.csswg.org/drafts/rev/22c74858f801</a>
+Closed:   Accepted
+Resolved: Editor discretion</pre>
+<pre class='a' id='issue-13'>
+Issue 13. <a href='issues-cr-2013.html#issue-13'>#</a>
+Summary:  Should emphasis marks use 'font-variant: ruby'?
+From:     Xidorn Quan
+Comment:  <a href='https://www.w3.org/mid/CAMdq69_efU_tobZe8VDYfM9qCm0ejpiajmmys5JW4h8=oAx4Lg@mail.gmail.com'>https://www.w3.org/mid/CAMdq69_efU_tobZe8VDYfM9qCm0ejpiajmmys5JW4h8=oAx4Lg@mail.gmail.com</a>
+Comment:  <a href='https://lists.w3.org/Archives/Public/www-style/2016Dec/0094.html'>https://lists.w3.org/Archives/Public/www-style/2016Dec/0094.html</a>
+Response: <a href='https://lists.w3.org/Archives/Public/www-style/2016Dec/0111.html'>https://lists.w3.org/Archives/Public/www-style/2016Dec/0111.html</a>
+Changes:  <a href='https://github.com/w3c/csswg-drafts/commit/22ed0ceb4192652bcee96c139326acb742b1d868'>https://github.com/w3c/csswg-drafts/commit/22ed0ceb4192652bcee96c139326acb742b1d868</a>
+Closed:   Accepted
+Resolved: <a href='https://github.com/w3c/csswg-drafts/commit/aa9ae9847dcff26d80f2b4d097e0f13781f25a44'>https://github.com/w3c/csswg-drafts/commit/aa9ae9847dcff26d80f2b4d097e0f13781f25a44</a></pre>
+<pre class='a' id='issue-14'>
+Issue 14. <a href='issues-cr-2013.html#issue-14'>#</a>
+Summary:  'text-emphasis' shorthand should not allow only &lt;color>
+From:     Xidorn Quan
+Comment:  <a href='https://www.w3.org/mid/CAMdq699grzUvrZHMHW17bFCE-CamQmfeGgOHN-tB4ViKsWtqTA@mail.gmail.com'>https://www.w3.org/mid/CAMdq699grzUvrZHMHW17bFCE-CamQmfeGgOHN-tB4ViKsWtqTA@mail.gmail.com</a>
+Comment:  <a href='https://www.w3.org/mid/CAMdq699ztveczAWh1nYZekBoNFUKVz2LCiUUigUSuxV+CuT6HA@mail.gmail.com'>https://www.w3.org/mid/CAMdq699ztveczAWh1nYZekBoNFUKVz2LCiUUigUSuxV+CuT6HA@mail.gmail.com</a>
+Response: <a href='https://lists.w3.org/Archives/Public/www-style/2015Nov/0355.html'>https://lists.w3.org/Archives/Public/www-style/2015Nov/0355.html</a>
+Closed:   Rejected
+Resolved: <a href='https://lists.w3.org/Archives/Public/www-style/2017Feb/0049.html'>https://lists.w3.org/Archives/Public/www-style/2017Feb/0049.html</a>
+Verified: <a href='https://logs.csswg.org/irc.w3.org/css/2017-10-18/#e893598'>https://logs.csswg.org/irc.w3.org/css/2017-10-18/#e893598</a></pre>
+<pre class='a' id='issue-15'>
+Issue 15. <a href='issues-cr-2013.html#issue-15'>#</a>
+Summary:  Emphasis marks per typographic character unit
+From:     Richard Ishida
+Comment:  <a href='https://www.w3.org/mid/5652E04D.6080408@w3.org'>https://www.w3.org/mid/5652E04D.6080408@w3.org</a>
+Response: <a href='https://lists.w3.org/Archives/Public/www-style/2016Dec/0084.html'>https://lists.w3.org/Archives/Public/www-style/2016Dec/0084.html</a>
+Closed:   Accepted
+Resolved: Editorial</pre>
+<pre class='a' id='issue-16'>
+Issue 16. <a href='issues-cr-2013.html#issue-16'>#</a>
+Summary:  Emphasis marks shouldn't apply to punctuation
+From:     Xidorn Quan
+Comment:  <a href='https://www.w3.org/mid/CAMdq699v=qhkpXD8smpV0TSOW_GEt67Z4HZWmTheqhv2n+=ekw@mail.gmail.com'>https://www.w3.org/mid/CAMdq699v=qhkpXD8smpV0TSOW_GEt67Z4HZWmTheqhv2n+=ekw@mail.gmail.com</a>
+Response: <a href='https://lists.w3.org/Archives/Public/www-style/2016Dec/0083.html'>https://lists.w3.org/Archives/Public/www-style/2016Dec/0083.html</a>
+Followup: <a href='https://github.com/w3c/csswg-drafts/issues/839'>https://github.com/w3c/csswg-drafts/issues/839</a>
+Closed:   Accepted
+Resolved: <a href='https://lists.w3.org/Archives/Public/www-style/2018Mar/0021.html'>https://lists.w3.org/Archives/Public/www-style/2018Mar/0021.html</a>
+Resolved: <a href='https://lists.w3.org/Archives/Public/www-style/2018May/0036.html'>https://lists.w3.org/Archives/Public/www-style/2018May/0036.html</a></pre>
+<pre class='a' id='issue-17'>
+Issue 17. <a href='issues-cr-2013.html#issue-17'>#</a>
+Summary:  'text-emphasis-position' requires too many arguments
+From:     Momdo Nakamura
+Comment:  <a href='https://www.w3.org/mid/20151215203411.4682.EDA4FE4B@gmail.com'>https://www.w3.org/mid/20151215203411.4682.EDA4FE4B@gmail.com</a>
+Response: <a href='https://lists.w3.org/Archives/Public/www-style/2016Dec/0118.html'>https://lists.w3.org/Archives/Public/www-style/2016Dec/0118.html</a>
+Changes:  <a href='https://hg.csswg.org/drafts/diff/49463814bb5b/css-text-decor/Overview.bs'>https://hg.csswg.org/drafts/diff/49463814bb5b/css-text-decor/Overview.bs</a>
+Closed:   Accepted
+Resolved: <a href='https://lists.w3.org/Archives/Public/www-style/2017Feb/0049.html'>https://lists.w3.org/Archives/Public/www-style/2017Feb/0049.html</a></pre>
+<pre class='a' id='issue-18'>
+Issue 18. <a href='issues-cr-2013.html#issue-18'>#</a>
+Summary:  'text-underline-position' should default to 'auto' for CJK, to avoid compat issues
+From:     Masayuki Nakano
+Comment:  <a href='https://www.w3.org/mid/55506D67.7060308@d-toybox.com'>https://www.w3.org/mid/55506D67.7060308@d-toybox.com</a>
+Comment:  <a href='https://www.w3.org/mid/5C756B1C-F03B-4CA7-8796-7A6EEBC34C32@apple.com'>https://www.w3.org/mid/5C756B1C-F03B-4CA7-8796-7A6EEBC34C32@apple.com</a>
+Response: <a href='https://lists.w3.org/Archives/Public/www-style/2015Jun/0144.html'>https://lists.w3.org/Archives/Public/www-style/2015Jun/0144.html</a>
+Changes:  <a href='https://github.com/w3c/csswg-drafts/commit/c7ca2e5cf82ddb73a8e58484eeee21750fd32d2e'>https://github.com/w3c/csswg-drafts/commit/c7ca2e5cf82ddb73a8e58484eeee21750fd32d2e</a>
+          <a href='https://hg.csswg.org/drafts/diff/6b29859a1ce2/css-text-decor/Overview.bs'>https://hg.csswg.org/drafts/diff/6b29859a1ce2/css-text-decor/Overview.bs</a>
+Closed:   Accepted
+Resolved: <a href='https://lists.w3.org/Archives/Public/www-style/2017Feb/0049.html'>https://lists.w3.org/Archives/Public/www-style/2017Feb/0049.html</a></pre>
+<pre class='a' id='issue-19'>
+Issue 19. <a href='issues-cr-2013.html#issue-19'>#</a>
+Summary:  'text-underline-position' UA rules don't handle non-CJK inside CJK
+From:     Myles Maxfield
+Comment:  <a href='https://lists.w3.org/Archives/Public/www-style/2015Jun/0210.html'>https://lists.w3.org/Archives/Public/www-style/2015Jun/0210.html</a>
+Response: <a href='https://lists.w3.org/Archives/Public/www-style/2016Dec/0092.html'>https://lists.w3.org/Archives/Public/www-style/2016Dec/0092.html</a>
+Changes:  <a href='https://lists.w3.org/Archives/Public/www-style/2016Dec/0094.html'>https://lists.w3.org/Archives/Public/www-style/2016Dec/0094.html</a>
+Closed:   Accepted
+Resolved: Bugfix <a href='https://lists.w3.org/Archives/Public/www-style/2017Feb/0049.html'>https://lists.w3.org/Archives/Public/www-style/2017Feb/0049.html</a></pre>
+<pre class='a' id='issue-20'>
+Issue 20. <a href='issues-cr-2013.html#issue-20'>#</a>
+Summary:  Module needs update to handle new sideways-lr/sideways-rl writing modes
+From:     fantasai
+Comment:  <a href='http://www.w3.org/mid/56E86D82.10606@inkedblade.net'>http://www.w3.org/mid/56E86D82.10606@inkedblade.net</a>
+Response: <a href='https://lists.w3.org/Archives/Public/www-style/2016Dec/0119.html'>https://lists.w3.org/Archives/Public/www-style/2016Dec/0119.html</a>
+Changes:  <a href='https://github.com/w3c/csswg-drafts/commit/aa9ae9847dcff26d80f2b4d097e0f13781f25a44'>https://github.com/w3c/csswg-drafts/commit/aa9ae9847dcff26d80f2b4d097e0f13781f25a44</a>
+Closed:   Accepted
+Resolved: <a href='https://lists.w3.org/Archives/Public/www-style/2017Feb/0049.html'>https://lists.w3.org/Archives/Public/www-style/2017Feb/0049.html</a></pre>
+<pre class='a' id='issue-21'>
+Issue 21. <a href='issues-cr-2013.html#issue-21'>#</a>
+Summary:  Specify interaction of text-decoration, text-emphasis, and ruby
+From:     Momdo Nakamura
+Comment:  <a href='https://www.w3.org/mid/CAMdq698GTMUd=OBrgaFLcNYWhMdmOtaYa6D-8OrGSbxZZDaibw@mail.gmail.com'>https://www.w3.org/mid/CAMdq698GTMUd=OBrgaFLcNYWhMdmOtaYa6D-8OrGSbxZZDaibw@mail.gmail.com</a>
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/160'>https://github.com/w3c/csswg-drafts/issues/160</a>
+Changes:  <a href='https://github.com/w3c/csswg-drafts/commit/f205ff9dc6b969d015aa37c710b32d3845f137c9'>https://github.com/w3c/csswg-drafts/commit/f205ff9dc6b969d015aa37c710b32d3845f137c9</a>
+Closed:   Accepted
+Resolved: =WG= Review.</pre>
+<pre class='d' id='issue-22'>
+Issue 22. <a href='issues-cr-2013.html#issue-22'>#</a>
+Summary:  CJK vs. skipping ink
+From:     Koji Ishii
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/707'>https://github.com/w3c/csswg-drafts/issues/707</a>
+Closed:   Deferred
+Resolved: <a href='https://lists.w3.org/Archives/Public/www-style/2017Feb/0049.html'>https://lists.w3.org/Archives/Public/www-style/2017Feb/0049.html</a></pre>
+<pre class='oi' id='issue-23'>
+Issue 23. <a href='issues-cr-2013.html#issue-23'>#</a>
+Summary:  ???
+From:     Christoph Päper
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/799'>https://github.com/w3c/csswg-drafts/issues/799</a>
+Response: <a href='https://github.com/w3c/csswg-drafts/issues/799#issuecomment-290461207'>https://github.com/w3c/csswg-drafts/issues/799#issuecomment-290461207</a>
+Closed:   Invalid</pre>
+<pre class='a' id='issue-24'>
+Issue 24. <a href='issues-cr-2013.html#issue-24'>#</a>
+Summary:  line-throughs vs. skipping ink
+From:     Xidorn Quan
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/711'>https://github.com/w3c/csswg-drafts/issues/711</a>
+Response: <a href='https://github.com/w3c/csswg-drafts/issues/711#issuecomment-268594411'>https://github.com/w3c/csswg-drafts/issues/711#issuecomment-268594411</a>
+Changes:  <a href='https://github.com/w3c/csswg-drafts/commit/6d37258d4696972886a18f2298488cf94800060a'>https://github.com/w3c/csswg-drafts/commit/6d37258d4696972886a18f2298488cf94800060a</a>
+Closed:   Accepted
+Resolved: <a href='https://www.w3.org/mid/CADhPm3vcLHbfAhsZi8OCT+kuQOuxt_qH4rimVTewkvNR=SUi=Q@mail.gmail.com'>https://www.w3.org/mid/CADhPm3vcLHbfAhsZi8OCT+kuQOuxt_qH4rimVTewkvNR=SUi=Q@mail.gmail.com</a></pre>
+<pre class='d' id='issue-25'>
+Issue 25. <a href='issues-cr-2013.html#issue-25'>#</a>
+Summary:  Position of underline should depend on skipped things
+From:     Dave Hyatt
+Comment:  <a href='https://www.w3.org/mid/3ADFB47B-FE63-4820-A602-D3BABFF6126F@apple.com'>https://www.w3.org/mid/3ADFB47B-FE63-4820-A602-D3BABFF6126F@apple.com</a>
+Closed:   Deferred
+Resolved: <a href='https://lists.w3.org/Archives/Public/www-style/2017Feb/0049.html'>https://lists.w3.org/Archives/Public/www-style/2017Feb/0049.html</a></pre>
+<pre class='d' id='issue-26'>
+Issue 26. <a href='issues-cr-2013.html#issue-26'>#</a>
+Summary:  text-decoration-skip should have keyword for complex initial value
+From:     Florian Rivoal
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/727'>https://github.com/w3c/csswg-drafts/issues/727</a>
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/843'>https://github.com/w3c/csswg-drafts/issues/843</a>
+Closed:   Deferred
+Resolved: <a href='https://lists.w3.org/Archives/Public/www-style/2017Feb/0049.html'>https://lists.w3.org/Archives/Public/www-style/2017Feb/0049.html</a></pre>
+<pre class='a' id='issue-27'>
+Issue 27. <a href='issues-cr-2013.html#issue-27'>#</a>
+Summary:  underline-becoming-line-through note is confusing
+From:     Hiroshi Sakakibara
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/160#issuecomment-224203512'>https://github.com/w3c/csswg-drafts/issues/160#issuecomment-224203512</a>
+Response: <a href='https://github.com/w3c/csswg-drafts/issues/160#issuecomment-269328826'>https://github.com/w3c/csswg-drafts/issues/160#issuecomment-269328826</a>
+Changes:  <a href='https://github.com/w3c/csswg-drafts/commit/0ff76a5ed7ce0e6de7c17ec4b7a357f56fcab3f0'>https://github.com/w3c/csswg-drafts/commit/0ff76a5ed7ce0e6de7c17ec4b7a357f56fcab3f0</a>
+Closed:   Accepted
+Resolved: Editorial</pre>
+<pre class='a' id='issue-28'>
+Issue 28. <a href='issues-cr-2013.html#issue-28'>#</a>
+Summary:  Initial value of text-shadow should be 'currentColor'
+From:     Jonathan Kew
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/942'>https://github.com/w3c/csswg-drafts/issues/942</a>
+Response: <a href='https://github.com/w3c/csswg-drafts/issues/942#issuecomment-281751272'>https://github.com/w3c/csswg-drafts/issues/942#issuecomment-281751272</a>
+Changes:  <a href='https://hg.csswg.org/drafts/diff/22897f99b2ac/css-text-decor/Overview.bs'>https://hg.csswg.org/drafts/diff/22897f99b2ac/css-text-decor/Overview.bs</a>
+Closed:   Accepted
+Resolved: <a href='https://lists.w3.org/Archives/Public/www-style/2017Feb/0088.html'>https://lists.w3.org/Archives/Public/www-style/2017Feb/0088.html</a></pre>
+<pre class='a' id='issue-29'>
+Issue 29. <a href='issues-cr-2013.html#issue-29'>#</a>
+Summary:  'text-underline-position: under' using font metrics conflicts with Arabic/Tibetan
+From:     Richard Ishida
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/1055'>https://github.com/w3c/csswg-drafts/issues/1055</a>
+Response: <a href='https://github.com/w3c/csswg-drafts/issues/1055#issuecomment-337752816'>https://github.com/w3c/csswg-drafts/issues/1055#issuecomment-337752816</a>
+Closed:   Accepted
+Resolved: Editorial
+Verified: i18n telecon 2018-02-18</pre>
+<pre class='a' id='issue-30'>
+Issue 30. <a href='issues-cr-2013.html#issue-30'>#</a>
+Summary:  ink skipping should conform to glyph shapes
+From:     Toby Reif
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/1093'>https://github.com/w3c/csswg-drafts/issues/1093</a>
+Response: <a href='https://github.com/w3c/csswg-drafts/issues/1093#issuecomment-340963541'>https://github.com/w3c/csswg-drafts/issues/1093#issuecomment-340963541</a>
+Changes:  <a href='https://github.com/w3c/csswg-drafts/commit/904e554cc193e11ff9338f7d1a3fa0995821dcd7'>https://github.com/w3c/csswg-drafts/commit/904e554cc193e11ff9338f7d1a3fa0995821dcd7</a>
+Closed:   Accepted
+Resolved: <a href='https://lists.w3.org/Archives/Public/www-style/2017Oct/0044.html'>https://lists.w3.org/Archives/Public/www-style/2017Oct/0044.html</a>
+Verified: <a href='https://github.com/w3c/csswg-drafts/issues/1093#issuecomment-339621321'>https://github.com/w3c/csswg-drafts/issues/1093#issuecomment-339621321</a>
+Verified: <a href='https://github.com/w3c/csswg-drafts/issues/1093#issuecomment-364610333'>https://github.com/w3c/csswg-drafts/issues/1093#issuecomment-364610333</a></pre>
+<pre class='a' id='issue-31'>
+Issue 31. <a href='issues-cr-2013.html#issue-31'>#</a>
+Summary:  interaction of 'display: contents' and text-decoration
+From:     Loirooriol
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/1136'>https://github.com/w3c/csswg-drafts/issues/1136</a>
+Changes:  <a href='https://hg.csswg.org/drafts/rev/b695de85d22b'>https://hg.csswg.org/drafts/rev/b695de85d22b</a>
+Closed:   Accepted</pre>
+<pre class='a' id='issue-32'>
+Issue 32. <a href='issues-cr-2013.html#issue-32'>#</a>
+Summary:  Text decoration shouldn't skip Ethiopic word space
+From:     Richard Ishida
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/1146'>https://github.com/w3c/csswg-drafts/issues/1146</a>
+Response: <a href='https://github.com/w3c/csswg-drafts/issues/1146#issuecomment-337783678'>https://github.com/w3c/csswg-drafts/issues/1146#issuecomment-337783678</a>
+Closed:   Accepted
+Resolved: Bugfix</pre>
+<pre class='a' id='issue-33'>
+Issue 33. <a href='issues-cr-2013.html#issue-33'>#</a>
+Summary:  Cross-reference 'text-underline-position' from 'text-decoration-line'
+From:     Richard Ishida
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/1178'>https://github.com/w3c/csswg-drafts/issues/1178</a>
+Response: <a href='https://github.com/w3c/csswg-drafts/issues/1178#issuecomment-337790860'>https://github.com/w3c/csswg-drafts/issues/1178#issuecomment-337790860</a>
+Changes:  <a href='https://hg.csswg.org/drafts/rev/7baf02b2c7e3'>https://hg.csswg.org/drafts/rev/7baf02b2c7e3</a>
+Closed:   Accepted
+Resolved: Editorial</pre>
+<pre class='oi' id='issue-34'>
+Issue 34. <a href='issues-cr-2013.html#issue-34'>#</a>
+Summary:  Questions about `text-emphasis-position`
+From:     Richard Ishida
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/1207'>https://github.com/w3c/csswg-drafts/issues/1207</a>
+Response: <a href='https://github.com/w3c/csswg-drafts/issues/1207#issuecomment-337791679'>https://github.com/w3c/csswg-drafts/issues/1207#issuecomment-337791679</a>
+Closed:   Invalid</pre>
+<pre class='a' id='issue-35'>
+Issue 35. <a href='issues-cr-2013.html#issue-35'>#</a>
+Summary:  text-shadow canonical order doesn't match impls
+From:     Anthony Ramine
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/1485'>https://github.com/w3c/csswg-drafts/issues/1485</a>
+Response: <a href='https://github.com/w3c/csswg-drafts/issues/1485#issuecomment-318728810'>https://github.com/w3c/csswg-drafts/issues/1485#issuecomment-318728810</a>
+Changes:  <a href='https://hg.csswg.org/drafts/rev/5683d7ffe07b'>https://hg.csswg.org/drafts/rev/5683d7ffe07b</a>
+Closed:   Accepted
+Resolved: Bugfix</pre>
+<pre class='a' id='issue-36'>
+Issue 36. <a href='issues-cr-2013.html#issue-36'>#</a>
+Summary:  List Mongolian as `text-underline-position: under right`
+From:     Koji Ishii
+Comment:  <a href='https://lists.w3.org/Archives/Public/www-style/2011Mar/0405.html'>https://lists.w3.org/Archives/Public/www-style/2011Mar/0405.html</a>
+Closed:   Accepted
+Resolved: <a href='https://github.com/w3c/type-samples/issues/58'>https://github.com/w3c/type-samples/issues/58</a></pre>
+<pre class='a' id='issue-37'>
+Issue 37. <a href='issues-cr-2013.html#issue-37'>#</a>
+Summary:  Describe text-decoration-style before -color.
+From:     Dennis Heuer
+Comment:  <a href='https://lists.w3.org/Archives/Public/www-style/2018Jan/0066.html'>https://lists.w3.org/Archives/Public/www-style/2018Jan/0066.html</a>
+Closed:   Accepted
+Resolved: Editorial</pre>
+<pre class='d' id='issue-38'>
+Issue 38. <a href='issues-cr-2013.html#issue-38'>#</a>
+Summary:  Add spelling-error and grammar-error styling to text-decoration
+From:     Florian Rivoal
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/1828'>https://github.com/w3c/csswg-drafts/issues/1828</a>
+Closed:   Deferred to (and accepted in) L4
+Resolved: <a href='https://lists.w3.org/Archives/Public/www-style/2017Oct/0012.html'>https://lists.w3.org/Archives/Public/www-style/2017Oct/0012.html</a></pre>
+<script>
+(function () {
+    var sheet = document.styleSheets[0];
+    function addCheckbox(className) {
+        var element = document.querySelector('*.' + className);
+        var label = document.createElement('label');
+        label.innerHTML = element.innerHTML;
+        element.innerHTML = null;
+        var check = document.createElement('input');
+        check.type = 'checkbox';
+        if (className == 'open') {
+            check.checked = false;
+            sheet.insertRule('pre:not(.open)' + '{}', sheet.cssRules.length);
+            check.onchange = function (e) {
+                rule.style.display = this.checked ? 'none' : 'block';
+            }
+        }
+        else {
+            check.checked = true;
+            sheet.insertRule('pre.' + className + '{}', sheet.cssRules.length);
+            check.onchange = function (e) {
+                rule.style.display = this.checked ? 'block' : 'none';
+            }
+        }
+        var rule = sheet.cssRules[sheet.cssRules.length - 1];
+        element.appendChild(label);
+        label.insertBefore(check, label.firstChild);
+    }
+    ['a', 'd', 'fo', 'oi', 'r', 'open'].forEach(addCheckbox);
+}());
+</script>

@@ -1,0 +1,2339 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CSS Working Group Editor Drafts</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      max-width: 960px; margin: 0 auto; padding: 1.5em 1em;
+      color: #1f2328; background: #fff; line-height: 1.5;
+    }
+    h1 { font-size: 1.5em; font-weight: 600; margin: 0 0 0.75em; }
+    a { color: #0366d6; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .search-bar {
+      position: sticky; top: 0; background: #fff;
+      padding: 0.5em 0 0.75em; z-index: 10;
+    }
+    .search-bar input {
+      width: 100%; padding: 0.6em 1em; font-size: 1em;
+      border: 1px solid #d1d5db; border-radius: 6px;
+      outline: none; background: #f6f8fa; color: inherit;
+    }
+    .search-bar input:focus {
+      background: #fff; border-color: #0366d6;
+      box-shadow: 0 0 0 3px rgba(3,102,214,0.15);
+    }
+
+    .controls {
+      display: flex; gap: 0.5em; align-items: center;
+      margin-bottom: 0.75em; font-size: 0.85em; color: #666;
+    }
+    .controls button {
+      background: none; border: 1px solid #d1d5db;
+      padding: 0.25em 0.75em; border-radius: 4px;
+      cursor: pointer; font-size: inherit; color: #444;
+    }
+    .controls button:hover { background: #f6f8fa; }
+    .controls button:focus-visible { outline: 2px solid #0366d6; outline-offset: 1px; }
+    .controls button.active { background: #0366d6; color: #fff; border-color: #0366d6; }
+    .spec-count { margin-left: auto; }
+
+    #spec-list { margin-top: 0.25em; }
+    .spec { padding: 0.6em 0; border-bottom: 1px solid #eee; }
+    .spec:last-child { border-bottom: none; }
+    .spec.hidden { display: none; }
+    .spec-header {
+      display: flex; align-items: baseline; gap: 0.5em; flex-wrap: wrap;
+    }
+    .activity-dot {
+      display: inline-block; width: 8px; height: 8px;
+      border-radius: 50%; flex-shrink: 0; position: relative; top: -1px;
+    }
+    .activity-dot.recent { background: #1a7f37; }
+    .activity-dot.moderate { background: #bf8700; }
+    .activity-dot.stale { background: #ccc; }
+    .spec-title { color: #0366d6; text-decoration: none; font-weight: 500; }
+    .spec-title:hover { text-decoration: underline; }
+    .badge {
+      font-size: 0.75em; padding: 0.15em 0.5em; border-radius: 3px;
+      font-weight: 500; white-space: nowrap;
+    }
+    .current-work { background: #dafbe1; color: #1a7f37; }
+    .spec-shortname {
+      font-size: 0.8em; color: #656d76; background: #f6f8fa;
+      padding: 0.1em 0.4em; border-radius: 3px;
+    }
+    .spec-date {
+      margin-left: auto; font-size: 0.85em; color: #656d76; white-space: nowrap;
+    }
+    .chevron { display: none; }
+    .spec-links { margin-top: 0.2em; padding-left: 1.5em; font-size: 0.8em; }
+    .spec-links a { color: #656d76; text-decoration: none; }
+    .spec-links a:hover { color: #0366d6; text-decoration: underline; }
+    .sep { color: #ccc; margin: 0 0.15em; }
+    .group-header {
+      font-weight: 600; font-size: 0.9em; padding: 1em 0 0.3em;
+      color: #1f2328; border-bottom: 1px solid #d1d5db;
+    }
+    .grouped-spec { padding-left: 1.5em; }
+    .no-results { padding: 2em; text-align: center; color: #666; display: none; }
+
+    /* ---- Mobile ---- */
+    @media (max-width: 640px) {
+      body { padding: 1em 0.75em; }
+      h1 { font-size: 1.25em; }
+      .search-bar input { font-size: 16px; }
+
+      .spec {
+        padding: 0.75em 0;
+        -webkit-tap-highlight-color: transparent;
+      }
+      .spec-header {
+        display: grid;
+        grid-template-columns: auto 1fr auto auto;
+        gap: 0.15em 0.4em;
+        align-items: baseline;
+        cursor: pointer;
+      }
+      .activity-dot { grid-row: 1; grid-column: 1; }
+      .spec-title { grid-row: 1; grid-column: 2; }
+      .spec-date { grid-row: 1; grid-column: 3; margin-left: 0; }
+      .chevron {
+        grid-row: 1; grid-column: 4;
+        display: inline-block; color: #8b949e; font-size: 0.75em;
+        transition: transform 0.2s ease; user-select: none;
+      }
+      .spec.expanded .chevron { transform: rotate(90deg); }
+      .badge { grid-row: 2; grid-column: 2 / -1; justify-self: start; }
+      .spec-shortname { display: none; }
+
+      .spec-details { display: none; }
+      .spec.expanded .spec-details { display: block; }
+
+      .spec-links {
+        display: flex; flex-wrap: wrap; gap: 0.4em;
+        padding: 0.4em 0 0.1em 1.25em; margin-top: 0;
+      }
+      .spec-links .sep { display: none; }
+      .spec-links a {
+        display: inline-flex; align-items: center;
+        background: #f6f8fa; color: #444;
+        padding: 0.35em 0.7em; border-radius: 999px;
+        font-size: 0.85em; min-height: 28px;
+      }
+      .spec-links a:hover { text-decoration: none; background: #e8ecf0; }
+
+      .controls button { padding: 0.4em 0.85em; }
+      .grouped-spec { padding-left: 0.75em; }
+    }
+
+    /* ---- Dark mode ---- */
+    @media (prefers-color-scheme: dark) {
+      body { background: #0d1117; color: #e6edf3; }
+      .search-bar { background: #0d1117; }
+      .search-bar input {
+        background: #161b22; border-color: #30363d; color: #e6edf3;
+      }
+      .search-bar input::placeholder { color: #484f58; }
+      .search-bar input:focus {
+        background: #0d1117; border-color: #58a6ff;
+        box-shadow: 0 0 0 3px rgba(88,166,255,0.15);
+      }
+      .spec { border-bottom-color: #21262d; }
+      .spec-title { color: #58a6ff; }
+      .spec-shortname { background: #161b22; color: #8b949e; }
+      .spec-date { color: #8b949e; }
+      .spec-links a { color: #8b949e; }
+      .spec-links a:hover { color: #58a6ff; }
+      .sep { color: #484f58; }
+      .controls { color: #8b949e; }
+      .controls button { color: #8b949e; border-color: #30363d; }
+      .controls button:hover { background: #161b22; }
+      .controls button.active {
+        background: #1f6feb; color: #fff; border-color: #1f6feb;
+      }
+      .current-work { background: #0d2818; color: #3fb950; }
+      .activity-dot.recent { background: #3fb950; }
+      .activity-dot.moderate { background: #d29922; }
+      .activity-dot.stale { background: #484f58; }
+      .group-header { color: #e6edf3; border-bottom-color: #30363d; }
+      .no-results { color: #8b949e; }
+      .chevron { color: #484f58; }
+      a { color: #58a6ff; }
+    }
+
+    @media (max-width: 640px) and (prefers-color-scheme: dark) {
+      .spec-links a { background: #21262d; color: #8b949e; }
+      .spec-links a:hover { background: #30363d; color: #58a6ff; }
+    }
+  </style>
+</head>
+<body>
+  <h1>CSS Working Group Editor Drafts</h1>
+  <div class="search-bar">
+    <input type="text" id="search" placeholder="Filter specifications…" autofocus>
+  </div>
+  <div class="controls">
+    <button id="sort-recent" class="active">Recent</button>
+    <button id="sort-grouped">Grouped</button>
+    <span class="spec-count" id="spec-count"></span>
+  </div>
+  <div id="spec-list">
+    <div class="spec" data-ts="1784320956" data-shortname="css-values" data-dir="css-values-5" data-level="5" data-group-size="3">
+      <div class="spec-header">
+        <span class="activity-dot" data-ts="1784320956"></span>
+        <a class="spec-title" href="css-values-5/index.html">CSS Values and Units Module Level 5</a>
+        <code class="spec-shortname">css-values-5</code>
+        <time class="spec-date" datetime="2026-07-17T20:42:36Z" data-ts="1784320956">2026-07-17</time>
+        <span class="chevron" aria-hidden="true">›</span>
+      </div>
+      <div class="spec-details">
+        <div class="spec-links"><a href="https://github.com/w3c/csswg-drafts/issues?q=is%3Aissue+is%3Aopen+label%3Acss-values-5">Issues</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/pulls?q=is%3Apr+is%3Aopen+label%3Acss-values-5">PRs</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/commits/main/css-values-5/">History</a></div>
+      </div>
+    </div>
+    <div class="spec" data-ts="1784288872" data-shortname="css-color" data-dir="css-color-4" data-level="4" data-group-size="4">
+      <div class="spec-header">
+        <span class="activity-dot" data-ts="1784288872"></span>
+        <a class="spec-title" href="css-color-4/index.html">CSS Color Module Level 4</a> <span class="badge current-work">Current Work</span>
+        <code class="spec-shortname">css-color-4</code>
+        <time class="spec-date" datetime="2026-07-17T11:47:52Z" data-ts="1784288872">2026-07-17</time>
+        <span class="chevron" aria-hidden="true">›</span>
+      </div>
+      <div class="spec-details">
+        <div class="spec-links"><a href="https://github.com/w3c/csswg-drafts/issues?q=is%3Aissue+is%3Aopen+label%3Acss-color-4">Issues</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/pulls?q=is%3Apr+is%3Aopen+label%3Acss-color-4">PRs</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/commits/main/css-color-4/">History</a></div>
+      </div>
+    </div>
+    <div class="spec" data-ts="1784288420" data-shortname="css-animations" data-dir="css-animations-2" data-level="2" data-group-size="2">
+      <div class="spec-header">
+        <span class="activity-dot" data-ts="1784288420"></span>
+        <a class="spec-title" href="css-animations-2/index.html">CSS Animations Module Level 2</a>
+        <code class="spec-shortname">css-animations-2</code>
+        <time class="spec-date" datetime="2026-07-17T11:40:20Z" data-ts="1784288420">2026-07-17</time>
+        <span class="chevron" aria-hidden="true">›</span>
+      </div>
+      <div class="spec-details">
+        <div class="spec-links"><a href="https://github.com/w3c/csswg-drafts/issues?q=is%3Aissue+is%3Aopen+label%3Acss-animations-2">Issues</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/pulls?q=is%3Apr+is%3Aopen+label%3Acss-animations-2">PRs</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/commits/main/css-animations-2/">History</a></div>
+      </div>
+    </div>
+    <div class="spec" data-ts="1784218045" data-shortname="web-animations" data-dir="web-animations-2" data-level="2" data-group-size="2">
+      <div class="spec-header">
+        <span class="activity-dot" data-ts="1784218045"></span>
+        <a class="spec-title" href="web-animations-2/index.html">Web Animations Module Level 2</a> <span class="badge current-work">Current Work</span>
+        <code class="spec-shortname">web-animations-2</code>
+        <time class="spec-date" datetime="2026-07-16T16:07:25Z" data-ts="1784218045">2026-07-16</time>
+        <span class="chevron" aria-hidden="true">›</span>
+      </div>
+      <div class="spec-details">
+        <div class="spec-links"><a href="https://github.com/w3c/csswg-drafts/issues?q=is%3Aissue+is%3Aopen+label%3Aweb-animations-2">Issues</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/pulls?q=is%3Apr+is%3Aopen+label%3Aweb-animations-2">PRs</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/commits/main/web-animations-2/">History</a></div>
+      </div>
+    </div>
+    <div class="spec" data-ts="1784062083" data-shortname="css-mixins" data-dir="css-mixins-1" data-level="1" data-group-size="1">
+      <div class="spec-header">
+        <span class="activity-dot" data-ts="1784062083"></span>
+        <a class="spec-title" href="css-mixins-1/index.html">CSS Custom Functions and Mixins Module Level 1</a>
+        <code class="spec-shortname">css-mixins-1</code>
+        <time class="spec-date" datetime="2026-07-14T20:48:03Z" data-ts="1784062083">2026-07-14</time>
+        <span class="chevron" aria-hidden="true">›</span>
+      </div>
+      <div class="spec-details">
+        <div class="spec-links"><a href="https://github.com/w3c/csswg-drafts/issues?q=is%3Aissue+is%3Aopen+label%3Acss-mixins-1">Issues</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/pulls?q=is%3Apr+is%3Aopen+label%3Acss-mixins-1">PRs</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/commits/main/css-mixins-1/">History</a></div>
+      </div>
+    </div>
+    <div class="spec" data-ts="1784031758" data-shortname="mediaqueries" data-dir="mediaqueries-4" data-level="4" data-group-size="3">
+      <div class="spec-header">
+        <span class="activity-dot" data-ts="1784031758"></span>
+        <a class="spec-title" href="mediaqueries-4/index.html">Media Queries Level 4</a> <span class="badge current-work">Current Work</span>
+        <code class="spec-shortname">mediaqueries-4</code>
+        <time class="spec-date" datetime="2026-07-14T12:22:38Z" data-ts="1784031758">2026-07-14</time>
+        <span class="chevron" aria-hidden="true">›</span>
+      </div>
+      <div class="spec-details">
+        <div class="spec-links"><a href="https://github.com/w3c/csswg-drafts/issues?q=is%3Aissue+is%3Aopen+label%3Amediaqueries-4">Issues</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/pulls?q=is%3Apr+is%3Aopen+label%3Amediaqueries-4">PRs</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/commits/main/mediaqueries-4/">History</a> <span class="sep">·</span> <a href="mediaqueries-4/issues-cr-2017-09-05.html">DoC: cr-2017-09-05</a> <span class="sep">·</span> <a href="mediaqueries-4/issues-wd-2016-01-26.html">DoC: wd-2016-01-26</a></div>
+      </div>
+    </div>
+    <div class="spec" data-ts="1783976663" data-shortname="selectors" data-dir="selectors-4" data-level="4" data-group-size="3">
+      <div class="spec-header">
+        <span class="activity-dot" data-ts="1783976663"></span>
+        <a class="spec-title" href="selectors-4/index.html">Selectors Level 4</a> <span class="badge current-work">Current Work</span>
+        <code class="spec-shortname">selectors-4</code>
+        <time class="spec-date" datetime="2026-07-13T21:04:23Z" data-ts="1783976663">2026-07-13</time>
+        <span class="chevron" aria-hidden="true">›</span>
+      </div>
+      <div class="spec-details">
+        <div class="spec-links"><a href="https://github.com/w3c/csswg-drafts/issues?q=is%3Aissue+is%3Aopen+label%3Aselectors-4">Issues</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/pulls?q=is%3Apr+is%3Aopen+label%3Aselectors-4">PRs</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/commits/main/selectors-4/">History</a></div>
+      </div>
+    </div>
+    <div class="spec" data-ts="1783952760" data-shortname="css-view-transitions" data-dir="css-view-transitions-2" data-level="2" data-group-size="2">
+      <div class="spec-header">
+        <span class="activity-dot" data-ts="1783952760"></span>
+        <a class="spec-title" href="css-view-transitions-2/index.html">CSS View Transitions Module Level 2</a>
+        <code class="spec-shortname">css-view-transitions-2</code>
+        <time class="spec-date" datetime="2026-07-13T14:26:00Z" data-ts="1783952760">2026-07-13</time>
+        <span class="chevron" aria-hidden="true">›</span>
+      </div>
+      <div class="spec-details">
+        <div class="spec-links"><a href="https://github.com/w3c/csswg-drafts/issues?q=is%3Aissue+is%3Aopen+label%3Acss-view-transitions-2">Issues</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/pulls?q=is%3Apr+is%3Aopen+label%3Acss-view-transitions-2">PRs</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/commits/main/css-view-transitions-2/">History</a></div>
+      </div>
+    </div>
+    <div class="spec" data-ts="1783441284" data-shortname="css-navigation" data-dir="css-navigation-1" data-level="1" data-group-size="1">
+      <div class="spec-header">
+        <span class="activity-dot" data-ts="1783441284"></span>
+        <a class="spec-title" href="css-navigation-1/index.html">CSS Route Matching</a>
+        <code class="spec-shortname">css-navigation-1</code>
+        <time class="spec-date" datetime="2026-07-07T16:21:24Z" data-ts="1783441284">2026-07-07</time>
+        <span class="chevron" aria-hidden="true">›</span>
+      </div>
+      <div class="spec-details">
+        <div class="spec-links"><a href="https://github.com/w3c/csswg-drafts/issues?q=is%3Aissue+is%3Aopen+label%3Acss-navigation-1">Issues</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/pulls?q=is%3Apr+is%3Aopen+label%3Acss-navigation-1">PRs</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/commits/main/css-navigation-1/">History</a></div>
+      </div>
+    </div>
+    <div class="spec" data-ts="1783098743" data-shortname="css-link-params" data-dir="css-link-params-1" data-level="1" data-group-size="1">
+      <div class="spec-header">
+        <span class="activity-dot" data-ts="1783098743"></span>
+        <a class="spec-title" href="css-link-params-1/index.html">CSS Linked Parameters Module Level 1</a>
+        <code class="spec-shortname">css-link-params-1</code>
+        <time class="spec-date" datetime="2026-07-03T17:12:23Z" data-ts="1783098743">2026-07-03</time>
+        <span class="chevron" aria-hidden="true">›</span>
+      </div>
+      <div class="spec-details">
+        <div class="spec-links"><a href="https://github.com/w3c/csswg-drafts/issues?q=is%3Aissue+is%3Aopen+label%3Acss-link-params-1">Issues</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/pulls?q=is%3Apr+is%3Aopen+label%3Acss-link-params-1">PRs</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/commits/main/css-link-params-1/">History</a></div>
+      </div>
+    </div>
+    <div class="spec" data-ts="1783017510" data-shortname="css-speech" data-dir="css-speech-1" data-level="1" data-group-size="1">
+      <div class="spec-header">
+        <span class="activity-dot" data-ts="1783017510"></span>
+        <a class="spec-title" href="css-speech-1/index.html">CSS Speech Module Level 1</a>
+        <code class="spec-shortname">css-speech-1</code>
+        <time class="spec-date" datetime="2026-07-02T18:38:30Z" data-ts="1783017510">2026-07-02</time>
+        <span class="chevron" aria-hidden="true">›</span>
+      </div>
+      <div class="spec-details">
+        <div class="spec-links"><a href="https://github.com/w3c/csswg-drafts/issues?q=is%3Aissue+is%3Aopen+label%3Acss-speech-1">Issues</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/pulls?q=is%3Apr+is%3Aopen+label%3Acss-speech-1">PRs</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/commits/main/css-speech-1/">History</a></div>
+      </div>
+    </div>
+    <div class="spec" data-ts="1782859974" data-shortname="css-overscroll" data-dir="css-overscroll-1" data-level="1" data-group-size="1">
+      <div class="spec-header">
+        <span class="activity-dot" data-ts="1782859974"></span>
+        <a class="spec-title" href="css-overscroll-1/index.html">CSS Overscroll Behavior Module Level 1</a>
+        <code class="spec-shortname">css-overscroll-1</code>
+        <time class="spec-date" datetime="2026-06-30T22:52:54Z" data-ts="1782859974">2026-06-30</time>
+        <span class="chevron" aria-hidden="true">›</span>
+      </div>
+      <div class="spec-details">
+        <div class="spec-links"><a href="https://github.com/w3c/csswg-drafts/issues?q=is%3Aissue+is%3Aopen+label%3Acss-overscroll-1">Issues</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/pulls?q=is%3Apr+is%3Aopen+label%3Acss-overscroll-1">PRs</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/commits/main/css-overscroll-1/">History</a></div>
+      </div>
+    </div>
+    <div class="spec" data-ts="1782859735" data-shortname="css-conditional" data-dir="css-conditional-5" data-level="5" data-group-size="3">
+      <div class="spec-header">
+        <span class="activity-dot" data-ts="1782859735"></span>
+        <a class="spec-title" href="css-conditional-5/index.html">CSS Conditional Rules Module Level 5</a> <span class="badge current-work">Current Work</span>
+        <code class="spec-shortname">css-conditional-5</code>
+        <time class="spec-date" datetime="2026-06-30T22:48:55Z" data-ts="1782859735">2026-06-30</time>
+        <span class="chevron" aria-hidden="true">›</span>
+      </div>
+      <div class="spec-details">
+        <div class="spec-links"><a href="https://github.com/w3c/csswg-drafts/issues?q=is%3Aissue+is%3Aopen+label%3Acss-conditional-5">Issues</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/pulls?q=is%3Apr+is%3Aopen+label%3Acss-conditional-5">PRs</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/commits/main/css-conditional-5/">History</a></div>
+      </div>
+    </div>
+    <div class="spec" data-ts="1782762467" data-shortname="mediaqueries" data-dir="mediaqueries-5" data-level="5" data-group-size="3">
+      <div class="spec-header">
+        <span class="activity-dot" data-ts="1782762467"></span>
+        <a class="spec-title" href="mediaqueries-5/index.html">Media Queries Level 5</a>
+        <code class="spec-shortname">mediaqueries-5</code>
+        <time class="spec-date" datetime="2026-06-29T19:47:47Z" data-ts="1782762467">2026-06-29</time>
+        <span class="chevron" aria-hidden="true">›</span>
+      </div>
+      <div class="spec-details">
+        <div class="spec-links"><a href="https://github.com/w3c/csswg-drafts/issues?q=is%3Aissue+is%3Aopen+label%3Amediaqueries-5">Issues</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/pulls?q=is%3Apr+is%3Aopen+label%3Amediaqueries-5">PRs</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/commits/main/mediaqueries-5/">History</a> <span class="sep">·</span> <a href="mediaqueries-5/issues-1.html">DoC: 1</a></div>
+      </div>
+    </div>
+    <div class="spec" data-ts="1782326442" data-shortname="css-gaps" data-dir="css-gaps-1" data-level="1" data-group-size="1">
+      <div class="spec-header">
+        <span class="activity-dot" data-ts="1782326442"></span>
+        <a class="spec-title" href="css-gaps-1/index.html">CSS Gaps Module Level 1</a>
+        <code class="spec-shortname">css-gaps-1</code>
+        <time class="spec-date" datetime="2026-06-24T18:40:42Z" data-ts="1782326442">2026-06-24</time>
+        <span class="chevron" aria-hidden="true">›</span>
+      </div>
+      <div class="spec-details">
+        <div class="spec-links"><a href="https://github.com/w3c/csswg-drafts/issues?q=is%3Aissue+is%3Aopen+label%3Acss-gaps-1">Issues</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/pulls?q=is%3Apr+is%3Aopen+label%3Acss-gaps-1">PRs</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/commits/main/css-gaps-1/">History</a></div>
+      </div>
+    </div>
+    <div class="spec" data-ts="1782312800" data-shortname="css-color-hdr" data-dir="css-color-hdr-1" data-level="1" data-group-size="1">
+      <div class="spec-header">
+        <span class="activity-dot" data-ts="1782312800"></span>
+        <a class="spec-title" href="css-color-hdr-1/index.html">CSS Color HDR Module Level 1</a>
+        <code class="spec-shortname">css-color-hdr-1</code>
+        <time class="spec-date" datetime="2026-06-24T14:53:20Z" data-ts="1782312800">2026-06-24</time>
+        <span class="chevron" aria-hidden="true">›</span>
+      </div>
+      <div class="spec-details">
+        <div class="spec-links"><a href="https://github.com/w3c/csswg-drafts/issues?q=is%3Aissue+is%3Aopen+label%3Acss-color-hdr-1">Issues</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/pulls?q=is%3Apr+is%3Aopen+label%3Acss-color-hdr-1">PRs</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/commits/main/css-color-hdr-1/">History</a></div>
+      </div>
+    </div>
+    <div class="spec" data-ts="1782202357" data-shortname="css-contain" data-dir="css-contain-1" data-level="1" data-group-size="3">
+      <div class="spec-header">
+        <span class="activity-dot" data-ts="1782202357"></span>
+        <a class="spec-title" href="css-contain-1/index.html">CSS Containment Module Level 1</a>
+        <code class="spec-shortname">css-contain-1</code>
+        <time class="spec-date" datetime="2026-06-23T08:12:37Z" data-ts="1782202357">2026-06-23</time>
+        <span class="chevron" aria-hidden="true">›</span>
+      </div>
+      <div class="spec-details">
+        <div class="spec-links"><a href="https://github.com/w3c/csswg-drafts/issues?q=is%3Aissue+is%3Aopen+label%3Acss-contain-1">Issues</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/pulls?q=is%3Apr+is%3Aopen+label%3Acss-contain-1">PRs</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/commits/main/css-contain-1/">History</a> <span class="sep">·</span> <a href="css-contain-1/issues-2017-cr.html">DoC: 2017-cr</a> <span class="sep">·</span> <a href="css-contain-1/issues-2017.html">DoC: 2017</a> <span class="sep">·</span> <a href="css-contain-1/issues-2018-11-cr.html">DoC: 2018-11-cr</a> <span class="sep">·</span> <a href="css-contain-1/issues-2018-cr.html">DoC: 2018-cr</a> <span class="sep">·</span> <a href="https://drafts.csswg.org/css-contain-1/issues-2019-10-pr.html">DoC: 2019-10-pr</a> <span class="sep">·</span> <a href="https://drafts.csswg.org/css-contain-1/issues-2019-cr.html">DoC: 2019-cr</a> <span class="sep">·</span> <a href="https://drafts.csswg.org/css-contain-1/issues-2020-rec.html">DoC: 2020-rec</a> <span class="sep">·</span> <a href="https://drafts.csswg.org/css-contain-1/issues-2022-rec.html">DoC: 2022-rec</a></div>
+      </div>
+    </div>
+    <div class="spec" data-ts="1782202357" data-shortname="css-contain" data-dir="css-contain-2" data-level="2" data-group-size="3">
+      <div class="spec-header">
+        <span class="activity-dot" data-ts="1782202357"></span>
+        <a class="spec-title" href="css-contain-2/index.html">CSS Containment Module Level 2</a> <span class="badge current-work">Current Work</span>
+        <code class="spec-shortname">css-contain-2</code>
+        <time class="spec-date" datetime="2026-06-23T08:12:37Z" data-ts="1782202357">2026-06-23</time>
+        <span class="chevron" aria-hidden="true">›</span>
+      </div>
+      <div class="spec-details">
+        <div class="spec-links"><a href="https://github.com/w3c/csswg-drafts/issues?q=is%3Aissue+is%3Aopen+label%3Acss-contain-2">Issues</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/pulls?q=is%3Apr+is%3Aopen+label%3Acss-contain-2">PRs</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/commits/main/css-contain-2/">History</a> <span class="sep">·</span> <a href="css-contain-2/issues-2019-10-fpwd.html">DoC: 2019-10-fpwd</a></div>
+      </div>
+    </div>
+    <div class="spec" data-ts="1782133564" data-shortname="css-snapshot" data-dir="css-2026" data-level="2026" data-group-size="12">
+      <div class="spec-header">
+        <span class="activity-dot" data-ts="1782133564"></span>
+        <a class="spec-title" href="css-2026/index.html">CSS Snapshot 2026</a> <span class="badge current-work">Current Work</span>
+        <code class="spec-shortname">css-2026</code>
+        <time class="spec-date" datetime="2026-06-22T13:06:04Z" data-ts="1782133564">2026-06-22</time>
+        <span class="chevron" aria-hidden="true">›</span>
+      </div>
+      <div class="spec-details">
+        <div class="spec-links"><a href="https://github.com/w3c/csswg-drafts/issues?q=is%3Aissue+is%3Aopen+label%3Acss-2026">Issues</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/pulls?q=is%3Apr+is%3Aopen+label%3Acss-2026">PRs</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/commits/main/css-2026/">History</a></div>
+      </div>
+    </div>
+    <div class="spec" data-ts="1781846403" data-shortname="css-ui" data-dir="css-ui-3" data-level="3" data-group-size="2">
+      <div class="spec-header">
+        <span class="activity-dot" data-ts="1781846403"></span>
+        <a class="spec-title" href="css-ui-3/index.html">CSS Basic User Interface Module Level 3 (CSS3 UI)</a>
+        <code class="spec-shortname">css-ui-3</code>
+        <time class="spec-date" datetime="2026-06-19T05:20:03Z" data-ts="1781846403">2026-06-19</time>
+        <span class="chevron" aria-hidden="true">›</span>
+      </div>
+      <div class="spec-details">
+        <div class="spec-links"><a href="https://github.com/w3c/csswg-drafts/issues?q=is%3Aissue+is%3Aopen+label%3Acss-ui-3">Issues</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/pulls?q=is%3Apr+is%3Aopen+label%3Acss-ui-3">PRs</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/commits/main/css-ui-3/">History</a> <span class="sep">·</span> <a href="css-ui-3/issues-2012-2015.html">DoC: 2012-2015</a> <span class="sep">·</span> <a href="css-ui-3/issues-2015-2017.html">DoC: 2015-2017</a> <span class="sep">·</span> <a href="css-ui-3/issues-2017-2.html">DoC: 2017-2</a> <span class="sep">·</span> <a href="css-ui-3/issues-2018.html">DoC: 2018</a></div>
+      </div>
+    </div>
+    <div class="spec" data-ts="1781845944" data-shortname="css-overflow" data-dir="css-overflow-4" data-level="4" data-group-size="3">
+      <div class="spec-header">
+        <span class="activity-dot" data-ts="1781845944"></span>
+        <a class="spec-title" href="css-overflow-4/index.html">CSS Overflow Module Level 4</a>
+        <code class="spec-shortname">css-overflow-4</code>
+        <time class="spec-date" datetime="2026-06-19T05:12:24Z" data-ts="1781845944">2026-06-19</time>
+        <span class="chevron" aria-hidden="true">›</span>
+      </div>
+      <div class="spec-details">
+        <div class="spec-links"><a href="https://github.com/w3c/csswg-drafts/issues?q=is%3Aissue+is%3Aopen+label%3Acss-overflow-4">Issues</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/pulls?q=is%3Apr+is%3Aopen+label%3Acss-overflow-4">PRs</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/commits/main/css-overflow-4/">History</a></div>
+      </div>
+    </div>
+    <div class="spec" data-ts="1781831060" data-shortname="css-text" data-dir="css-text-3" data-level="3" data-group-size="3">
+      <div class="spec-header">
+        <span class="activity-dot" data-ts="1781831060"></span>
+        <a class="spec-title" href="css-text-3/index.html">CSS Text Module Level 3</a> <span class="badge current-work">Current Work</span>
+        <code class="spec-shortname">css-text-3</code>
+        <time class="spec-date" datetime="2026-06-19T01:04:20Z" data-ts="1781831060">2026-06-19</time>
+        <span class="chevron" aria-hidden="true">›</span>
+      </div>
+      <div class="spec-details">
+        <div class="spec-links"><a href="https://github.com/w3c/csswg-drafts/issues?q=is%3Aissue+is%3Aopen+label%3Acss-text-3">Issues</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/pulls?q=is%3Apr+is%3Aopen+label%3Acss-text-3">PRs</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/commits/main/css-text-3/">History</a> <span class="sep">·</span> <a href="css-text-3/issues-cr-2020.html">DoC: cr-2020</a> <span class="sep">·</span> <a href="https://drafts.csswg.org/css-text-3/issues-lc-2013.html">DoC: lc-2013</a></div>
+      </div>
+    </div>
+    <div class="spec" data-ts="1781831060" data-shortname="css-text" data-dir="css-text-4" data-level="4" data-group-size="3">
+      <div class="spec-header">
+        <span class="activity-dot" data-ts="1781831060"></span>
+        <a class="spec-title" href="css-text-4/index.html">CSS Text Module Level 4</a>
+        <code class="spec-shortname">css-text-4</code>
+        <time class="spec-date" datetime="2026-06-19T01:04:20Z" data-ts="1781831060">2026-06-19</time>
+        <span class="chevron" aria-hidden="true">›</span>
+      </div>
+      <div class="spec-details">
+        <div class="spec-links"><a href="https://github.com/w3c/csswg-drafts/issues?q=is%3Aissue+is%3Aopen+label%3Acss-text-4">Issues</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/pulls?q=is%3Apr+is%3Aopen+label%3Acss-text-4">PRs</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/commits/main/css-text-4/">History</a></div>
+      </div>
+    </div>
+    <div class="spec" data-ts="1781799963" data-shortname="css-color" data-dir="css-color-5" data-level="5" data-group-size="4">
+      <div class="spec-header">
+        <span class="activity-dot" data-ts="1781799963"></span>
+        <a class="spec-title" href="css-color-5/index.html">CSS Color Module Level 5</a>
+        <code class="spec-shortname">css-color-5</code>
+        <time class="spec-date" datetime="2026-06-18T16:26:03Z" data-ts="1781799963">2026-06-18</time>
+        <span class="chevron" aria-hidden="true">›</span>
+      </div>
+      <div class="spec-details">
+        <div class="spec-links"><a href="https://github.com/w3c/csswg-drafts/issues?q=is%3Aissue+is%3Aopen+label%3Acss-color-5">Issues</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/pulls?q=is%3Apr+is%3Aopen+label%3Acss-color-5">PRs</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/commits/main/css-color-5/">History</a></div>
+      </div>
+    </div>
+    <div class="spec" data-ts="1781716020" data-shortname="css-scroll-snap" data-dir="css-scroll-snap-1" data-level="1" data-group-size="2">
+      <div class="spec-header">
+        <span class="activity-dot" data-ts="1781716020"></span>
+        <a class="spec-title" href="css-scroll-snap-1/index.html">CSS Scroll Snap Module Level 1</a> <span class="badge current-work">Current Work</span>
+        <code class="spec-shortname">css-scroll-snap-1</code>
+        <time class="spec-date" datetime="2026-06-17T17:07:00Z" data-ts="1781716020">2026-06-17</time>
+        <span class="chevron" aria-hidden="true">›</span>
+      </div>
+      <div class="spec-details">
+        <div class="spec-links"><a href="https://github.com/w3c/csswg-drafts/issues?q=is%3Aissue+is%3Aopen+label%3Acss-scroll-snap-1">Issues</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/pulls?q=is%3Apr+is%3Aopen+label%3Acss-scroll-snap-1">PRs</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/commits/main/css-scroll-snap-1/">History</a> <span class="sep">·</span> <a href="css-scroll-snap-1/issues-2015-12.html">DoC: 2015-12</a> <span class="sep">·</span> <a href="css-scroll-snap-1/issues-by-issue.html">DoC: by-issue</a> <span class="sep">·</span> <a href="https://drafts.csswg.org/css-scroll-snap-1/issues-cr-2016-08.html">DoC: cr-2016-08</a> <span class="sep">·</span> <a href="https://drafts.csswg.org/css-scroll-snap-1/issues-cr-2016.html">DoC: cr-2016</a> <span class="sep">·</span> <a href="https://drafts.csswg.org/css-scroll-snap-1/issues-cr-2017-12.html">DoC: cr-2017-12</a> <span class="sep">·</span> <a href="https://drafts.csswg.org/css-scroll-snap-1/issues-cr-2018.html">DoC: cr-2018</a> <span class="sep">·</span> <a href="https://drafts.csswg.org/css-scroll-snap-1/issues-cr-2019.html">DoC: cr-2019</a></div>
+      </div>
+    </div>
+    <div class="spec" data-ts="1781133616" data-shortname="css-gcpm" data-dir="css-gcpm-3" data-level="3" data-group-size="2">
+      <div class="spec-header">
+        <span class="activity-dot" data-ts="1781133616"></span>
+        <a class="spec-title" href="css-gcpm-3/index.html">CSS Generated Content for Paged Media Module Level 3</a> <span class="badge current-work">Current Work</span>
+        <code class="spec-shortname">css-gcpm-3</code>
+        <time class="spec-date" datetime="2026-06-10T23:20:16Z" data-ts="1781133616">2026-06-10</time>
+        <span class="chevron" aria-hidden="true">›</span>
+      </div>
+      <div class="spec-details">
+        <div class="spec-links"><a href="https://github.com/w3c/csswg-drafts/issues?q=is%3Aissue+is%3Aopen+label%3Acss-gcpm-3">Issues</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/pulls?q=is%3Apr+is%3Aopen+label%3Acss-gcpm-3">PRs</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/commits/main/css-gcpm-3/">History</a></div>
+      </div>
+    </div>
+    <div class="spec" data-ts="1781133616" data-shortname="css-syntax" data-dir="css-syntax-3" data-level="3" data-group-size="1">
+      <div class="spec-header">
+        <span class="activity-dot" data-ts="1781133616"></span>
+        <a class="spec-title" href="css-syntax-3/index.html">CSS Syntax Module Level 3</a>
+        <code class="spec-shortname">css-syntax-3</code>
+        <time class="spec-date" datetime="2026-06-10T23:20:16Z" data-ts="1781133616">2026-06-10</time>
+        <span class="chevron" aria-hidden="true">›</span>
+      </div>
+      <div class="spec-details">
+        <div class="spec-links"><a href="https://github.com/w3c/csswg-drafts/issues?q=is%3Aissue+is%3Aopen+label%3Acss-syntax-3">Issues</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/pulls?q=is%3Apr+is%3Aopen+label%3Acss-syntax-3">PRs</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/commits/main/css-syntax-3/">History</a> <span class="sep">·</span> <a href="css-syntax-3/issues-LC-20131105.html">DoC: LC-20131105</a></div>
+      </div>
+    </div>
+    <div class="spec" data-ts="1781133616" data-shortname="cssom" data-dir="cssom-1" data-level="1" data-group-size="1">
+      <div class="spec-header">
+        <span class="activity-dot" data-ts="1781133616"></span>
+        <a class="spec-title" href="cssom-1/index.html">CSS Object Model (CSSOM) Module Level 1</a>
+        <code class="spec-shortname">cssom-1</code>
+        <time class="spec-date" datetime="2026-06-10T23:20:16Z" data-ts="1781133616">2026-06-10</time>
+        <span class="chevron" aria-hidden="true">›</span>
+      </div>
+      <div class="spec-details">
+        <div class="spec-links"><a href="https://github.com/w3c/csswg-drafts/issues?q=is%3Aissue+is%3Aopen+label%3Acssom-1">Issues</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/pulls?q=is%3Apr+is%3Aopen+label%3Acssom-1">PRs</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/commits/main/cssom-1/">History</a></div>
+      </div>
+    </div>
+    <div class="spec" data-ts="1780639801" data-shortname="css-display" data-dir="css-display-3" data-level="3" data-group-size="2">
+      <div class="spec-header">
+        <span class="activity-dot" data-ts="1780639801"></span>
+        <a class="spec-title" href="css-display-3/index.html">CSS Display Module Level 3</a> <span class="badge current-work">Current Work</span>
+        <code class="spec-shortname">css-display-3</code>
+        <time class="spec-date" datetime="2026-06-05T06:10:01Z" data-ts="1780639801">2026-06-05</time>
+        <span class="chevron" aria-hidden="true">›</span>
+      </div>
+      <div class="spec-details">
+        <div class="spec-links"><a href="https://github.com/w3c/csswg-drafts/issues?q=is%3Aissue+is%3Aopen+label%3Acss-display-3">Issues</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/pulls?q=is%3Apr+is%3Aopen+label%3Acss-display-3">PRs</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/commits/main/css-display-3/">History</a> <span class="sep">·</span> <a href="css-display-3/issues-cr-2018.html">DoC: cr-2018</a> <span class="sep">·</span> <a href="https://drafts.csswg.org/css-display-3/issues-cr-2020.html">DoC: cr-2020</a> <span class="sep">·</span> <a href="https://drafts.csswg.org/css-display-3/issues-wd-2017.html">DoC: wd-2017</a></div>
+      </div>
+    </div>
+    <div class="spec" data-ts="1780635180" data-shortname="css-display" data-dir="css-display-4" data-level="4" data-group-size="2">
+      <div class="spec-header">
+        <span class="activity-dot" data-ts="1780635180"></span>
+        <a class="spec-title" href="css-display-4/index.html">CSS Display Module Level 4</a>
+        <code class="spec-shortname">css-display-4</code>
+        <time class="spec-date" datetime="2026-06-05T04:53:00Z" data-ts="1780635180">2026-06-05</time>
+        <span class="chevron" aria-hidden="true">›</span>
+      </div>
+      <div class="spec-details">
+        <div class="spec-links"><a href="https://github.com/w3c/csswg-drafts/issues?q=is%3Aissue+is%3Aopen+label%3Acss-display-4">Issues</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/pulls?q=is%3Apr+is%3Aopen+label%3Acss-display-4">PRs</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/commits/main/css-display-4/">History</a></div>
+      </div>
+    </div>
+    <div class="spec" data-ts="1780613395" data-shortname="css-text" data-dir="css-text-5" data-level="4" data-group-size="3">
+      <div class="spec-header">
+        <span class="activity-dot" data-ts="1780613395"></span>
+        <a class="spec-title" href="css-text-5/index.html">CSS Text Module Level 5</a>
+        <code class="spec-shortname">css-text-5</code>
+        <time class="spec-date" datetime="2026-06-04T22:49:55Z" data-ts="1780613395">2026-06-04</time>
+        <span class="chevron" aria-hidden="true">›</span>
+      </div>
+      <div class="spec-details">
+        <div class="spec-links"><a href="https://github.com/w3c/csswg-drafts/issues?q=is%3Aissue+is%3Aopen+label%3Acss-text-5">Issues</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/pulls?q=is%3Apr+is%3Aopen+label%3Acss-text-5">PRs</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/commits/main/css-text-5/">History</a></div>
+      </div>
+    </div>
+    <div class="spec" data-ts="1779999928" data-shortname="css-env" data-dir="css-env-1" data-level="1" data-group-size="1">
+      <div class="spec-header">
+        <span class="activity-dot" data-ts="1779999928"></span>
+        <a class="spec-title" href="css-env-1/index.html">CSS Environment Variables Module Level 1</a>
+        <code class="spec-shortname">css-env-1</code>
+        <time class="spec-date" datetime="2026-05-28T20:25:28Z" data-ts="1779999928">2026-05-28</time>
+        <span class="chevron" aria-hidden="true">›</span>
+      </div>
+      <div class="spec-details">
+        <div class="spec-links"><a href="https://github.com/w3c/csswg-drafts/issues?q=is%3Aissue+is%3Aopen+label%3Acss-env-1">Issues</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/pulls?q=is%3Apr+is%3Aopen+label%3Acss-env-1">PRs</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/commits/main/css-env-1/">History</a></div>
+      </div>
+    </div>
+    <div class="spec" data-ts="1779998505" data-shortname="css-viewport" data-dir="css-viewport-1" data-level="1" data-group-size="1">
+      <div class="spec-header">
+        <span class="activity-dot" data-ts="1779998505"></span>
+        <a class="spec-title" href="css-viewport-1/index.html">CSS Viewport Module Level 1</a>
+        <code class="spec-shortname">css-viewport-1</code>
+        <time class="spec-date" datetime="2026-05-28T20:01:45Z" data-ts="1779998505">2026-05-28</time>
+        <span class="chevron" aria-hidden="true">›</span>
+      </div>
+      <div class="spec-details">
+        <div class="spec-links"><a href="https://github.com/w3c/csswg-drafts/issues?q=is%3Aissue+is%3Aopen+label%3Acss-viewport-1">Issues</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/pulls?q=is%3Apr+is%3Aopen+label%3Acss-viewport-1">PRs</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/commits/main/css-viewport-1/">History</a></div>
+      </div>
+    </div>
+    <div class="spec" data-ts="1779404344" data-shortname="css-overflow" data-dir="css-overflow-3" data-level="3" data-group-size="3">
+      <div class="spec-header">
+        <span class="activity-dot" data-ts="1779404344"></span>
+        <a class="spec-title" href="css-overflow-3/index.html">CSS Overflow Module Level 3</a> <span class="badge current-work">Current Work</span>
+        <code class="spec-shortname">css-overflow-3</code>
+        <time class="spec-date" datetime="2026-05-21T22:59:04Z" data-ts="1779404344">2026-05-21</time>
+        <span class="chevron" aria-hidden="true">›</span>
+      </div>
+      <div class="spec-details">
+        <div class="spec-links"><a href="https://github.com/w3c/csswg-drafts/issues?q=is%3Aissue+is%3Aopen+label%3Acss-overflow-3">Issues</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/pulls?q=is%3Apr+is%3Aopen+label%3Acss-overflow-3">PRs</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/commits/main/css-overflow-3/">History</a></div>
+      </div>
+    </div>
+    <div class="spec" data-ts="1779396410" data-shortname="css-pseudo" data-dir="css-pseudo-4" data-level="4" data-group-size="1">
+      <div class="spec-header">
+        <span class="activity-dot" data-ts="1779396410"></span>
+        <a class="spec-title" href="css-pseudo-4/index.html">CSS Pseudo-Elements Module Level 4</a>
+        <code class="spec-shortname">css-pseudo-4</code>
+        <time class="spec-date" datetime="2026-05-21T20:46:50Z" data-ts="1779396410">2026-05-21</time>
+        <span class="chevron" aria-hidden="true">›</span>
+      </div>
+      <div class="spec-details">
+        <div class="spec-links"><a href="https://github.com/w3c/csswg-drafts/issues?q=is%3Aissue+is%3Aopen+label%3Acss-pseudo-4">Issues</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/pulls?q=is%3Apr+is%3Aopen+label%3Acss-pseudo-4">PRs</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/commits/main/css-pseudo-4/">History</a></div>
+      </div>
+    </div>
+    <div class="spec" data-ts="1779355419" data-shortname="animation-triggers" data-dir="animation-triggers-1" data-level="1" data-group-size="1">
+      <div class="spec-header">
+        <span class="activity-dot" data-ts="1779355419"></span>
+        <a class="spec-title" href="animation-triggers-1/index.html">Animation Triggers</a>
+        <code class="spec-shortname">animation-triggers-1</code>
+        <time class="spec-date" datetime="2026-05-21T09:23:39Z" data-ts="1779355419">2026-05-21</time>
+        <span class="chevron" aria-hidden="true">›</span>
+      </div>
+      <div class="spec-details">
+        <div class="spec-links"><a href="https://github.com/w3c/csswg-drafts/issues?q=is%3Aissue+is%3Aopen+label%3Aanimation-triggers-1">Issues</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/pulls?q=is%3Apr+is%3Aopen+label%3Aanimation-triggers-1">PRs</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/commits/main/animation-triggers-1/">History</a></div>
+      </div>
+    </div>
+    <div class="spec" data-ts="1779313473" data-shortname="selectors" data-dir="selectors-5" data-level="5" data-group-size="3">
+      <div class="spec-header">
+        <span class="activity-dot" data-ts="1779313473"></span>
+        <a class="spec-title" href="selectors-5/index.html">Selectors Level 5</a>
+        <code class="spec-shortname">selectors-5</code>
+        <time class="spec-date" datetime="2026-05-20T21:44:33Z" data-ts="1779313473">2026-05-20</time>
+        <span class="chevron" aria-hidden="true">›</span>
+      </div>
+      <div class="spec-details">
+        <div class="spec-links"><a href="https://github.com/w3c/csswg-drafts/issues?q=is%3Aissue+is%3Aopen+label%3Aselectors-5">Issues</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/pulls?q=is%3Apr+is%3Aopen+label%3Aselectors-5">PRs</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/commits/main/selectors-5/">History</a></div>
+      </div>
+    </div>
+    <div class="spec" data-ts="1778879049" data-shortname="css-flexbox" data-dir="css-flexbox-2" data-level="2" data-group-size="2">
+      <div class="spec-header">
+        <span class="activity-dot" data-ts="1778879049"></span>
+        <a class="spec-title" href="css-flexbox-2/index.html">CSS Flexible Box Layout Module Level 2</a>
+        <code class="spec-shortname">css-flexbox-2</code>
+        <time class="spec-date" datetime="2026-05-15T21:04:09Z" data-ts="1778879049">2026-05-15</time>
+        <span class="chevron" aria-hidden="true">›</span>
+      </div>
+      <div class="spec-details">
+        <div class="spec-links"><a href="https://github.com/w3c/csswg-drafts/issues?q=is%3Aissue+is%3Aopen+label%3Acss-flexbox-2">Issues</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/pulls?q=is%3Apr+is%3Aopen+label%3Acss-flexbox-2">PRs</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/commits/main/css-flexbox-2/">History</a></div>
+      </div>
+    </div>
+    <div class="spec" data-ts="1778798437" data-shortname="css-spatial-nav" data-dir="css-spatial-nav-1" data-level="1" data-group-size="1">
+      <div class="spec-header">
+        <span class="activity-dot" data-ts="1778798437"></span>
+        <a class="spec-title" href="css-spatial-nav-1/index.html">CSS Spatial Navigation Module Level 1</a>
+        <code class="spec-shortname">css-spatial-nav-1</code>
+        <time class="spec-date" datetime="2026-05-14T22:40:37Z" data-ts="1778798437">2026-05-14</time>
+        <span class="chevron" aria-hidden="true">›</span>
+      </div>
+      <div class="spec-details">
+        <div class="spec-links"><a href="https://github.com/w3c/csswg-drafts/issues?q=is%3Aissue+is%3Aopen+label%3Acss-spatial-nav-1">Issues</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/pulls?q=is%3Apr+is%3Aopen+label%3Acss-spatial-nav-1">PRs</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/commits/main/css-spatial-nav-1/">History</a></div>
+      </div>
+    </div>
+    <div class="spec" data-ts="1778719355" data-shortname="css-scrollbars" data-dir="css-scrollbars-1" data-level="1" data-group-size="1">
+      <div class="spec-header">
+        <span class="activity-dot" data-ts="1778719355"></span>
+        <a class="spec-title" href="css-scrollbars-1/index.html">CSS Scrollbars Styling Module Level 1</a>
+        <code class="spec-shortname">css-scrollbars-1</code>
+        <time class="spec-date" datetime="2026-05-14T00:42:35Z" data-ts="1778719355">2026-05-14</time>
+        <span class="chevron" aria-hidden="true">›</span>
+      </div>
+      <div class="spec-details">
+        <div class="spec-links"><a href="https://github.com/w3c/csswg-drafts/issues?q=is%3Aissue+is%3Aopen+label%3Acss-scrollbars-1">Issues</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/pulls?q=is%3Apr+is%3Aopen+label%3Acss-scrollbars-1">PRs</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/commits/main/css-scrollbars-1/">History</a></div>
+      </div>
+    </div>
+    <div class="spec" data-ts="1778719355" data-shortname="css-sizing" data-dir="css-sizing-4" data-level="4" data-group-size="2">
+      <div class="spec-header">
+        <span class="activity-dot" data-ts="1778719355"></span>
+        <a class="spec-title" href="css-sizing-4/index.html">CSS Box Sizing Module Level 4</a>
+        <code class="spec-shortname">css-sizing-4</code>
+        <time class="spec-date" datetime="2026-05-14T00:42:35Z" data-ts="1778719355">2026-05-14</time>
+        <span class="chevron" aria-hidden="true">›</span>
+      </div>
+      <div class="spec-details">
+        <div class="spec-links"><a href="https://github.com/w3c/csswg-drafts/issues?q=is%3Aissue+is%3Aopen+label%3Acss-sizing-4">Issues</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/pulls?q=is%3Apr+is%3Aopen+label%3Acss-sizing-4">PRs</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/commits/main/css-sizing-4/">History</a></div>
+      </div>
+    </div>
+    <div class="spec" data-ts="1778719355" data-shortname="scroll-animations" data-dir="scroll-animations-1" data-level="1" data-group-size="1">
+      <div class="spec-header">
+        <span class="activity-dot" data-ts="1778719355"></span>
+        <a class="spec-title" href="scroll-animations-1/index.html">Scroll-driven Animations Module Level 1</a>
+        <code class="spec-shortname">scroll-animations-1</code>
+        <time class="spec-date" datetime="2026-05-14T00:42:35Z" data-ts="1778719355">2026-05-14</time>
+        <span class="chevron" aria-hidden="true">›</span>
+      </div>
+      <div class="spec-details">
+        <div class="spec-links"><a href="https://github.com/w3c/csswg-drafts/issues?q=is%3Aissue+is%3Aopen+label%3Ascroll-animations-1">Issues</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/pulls?q=is%3Apr+is%3Aopen+label%3Ascroll-animations-1">PRs</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/commits/main/scroll-animations-1/">History</a></div>
+      </div>
+    </div>
+    <div class="spec" data-ts="1778719355" data-shortname="css-position" data-dir="css-position-3" data-level="3" data-group-size="2">
+      <div class="spec-header">
+        <span class="activity-dot" data-ts="1778719355"></span>
+        <a class="spec-title" href="css-position-3/index.html">CSS Positioned Layout Module Level 3</a> <span class="badge current-work">Current Work</span>
+        <code class="spec-shortname">css-position-3</code>
+        <time class="spec-date" datetime="2026-05-14T00:42:35Z" data-ts="1778719355">2026-05-14</time>
+        <span class="chevron" aria-hidden="true">›</span>
+      </div>
+      <div class="spec-details">
+        <div class="spec-links"><a href="https://github.com/w3c/csswg-drafts/issues?q=is%3Aissue+is%3Aopen+label%3Acss-position-3">Issues</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/pulls?q=is%3Apr+is%3Aopen+label%3Acss-position-3">PRs</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/commits/main/css-position-3/">History</a></div>
+      </div>
+    </div>
+    <div class="spec" data-ts="1778682177" data-shortname="css-inline" data-dir="css-inline-3" data-level="3" data-group-size="1">
+      <div class="spec-header">
+        <span class="activity-dot" data-ts="1778682177"></span>
+        <a class="spec-title" href="css-inline-3/index.html">CSS Inline Layout Module Level 3</a>
+        <code class="spec-shortname">css-inline-3</code>
+        <time class="spec-date" datetime="2026-05-13T14:22:57Z" data-ts="1778682177">2026-05-13</time>
+        <span class="chevron" aria-hidden="true">›</span>
+      </div>
+      <div class="spec-details">
+        <div class="spec-links"><a href="https://github.com/w3c/csswg-drafts/issues?q=is%3Aissue+is%3Aopen+label%3Acss-inline-3">Issues</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/pulls?q=is%3Apr+is%3Aopen+label%3Acss-inline-3">PRs</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/commits/main/css-inline-3/">History</a></div>
+      </div>
+    </div>
+    <div class="spec" data-ts="1778281185" data-shortname="css-anchor-position" data-dir="css-anchor-position-1" data-level="1" data-group-size="2">
+      <div class="spec-header">
+        <span class="activity-dot" data-ts="1778281185"></span>
+        <a class="spec-title" href="css-anchor-position-1/index.html">CSS Anchor Positioning Module Level 1</a> <span class="badge current-work">Current Work</span>
+        <code class="spec-shortname">css-anchor-position-1</code>
+        <time class="spec-date" datetime="2026-05-08T22:59:45Z" data-ts="1778281185">2026-05-08</time>
+        <span class="chevron" aria-hidden="true">›</span>
+      </div>
+      <div class="spec-details">
+        <div class="spec-links"><a href="https://github.com/w3c/csswg-drafts/issues?q=is%3Aissue+is%3Aopen+label%3Acss-anchor-position-1">Issues</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/pulls?q=is%3Apr+is%3Aopen+label%3Acss-anchor-position-1">PRs</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/commits/main/css-anchor-position-1/">History</a></div>
+      </div>
+    </div>
+    <div class="spec" data-ts="1778281185" data-shortname="css-backgrounds" data-dir="css-backgrounds-4" data-level="4" data-group-size="2">
+      <div class="spec-header">
+        <span class="activity-dot" data-ts="1778281185"></span>
+        <a class="spec-title" href="css-backgrounds-4/index.html">CSS Backgrounds Module Level 4</a>
+        <code class="spec-shortname">css-backgrounds-4</code>
+        <time class="spec-date" datetime="2026-05-08T22:59:45Z" data-ts="1778281185">2026-05-08</time>
+        <span class="chevron" aria-hidden="true">›</span>
+      </div>
+      <div class="spec-details">
+        <div class="spec-links"><a href="https://github.com/w3c/csswg-drafts/issues?q=is%3Aissue+is%3Aopen+label%3Acss-backgrounds-4">Issues</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/pulls?q=is%3Apr+is%3Aopen+label%3Acss-backgrounds-4">PRs</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/commits/main/css-backgrounds-4/">History</a></div>
+      </div>
+    </div>
+    <div class="spec" data-ts="1778281185" data-shortname="css-flexbox" data-dir="css-flexbox-1" data-level="1" data-group-size="2">
+      <div class="spec-header">
+        <span class="activity-dot" data-ts="1778281185"></span>
+        <a class="spec-title" href="css-flexbox-1/index.html">CSS Flexible Box Layout Module Level 1</a> <span class="badge current-work">Current Work</span>
+        <code class="spec-shortname">css-flexbox-1</code>
+        <time class="spec-date" datetime="2026-05-08T22:59:45Z" data-ts="1778281185">2026-05-08</time>
+        <span class="chevron" aria-hidden="true">›</span>
+      </div>
+      <div class="spec-details">
+        <div class="spec-links"><a href="https://github.com/w3c/csswg-drafts/issues?q=is%3Aissue+is%3Aopen+label%3Acss-flexbox-1">Issues</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/pulls?q=is%3Apr+is%3Aopen+label%3Acss-flexbox-1">PRs</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/commits/main/css-flexbox-1/">History</a> <span class="sep">·</span> <a href="https://drafts.csswg.org/css-flexbox-1/issues-cr-2012.html">DoC: cr-2012</a> <span class="sep">·</span> <a href="https://drafts.csswg.org/css-flexbox-1/issues-cr-20160301.html">DoC: cr-20160301</a> <span class="sep">·</span> <a href="https://drafts.csswg.org/css-flexbox-1/issues-cr-20160526.html">DoC: cr-20160526</a> <span class="sep">·</span> <a href="https://drafts.csswg.org/css-flexbox-1/issues-cr-2017.html">DoC: cr-2017</a> <span class="sep">·</span> <a href="https://drafts.csswg.org/css-flexbox-1/issues-cr-2018.html">DoC: cr-2018</a> <span class="sep">·</span> <a href="css-flexbox-1/issues-lc-2012.html">DoC: lc-2012</a> <span class="sep">·</span> <a href="https://drafts.csswg.org/css-flexbox-1/issues-lc-20140325.html">DoC: lc-20140325</a> <span class="sep">·</span> <a href="https://drafts.csswg.org/css-flexbox-1/issues-lc-20140925.html">DoC: lc-20140925</a> <span class="sep">·</span> <a href="https://drafts.csswg.org/css-flexbox-1/issues-lc-20150514.html">DoC: lc-20150514</a></div>
+      </div>
+    </div>
+    <div class="spec" data-ts="1778281185" data-shortname="css-align" data-dir="css-align-3" data-level="3" data-group-size="1">
+      <div class="spec-header">
+        <span class="activity-dot" data-ts="1778281185"></span>
+        <a class="spec-title" href="css-align-3/index.html">CSS Box Alignment Module Level 3</a>
+        <code class="spec-shortname">css-align-3</code>
+        <time class="spec-date" datetime="2026-05-08T22:59:45Z" data-ts="1778281185">2026-05-08</time>
+        <span class="chevron" aria-hidden="true">›</span>
+      </div>
+      <div class="spec-details">
+        <div class="spec-links"><a href="https://github.com/w3c/csswg-drafts/issues?q=is%3Aissue+is%3Aopen+label%3Acss-align-3">Issues</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/pulls?q=is%3Apr+is%3Aopen+label%3Acss-align-3">PRs</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/commits/main/css-align-3/">History</a></div>
+      </div>
+    </div>
+    <div class="spec" data-ts="1778191163" data-shortname="css-color-adjust" data-dir="css-color-adjust-1" data-level="1" data-group-size="1">
+      <div class="spec-header">
+        <span class="activity-dot" data-ts="1778191163"></span>
+        <a class="spec-title" href="css-color-adjust-1/index.html">CSS Color Adjustment Module Level 1</a>
+        <code class="spec-shortname">css-color-adjust-1</code>
+        <time class="spec-date" datetime="2026-05-07T21:59:23Z" data-ts="1778191163">2026-05-07</time>
+        <span class="chevron" aria-hidden="true">›</span>
+      </div>
+      <div class="spec-details">
+        <div class="spec-links"><a href="https://github.com/w3c/csswg-drafts/issues?q=is%3Aissue+is%3Aopen+label%3Acss-color-adjust-1">Issues</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/pulls?q=is%3Apr+is%3Aopen+label%3Acss-color-adjust-1">PRs</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/commits/main/css-color-adjust-1/">History</a></div>
+      </div>
+    </div>
+    <div class="spec" data-ts="1778190940" data-shortname="css-images" data-dir="css-images-4" data-level="4" data-group-size="3">
+      <div class="spec-header">
+        <span class="activity-dot" data-ts="1778190940"></span>
+        <a class="spec-title" href="css-images-4/index.html">CSS Images Module Level 4</a>
+        <code class="spec-shortname">css-images-4</code>
+        <time class="spec-date" datetime="2026-05-07T21:55:40Z" data-ts="1778190940">2026-05-07</time>
+        <span class="chevron" aria-hidden="true">›</span>
+      </div>
+      <div class="spec-details">
+        <div class="spec-links"><a href="https://github.com/w3c/csswg-drafts/issues?q=is%3Aissue+is%3Aopen+label%3Acss-images-4">Issues</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/pulls?q=is%3Apr+is%3Aopen+label%3Acss-images-4">PRs</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/commits/main/css-images-4/">History</a></div>
+      </div>
+    </div>
+    <div class="spec" data-ts="1778190940" data-shortname="css-images" data-dir="css-images-5" data-level="5" data-group-size="3">
+      <div class="spec-header">
+        <span class="activity-dot" data-ts="1778190940"></span>
+        <a class="spec-title" href="css-images-5/index.html">CSS Images Module Level 5</a>
+        <code class="spec-shortname">css-images-5</code>
+        <time class="spec-date" datetime="2026-05-07T21:55:40Z" data-ts="1778190940">2026-05-07</time>
+        <span class="chevron" aria-hidden="true">›</span>
+      </div>
+      <div class="spec-details">
+        <div class="spec-links"><a href="https://github.com/w3c/csswg-drafts/issues?q=is%3Aissue+is%3Aopen+label%3Acss-images-5">Issues</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/pulls?q=is%3Apr+is%3Aopen+label%3Acss-images-5">PRs</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/commits/main/css-images-5/">History</a></div>
+      </div>
+    </div>
+    <div class="spec" data-ts="1778163883" data-shortname="css-shapes" data-dir="css-shapes-1" data-level="1" data-group-size="2">
+      <div class="spec-header">
+        <span class="activity-dot" data-ts="1778163883"></span>
+        <a class="spec-title" href="css-shapes-1/index.html">CSS Shapes Module Level 1</a> <span class="badge current-work">Current Work</span>
+        <code class="spec-shortname">css-shapes-1</code>
+        <time class="spec-date" datetime="2026-05-07T14:24:43Z" data-ts="1778163883">2026-05-07</time>
+        <span class="chevron" aria-hidden="true">›</span>
+      </div>
+      <div class="spec-details">
+        <div class="spec-links"><a href="https://github.com/w3c/csswg-drafts/issues?q=is%3Aissue+is%3Aopen+label%3Acss-shapes-1">Issues</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/pulls?q=is%3Apr+is%3Aopen+label%3Acss-shapes-1">PRs</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/commits/main/css-shapes-1/">History</a> <span class="sep">·</span> <a href="css-shapes-1/issues-cr-20141015.html">DoC: cr-20141015</a> <span class="sep">·</span> <a href="css-shapes-1/issues-lc-20131203.html">DoC: lc-20131203</a> <span class="sep">·</span> <a href="css-shapes-1/issues-lc-20140211.html">DoC: lc-20140211</a></div>
+      </div>
+    </div>
+    <div class="spec" data-ts="1778111843" data-shortname="css-shapes" data-dir="css-shapes-2" data-level="2" data-group-size="2">
+      <div class="spec-header">
+        <span class="activity-dot" data-ts="1778111843"></span>
+        <a class="spec-title" href="css-shapes-2/index.html">CSS Shapes Module Level 2</a>
+        <code class="spec-shortname">css-shapes-2</code>
+        <time class="spec-date" datetime="2026-05-06T23:57:23Z" data-ts="1778111843">2026-05-06</time>
+        <span class="chevron" aria-hidden="true">›</span>
+      </div>
+      <div class="spec-details">
+        <div class="spec-links"><a href="https://github.com/w3c/csswg-drafts/issues?q=is%3Aissue+is%3Aopen+label%3Acss-shapes-2">Issues</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/pulls?q=is%3Apr+is%3Aopen+label%3Acss-shapes-2">PRs</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/commits/main/css-shapes-2/">History</a></div>
+      </div>
+    </div>
+    <div class="spec" data-ts="1778104623" data-shortname="css-ui" data-dir="css-ui-4" data-level="4" data-group-size="2">
+      <div class="spec-header">
+        <span class="activity-dot" data-ts="1778104623"></span>
+        <a class="spec-title" href="css-ui-4/index.html">CSS Basic User Interface Module Level 4</a> <span class="badge current-work">Current Work</span>
+        <code class="spec-shortname">css-ui-4</code>
+        <time class="spec-date" datetime="2026-05-06T21:57:03Z" data-ts="1778104623">2026-05-06</time>
+        <span class="chevron" aria-hidden="true">›</span>
+      </div>
+      <div class="spec-details">
+        <div class="spec-links"><a href="https://github.com/w3c/csswg-drafts/issues?q=is%3Aissue+is%3Aopen+label%3Acss-ui-4">Issues</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/pulls?q=is%3Apr+is%3Aopen+label%3Acss-ui-4">PRs</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/commits/main/css-ui-4/">History</a> <span class="sep">·</span> <a href="css-ui-4/issues-fpwd-2015.html">DoC: fpwd-2015</a></div>
+      </div>
+    </div>
+    <div class="spec" data-ts="1778082126" data-shortname="css-grid" data-dir="css-grid-3" data-level="3" data-group-size="3">
+      <div class="spec-header">
+        <span class="activity-dot" data-ts="1778082126"></span>
+        <a class="spec-title" href="css-grid-3/index.html">CSS Grid Layout Module Level 3</a>
+        <code class="spec-shortname">css-grid-3</code>
+        <time class="spec-date" datetime="2026-05-06T15:42:06Z" data-ts="1778082126">2026-05-06</time>
+        <span class="chevron" aria-hidden="true">›</span>
+      </div>
+      <div class="spec-details">
+        <div class="spec-links"><a href="https://github.com/w3c/csswg-drafts/issues?q=is%3Aissue+is%3Aopen+label%3Acss-grid-3">Issues</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/pulls?q=is%3Apr+is%3Aopen+label%3Acss-grid-3">PRs</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/commits/main/css-grid-3/">History</a></div>
+      </div>
+    </div>
+    <div class="spec" data-ts="1777968089" data-shortname="css-forms" data-dir="css-forms-1" data-level="1" data-group-size="1">
+      <div class="spec-header">
+        <span class="activity-dot" data-ts="1777968089"></span>
+        <a class="spec-title" href="css-forms-1/index.html">CSS Form Control Styling Module Level 1</a>
+        <code class="spec-shortname">css-forms-1</code>
+        <time class="spec-date" datetime="2026-05-05T08:01:29Z" data-ts="1777968089">2026-05-05</time>
+        <span class="chevron" aria-hidden="true">›</span>
+      </div>
+      <div class="spec-details">
+        <div class="spec-links"><a href="https://github.com/w3c/csswg-drafts/issues?q=is%3Aissue+is%3Aopen+label%3Acss-forms-1">Issues</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/pulls?q=is%3Apr+is%3Aopen+label%3Acss-forms-1">PRs</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/commits/main/css-forms-1/">History</a></div>
+      </div>
+    </div>
+    <div class="spec" data-ts="1777718255" data-shortname="css-tables" data-dir="css-tables-3" data-level="3" data-group-size="1">
+      <div class="spec-header">
+        <span class="activity-dot" data-ts="1777718255"></span>
+        <a class="spec-title" href="css-tables-3/index.html">CSS Table Module Level 3</a>
+        <code class="spec-shortname">css-tables-3</code>
+        <time class="spec-date" datetime="2026-05-02T10:37:35Z" data-ts="1777718255">2026-05-02</time>
+        <span class="chevron" aria-hidden="true">›</span>
+      </div>
+      <div class="spec-details">
+        <div class="spec-links"><a href="https://github.com/w3c/csswg-drafts/issues?q=is%3Aissue+is%3Aopen+label%3Acss-tables-3">Issues</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/pulls?q=is%3Apr+is%3Aopen+label%3Acss-tables-3">PRs</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/commits/main/css-tables-3/">History</a> <span class="sep">·</span> <a href="css-tables-3/issues-ed-20160202.html">DoC: ed-20160202</a></div>
+      </div>
+    </div>
+    <div class="spec" data-ts="1777646123" data-shortname="css-ruby" data-dir="css-ruby-1" data-level="1" data-group-size="1">
+      <div class="spec-header">
+        <span class="activity-dot" data-ts="1777646123"></span>
+        <a class="spec-title" href="css-ruby-1/index.html">CSS Ruby Annotation Layout Module Level 1</a>
+        <code class="spec-shortname">css-ruby-1</code>
+        <time class="spec-date" datetime="2026-05-01T14:35:23Z" data-ts="1777646123">2026-05-01</time>
+        <span class="chevron" aria-hidden="true">›</span>
+      </div>
+      <div class="spec-details">
+        <div class="spec-links"><a href="https://github.com/w3c/csswg-drafts/issues?q=is%3Aissue+is%3Aopen+label%3Acss-ruby-1">Issues</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/pulls?q=is%3Apr+is%3Aopen+label%3Acss-ruby-1">PRs</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/commits/main/css-ruby-1/">History</a> <span class="sep">·</span> <a href="css-ruby-1/issues-wd-2014.html">DoC: wd-2014</a> <span class="sep">·</span> <a href="https://drafts.csswg.org/css-ruby-1/issues-wd-2020.html">DoC: wd-2020</a></div>
+      </div>
+    </div>
+    <div class="spec" data-ts="1777403342" data-shortname="motion" data-dir="motion-1" data-level="1" data-group-size="1">
+      <div class="spec-header">
+        <span class="activity-dot" data-ts="1777403342"></span>
+        <a class="spec-title" href="motion-1/index.html">Motion Path Module Level 1</a>
+        <code class="spec-shortname">motion-1</code>
+        <time class="spec-date" datetime="2026-04-28T19:09:02Z" data-ts="1777403342">2026-04-28</time>
+        <span class="chevron" aria-hidden="true">›</span>
+      </div>
+      <div class="spec-details">
+        <div class="spec-links"><a href="https://github.com/w3c/csswg-drafts/issues?q=is%3Aissue+is%3Aopen+label%3Amotion-1">Issues</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/pulls?q=is%3Apr+is%3Aopen+label%3Amotion-1">PRs</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/commits/main/motion-1/">History</a></div>
+      </div>
+    </div>
+    <div class="spec" data-ts="1777401682" data-shortname="css-masking" data-dir="css-masking-1" data-level="1" data-group-size="1">
+      <div class="spec-header">
+        <span class="activity-dot" data-ts="1777401682"></span>
+        <a class="spec-title" href="css-masking-1/index.html">CSS Masking Module Level 1</a>
+        <code class="spec-shortname">css-masking-1</code>
+        <time class="spec-date" datetime="2026-04-28T18:41:22Z" data-ts="1777401682">2026-04-28</time>
+        <span class="chevron" aria-hidden="true">›</span>
+      </div>
+      <div class="spec-details">
+        <div class="spec-links"><a href="https://github.com/w3c/csswg-drafts/issues?q=is%3Aissue+is%3Aopen+label%3Acss-masking-1">Issues</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/pulls?q=is%3Apr+is%3Aopen+label%3Acss-masking-1">PRs</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/commits/main/css-masking-1/">History</a> <span class="sep">·</span> <a href="css-masking-1/issues-lc-2013.html">DoC: lc-2013</a> <span class="sep">·</span> <a href="css-masking-1/issues-lc-2014.html">DoC: lc-2014</a></div>
+      </div>
+    </div>
+    <div class="spec" data-ts="1777400714" data-shortname="css-shadow" data-dir="css-shadow-1" data-level="1" data-group-size="1">
+      <div class="spec-header">
+        <span class="activity-dot" data-ts="1777400714"></span>
+        <a class="spec-title" href="css-shadow-1/index.html">CSS Shadow Module Level 1</a>
+        <code class="spec-shortname">css-shadow-1</code>
+        <time class="spec-date" datetime="2026-04-28T18:25:14Z" data-ts="1777400714">2026-04-28</time>
+        <span class="chevron" aria-hidden="true">›</span>
+      </div>
+      <div class="spec-details">
+        <div class="spec-links"><a href="https://github.com/w3c/csswg-drafts/issues?q=is%3Aissue+is%3Aopen+label%3Acss-shadow-1">Issues</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/pulls?q=is%3Apr+is%3Aopen+label%3Acss-shadow-1">PRs</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/commits/main/css-shadow-1/">History</a></div>
+      </div>
+    </div>
+    <div class="spec" data-ts="1777400544" data-shortname="css-lists" data-dir="css-lists-3" data-level="3" data-group-size="1">
+      <div class="spec-header">
+        <span class="activity-dot" data-ts="1777400544"></span>
+        <a class="spec-title" href="css-lists-3/index.html">CSS Lists and Counters Module Level 3</a>
+        <code class="spec-shortname">css-lists-3</code>
+        <time class="spec-date" datetime="2026-04-28T18:22:24Z" data-ts="1777400544">2026-04-28</time>
+        <span class="chevron" aria-hidden="true">›</span>
+      </div>
+      <div class="spec-details">
+        <div class="spec-links"><a href="https://github.com/w3c/csswg-drafts/issues?q=is%3Aissue+is%3Aopen+label%3Acss-lists-3">Issues</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/pulls?q=is%3Apr+is%3Aopen+label%3Acss-lists-3">PRs</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/commits/main/css-lists-3/">History</a></div>
+      </div>
+    </div>
+    <div class="spec" data-ts="1777400253" data-shortname="css-cascade" data-dir="css-cascade-6" data-level="6" data-group-size="4">
+      <div class="spec-header">
+        <span class="activity-dot" data-ts="1777400253"></span>
+        <a class="spec-title" href="css-cascade-6/index.html">CSS Cascading and Inheritance Module Level 6</a>
+        <code class="spec-shortname">css-cascade-6</code>
+        <time class="spec-date" datetime="2026-04-28T18:17:33Z" data-ts="1777400253">2026-04-28</time>
+        <span class="chevron" aria-hidden="true">›</span>
+      </div>
+      <div class="spec-details">
+        <div class="spec-links"><a href="https://github.com/w3c/csswg-drafts/issues?q=is%3Aissue+is%3Aopen+label%3Acss-cascade-6">Issues</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/pulls?q=is%3Apr+is%3Aopen+label%3Acss-cascade-6">PRs</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/commits/main/css-cascade-6/">History</a></div>
+      </div>
+    </div>
+    <div class="spec" data-ts="1777398746" data-shortname="css-scroll-anchoring" data-dir="css-scroll-anchoring-1" data-level="1" data-group-size="1">
+      <div class="spec-header">
+        <span class="activity-dot" data-ts="1777398746"></span>
+        <a class="spec-title" href="css-scroll-anchoring-1/index.html">CSS Scroll Anchoring Module Level 1</a>
+        <code class="spec-shortname">css-scroll-anchoring-1</code>
+        <time class="spec-date" datetime="2026-04-28T17:52:26Z" data-ts="1777398746">2026-04-28</time>
+        <span class="chevron" aria-hidden="true">›</span>
+      </div>
+      <div class="spec-details">
+        <div class="spec-links"><a href="https://github.com/w3c/csswg-drafts/issues?q=is%3Aissue+is%3Aopen+label%3Acss-scroll-anchoring-1">Issues</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/pulls?q=is%3Apr+is%3Aopen+label%3Acss-scroll-anchoring-1">PRs</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/commits/main/css-scroll-anchoring-1/">History</a></div>
+      </div>
+    </div>
+    <div class="spec" data-ts="1776875999" data-shortname="css-fonts" data-dir="css-fonts-4" data-level="4" data-group-size="3">
+      <div class="spec-header">
+        <span class="activity-dot" data-ts="1776875999"></span>
+        <a class="spec-title" href="css-fonts-4/index.html">CSS Fonts Module Level 4</a> <span class="badge current-work">Current Work</span>
+        <code class="spec-shortname">css-fonts-4</code>
+        <time class="spec-date" datetime="2026-04-22T16:39:59Z" data-ts="1776875999">2026-04-22</time>
+        <span class="chevron" aria-hidden="true">›</span>
+      </div>
+      <div class="spec-details">
+        <div class="spec-links"><a href="https://github.com/w3c/csswg-drafts/issues?q=is%3Aissue+is%3Aopen+label%3Acss-fonts-4">Issues</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/pulls?q=is%3Apr+is%3Aopen+label%3Acss-fonts-4">PRs</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/commits/main/css-fonts-4/">History</a></div>
+      </div>
+    </div>
+    <div class="spec" data-ts="1776869023" data-shortname="css-transitions" data-dir="css-transitions-2" data-level="2" data-group-size="2">
+      <div class="spec-header">
+        <span class="activity-dot" data-ts="1776869023"></span>
+        <a class="spec-title" href="css-transitions-2/index.html">CSS Transitions Module Level 2</a>
+        <code class="spec-shortname">css-transitions-2</code>
+        <time class="spec-date" datetime="2026-04-22T14:43:43Z" data-ts="1776869023">2026-04-22</time>
+        <span class="chevron" aria-hidden="true">›</span>
+      </div>
+      <div class="spec-details">
+        <div class="spec-links"><a href="https://github.com/w3c/csswg-drafts/issues?q=is%3Aissue+is%3Aopen+label%3Acss-transitions-2">Issues</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/pulls?q=is%3Apr+is%3Aopen+label%3Acss-transitions-2">PRs</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/commits/main/css-transitions-2/">History</a></div>
+      </div>
+    </div>
+    <div class="spec" data-ts="1776657583" data-shortname="css-text-decor" data-dir="css-text-decor-4" data-level="4" data-group-size="2">
+      <div class="spec-header">
+        <span class="activity-dot" data-ts="1776657583"></span>
+        <a class="spec-title" href="css-text-decor-4/index.html">CSS Text Decoration Module Level 4</a>
+        <code class="spec-shortname">css-text-decor-4</code>
+        <time class="spec-date" datetime="2026-04-20T03:59:43Z" data-ts="1776657583">2026-04-20</time>
+        <span class="chevron" aria-hidden="true">›</span>
+      </div>
+      <div class="spec-details">
+        <div class="spec-links"><a href="https://github.com/w3c/csswg-drafts/issues?q=is%3Aissue+is%3Aopen+label%3Acss-text-decor-4">Issues</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/pulls?q=is%3Apr+is%3Aopen+label%3Acss-text-decor-4">PRs</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/commits/main/css-text-decor-4/">History</a></div>
+      </div>
+    </div>
+    <div class="spec" data-ts="1776378466" data-shortname="css-fonts" data-dir="css-fonts-5" data-level="5" data-group-size="3">
+      <div class="spec-header">
+        <span class="activity-dot" data-ts="1776378466"></span>
+        <a class="spec-title" href="css-fonts-5/index.html">CSS Fonts Module Level 5</a>
+        <code class="spec-shortname">css-fonts-5</code>
+        <time class="spec-date" datetime="2026-04-16T22:27:46Z" data-ts="1776378466">2026-04-16</time>
+        <span class="chevron" aria-hidden="true">›</span>
+      </div>
+      <div class="spec-details">
+        <div class="spec-links"><a href="https://github.com/w3c/csswg-drafts/issues?q=is%3Aissue+is%3Aopen+label%3Acss-fonts-5">Issues</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/pulls?q=is%3Apr+is%3Aopen+label%3Acss-fonts-5">PRs</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/commits/main/css-fonts-5/">History</a></div>
+      </div>
+    </div>
+    <div class="spec" data-ts="1776375863" data-shortname="css-values" data-dir="css-values-3" data-level="3" data-group-size="3">
+      <div class="spec-header">
+        <span class="activity-dot" data-ts="1776375863"></span>
+        <a class="spec-title" href="css-values-3/index.html">CSS Values and Units Module Level 3</a>
+        <code class="spec-shortname">css-values-3</code>
+        <time class="spec-date" datetime="2026-04-16T21:44:23Z" data-ts="1776375863">2026-04-16</time>
+        <span class="chevron" aria-hidden="true">›</span>
+      </div>
+      <div class="spec-details">
+        <div class="spec-links"><a href="https://github.com/w3c/csswg-drafts/issues?q=is%3Aissue+is%3Aopen+label%3Acss-values-3">Issues</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/pulls?q=is%3Apr+is%3Aopen+label%3Acss-values-3">PRs</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/commits/main/css-values-3/">History</a> <span class="sep">·</span> <a href="https://drafts.csswg.org/css-values-3/issues-cr-2013.html">DoC: cr-2013</a> <span class="sep">·</span> <a href="css-values-3/issues-cr-2015.html">DoC: cr-2015</a> <span class="sep">·</span> <a href="https://drafts.csswg.org/css-values-3/issues-cr-2016.html">DoC: cr-2016</a> <span class="sep">·</span> <a href="https://drafts.csswg.org/css-values-3/issues-cr-2018.html">DoC: cr-2018</a> <span class="sep">·</span> <a href="css-values-3/issues-lc-2012.html">DoC: lc-2012</a></div>
+      </div>
+    </div>
+    <div class="spec" data-ts="1776375863" data-shortname="css-print" data-dir="css-print" data-level="0" data-group-size="1">
+      <div class="spec-header">
+        <span class="activity-dot" data-ts="1776375863"></span>
+        <a class="spec-title" href="css-print/index.html">CSS Print Profile</a>
+        <code class="spec-shortname">css-print</code>
+        <time class="spec-date" datetime="2026-04-16T21:44:23Z" data-ts="1776375863">2026-04-16</time>
+        <span class="chevron" aria-hidden="true">›</span>
+      </div>
+      <div class="spec-details">
+        <div class="spec-links"><a href="https://github.com/w3c/csswg-drafts/issues?q=is%3Aissue+is%3Aopen+label%3Acss-print">Issues</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/pulls?q=is%3Apr+is%3Aopen+label%3Acss-print">PRs</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/commits/main/css-print/">History</a></div>
+      </div>
+    </div>
+    <div class="spec" data-ts="1776201379" data-shortname="css-break" data-dir="css-break-4" data-level="4" data-group-size="2">
+      <div class="spec-header">
+        <span class="activity-dot" data-ts="1776201379"></span>
+        <a class="spec-title" href="css-break-4/index.html">CSS Fragmentation Module Level 4</a>
+        <code class="spec-shortname">css-break-4</code>
+        <time class="spec-date" datetime="2026-04-14T21:16:19Z" data-ts="1776201379">2026-04-14</time>
+        <span class="chevron" aria-hidden="true">›</span>
+      </div>
+      <div class="spec-details">
+        <div class="spec-links"><a href="https://github.com/w3c/csswg-drafts/issues?q=is%3Aissue+is%3Aopen+label%3Acss-break-4">Issues</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/pulls?q=is%3Apr+is%3Aopen+label%3Acss-break-4">PRs</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/commits/main/css-break-4/">History</a></div>
+      </div>
+    </div>
+    <div class="spec" data-ts="1776104917" data-shortname="css-cascade" data-dir="css-cascade-5" data-level="5" data-group-size="4">
+      <div class="spec-header">
+        <span class="activity-dot" data-ts="1776104917"></span>
+        <a class="spec-title" href="css-cascade-5/index.html">CSS Cascading and Inheritance Module Level 5</a>
+        <code class="spec-shortname">css-cascade-5</code>
+        <time class="spec-date" datetime="2026-04-13T18:28:37Z" data-ts="1776104917">2026-04-13</time>
+        <span class="chevron" aria-hidden="true">›</span>
+      </div>
+      <div class="spec-details">
+        <div class="spec-links"><a href="https://github.com/w3c/csswg-drafts/issues?q=is%3Aissue+is%3Aopen+label%3Acss-cascade-5">Issues</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/pulls?q=is%3Apr+is%3Aopen+label%3Acss-cascade-5">PRs</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/commits/main/css-cascade-5/">History</a></div>
+      </div>
+    </div>
+    <div class="spec" data-ts="1775574691" data-shortname="css-image-animation" data-dir="css-image-animation-1" data-level="1" data-group-size="1">
+      <div class="spec-header">
+        <span class="activity-dot" data-ts="1775574691"></span>
+        <a class="spec-title" href="css-image-animation-1/index.html">CSS Image Animation Module Level 1</a>
+        <code class="spec-shortname">css-image-animation-1</code>
+        <time class="spec-date" datetime="2026-04-07T15:11:31Z" data-ts="1775574691">2026-04-07</time>
+        <span class="chevron" aria-hidden="true">›</span>
+      </div>
+      <div class="spec-details">
+        <div class="spec-links"><a href="https://github.com/w3c/csswg-drafts/issues?q=is%3Aissue+is%3Aopen+label%3Acss-image-animation-1">Issues</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/pulls?q=is%3Apr+is%3Aopen+label%3Acss-image-animation-1">PRs</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/commits/main/css-image-animation-1/">History</a></div>
+      </div>
+    </div>
+    <div class="spec" data-ts="1774539074" data-shortname="css-borders" data-dir="css-borders-4" data-level="4" data-group-size="1">
+      <div class="spec-header">
+        <span class="activity-dot" data-ts="1774539074"></span>
+        <a class="spec-title" href="css-borders-4/index.html">CSS Borders and Box Decorations Module Level 4</a>
+        <code class="spec-shortname">css-borders-4</code>
+        <time class="spec-date" datetime="2026-03-26T15:31:14Z" data-ts="1774539074">2026-03-26</time>
+        <span class="chevron" aria-hidden="true">›</span>
+      </div>
+      <div class="spec-details">
+        <div class="spec-links"><a href="https://github.com/w3c/csswg-drafts/issues?q=is%3Aissue+is%3Aopen+label%3Acss-borders-4">Issues</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/pulls?q=is%3Apr+is%3Aopen+label%3Acss-borders-4">PRs</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/commits/main/css-borders-4/">History</a></div>
+      </div>
+    </div>
+    <div class="spec" data-ts="1774018971" data-shortname="cssom-view" data-dir="cssom-view-1" data-level="1" data-group-size="1">
+      <div class="spec-header">
+        <span class="activity-dot" data-ts="1774018971"></span>
+        <a class="spec-title" href="cssom-view-1/index.html">CSSOM View Module Level 1</a>
+        <code class="spec-shortname">cssom-view-1</code>
+        <time class="spec-date" datetime="2026-03-20T15:02:51Z" data-ts="1774018971">2026-03-20</time>
+        <span class="chevron" aria-hidden="true">›</span>
+      </div>
+      <div class="spec-details">
+        <div class="spec-links"><a href="https://github.com/w3c/csswg-drafts/issues?q=is%3Aissue+is%3Aopen+label%3Acssom-view-1">Issues</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/pulls?q=is%3Apr+is%3Aopen+label%3Acssom-view-1">PRs</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/commits/main/cssom-view-1/">History</a></div>
+      </div>
+    </div>
+    <div class="spec" data-ts="1773766994" data-shortname="css-overflow" data-dir="css-overflow-5" data-level="5" data-group-size="3">
+      <div class="spec-header">
+        <span class="activity-dot" data-ts="1773766994"></span>
+        <a class="spec-title" href="css-overflow-5/index.html">CSS Overflow Module Level 5</a>
+        <code class="spec-shortname">css-overflow-5</code>
+        <time class="spec-date" datetime="2026-03-17T17:03:14Z" data-ts="1773766994">2026-03-17</time>
+        <span class="chevron" aria-hidden="true">›</span>
+      </div>
+      <div class="spec-details">
+        <div class="spec-links"><a href="https://github.com/w3c/csswg-drafts/issues?q=is%3Aissue+is%3Aopen+label%3Acss-overflow-5">Issues</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/pulls?q=is%3Apr+is%3Aopen+label%3Acss-overflow-5">PRs</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/commits/main/css-overflow-5/">History</a></div>
+      </div>
+    </div>
+    <div class="spec" data-ts="1772666202" data-shortname="fill-stroke" data-dir="fill-stroke-3" data-level="3" data-group-size="1">
+      <div class="spec-header">
+        <span class="activity-dot" data-ts="1772666202"></span>
+        <a class="spec-title" href="fill-stroke-3/index.html">CSS Fill and Stroke Module Level 3</a>
+        <code class="spec-shortname">fill-stroke-3</code>
+        <time class="spec-date" datetime="2026-03-04T23:16:42Z" data-ts="1772666202">2026-03-04</time>
+        <span class="chevron" aria-hidden="true">›</span>
+      </div>
+      <div class="spec-details">
+        <div class="spec-links"><a href="https://github.com/w3c/csswg-drafts/issues?q=is%3Aissue+is%3Aopen+label%3Afill-stroke-3">Issues</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/pulls?q=is%3Apr+is%3Aopen+label%3Afill-stroke-3">PRs</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/commits/main/fill-stroke-3/">History</a></div>
+      </div>
+    </div>
+    <div class="spec" data-ts="1772559109" data-shortname="css-page" data-dir="css-page-3" data-level="3" data-group-size="2">
+      <div class="spec-header">
+        <span class="activity-dot" data-ts="1772559109"></span>
+        <a class="spec-title" href="css-page-3/index.html">CSS Paged Media Module Level 3</a> <span class="badge current-work">Current Work</span>
+        <code class="spec-shortname">css-page-3</code>
+        <time class="spec-date" datetime="2026-03-03T17:31:49Z" data-ts="1772559109">2026-03-03</time>
+        <span class="chevron" aria-hidden="true">›</span>
+      </div>
+      <div class="spec-details">
+        <div class="spec-links"><a href="https://github.com/w3c/csswg-drafts/issues?q=is%3Aissue+is%3Aopen+label%3Acss-page-3">Issues</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/pulls?q=is%3Apr+is%3Aopen+label%3Acss-page-3">PRs</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/commits/main/css-page-3/">History</a></div>
+      </div>
+    </div>
+    <div class="spec" data-ts="1772029649" data-shortname="css-scroll-snap" data-dir="css-scroll-snap-2" data-level="2" data-group-size="2">
+      <div class="spec-header">
+        <span class="activity-dot" data-ts="1772029649"></span>
+        <a class="spec-title" href="css-scroll-snap-2/index.html">CSS Scroll Snap Module Level 2</a>
+        <code class="spec-shortname">css-scroll-snap-2</code>
+        <time class="spec-date" datetime="2026-02-25T14:27:29Z" data-ts="1772029649">2026-02-25</time>
+        <span class="chevron" aria-hidden="true">›</span>
+      </div>
+      <div class="spec-details">
+        <div class="spec-links"><a href="https://github.com/w3c/csswg-drafts/issues?q=is%3Aissue+is%3Aopen+label%3Acss-scroll-snap-2">Issues</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/pulls?q=is%3Apr+is%3Aopen+label%3Acss-scroll-snap-2">PRs</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/commits/main/css-scroll-snap-2/">History</a></div>
+      </div>
+    </div>
+    <div class="spec" data-ts="1771882013" data-shortname="css-easing" data-dir="css-easing-2" data-level="2" data-group-size="2">
+      <div class="spec-header">
+        <span class="activity-dot" data-ts="1771882013"></span>
+        <a class="spec-title" href="css-easing-2/index.html">CSS Easing Functions Module Level 2</a> <span class="badge current-work">Current Work</span>
+        <code class="spec-shortname">css-easing-2</code>
+        <time class="spec-date" datetime="2026-02-23T21:26:53Z" data-ts="1771882013">2026-02-23</time>
+        <span class="chevron" aria-hidden="true">›</span>
+      </div>
+      <div class="spec-details">
+        <div class="spec-links"><a href="https://github.com/w3c/csswg-drafts/issues?q=is%3Aissue+is%3Aopen+label%3Acss-easing-2">Issues</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/pulls?q=is%3Apr+is%3Aopen+label%3Acss-easing-2">PRs</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/commits/main/css-easing-2/">History</a></div>
+      </div>
+    </div>
+    <div class="spec" data-ts="1771200172" data-shortname="css-multicol" data-dir="css-multicol-1" data-level="1" data-group-size="2">
+      <div class="spec-header">
+        <span class="activity-dot" data-ts="1771200172"></span>
+        <a class="spec-title" href="css-multicol-1/index.html">CSS Multi-column Layout Module Level 1</a> <span class="badge current-work">Current Work</span>
+        <code class="spec-shortname">css-multicol-1</code>
+        <time class="spec-date" datetime="2026-02-16T00:02:52Z" data-ts="1771200172">2026-02-16</time>
+        <span class="chevron" aria-hidden="true">›</span>
+      </div>
+      <div class="spec-details">
+        <div class="spec-links"><a href="https://github.com/w3c/csswg-drafts/issues?q=is%3Aissue+is%3Aopen+label%3Acss-multicol-1">Issues</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/pulls?q=is%3Apr+is%3Aopen+label%3Acss-multicol-1">PRs</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/commits/main/css-multicol-1/">History</a> <span class="sep">·</span> <a href="css-multicol-1/issues-2011.html">DoC: 2011</a> <span class="sep">·</span> <a href="css-multicol-1/issues-cr-2021.html">DoC: cr-2021</a> <span class="sep">·</span> <a href="css-multicol-1/issues-dec-2020.html">DoC: dec-2020</a> <span class="sep">·</span> <a href="css-multicol-1/issues-may-2021.html">DoC: may-2021</a> <span class="sep">·</span> <a href="css-multicol-1/issues-post-cr-2021.html">DoC: post-cr-2021</a></div>
+      </div>
+    </div>
+    <div class="spec" data-ts="1771200172" data-shortname="css-multicol" data-dir="css-multicol-2" data-level="2" data-group-size="2">
+      <div class="spec-header">
+        <span class="activity-dot" data-ts="1771200172"></span>
+        <a class="spec-title" href="css-multicol-2/index.html">CSS Multi-column Layout Module Level 2</a>
+        <code class="spec-shortname">css-multicol-2</code>
+        <time class="spec-date" datetime="2026-02-16T00:02:52Z" data-ts="1771200172">2026-02-16</time>
+        <span class="chevron" aria-hidden="true">›</span>
+      </div>
+      <div class="spec-details">
+        <div class="spec-links"><a href="https://github.com/w3c/csswg-drafts/issues?q=is%3Aissue+is%3Aopen+label%3Acss-multicol-2">Issues</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/pulls?q=is%3Apr+is%3Aopen+label%3Acss-multicol-2">PRs</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/commits/main/css-multicol-2/">History</a></div>
+      </div>
+    </div>
+    <div class="spec" data-ts="1771198252" data-shortname="css-sizing" data-dir="css-sizing-3" data-level="3" data-group-size="2">
+      <div class="spec-header">
+        <span class="activity-dot" data-ts="1771198252"></span>
+        <a class="spec-title" href="css-sizing-3/index.html">CSS Box Sizing Module Level 3</a> <span class="badge current-work">Current Work</span>
+        <code class="spec-shortname">css-sizing-3</code>
+        <time class="spec-date" datetime="2026-02-15T23:30:52Z" data-ts="1771198252">2026-02-15</time>
+        <span class="chevron" aria-hidden="true">›</span>
+      </div>
+      <div class="spec-details">
+        <div class="spec-links"><a href="https://github.com/w3c/csswg-drafts/issues?q=is%3Aissue+is%3Aopen+label%3Acss-sizing-3">Issues</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/pulls?q=is%3Apr+is%3Aopen+label%3Acss-sizing-3">PRs</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/commits/main/css-sizing-3/">History</a></div>
+      </div>
+    </div>
+    <div class="spec" data-ts="1770940015" data-shortname="css-rhythm" data-dir="css-rhythm-1" data-level="1" data-group-size="1">
+      <div class="spec-header">
+        <span class="activity-dot" data-ts="1770940015"></span>
+        <a class="spec-title" href="css-rhythm-1/index.html">CSS Rhythmic Sizing Module Level 1</a>
+        <code class="spec-shortname">css-rhythm-1</code>
+        <time class="spec-date" datetime="2026-02-12T23:46:55Z" data-ts="1770940015">2026-02-12</time>
+        <span class="chevron" aria-hidden="true">›</span>
+      </div>
+      <div class="spec-details">
+        <div class="spec-links"><a href="https://github.com/w3c/csswg-drafts/issues?q=is%3Aissue+is%3Aopen+label%3Acss-rhythm-1">Issues</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/pulls?q=is%3Apr+is%3Aopen+label%3Acss-rhythm-1">PRs</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/commits/main/css-rhythm-1/">History</a></div>
+      </div>
+    </div>
+    <div class="spec" data-ts="1770323254" data-shortname="css-nesting" data-dir="css-nesting-1" data-level="1" data-group-size="1">
+      <div class="spec-header">
+        <span class="activity-dot" data-ts="1770323254"></span>
+        <a class="spec-title" href="css-nesting-1/index.html">CSS Nesting Module Level 1</a>
+        <code class="spec-shortname">css-nesting-1</code>
+        <time class="spec-date" datetime="2026-02-05T20:27:34Z" data-ts="1770323254">2026-02-05</time>
+        <span class="chevron" aria-hidden="true">›</span>
+      </div>
+      <div class="spec-details">
+        <div class="spec-links"><a href="https://github.com/w3c/csswg-drafts/issues?q=is%3Aissue+is%3Aopen+label%3Acss-nesting-1">Issues</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/pulls?q=is%3Apr+is%3Aopen+label%3Acss-nesting-1">PRs</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/commits/main/css-nesting-1/">History</a></div>
+      </div>
+    </div>
+    <div class="spec" data-ts="1770154197" data-shortname="filter-effects" data-dir="filter-effects-1" data-level="1" data-group-size="2">
+      <div class="spec-header">
+        <span class="activity-dot" data-ts="1770154197"></span>
+        <a class="spec-title" href="filter-effects-1/index.html">Filter Effects Module Level 1</a> <span class="badge current-work">Current Work</span>
+        <code class="spec-shortname">filter-effects-1</code>
+        <time class="spec-date" datetime="2026-02-03T21:29:57Z" data-ts="1770154197">2026-02-03</time>
+        <span class="chevron" aria-hidden="true">›</span>
+      </div>
+      <div class="spec-details">
+        <div class="spec-links"><a href="https://github.com/w3c/csswg-drafts/issues?q=is%3Aissue+is%3Aopen+label%3Afilter-effects-1">Issues</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/pulls?q=is%3Apr+is%3Aopen+label%3Afilter-effects-1">PRs</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/commits/main/filter-effects-1/">History</a> <span class="sep">·</span> <a href="filter-effects-1/issues-lc-2015.html">DoC: lc-2015</a></div>
+      </div>
+    </div>
+    <div class="spec" data-ts="1769199642" data-shortname="css-animations" data-dir="css-animations-1" data-level="1" data-group-size="2">
+      <div class="spec-header">
+        <span class="activity-dot" data-ts="1769199642"></span>
+        <a class="spec-title" href="css-animations-1/index.html">CSS Animations Module Level 1</a> <span class="badge current-work">Current Work</span>
+        <code class="spec-shortname">css-animations-1</code>
+        <time class="spec-date" datetime="2026-01-23T20:20:42Z" data-ts="1769199642">2026-01-23</time>
+        <span class="chevron" aria-hidden="true">›</span>
+      </div>
+      <div class="spec-details">
+        <div class="spec-links"><a href="https://github.com/w3c/csswg-drafts/issues?q=is%3Aissue+is%3Aopen+label%3Acss-animations-1">Issues</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/pulls?q=is%3Apr+is%3Aopen+label%3Acss-animations-1">PRs</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/commits/main/css-animations-1/">History</a></div>
+      </div>
+    </div>
+    <div class="spec" data-ts="1769194221" data-shortname="filter-effects" data-dir="filter-effects-2" data-level="2" data-group-size="2">
+      <div class="spec-header">
+        <span class="activity-dot" data-ts="1769194221"></span>
+        <a class="spec-title" href="filter-effects-2/index.html">Filter Effects Module Level 2</a>
+        <code class="spec-shortname">filter-effects-2</code>
+        <time class="spec-date" datetime="2026-01-23T18:50:21Z" data-ts="1769194221">2026-01-23</time>
+        <span class="chevron" aria-hidden="true">›</span>
+      </div>
+      <div class="spec-details">
+        <div class="spec-links"><a href="https://github.com/w3c/csswg-drafts/issues?q=is%3Aissue+is%3Aopen+label%3Afilter-effects-2">Issues</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/pulls?q=is%3Apr+is%3Aopen+label%3Afilter-effects-2">PRs</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/commits/main/filter-effects-2/">History</a></div>
+      </div>
+    </div>
+    <div class="spec" data-ts="1769194221" data-shortname="matrix" data-dir="matrix" data-level="1" data-group-size="1">
+      <div class="spec-header">
+        <span class="activity-dot" data-ts="1769194221"></span>
+        <a class="spec-title" href="matrix/index.html">DOMMatrix interface</a>
+        <code class="spec-shortname">matrix</code>
+        <time class="spec-date" datetime="2026-01-23T18:50:21Z" data-ts="1769194221">2026-01-23</time>
+        <span class="chevron" aria-hidden="true">›</span>
+      </div>
+      <div class="spec-details">
+        <div class="spec-links"><a href="https://github.com/w3c/csswg-drafts/issues?q=is%3Aissue+is%3Aopen+label%3Amatrix">Issues</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/pulls?q=is%3Apr+is%3Aopen+label%3Amatrix">PRs</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/commits/main/matrix/">History</a></div>
+      </div>
+    </div>
+    <div class="spec" data-ts="1768896208" data-shortname="css-writing-modes" data-dir="css-writing-modes-4" data-level="4" data-group-size="2">
+      <div class="spec-header">
+        <span class="activity-dot" data-ts="1768896208"></span>
+        <a class="spec-title" href="css-writing-modes-4/index.html">CSS Writing Modes Module Level 4</a> <span class="badge current-work">Current Work</span>
+        <code class="spec-shortname">css-writing-modes-4</code>
+        <time class="spec-date" datetime="2026-01-20T08:03:28Z" data-ts="1768896208">2026-01-20</time>
+        <span class="chevron" aria-hidden="true">›</span>
+      </div>
+      <div class="spec-details">
+        <div class="spec-links"><a href="https://github.com/w3c/csswg-drafts/issues?q=is%3Aissue+is%3Aopen+label%3Acss-writing-modes-4">Issues</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/pulls?q=is%3Apr+is%3Aopen+label%3Acss-writing-modes-4">PRs</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/commits/main/css-writing-modes-4/">History</a></div>
+      </div>
+    </div>
+    <div class="spec" data-ts="1768779376" data-shortname="css-writing-modes" data-dir="css-writing-modes-3" data-level="3" data-group-size="2">
+      <div class="spec-header">
+        <span class="activity-dot" data-ts="1768779376"></span>
+        <a class="spec-title" href="css-writing-modes-3/index.html">CSS Writing Modes Module Level 3</a>
+        <code class="spec-shortname">css-writing-modes-3</code>
+        <time class="spec-date" datetime="2026-01-18T23:36:16Z" data-ts="1768779376">2026-01-18</time>
+        <span class="chevron" aria-hidden="true">›</span>
+      </div>
+      <div class="spec-details">
+        <div class="spec-links"><a href="https://github.com/w3c/csswg-drafts/issues?q=is%3Aissue+is%3Aopen+label%3Acss-writing-modes-3">Issues</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/pulls?q=is%3Apr+is%3Aopen+label%3Acss-writing-modes-3">PRs</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/commits/main/css-writing-modes-3/">History</a> <span class="sep">·</span> <a href="css-writing-modes-3/issues-cr-2014.html">DoC: cr-2014</a> <span class="sep">·</span> <a href="css-writing-modes-3/issues-cr-2015.html">DoC: cr-2015</a> <span class="sep">·</span> <a href="css-writing-modes-3/issues-cr-2018.html">DoC: cr-2018</a> <span class="sep">·</span> <a href="css-writing-modes-3/issues-cr-2019.html">DoC: cr-2019</a> <span class="sep">·</span> <a href="css-writing-modes-3/issues-lc-2013.html">DoC: lc-2013</a></div>
+      </div>
+    </div>
+    <div class="spec" data-ts="1768779214" data-shortname="css-regions" data-dir="css-regions-1" data-level="1" data-group-size="1">
+      <div class="spec-header">
+        <span class="activity-dot" data-ts="1768779214"></span>
+        <a class="spec-title" href="css-regions-1/index.html">CSS Regions Module Level 1</a>
+        <code class="spec-shortname">css-regions-1</code>
+        <time class="spec-date" datetime="2026-01-18T23:33:34Z" data-ts="1768779214">2026-01-18</time>
+        <span class="chevron" aria-hidden="true">›</span>
+      </div>
+      <div class="spec-details">
+        <div class="spec-links"><a href="https://github.com/w3c/csswg-drafts/issues?q=is%3Aissue+is%3Aopen+label%3Acss-regions-1">Issues</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/pulls?q=is%3Apr+is%3Aopen+label%3Acss-regions-1">PRs</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/commits/main/css-regions-1/">History</a></div>
+      </div>
+    </div>
+    <div class="spec" data-ts="1768557767" data-shortname="indexes" data-dir="indexes" data-level="0" data-group-size="1">
+      <div class="spec-header">
+        <span class="activity-dot" data-ts="1768557767"></span>
+        <a class="spec-title" href="indexes/index.html">CSS Indexes</a>
+        <code class="spec-shortname">indexes</code>
+        <time class="spec-date" datetime="2026-01-16T10:02:47Z" data-ts="1768557767">2026-01-16</time>
+        <span class="chevron" aria-hidden="true">›</span>
+      </div>
+      <div class="spec-details">
+        <div class="spec-links"><a href="https://github.com/w3c/csswg-drafts/issues?q=is%3Aissue+is%3Aopen+label%3Aindexes">Issues</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/pulls?q=is%3Apr+is%3Aopen+label%3Aindexes">PRs</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/commits/main/indexes/">History</a></div>
+      </div>
+    </div>
+    <div class="spec" data-ts="1768429114" data-shortname="css-size-adjust" data-dir="css-size-adjust-1" data-level="1" data-group-size="1">
+      <div class="spec-header">
+        <span class="activity-dot" data-ts="1768429114"></span>
+        <a class="spec-title" href="css-size-adjust-1/index.html">CSS Mobile Text Size Adjustment Module Level 1</a>
+        <code class="spec-shortname">css-size-adjust-1</code>
+        <time class="spec-date" datetime="2026-01-14T22:18:34Z" data-ts="1768429114">2026-01-14</time>
+        <span class="chevron" aria-hidden="true">›</span>
+      </div>
+      <div class="spec-details">
+        <div class="spec-links"><a href="https://github.com/w3c/csswg-drafts/issues?q=is%3Aissue+is%3Aopen+label%3Acss-size-adjust-1">Issues</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/pulls?q=is%3Apr+is%3Aopen+label%3Acss-size-adjust-1">PRs</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/commits/main/css-size-adjust-1/">History</a></div>
+      </div>
+    </div>
+    <div class="spec" data-ts="1768253772" data-shortname="css-conditional-values" data-dir="css-conditional-values-1" data-level="1" data-group-size="1">
+      <div class="spec-header">
+        <span class="activity-dot" data-ts="1768253772"></span>
+        <a class="spec-title" href="css-conditional-values-1/index.html">CSS Conditional Values Module Level 1</a>
+        <code class="spec-shortname">css-conditional-values-1</code>
+        <time class="spec-date" datetime="2026-01-12T21:36:12Z" data-ts="1768253772">2026-01-12</time>
+        <span class="chevron" aria-hidden="true">›</span>
+      </div>
+      <div class="spec-details">
+        <div class="spec-links"><a href="https://github.com/w3c/csswg-drafts/issues?q=is%3Aissue+is%3Aopen+label%3Acss-conditional-values-1">Issues</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/pulls?q=is%3Apr+is%3Aopen+label%3Acss-conditional-values-1">PRs</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/commits/main/css-conditional-values-1/">History</a></div>
+      </div>
+    </div>
+    <div class="spec" data-ts="1768253257" data-shortname="css-font-loading" data-dir="css-font-loading-3" data-level="3" data-group-size="1">
+      <div class="spec-header">
+        <span class="activity-dot" data-ts="1768253257"></span>
+        <a class="spec-title" href="css-font-loading-3/index.html">CSS Font Loading Module Level 3</a>
+        <code class="spec-shortname">css-font-loading-3</code>
+        <time class="spec-date" datetime="2026-01-12T21:27:37Z" data-ts="1768253257">2026-01-12</time>
+        <span class="chevron" aria-hidden="true">›</span>
+      </div>
+      <div class="spec-details">
+        <div class="spec-links"><a href="https://github.com/w3c/csswg-drafts/issues?q=is%3Aissue+is%3Aopen+label%3Acss-font-loading-3">Issues</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/pulls?q=is%3Apr+is%3Aopen+label%3Acss-font-loading-3">PRs</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/commits/main/css-font-loading-3/">History</a></div>
+      </div>
+    </div>
+    <div class="spec" data-ts="1768147132" data-shortname="css-color" data-dir="css-color-6" data-level="6" data-group-size="4">
+      <div class="spec-header">
+        <span class="activity-dot" data-ts="1768147132"></span>
+        <a class="spec-title" href="css-color-6/index.html">CSS Color Module Level 6</a>
+        <code class="spec-shortname">css-color-6</code>
+        <time class="spec-date" datetime="2026-01-11T15:58:52Z" data-ts="1768147132">2026-01-11</time>
+        <span class="chevron" aria-hidden="true">›</span>
+      </div>
+      <div class="spec-details">
+        <div class="spec-links"><a href="https://github.com/w3c/csswg-drafts/issues?q=is%3Aissue+is%3Aopen+label%3Acss-color-6">Issues</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/pulls?q=is%3Apr+is%3Aopen+label%3Acss-color-6">PRs</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/commits/main/css-color-6/">History</a></div>
+      </div>
+    </div>
+    <div class="spec" data-ts="1768124298" data-shortname="pointer-animations" data-dir="pointer-animations-1" data-level="1" data-group-size="1">
+      <div class="spec-header">
+        <span class="activity-dot" data-ts="1768124298"></span>
+        <a class="spec-title" href="pointer-animations-1/index.html">Pointer-driven Animations Module Level 1</a>
+        <code class="spec-shortname">pointer-animations-1</code>
+        <time class="spec-date" datetime="2026-01-11T09:38:18Z" data-ts="1768124298">2026-01-11</time>
+        <span class="chevron" aria-hidden="true">›</span>
+      </div>
+      <div class="spec-details">
+        <div class="spec-links"><a href="https://github.com/w3c/csswg-drafts/issues?q=is%3Aissue+is%3Aopen+label%3Apointer-animations-1">Issues</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/pulls?q=is%3Apr+is%3Aopen+label%3Apointer-animations-1">PRs</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/commits/main/pointer-animations-1/">History</a></div>
+      </div>
+    </div>
+    <div class="spec" data-ts="1767988799" data-shortname="css-content" data-dir="css-content-3" data-level="3" data-group-size="1">
+      <div class="spec-header">
+        <span class="activity-dot" data-ts="1767988799"></span>
+        <a class="spec-title" href="css-content-3/index.html">CSS Generated Content Module Level 3</a>
+        <code class="spec-shortname">css-content-3</code>
+        <time class="spec-date" datetime="2026-01-09T19:59:59Z" data-ts="1767988799">2026-01-09</time>
+        <span class="chevron" aria-hidden="true">›</span>
+      </div>
+      <div class="spec-details">
+        <div class="spec-links"><a href="https://github.com/w3c/csswg-drafts/issues?q=is%3Aissue+is%3Aopen+label%3Acss-content-3">Issues</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/pulls?q=is%3Apr+is%3Aopen+label%3Acss-content-3">PRs</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/commits/main/css-content-3/">History</a></div>
+      </div>
+    </div>
+    <div class="spec" data-ts="1767952963" data-shortname="css-highlight-api" data-dir="css-highlight-api-1" data-level="1" data-group-size="1">
+      <div class="spec-header">
+        <span class="activity-dot" data-ts="1767952963"></span>
+        <a class="spec-title" href="css-highlight-api-1/index.html">CSS Custom Highlight API Module Level 1</a>
+        <code class="spec-shortname">css-highlight-api-1</code>
+        <time class="spec-date" datetime="2026-01-09T10:02:43Z" data-ts="1767952963">2026-01-09</time>
+        <span class="chevron" aria-hidden="true">›</span>
+      </div>
+      <div class="spec-details">
+        <div class="spec-links"><a href="https://github.com/w3c/csswg-drafts/issues?q=is%3Aissue+is%3Aopen+label%3Acss-highlight-api-1">Issues</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/pulls?q=is%3Apr+is%3Aopen+label%3Acss-highlight-api-1">PRs</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/commits/main/css-highlight-api-1/">History</a></div>
+      </div>
+    </div>
+    <div class="spec" data-ts="1767787401" data-shortname="css-line-grid" data-dir="css-line-grid-1" data-level="1" data-group-size="1">
+      <div class="spec-header">
+        <span class="activity-dot" data-ts="1767787401"></span>
+        <a class="spec-title" href="css-line-grid-1/index.html">CSS Line Grid Module Level 1</a>
+        <code class="spec-shortname">css-line-grid-1</code>
+        <time class="spec-date" datetime="2026-01-07T12:03:21Z" data-ts="1767787401">2026-01-07</time>
+        <span class="chevron" aria-hidden="true">›</span>
+      </div>
+      <div class="spec-details">
+        <div class="spec-links"><a href="https://github.com/w3c/csswg-drafts/issues?q=is%3Aissue+is%3Aopen+label%3Acss-line-grid-1">Issues</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/pulls?q=is%3Apr+is%3Aopen+label%3Acss-line-grid-1">PRs</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/commits/main/css-line-grid-1/">History</a></div>
+      </div>
+    </div>
+    <div class="spec" data-ts="1767711420" data-shortname="css-transitions" data-dir="css-transitions-1" data-level="1" data-group-size="2">
+      <div class="spec-header">
+        <span class="activity-dot" data-ts="1767711420"></span>
+        <a class="spec-title" href="css-transitions-1/index.html">CSS Transitions Module Level 1</a> <span class="badge current-work">Current Work</span>
+        <code class="spec-shortname">css-transitions-1</code>
+        <time class="spec-date" datetime="2026-01-06T14:57:00Z" data-ts="1767711420">2026-01-06</time>
+        <span class="chevron" aria-hidden="true">›</span>
+      </div>
+      <div class="spec-details">
+        <div class="spec-links"><a href="https://github.com/w3c/csswg-drafts/issues?q=is%3Aissue+is%3Aopen+label%3Acss-transitions-1">Issues</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/pulls?q=is%3Apr+is%3Aopen+label%3Acss-transitions-1">PRs</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/commits/main/css-transitions-1/">History</a></div>
+      </div>
+    </div>
+    <div class="spec" data-ts="1767134600" data-shortname="css2" data-dir="css2" data-level="0" data-group-size="1">
+      <div class="spec-header">
+        <span class="activity-dot" data-ts="1767134600"></span>
+        <a class="spec-title" href="css2/index.html">Cascading Style Sheets (CSS) Level 2</a>
+        <code class="spec-shortname">css2</code>
+        <time class="spec-date" datetime="2025-12-30T22:43:20Z" data-ts="1767134600">2025-12-30</time>
+        <span class="chevron" aria-hidden="true">›</span>
+      </div>
+      <div class="spec-details">
+        <div class="spec-links"><a href="https://github.com/w3c/csswg-drafts/issues?q=is%3Aissue+is%3Aopen+label%3Acss2">Issues</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/pulls?q=is%3Apr+is%3Aopen+label%3Acss2">PRs</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/commits/main/css2/">History</a></div>
+      </div>
+    </div>
+    <div class="spec" data-ts="1766787958" data-shortname="css-round-display" data-dir="css-round-display-1" data-level="1" data-group-size="1">
+      <div class="spec-header">
+        <span class="activity-dot" data-ts="1766787958"></span>
+        <a class="spec-title" href="css-round-display-1/index.html">CSS Round Display Module Level 1</a>
+        <code class="spec-shortname">css-round-display-1</code>
+        <time class="spec-date" datetime="2025-12-26T22:25:58Z" data-ts="1766787958">2025-12-26</time>
+        <span class="chevron" aria-hidden="true">›</span>
+      </div>
+      <div class="spec-details">
+        <div class="spec-links"><a href="https://github.com/w3c/csswg-drafts/issues?q=is%3Aissue+is%3Aopen+label%3Acss-round-display-1">Issues</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/pulls?q=is%3Apr+is%3Aopen+label%3Acss-round-display-1">PRs</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/commits/main/css-round-display-1/">History</a></div>
+      </div>
+    </div>
+    <div class="spec" data-ts="1766705490" data-shortname="css-position" data-dir="css-position-4" data-level="4" data-group-size="2">
+      <div class="spec-header">
+        <span class="activity-dot" data-ts="1766705490"></span>
+        <a class="spec-title" href="css-position-4/index.html">CSS Positioned Layout Module Level 4</a>
+        <code class="spec-shortname">css-position-4</code>
+        <time class="spec-date" datetime="2025-12-25T23:31:30Z" data-ts="1766705490">2025-12-25</time>
+        <span class="chevron" aria-hidden="true">›</span>
+      </div>
+      <div class="spec-details">
+        <div class="spec-links"><a href="https://github.com/w3c/csswg-drafts/issues?q=is%3Aissue+is%3Aopen+label%3Acss-position-4">Issues</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/pulls?q=is%3Apr+is%3Aopen+label%3Acss-position-4">PRs</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/commits/main/css-position-4/">History</a></div>
+      </div>
+    </div>
+    <div class="spec" data-ts="1766440554" data-shortname="css-contain" data-dir="css-contain-3" data-level="3" data-group-size="3">
+      <div class="spec-header">
+        <span class="activity-dot" data-ts="1766440554"></span>
+        <a class="spec-title" href="css-contain-3/index.html">CSS Containment Module Level 3</a>
+        <code class="spec-shortname">css-contain-3</code>
+        <time class="spec-date" datetime="2025-12-22T21:55:54Z" data-ts="1766440554">2025-12-22</time>
+        <span class="chevron" aria-hidden="true">›</span>
+      </div>
+      <div class="spec-details">
+        <div class="spec-links"><a href="https://github.com/w3c/csswg-drafts/issues?q=is%3Aissue+is%3Aopen+label%3Acss-contain-3">Issues</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/pulls?q=is%3Apr+is%3Aopen+label%3Acss-contain-3">PRs</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/commits/main/css-contain-3/">History</a></div>
+      </div>
+    </div>
+    <div class="spec" data-ts="1766409581" data-shortname="css-page-floats" data-dir="css-page-floats-3" data-level="3" data-group-size="1">
+      <div class="spec-header">
+        <span class="activity-dot" data-ts="1766409581"></span>
+        <a class="spec-title" href="css-page-floats-3/index.html">CSS Page Floats Module Level 3</a>
+        <code class="spec-shortname">css-page-floats-3</code>
+        <time class="spec-date" datetime="2025-12-22T13:19:41Z" data-ts="1766409581">2025-12-22</time>
+        <span class="chevron" aria-hidden="true">›</span>
+      </div>
+      <div class="spec-details">
+        <div class="spec-links"><a href="https://github.com/w3c/csswg-drafts/issues?q=is%3Aissue+is%3Aopen+label%3Acss-page-floats-3">Issues</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/pulls?q=is%3Apr+is%3Aopen+label%3Acss-page-floats-3">PRs</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/commits/main/css-page-floats-3/">History</a></div>
+      </div>
+    </div>
+    <div class="spec" data-ts="1765979948" data-shortname="css-cascade" data-dir="css-cascade-3" data-level="3" data-group-size="4">
+      <div class="spec-header">
+        <span class="activity-dot" data-ts="1765979948"></span>
+        <a class="spec-title" href="css-cascade-3/index.html">CSS Cascading and Inheritance Level 3</a>
+        <code class="spec-shortname">css-cascade-3</code>
+        <time class="spec-date" datetime="2025-12-17T13:59:08Z" data-ts="1765979948">2025-12-17</time>
+        <span class="chevron" aria-hidden="true">›</span>
+      </div>
+      <div class="spec-details">
+        <div class="spec-links"><a href="https://github.com/w3c/csswg-drafts/issues?q=is%3Aissue+is%3Aopen+label%3Acss-cascade-3">Issues</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/pulls?q=is%3Apr+is%3Aopen+label%3Acss-cascade-3">PRs</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/commits/main/css-cascade-3/">History</a> <span class="sep">·</span> <a href="css-cascade-3/issues-cr-2013.html">DoC: cr-2013</a> <span class="sep">·</span> <a href="https://drafts.csswg.org/css-cascade-3/issues-cr-2016.html">DoC: cr-2016</a> <span class="sep">·</span> <a href="css-cascade-3/issues-lc-2013.html">DoC: lc-2013</a></div>
+      </div>
+    </div>
+    <div class="spec" data-ts="1765979948" data-shortname="css-cascade" data-dir="css-cascade-4" data-level="4" data-group-size="4">
+      <div class="spec-header">
+        <span class="activity-dot" data-ts="1765979948"></span>
+        <a class="spec-title" href="css-cascade-4/index.html">CSS Cascading and Inheritance Module Level 4</a> <span class="badge current-work">Current Work</span>
+        <code class="spec-shortname">css-cascade-4</code>
+        <time class="spec-date" datetime="2025-12-17T13:59:08Z" data-ts="1765979948">2025-12-17</time>
+        <span class="chevron" aria-hidden="true">›</span>
+      </div>
+      <div class="spec-details">
+        <div class="spec-links"><a href="https://github.com/w3c/csswg-drafts/issues?q=is%3Aissue+is%3Aopen+label%3Acss-cascade-4">Issues</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/pulls?q=is%3Apr+is%3Aopen+label%3Acss-cascade-4">PRs</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/commits/main/css-cascade-4/">History</a> <span class="sep">·</span> <a href="css-cascade-4/issues-cr-2016.html">DoC: cr-2016</a> <span class="sep">·</span> <a href="css-cascade-4/issues-lc-2015.html">DoC: lc-2015</a></div>
+      </div>
+    </div>
+    <div class="spec" data-ts="1765888427" data-shortname="css-text-decor" data-dir="css-text-decor-3" data-level="3" data-group-size="2">
+      <div class="spec-header">
+        <span class="activity-dot" data-ts="1765888427"></span>
+        <a class="spec-title" href="css-text-decor-3/index.html">CSS Text Decoration Module Level 3</a> <span class="badge current-work">Current Work</span>
+        <code class="spec-shortname">css-text-decor-3</code>
+        <time class="spec-date" datetime="2025-12-16T12:33:47Z" data-ts="1765888427">2025-12-16</time>
+        <span class="chevron" aria-hidden="true">›</span>
+      </div>
+      <div class="spec-details">
+        <div class="spec-links"><a href="https://github.com/w3c/csswg-drafts/issues?q=is%3Aissue+is%3Aopen+label%3Acss-text-decor-3">Issues</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/pulls?q=is%3Apr+is%3Aopen+label%3Acss-text-decor-3">PRs</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/commits/main/css-text-decor-3/">History</a> <span class="sep">·</span> <a href="https://drafts.csswg.org/css-text-decor-3/issues-cr-2013.html">DoC: cr-2013</a> <span class="sep">·</span> <a href="https://drafts.csswg.org/css-text-decor-3/issues-cr-2018.html">DoC: cr-2018</a> <span class="sep">·</span> <a href="css-text-decor-3/issues-lc-2013.html">DoC: lc-2013</a></div>
+      </div>
+    </div>
+    <div class="spec" data-ts="1765888427" data-shortname="css-backgrounds" data-dir="css-backgrounds-3" data-level="3" data-group-size="2">
+      <div class="spec-header">
+        <span class="activity-dot" data-ts="1765888427"></span>
+        <a class="spec-title" href="css-backgrounds-3/index.html">CSS Backgrounds and Borders Module Level 3</a> <span class="badge current-work">Current Work</span>
+        <code class="spec-shortname">css-backgrounds-3</code>
+        <time class="spec-date" datetime="2025-12-16T12:33:47Z" data-ts="1765888427">2025-12-16</time>
+        <span class="chevron" aria-hidden="true">›</span>
+      </div>
+      <div class="spec-details">
+        <div class="spec-links"><a href="https://github.com/w3c/csswg-drafts/issues?q=is%3Aissue+is%3Aopen+label%3Acss-backgrounds-3">Issues</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/pulls?q=is%3Apr+is%3Aopen+label%3Acss-backgrounds-3">PRs</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/commits/main/css-backgrounds-3/">History</a> <span class="sep">·</span> <a href="css-backgrounds-3/issues-cr-2014.html">DoC: cr-2014</a> <span class="sep">·</span> <a href="css-backgrounds-3/issues-cr-2017.html">DoC: cr-2017</a> <span class="sep">·</span> <a href="css-backgrounds-3/issues-lc-2009.html">DoC: lc-2009</a> <span class="sep">·</span> <a href="css-backgrounds-3/issues-lc-2010.html">DoC: lc-2010</a> <span class="sep">·</span> <a href="https://drafts.csswg.org/css-backgrounds-3/issues-lc-2012.html">DoC: lc-2012</a> <span class="sep">·</span> <a href="https://drafts.csswg.org/css-backgrounds-3/issues-lc-2014.html">DoC: lc-2014</a></div>
+      </div>
+    </div>
+    <div class="spec" data-ts="1765888427" data-shortname="css-easing" data-dir="css-easing-1" data-level="1" data-group-size="2">
+      <div class="spec-header">
+        <span class="activity-dot" data-ts="1765888427"></span>
+        <a class="spec-title" href="css-easing-1/index.html">CSS Easing Functions Module Level 1</a>
+        <code class="spec-shortname">css-easing-1</code>
+        <time class="spec-date" datetime="2025-12-16T12:33:47Z" data-ts="1765888427">2025-12-16</time>
+        <span class="chevron" aria-hidden="true">›</span>
+      </div>
+      <div class="spec-details">
+        <div class="spec-links"><a href="https://github.com/w3c/csswg-drafts/issues?q=is%3Aissue+is%3Aopen+label%3Acss-easing-1">Issues</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/pulls?q=is%3Apr+is%3Aopen+label%3Acss-easing-1">PRs</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/commits/main/css-easing-1/">History</a></div>
+      </div>
+    </div>
+    <div class="spec" data-ts="1765834426" data-shortname="css-images" data-dir="css-images-3" data-level="3" data-group-size="3">
+      <div class="spec-header">
+        <span class="activity-dot" data-ts="1765834426"></span>
+        <a class="spec-title" href="css-images-3/index.html">CSS Images Module Level 3</a> <span class="badge current-work">Current Work</span>
+        <code class="spec-shortname">css-images-3</code>
+        <time class="spec-date" datetime="2025-12-15T21:33:46Z" data-ts="1765834426">2025-12-15</time>
+        <span class="chevron" aria-hidden="true">›</span>
+      </div>
+      <div class="spec-details">
+        <div class="spec-links"><a href="https://github.com/w3c/csswg-drafts/issues?q=is%3Aissue+is%3Aopen+label%3Acss-images-3">Issues</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/pulls?q=is%3Apr+is%3Aopen+label%3Acss-images-3">PRs</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/commits/main/css-images-3/">History</a> <span class="sep">·</span> <a href="css-images-3/issues-cr-2012.html">DoC: cr-2012</a> <span class="sep">·</span> <a href="css-images-3/issues-lc-2012.html">DoC: lc-2012</a></div>
+      </div>
+    </div>
+    <div class="spec" data-ts="1765667640" data-shortname="css-counter-styles" data-dir="css-counter-styles-3" data-level="3" data-group-size="1">
+      <div class="spec-header">
+        <span class="activity-dot" data-ts="1765667640"></span>
+        <a class="spec-title" href="css-counter-styles-3/index.html">CSS Counter Styles Module Level 3</a>
+        <code class="spec-shortname">css-counter-styles-3</code>
+        <time class="spec-date" datetime="2025-12-13T23:14:00Z" data-ts="1765667640">2025-12-13</time>
+        <span class="chevron" aria-hidden="true">›</span>
+      </div>
+      <div class="spec-details">
+        <div class="spec-links"><a href="https://github.com/w3c/csswg-drafts/issues?q=is%3Aissue+is%3Aopen+label%3Acss-counter-styles-3">Issues</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/pulls?q=is%3Apr+is%3Aopen+label%3Acss-counter-styles-3">PRs</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/commits/main/css-counter-styles-3/">History</a> <span class="sep">·</span> <a href="css-counter-styles-3/issues-cr-20150203.html">DoC: cr-20150203</a> <span class="sep">·</span> <a href="https://drafts.csswg.org/css-counter-styles-3/issues-cr-20150611.html">DoC: cr-20150611</a> <span class="sep">·</span> <a href="https://drafts.csswg.org/css-counter-styles-3/issues-cr-2017.html">DoC: cr-2017</a> <span class="sep">·</span> <a href="css-counter-styles-3/issues-lc-20130718.html">DoC: lc-20130718</a> <span class="sep">·</span> <a href="css-counter-styles-3/issues-lc-20140826.html">DoC: lc-20140826</a></div>
+      </div>
+    </div>
+    <div class="spec" data-ts="1765661406" data-shortname="compositing" data-dir="compositing-2" data-level="2" data-group-size="2">
+      <div class="spec-header">
+        <span class="activity-dot" data-ts="1765661406"></span>
+        <a class="spec-title" href="compositing-2/index.html">Compositing and Blending Module Level 2</a> <span class="badge current-work">Current Work</span>
+        <code class="spec-shortname">compositing-2</code>
+        <time class="spec-date" datetime="2025-12-13T21:30:06Z" data-ts="1765661406">2025-12-13</time>
+        <span class="chevron" aria-hidden="true">›</span>
+      </div>
+      <div class="spec-details">
+        <div class="spec-links"><a href="https://github.com/w3c/csswg-drafts/issues?q=is%3Aissue+is%3Aopen+label%3Acompositing-2">Issues</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/pulls?q=is%3Apr+is%3Aopen+label%3Acompositing-2">PRs</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/commits/main/compositing-2/">History</a></div>
+      </div>
+    </div>
+    <div class="spec" data-ts="1765580715" data-shortname="compositing" data-dir="compositing-1" data-level="1" data-group-size="2">
+      <div class="spec-header">
+        <span class="activity-dot" data-ts="1765580715"></span>
+        <a class="spec-title" href="compositing-1/index.html">Compositing and Blending Module Level 1</a>
+        <code class="spec-shortname">compositing-1</code>
+        <time class="spec-date" datetime="2025-12-12T23:05:15Z" data-ts="1765580715">2025-12-12</time>
+        <span class="chevron" aria-hidden="true">›</span>
+      </div>
+      <div class="spec-details">
+        <div class="spec-links"><a href="https://github.com/w3c/csswg-drafts/issues?q=is%3Aissue+is%3Aopen+label%3Acompositing-1">Issues</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/pulls?q=is%3Apr+is%3Aopen+label%3Acompositing-1">PRs</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/commits/main/compositing-1/">History</a> <span class="sep">·</span> <a href="compositing-1/issues-cr-2014.html">DoC: cr-2014</a> <span class="sep">·</span> <a href="compositing-1/issues-lc-2013.html">DoC: lc-2013</a> <span class="sep">·</span> <a href="compositing-1/issues-lc-2014-2.html">DoC: lc-2014-2</a> <span class="sep">·</span> <a href="compositing-1/issues-lc-2014.html">DoC: lc-2014</a></div>
+      </div>
+    </div>
+    <div class="spec" data-ts="1765564973" data-shortname="geometry" data-dir="geometry-1" data-level="1" data-group-size="1">
+      <div class="spec-header">
+        <span class="activity-dot" data-ts="1765564973"></span>
+        <a class="spec-title" href="geometry-1/index.html">Geometry Interfaces Module Level 1</a>
+        <code class="spec-shortname">geometry-1</code>
+        <time class="spec-date" datetime="2025-12-12T18:42:53Z" data-ts="1765564973">2025-12-12</time>
+        <span class="chevron" aria-hidden="true">›</span>
+      </div>
+      <div class="spec-details">
+        <div class="spec-links"><a href="https://github.com/w3c/csswg-drafts/issues?q=is%3Aissue+is%3Aopen+label%3Ageometry-1">Issues</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/pulls?q=is%3Apr+is%3Aopen+label%3Ageometry-1">PRs</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/commits/main/geometry-1/">History</a> <span class="sep">·</span> <a href="geometry-1/issues-lc-2014.html">DoC: lc-2014</a></div>
+      </div>
+    </div>
+    <div class="spec" data-ts="1765549298" data-shortname="css-logical" data-dir="css-logical-1" data-level="1" data-group-size="1">
+      <div class="spec-header">
+        <span class="activity-dot" data-ts="1765549298"></span>
+        <a class="spec-title" href="css-logical-1/index.html">CSS Logical Properties and Values Module Level 1</a>
+        <code class="spec-shortname">css-logical-1</code>
+        <time class="spec-date" datetime="2025-12-12T14:21:38Z" data-ts="1765549298">2025-12-12</time>
+        <span class="chevron" aria-hidden="true">›</span>
+      </div>
+      <div class="spec-details">
+        <div class="spec-links"><a href="https://github.com/w3c/csswg-drafts/issues?q=is%3Aissue+is%3Aopen+label%3Acss-logical-1">Issues</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/pulls?q=is%3Apr+is%3Aopen+label%3Acss-logical-1">PRs</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/commits/main/css-logical-1/">History</a></div>
+      </div>
+    </div>
+    <div class="spec" data-ts="1765071440" data-shortname="css-conditional" data-dir="css-conditional-3" data-level="3" data-group-size="3">
+      <div class="spec-header">
+        <span class="activity-dot" data-ts="1765071440"></span>
+        <a class="spec-title" href="css-conditional-3/index.html">CSS Conditional Rules Module Level 3</a>
+        <code class="spec-shortname">css-conditional-3</code>
+        <time class="spec-date" datetime="2025-12-07T01:37:20Z" data-ts="1765071440">2025-12-07</time>
+        <span class="chevron" aria-hidden="true">›</span>
+      </div>
+      <div class="spec-details">
+        <div class="spec-links"><a href="https://github.com/w3c/csswg-drafts/issues?q=is%3Aissue+is%3Aopen+label%3Acss-conditional-3">Issues</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/pulls?q=is%3Apr+is%3Aopen+label%3Acss-conditional-3">PRs</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/commits/main/css-conditional-3/">History</a> <span class="sep">·</span> <a href="css-conditional-3/issues-cr-2013.html">DoC: cr-2013</a> <span class="sep">·</span> <a href="css-conditional-3/issues-cr-2020.html">DoC: cr-2020</a></div>
+      </div>
+    </div>
+    <div class="spec" data-ts="1764537252" data-shortname="css-transforms" data-dir="css-transforms-1" data-level="1" data-group-size="2">
+      <div class="spec-header">
+        <span class="activity-dot" data-ts="1764537252"></span>
+        <a class="spec-title" href="css-transforms-1/index.html">CSS Transforms Module Level 1</a> <span class="badge current-work">Current Work</span>
+        <code class="spec-shortname">css-transforms-1</code>
+        <time class="spec-date" datetime="2025-11-30T21:14:12Z" data-ts="1764537252">2025-11-30</time>
+        <span class="chevron" aria-hidden="true">›</span>
+      </div>
+      <div class="spec-details">
+        <div class="spec-links"><a href="https://github.com/w3c/csswg-drafts/issues?q=is%3Aissue+is%3Aopen+label%3Acss-transforms-1">Issues</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/pulls?q=is%3Apr+is%3Aopen+label%3Acss-transforms-1">PRs</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/commits/main/css-transforms-1/">History</a> <span class="sep">·</span> <a href="css-transforms-1/issues-wd-2013.html">DoC: wd-2013</a></div>
+      </div>
+    </div>
+    <div class="spec" data-ts="1764537252" data-shortname="css-transforms" data-dir="css-transforms-2" data-level="2" data-group-size="2">
+      <div class="spec-header">
+        <span class="activity-dot" data-ts="1764537252"></span>
+        <a class="spec-title" href="css-transforms-2/index.html">CSS Transforms Module Level 2</a>
+        <code class="spec-shortname">css-transforms-2</code>
+        <time class="spec-date" datetime="2025-11-30T21:14:12Z" data-ts="1764537252">2025-11-30</time>
+        <span class="chevron" aria-hidden="true">›</span>
+      </div>
+      <div class="spec-details">
+        <div class="spec-links"><a href="https://github.com/w3c/csswg-drafts/issues?q=is%3Aissue+is%3Aopen+label%3Acss-transforms-2">Issues</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/pulls?q=is%3Apr+is%3Aopen+label%3Acss-transforms-2">PRs</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/commits/main/css-transforms-2/">History</a> <span class="sep">·</span> <a href="css-transforms-2/issues-wd-2013.html">DoC: wd-2013</a></div>
+      </div>
+    </div>
+    <div class="spec" data-ts="1764464977" data-shortname="css-page" data-dir="css-page-4" data-level="4" data-group-size="2">
+      <div class="spec-header">
+        <span class="activity-dot" data-ts="1764464977"></span>
+        <a class="spec-title" href="css-page-4/index.html">Proposals for the future of CSS Paged Media</a>
+        <code class="spec-shortname">css-page-4</code>
+        <time class="spec-date" datetime="2025-11-30T01:09:37Z" data-ts="1764464977">2025-11-30</time>
+        <span class="chevron" aria-hidden="true">›</span>
+      </div>
+      <div class="spec-details">
+        <div class="spec-links"><a href="https://github.com/w3c/csswg-drafts/issues?q=is%3Aissue+is%3Aopen+label%3Acss-page-4">Issues</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/pulls?q=is%3Apr+is%3Aopen+label%3Acss-page-4">PRs</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/commits/main/css-page-4/">History</a></div>
+      </div>
+    </div>
+    <div class="spec" data-ts="1764022590" data-shortname="web-animations" data-dir="web-animations-1" data-level="1" data-group-size="2">
+      <div class="spec-header">
+        <span class="activity-dot" data-ts="1764022590"></span>
+        <a class="spec-title" href="web-animations-1/index.html">Web Animations Module Level 1</a>
+        <code class="spec-shortname">web-animations-1</code>
+        <time class="spec-date" datetime="2025-11-24T22:16:30Z" data-ts="1764022590">2025-11-24</time>
+        <span class="chevron" aria-hidden="true">›</span>
+      </div>
+      <div class="spec-details">
+        <div class="spec-links"><a href="https://github.com/w3c/csswg-drafts/issues?q=is%3Aissue+is%3Aopen+label%3Aweb-animations-1">Issues</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/pulls?q=is%3Apr+is%3Aopen+label%3Aweb-animations-1">PRs</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/commits/main/web-animations-1/">History</a></div>
+      </div>
+    </div>
+    <div class="spec" data-ts="1763731945" data-shortname="css-snapshot" data-dir="css-2022" data-level="2022" data-group-size="12">
+      <div class="spec-header">
+        <span class="activity-dot" data-ts="1763731945"></span>
+        <a class="spec-title" href="css-2022/index.html">CSS Snapshot 2022</a>
+        <code class="spec-shortname">css-2022</code>
+        <time class="spec-date" datetime="2025-11-21T13:32:25Z" data-ts="1763731945">2025-11-21</time>
+        <span class="chevron" aria-hidden="true">›</span>
+      </div>
+      <div class="spec-details">
+        <div class="spec-links"><a href="https://github.com/w3c/csswg-drafts/issues?q=is%3Aissue+is%3Aopen+label%3Acss-2022">Issues</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/pulls?q=is%3Apr+is%3Aopen+label%3Acss-2022">PRs</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/commits/main/css-2022/">History</a></div>
+      </div>
+    </div>
+    <div class="spec" data-ts="1763731945" data-shortname="css-snapshot" data-dir="css-2023" data-level="2023" data-group-size="12">
+      <div class="spec-header">
+        <span class="activity-dot" data-ts="1763731945"></span>
+        <a class="spec-title" href="css-2023/index.html">CSS Snapshot 2023</a>
+        <code class="spec-shortname">css-2023</code>
+        <time class="spec-date" datetime="2025-11-21T13:32:25Z" data-ts="1763731945">2025-11-21</time>
+        <span class="chevron" aria-hidden="true">›</span>
+      </div>
+      <div class="spec-details">
+        <div class="spec-links"><a href="https://github.com/w3c/csswg-drafts/issues?q=is%3Aissue+is%3Aopen+label%3Acss-2023">Issues</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/pulls?q=is%3Apr+is%3Aopen+label%3Acss-2023">PRs</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/commits/main/css-2023/">History</a></div>
+      </div>
+    </div>
+    <div class="spec" data-ts="1763731945" data-shortname="css-snapshot" data-dir="css-2024" data-level="2024" data-group-size="12">
+      <div class="spec-header">
+        <span class="activity-dot" data-ts="1763731945"></span>
+        <a class="spec-title" href="css-2024/index.html">CSS Snapshot 2024</a>
+        <code class="spec-shortname">css-2024</code>
+        <time class="spec-date" datetime="2025-11-21T13:32:25Z" data-ts="1763731945">2025-11-21</time>
+        <span class="chevron" aria-hidden="true">›</span>
+      </div>
+      <div class="spec-details">
+        <div class="spec-links"><a href="https://github.com/w3c/csswg-drafts/issues?q=is%3Aissue+is%3Aopen+label%3Acss-2024">Issues</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/pulls?q=is%3Apr+is%3Aopen+label%3Acss-2024">PRs</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/commits/main/css-2024/">History</a></div>
+      </div>
+    </div>
+    <div class="spec" data-ts="1763731945" data-shortname="css-snapshot" data-dir="css-2025" data-level="2025" data-group-size="12">
+      <div class="spec-header">
+        <span class="activity-dot" data-ts="1763731945"></span>
+        <a class="spec-title" href="css-2025/index.html">CSS Snapshot 2025</a>
+        <code class="spec-shortname">css-2025</code>
+        <time class="spec-date" datetime="2025-11-21T13:32:25Z" data-ts="1763731945">2025-11-21</time>
+        <span class="chevron" aria-hidden="true">›</span>
+      </div>
+      <div class="spec-details">
+        <div class="spec-links"><a href="https://github.com/w3c/csswg-drafts/issues?q=is%3Aissue+is%3Aopen+label%3Acss-2025">Issues</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/pulls?q=is%3Apr+is%3Aopen+label%3Acss-2025">PRs</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/commits/main/css-2025/">History</a></div>
+      </div>
+    </div>
+    <div class="spec" data-ts="1762315980" data-shortname="css-extensions" data-dir="css-extensions-1" data-level="1" data-group-size="1">
+      <div class="spec-header">
+        <span class="activity-dot" data-ts="1762315980"></span>
+        <a class="spec-title" href="css-extensions-1/index.html">CSS Extensions Module Level 1</a>
+        <code class="spec-shortname">css-extensions-1</code>
+        <time class="spec-date" datetime="2025-11-05T04:13:00Z" data-ts="1762315980">2025-11-05</time>
+        <span class="chevron" aria-hidden="true">›</span>
+      </div>
+      <div class="spec-details">
+        <div class="spec-links"><a href="https://github.com/w3c/csswg-drafts/issues?q=is%3Aissue+is%3Aopen+label%3Acss-extensions-1">Issues</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/pulls?q=is%3Apr+is%3Aopen+label%3Acss-extensions-1">PRs</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/commits/main/css-extensions-1/">History</a></div>
+      </div>
+    </div>
+    <div class="spec" data-ts="1761338248" data-shortname="css-anchor-position" data-dir="css-anchor-position-2" data-level="2" data-group-size="2">
+      <div class="spec-header">
+        <span class="activity-dot" data-ts="1761338248"></span>
+        <a class="spec-title" href="css-anchor-position-2/index.html">CSS Anchor Positioning Module Level 2</a>
+        <code class="spec-shortname">css-anchor-position-2</code>
+        <time class="spec-date" datetime="2025-10-24T20:37:28Z" data-ts="1761338248">2025-10-24</time>
+        <span class="chevron" aria-hidden="true">›</span>
+      </div>
+      <div class="spec-details">
+        <div class="spec-links"><a href="https://github.com/w3c/csswg-drafts/issues?q=is%3Aissue+is%3Aopen+label%3Acss-anchor-position-2">Issues</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/pulls?q=is%3Apr+is%3Aopen+label%3Acss-anchor-position-2">PRs</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/commits/main/css-anchor-position-2/">History</a></div>
+      </div>
+    </div>
+    <div class="spec" data-ts="1761338248" data-shortname="css-snapshot" data-dir="css-2020" data-level="2020" data-group-size="12">
+      <div class="spec-header">
+        <span class="activity-dot" data-ts="1761338248"></span>
+        <a class="spec-title" href="css-2020/index.html">CSS Snapshot 2020</a>
+        <code class="spec-shortname">css-2020</code>
+        <time class="spec-date" datetime="2025-10-24T20:37:28Z" data-ts="1761338248">2025-10-24</time>
+        <span class="chevron" aria-hidden="true">›</span>
+      </div>
+      <div class="spec-details">
+        <div class="spec-links"><a href="https://github.com/w3c/csswg-drafts/issues?q=is%3Aissue+is%3Aopen+label%3Acss-2020">Issues</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/pulls?q=is%3Apr+is%3Aopen+label%3Acss-2020">PRs</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/commits/main/css-2020/">History</a></div>
+      </div>
+    </div>
+    <div class="spec" data-ts="1761338248" data-shortname="css-box" data-dir="css-box-3" data-level="3" data-group-size="2">
+      <div class="spec-header">
+        <span class="activity-dot" data-ts="1761338248"></span>
+        <a class="spec-title" href="css-box-3/index.html">CSS Box Model Module Level 3</a>
+        <code class="spec-shortname">css-box-3</code>
+        <time class="spec-date" datetime="2025-10-24T20:37:28Z" data-ts="1761338248">2025-10-24</time>
+        <span class="chevron" aria-hidden="true">›</span>
+      </div>
+      <div class="spec-details">
+        <div class="spec-links"><a href="https://github.com/w3c/csswg-drafts/issues?q=is%3Aissue+is%3Aopen+label%3Acss-box-3">Issues</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/pulls?q=is%3Apr+is%3Aopen+label%3Acss-box-3">PRs</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/commits/main/css-box-3/">History</a></div>
+      </div>
+    </div>
+    <div class="spec" data-ts="1761175848" data-shortname="css-exclusions" data-dir="css-exclusions-1" data-level="1" data-group-size="1">
+      <div class="spec-header">
+        <span class="activity-dot" data-ts="1761175848"></span>
+        <a class="spec-title" href="css-exclusions-1/index.html">CSS Exclusions Module Level 1</a>
+        <code class="spec-shortname">css-exclusions-1</code>
+        <time class="spec-date" datetime="2025-10-22T23:30:48Z" data-ts="1761175848">2025-10-22</time>
+        <span class="chevron" aria-hidden="true">›</span>
+      </div>
+      <div class="spec-details">
+        <div class="spec-links"><a href="https://github.com/w3c/csswg-drafts/issues?q=is%3Aissue+is%3Aopen+label%3Acss-exclusions-1">Issues</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/pulls?q=is%3Apr+is%3Aopen+label%3Acss-exclusions-1">PRs</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/commits/main/css-exclusions-1/">History</a></div>
+      </div>
+    </div>
+    <div class="spec" data-ts="1761136334" data-shortname="css-conditional" data-dir="css-conditional-4" data-level="4" data-group-size="3">
+      <div class="spec-header">
+        <span class="activity-dot" data-ts="1761136334"></span>
+        <a class="spec-title" href="css-conditional-4/index.html">CSS Conditional Rules Module Level 4</a>
+        <code class="spec-shortname">css-conditional-4</code>
+        <time class="spec-date" datetime="2025-10-22T12:32:14Z" data-ts="1761136334">2025-10-22</time>
+        <span class="chevron" aria-hidden="true">›</span>
+      </div>
+      <div class="spec-details">
+        <div class="spec-links"><a href="https://github.com/w3c/csswg-drafts/issues?q=is%3Aissue+is%3Aopen+label%3Acss-conditional-4">Issues</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/pulls?q=is%3Apr+is%3Aopen+label%3Acss-conditional-4">PRs</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/commits/main/css-conditional-4/">History</a></div>
+      </div>
+    </div>
+    <div class="spec" data-ts="1761127183" data-shortname="css-break" data-dir="css-break-3" data-level="3" data-group-size="2">
+      <div class="spec-header">
+        <span class="activity-dot" data-ts="1761127183"></span>
+        <a class="spec-title" href="css-break-3/index.html">CSS Fragmentation Module Level 3</a> <span class="badge current-work">Current Work</span>
+        <code class="spec-shortname">css-break-3</code>
+        <time class="spec-date" datetime="2025-10-22T09:59:43Z" data-ts="1761127183">2025-10-22</time>
+        <span class="chevron" aria-hidden="true">›</span>
+      </div>
+      <div class="spec-details">
+        <div class="spec-links"><a href="https://github.com/w3c/csswg-drafts/issues?q=is%3Aissue+is%3Aopen+label%3Acss-break-3">Issues</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/pulls?q=is%3Apr+is%3Aopen+label%3Acss-break-3">PRs</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/commits/main/css-break-3/">History</a> <span class="sep">·</span> <a href="css-break-3/issues-cr-2016.html">DoC: cr-2016</a> <span class="sep">·</span> <a href="css-break-3/issues-lc-2015.html">DoC: lc-2015</a></div>
+      </div>
+    </div>
+    <div class="spec" data-ts="1761088191" data-shortname="css-box" data-dir="css-box-4" data-level="4" data-group-size="2">
+      <div class="spec-header">
+        <span class="activity-dot" data-ts="1761088191"></span>
+        <a class="spec-title" href="css-box-4/index.html">CSS Box Model Module Level 4</a> <span class="badge current-work">Current Work</span>
+        <code class="spec-shortname">css-box-4</code>
+        <time class="spec-date" datetime="2025-10-21T23:09:51Z" data-ts="1761088191">2025-10-21</time>
+        <span class="chevron" aria-hidden="true">›</span>
+      </div>
+      <div class="spec-details">
+        <div class="spec-links"><a href="https://github.com/w3c/csswg-drafts/issues?q=is%3Aissue+is%3Aopen+label%3Acss-box-4">Issues</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/pulls?q=is%3Apr+is%3Aopen+label%3Acss-box-4">PRs</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/commits/main/css-box-4/">History</a></div>
+      </div>
+    </div>
+    <div class="spec" data-ts="1746478931" data-shortname="css-variables" data-dir="css-variables-1" data-level="1" data-group-size="2">
+      <div class="spec-header">
+        <span class="activity-dot" data-ts="1746478931"></span>
+        <a class="spec-title" href="css-variables-1/index.html">CSS Custom Properties for Cascading Variables Module Level 1</a> <span class="badge current-work">Current Work</span>
+        <code class="spec-shortname">css-variables-1</code>
+        <time class="spec-date" datetime="2025-05-05T21:02:11Z" data-ts="1746478931">2025-05-05</time>
+        <span class="chevron" aria-hidden="true">›</span>
+      </div>
+      <div class="spec-details">
+        <div class="spec-links"><a href="https://github.com/w3c/csswg-drafts/issues?q=is%3Aissue+is%3Aopen+label%3Acss-variables-1">Issues</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/pulls?q=is%3Apr+is%3Aopen+label%3Acss-variables-1">PRs</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/commits/main/css-variables-1/">History</a> <span class="sep">·</span> <a href="css-variables-1/issues-lc-20130620.html">DoC: lc-20130620</a> <span class="sep">·</span> <a href="css-variables-1/issues-lc-20140506.html">DoC: lc-20140506</a></div>
+      </div>
+    </div>
+    <div class="spec" data-ts="1746478931" data-shortname="css-variables" data-dir="css-variables-2" data-level="2" data-group-size="2">
+      <div class="spec-header">
+        <span class="activity-dot" data-ts="1746478931"></span>
+        <a class="spec-title" href="css-variables-2/index.html">CSS Custom Properties for Cascading Variables Module Level 2</a>
+        <code class="spec-shortname">css-variables-2</code>
+        <time class="spec-date" datetime="2025-05-05T21:02:11Z" data-ts="1746478931">2025-05-05</time>
+        <span class="chevron" aria-hidden="true">›</span>
+      </div>
+      <div class="spec-details">
+        <div class="spec-links"><a href="https://github.com/w3c/csswg-drafts/issues?q=is%3Aissue+is%3Aopen+label%3Acss-variables-2">Issues</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/pulls?q=is%3Apr+is%3Aopen+label%3Acss-variables-2">PRs</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/commits/main/css-variables-2/">History</a></div>
+      </div>
+    </div>
+    <div class="spec" data-ts="1739724217" data-shortname="css-view-transitions" data-dir="css-view-transitions-1" data-level="1" data-group-size="2">
+      <div class="spec-header">
+        <span class="activity-dot" data-ts="1739724217"></span>
+        <a class="spec-title" href="css-view-transitions-1/index.html">CSS View Transitions Module Level 1</a> <span class="badge current-work">Current Work</span>
+        <code class="spec-shortname">css-view-transitions-1</code>
+        <time class="spec-date" datetime="2025-02-16T16:43:37Z" data-ts="1739724217">2025-02-16</time>
+        <span class="chevron" aria-hidden="true">›</span>
+      </div>
+      <div class="spec-details">
+        <div class="spec-links"><a href="https://github.com/w3c/csswg-drafts/issues?q=is%3Aissue+is%3Aopen+label%3Acss-view-transitions-1">Issues</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/pulls?q=is%3Apr+is%3Aopen+label%3Acss-view-transitions-1">PRs</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/commits/main/css-view-transitions-1/">History</a></div>
+      </div>
+    </div>
+    <div class="spec" data-ts="1738189270" data-shortname="css-snapshot" data-dir="css-2021" data-level="2021" data-group-size="12">
+      <div class="spec-header">
+        <span class="activity-dot" data-ts="1738189270"></span>
+        <a class="spec-title" href="css-2021/index.html">CSS Snapshot 2021</a>
+        <code class="spec-shortname">css-2021</code>
+        <time class="spec-date" datetime="2025-01-29T22:21:10Z" data-ts="1738189270">2025-01-29</time>
+        <span class="chevron" aria-hidden="true">›</span>
+      </div>
+      <div class="spec-details">
+        <div class="spec-links"><a href="https://github.com/w3c/csswg-drafts/issues?q=is%3Aissue+is%3Aopen+label%3Acss-2021">Issues</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/pulls?q=is%3Apr+is%3Aopen+label%3Acss-2021">PRs</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/commits/main/css-2021/">History</a></div>
+      </div>
+    </div>
+    <div class="spec" data-ts="1729879335" data-shortname="css-namespaces" data-dir="css-namespaces-3" data-level="3" data-group-size="1">
+      <div class="spec-header">
+        <span class="activity-dot" data-ts="1729879335"></span>
+        <a class="spec-title" href="css-namespaces-3/index.html">CSS Namespaces Module Level 3</a>
+        <code class="spec-shortname">css-namespaces-3</code>
+        <time class="spec-date" datetime="2024-10-25T18:02:15Z" data-ts="1729879335">2024-10-25</time>
+        <span class="chevron" aria-hidden="true">›</span>
+      </div>
+      <div class="spec-details">
+        <div class="spec-links"><a href="https://github.com/w3c/csswg-drafts/issues?q=is%3Aissue+is%3Aopen+label%3Acss-namespaces-3">Issues</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/pulls?q=is%3Apr+is%3Aopen+label%3Acss-namespaces-3">PRs</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/commits/main/css-namespaces-3/">History</a> <span class="sep">·</span> <a href="css-namespaces-3/issues-2.html">DoC: 2</a> <span class="sep">·</span> <a href="css-namespaces-3/issues-3.html">DoC: 3</a></div>
+      </div>
+    </div>
+    <div class="spec" data-ts="1706108131" data-shortname="css-gcpm" data-dir="css-gcpm-4" data-level="4" data-group-size="2">
+      <div class="spec-header">
+        <span class="activity-dot" data-ts="1706108131"></span>
+        <a class="spec-title" href="css-gcpm-4/index.html">CSS Generated Content for Paged Media Module Level 4</a>
+        <code class="spec-shortname">css-gcpm-4</code>
+        <time class="spec-date" datetime="2024-01-24T14:55:31Z" data-ts="1706108131">2024-01-24</time>
+        <span class="chevron" aria-hidden="true">›</span>
+      </div>
+      <div class="spec-details">
+        <div class="spec-links"><a href="https://github.com/w3c/csswg-drafts/issues?q=is%3Aissue+is%3Aopen+label%3Acss-gcpm-4">Issues</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/pulls?q=is%3Apr+is%3Aopen+label%3Acss-gcpm-4">PRs</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/commits/main/css-gcpm-4/">History</a></div>
+      </div>
+    </div>
+    <div class="spec" data-ts="1706108131" data-shortname="selectors-nonelement" data-dir="selectors-nonelement-1" data-level="1" data-group-size="1">
+      <div class="spec-header">
+        <span class="activity-dot" data-ts="1706108131"></span>
+        <a class="spec-title" href="selectors-nonelement-1/index.html">Non-element Selectors Module Level 1</a>
+        <code class="spec-shortname">selectors-nonelement-1</code>
+        <time class="spec-date" datetime="2024-01-24T14:55:31Z" data-ts="1706108131">2024-01-24</time>
+        <span class="chevron" aria-hidden="true">›</span>
+      </div>
+      <div class="spec-details">
+        <div class="spec-links"><a href="https://github.com/w3c/csswg-drafts/issues?q=is%3Aissue+is%3Aopen+label%3Aselectors-nonelement-1">Issues</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/pulls?q=is%3Apr+is%3Aopen+label%3Aselectors-nonelement-1">PRs</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/commits/main/selectors-nonelement-1/">History</a></div>
+      </div>
+    </div>
+    <div class="spec" data-ts="1702933595" data-shortname="css-values" data-dir="css-values-4" data-level="4" data-group-size="3">
+      <div class="spec-header">
+        <span class="activity-dot" data-ts="1702933595"></span>
+        <a class="spec-title" href="css-values-4/index.html">CSS Values and Units Module Level 4</a> <span class="badge current-work">Current Work</span>
+        <code class="spec-shortname">css-values-4</code>
+        <time class="spec-date" datetime="2023-12-18T21:06:35Z" data-ts="1702933595">2023-12-18</time>
+        <span class="chevron" aria-hidden="true">›</span>
+      </div>
+      <div class="spec-details">
+        <div class="spec-links"><a href="https://github.com/w3c/csswg-drafts/issues?q=is%3Aissue+is%3Aopen+label%3Acss-values-4">Issues</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/pulls?q=is%3Apr+is%3Aopen+label%3Acss-values-4">PRs</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/commits/main/css-values-4/">History</a></div>
+      </div>
+    </div>
+    <div class="spec" data-ts="1698698975" data-shortname="css-grid" data-dir="css-grid-1" data-level="1" data-group-size="3">
+      <div class="spec-header">
+        <span class="activity-dot" data-ts="1698698975"></span>
+        <a class="spec-title" href="css-grid-1/index.html">CSS Grid Layout Module Level 1</a>
+        <code class="spec-shortname">css-grid-1</code>
+        <time class="spec-date" datetime="2023-10-30T20:49:35Z" data-ts="1698698975">2023-10-30</time>
+        <span class="chevron" aria-hidden="true">›</span>
+      </div>
+      <div class="spec-details">
+        <div class="spec-links"><a href="https://github.com/w3c/csswg-drafts/issues?q=is%3Aissue+is%3Aopen+label%3Acss-grid-1">Issues</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/pulls?q=is%3Apr+is%3Aopen+label%3Acss-grid-1">PRs</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/commits/main/css-grid-1/">History</a> <span class="sep">·</span> <a href="https://drafts.csswg.org/css-grid-1/issues-cr-2016.html">DoC: cr-2016</a> <span class="sep">·</span> <a href="https://drafts.csswg.org/css-grid-1/issues-cr-2017.html">DoC: cr-2017</a> <span class="sep">·</span> <a href="css-grid-1/issues-wd-20150108.html">DoC: wd-20150108</a> <span class="sep">·</span> <a href="css-grid-1/issues-wd-20150806.html">DoC: wd-20150806</a> <span class="sep">·</span> <a href="css-grid-1/issues-wd-20150917.html">DoC: wd-20150917</a> <span class="sep">·</span> <a href="css-grid-1/issues-wd-20160519.html">DoC: wd-20160519</a></div>
+      </div>
+    </div>
+    <div class="spec" data-ts="1698698975" data-shortname="css-grid" data-dir="css-grid-2" data-level="2" data-group-size="3">
+      <div class="spec-header">
+        <span class="activity-dot" data-ts="1698698975"></span>
+        <a class="spec-title" href="css-grid-2/index.html">CSS Grid Layout Module Level 2</a> <span class="badge current-work">Current Work</span>
+        <code class="spec-shortname">css-grid-2</code>
+        <time class="spec-date" datetime="2023-10-30T20:49:35Z" data-ts="1698698975">2023-10-30</time>
+        <span class="chevron" aria-hidden="true">›</span>
+      </div>
+      <div class="spec-details">
+        <div class="spec-links"><a href="https://github.com/w3c/csswg-drafts/issues?q=is%3Aissue+is%3Aopen+label%3Acss-grid-2">Issues</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/pulls?q=is%3Apr+is%3Aopen+label%3Acss-grid-2">PRs</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/commits/main/css-grid-2/">History</a></div>
+      </div>
+    </div>
+    <div class="spec" data-ts="1693251899" data-shortname="css-snapshot" data-dir="css-2015" data-level="2015" data-group-size="12">
+      <div class="spec-header">
+        <span class="activity-dot" data-ts="1693251899"></span>
+        <a class="spec-title" href="css-2015/index.html">CSS Snapshot 2015</a>
+        <code class="spec-shortname">css-2015</code>
+        <time class="spec-date" datetime="2023-08-28T19:44:59Z" data-ts="1693251899">2023-08-28</time>
+        <span class="chevron" aria-hidden="true">›</span>
+      </div>
+      <div class="spec-details">
+        <div class="spec-links"><a href="https://github.com/w3c/csswg-drafts/issues?q=is%3Aissue+is%3Aopen+label%3Acss-2015">Issues</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/pulls?q=is%3Apr+is%3Aopen+label%3Acss-2015">PRs</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/commits/main/css-2015/">History</a></div>
+      </div>
+    </div>
+    <div class="spec" data-ts="1693251899" data-shortname="css-snapshot" data-dir="css-2017" data-level="2017" data-group-size="12">
+      <div class="spec-header">
+        <span class="activity-dot" data-ts="1693251899"></span>
+        <a class="spec-title" href="css-2017/index.html">CSS Snapshot 2017</a>
+        <code class="spec-shortname">css-2017</code>
+        <time class="spec-date" datetime="2023-08-28T19:44:59Z" data-ts="1693251899">2023-08-28</time>
+        <span class="chevron" aria-hidden="true">›</span>
+      </div>
+      <div class="spec-details">
+        <div class="spec-links"><a href="https://github.com/w3c/csswg-drafts/issues?q=is%3Aissue+is%3Aopen+label%3Acss-2017">Issues</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/pulls?q=is%3Apr+is%3Aopen+label%3Acss-2017">PRs</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/commits/main/css-2017/">History</a></div>
+      </div>
+    </div>
+    <div class="spec" data-ts="1693251899" data-shortname="css-snapshot" data-dir="css-2018" data-level="2018" data-group-size="12">
+      <div class="spec-header">
+        <span class="activity-dot" data-ts="1693251899"></span>
+        <a class="spec-title" href="css-2018/index.html">CSS Snapshot 2018</a>
+        <code class="spec-shortname">css-2018</code>
+        <time class="spec-date" datetime="2023-08-28T19:44:59Z" data-ts="1693251899">2023-08-28</time>
+        <span class="chevron" aria-hidden="true">›</span>
+      </div>
+      <div class="spec-details">
+        <div class="spec-links"><a href="https://github.com/w3c/csswg-drafts/issues?q=is%3Aissue+is%3Aopen+label%3Acss-2018">Issues</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/pulls?q=is%3Apr+is%3Aopen+label%3Acss-2018">PRs</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/commits/main/css-2018/">History</a></div>
+      </div>
+    </div>
+    <div class="spec" data-ts="1677004739" data-shortname="css-egg" data-dir="css-egg-1" data-level="1" data-group-size="1">
+      <div class="spec-header">
+        <span class="activity-dot" data-ts="1677004739"></span>
+        <a class="spec-title" href="css-egg-1/index.html">CSS Expressive Generalizations and Gadgetry Level 1</a>
+        <code class="spec-shortname">css-egg-1</code>
+        <time class="spec-date" datetime="2023-02-21T18:38:59Z" data-ts="1677004739">2023-02-21</time>
+        <span class="chevron" aria-hidden="true">›</span>
+      </div>
+      <div class="spec-details">
+        <div class="spec-links"><a href="https://github.com/w3c/csswg-drafts/issues?q=is%3Aissue+is%3Aopen+label%3Acss-egg-1">Issues</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/pulls?q=is%3Apr+is%3Aopen+label%3Acss-egg-1">PRs</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/commits/main/css-egg-1/">History</a></div>
+      </div>
+    </div>
+    <div class="spec" data-ts="1669136168" data-shortname="resize-observer" data-dir="resize-observer-1" data-level="1" data-group-size="1">
+      <div class="spec-header">
+        <span class="activity-dot" data-ts="1669136168"></span>
+        <a class="spec-title" href="resize-observer-1/index.html">Resize Observer Module Level 1</a>
+        <code class="spec-shortname">resize-observer-1</code>
+        <time class="spec-date" datetime="2022-11-22T16:56:08Z" data-ts="1669136168">2022-11-22</time>
+        <span class="chevron" aria-hidden="true">›</span>
+      </div>
+      <div class="spec-details">
+        <div class="spec-links"><a href="https://github.com/w3c/csswg-drafts/issues?q=is%3Aissue+is%3Aopen+label%3Aresize-observer-1">Issues</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/pulls?q=is%3Apr+is%3Aopen+label%3Aresize-observer-1">PRs</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/commits/main/resize-observer-1/">History</a></div>
+      </div>
+    </div>
+    <div class="spec" data-ts="1651262442" data-shortname="css-will-change" data-dir="css-will-change-1" data-level="1" data-group-size="1">
+      <div class="spec-header">
+        <span class="activity-dot" data-ts="1651262442"></span>
+        <a class="spec-title" href="css-will-change-1/index.html">CSS Will Change Module Level 1</a>
+        <code class="spec-shortname">css-will-change-1</code>
+        <time class="spec-date" datetime="2022-04-29T20:00:42Z" data-ts="1651262442">2022-04-29</time>
+        <span class="chevron" aria-hidden="true">›</span>
+      </div>
+      <div class="spec-details">
+        <div class="spec-links"><a href="https://github.com/w3c/csswg-drafts/issues?q=is%3Aissue+is%3Aopen+label%3Acss-will-change-1">Issues</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/pulls?q=is%3Apr+is%3Aopen+label%3Acss-will-change-1">PRs</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/commits/main/css-will-change-1/">History</a> <span class="sep">·</span> <a href="css-will-change-1/issues-20140429-wd.html">DoC: 20140429-wd</a></div>
+      </div>
+    </div>
+    <div class="spec" data-ts="1637010836" data-shortname="css-mobile" data-dir="css-mobile" data-level="0" data-group-size="1">
+      <div class="spec-header">
+        <span class="activity-dot" data-ts="1637010836"></span>
+        <a class="spec-title" href="css-mobile/index.html">CSS Mobile Profile 2.0</a>
+        <code class="spec-shortname">css-mobile</code>
+        <time class="spec-date" datetime="2021-11-15T21:13:56Z" data-ts="1637010836">2021-11-15</time>
+        <span class="chevron" aria-hidden="true">›</span>
+      </div>
+      <div class="spec-details">
+        <div class="spec-links"><a href="https://github.com/w3c/csswg-drafts/issues?q=is%3Aissue+is%3Aopen+label%3Acss-mobile">Issues</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/pulls?q=is%3Apr+is%3Aopen+label%3Acss-mobile">PRs</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/commits/main/css-mobile/">History</a></div>
+      </div>
+    </div>
+    <div class="spec" data-ts="0" data-shortname="css-style-attr" data-dir="css-style-attr-1" data-level="1" data-group-size="1">
+      <div class="spec-header">
+        <span class="activity-dot" data-ts="0"></span>
+        <a class="spec-title" href="css-style-attr-1/index.html">CSS Style Attributes</a>
+        <code class="spec-shortname">css-style-attr-1</code>
+        <time class="spec-date" datetime="" data-ts="0"></time>
+        <span class="chevron" aria-hidden="true">›</span>
+      </div>
+      <div class="spec-details">
+        <div class="spec-links"><a href="https://github.com/w3c/csswg-drafts/issues?q=is%3Aissue+is%3Aopen+label%3Acss-style-attr-1">Issues</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/pulls?q=is%3Apr+is%3Aopen+label%3Acss-style-attr-1">PRs</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/commits/main/css-style-attr-1/">History</a> <span class="sep">·</span> <a href="css-style-attr-1/issues-lc-2010.html">DoC: lc-2010</a></div>
+      </div>
+    </div>
+    <div class="spec" data-ts="0" data-shortname="css-shaders" data-dir="css-shaders-1" data-level="1" data-group-size="1">
+      <div class="spec-header">
+        <span class="activity-dot" data-ts="0"></span>
+        <a class="spec-title" href="css-shaders-1/index.html">CSS shaders</a>
+        <code class="spec-shortname">css-shaders-1</code>
+        <time class="spec-date" datetime="" data-ts="0"></time>
+        <span class="chevron" aria-hidden="true">›</span>
+      </div>
+      <div class="spec-details">
+        <div class="spec-links"><a href="https://github.com/w3c/csswg-drafts/issues?q=is%3Aissue+is%3Aopen+label%3Acss-shaders-1">Issues</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/pulls?q=is%3Apr+is%3Aopen+label%3Acss-shaders-1">PRs</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/commits/main/css-shaders-1/">History</a></div>
+      </div>
+    </div>
+    <div class="spec" data-ts="0" data-shortname="css-snapshot" data-dir="css-2007" data-level="2007" data-group-size="12">
+      <div class="spec-header">
+        <span class="activity-dot" data-ts="0"></span>
+        <a class="spec-title" href="css-2007/index.html">CSS Snapshot 2007</a>
+        <code class="spec-shortname">css-2007</code>
+        <time class="spec-date" datetime="" data-ts="0"></time>
+        <span class="chevron" aria-hidden="true">›</span>
+      </div>
+      <div class="spec-details">
+        <div class="spec-links"><a href="https://github.com/w3c/csswg-drafts/issues?q=is%3Aissue+is%3Aopen+label%3Acss-2007">Issues</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/pulls?q=is%3Apr+is%3Aopen+label%3Acss-2007">PRs</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/commits/main/css-2007/">History</a></div>
+      </div>
+    </div>
+    <div class="spec" data-ts="0" data-shortname="css-snapshot" data-dir="css-2010" data-level="2010" data-group-size="12">
+      <div class="spec-header">
+        <span class="activity-dot" data-ts="0"></span>
+        <a class="spec-title" href="css-2010/index.html">CSS Snapshot 2010</a>
+        <code class="spec-shortname">css-2010</code>
+        <time class="spec-date" datetime="" data-ts="0"></time>
+        <span class="chevron" aria-hidden="true">›</span>
+      </div>
+      <div class="spec-details">
+        <div class="spec-links"><a href="https://github.com/w3c/csswg-drafts/issues?q=is%3Aissue+is%3Aopen+label%3Acss-2010">Issues</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/pulls?q=is%3Apr+is%3Aopen+label%3Acss-2010">PRs</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/commits/main/css-2010/">History</a></div>
+      </div>
+    </div>
+    <div class="spec" data-ts="0" data-shortname="css-template" data-dir="css-template-1" data-level="1" data-group-size="1">
+      <div class="spec-header">
+        <span class="activity-dot" data-ts="0"></span>
+        <a class="spec-title" href="css-template-1/index.html">CSS Template Layout Module</a>
+        <code class="spec-shortname">css-template-1</code>
+        <time class="spec-date" datetime="" data-ts="0"></time>
+        <span class="chevron" aria-hidden="true">›</span>
+      </div>
+      <div class="spec-details">
+        <div class="spec-links"><a href="https://github.com/w3c/csswg-drafts/issues?q=is%3Aissue+is%3Aopen+label%3Acss-template-1">Issues</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/pulls?q=is%3Apr+is%3Aopen+label%3Acss-template-1">PRs</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/commits/main/css-template-1/">History</a></div>
+      </div>
+    </div>
+    <div class="spec" data-ts="0" data-shortname="css-color" data-dir="css-color-3" data-level="3" data-group-size="4">
+      <div class="spec-header">
+        <span class="activity-dot" data-ts="0"></span>
+        <a class="spec-title" href="css-color-3/index.html">CSS Color Module Level 3</a>
+        <code class="spec-shortname">css-color-3</code>
+        <time class="spec-date" datetime="" data-ts="0"></time>
+        <span class="chevron" aria-hidden="true">›</span>
+      </div>
+      <div class="spec-details">
+        <div class="spec-links"><a href="https://github.com/w3c/csswg-drafts/issues?q=is%3Aissue+is%3Aopen+label%3Acss-color-3">Issues</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/pulls?q=is%3Apr+is%3Aopen+label%3Acss-color-3">PRs</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/commits/main/css-color-3/">History</a> <span class="sep">·</span> <a href="css-color-3/issues-lc-2008.html">DoC: lc-2008</a></div>
+      </div>
+    </div>
+    <div class="spec" data-ts="0" data-shortname="selectors" data-dir="selectors-3" data-level="3" data-group-size="3">
+      <div class="spec-header">
+        <span class="activity-dot" data-ts="0"></span>
+        <a class="spec-title" href="selectors-3/index.html">Selectors Level 3</a>
+        <code class="spec-shortname">selectors-3</code>
+        <time class="spec-date" datetime="" data-ts="0"></time>
+        <span class="chevron" aria-hidden="true">›</span>
+      </div>
+      <div class="spec-details">
+        <div class="spec-links"><a href="https://github.com/w3c/csswg-drafts/issues?q=is%3Aissue+is%3Aopen+label%3Aselectors-3">Issues</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/pulls?q=is%3Apr+is%3Aopen+label%3Aselectors-3">PRs</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/commits/main/selectors-3/">History</a> <span class="sep">·</span> <a href="selectors-3/issues-lc-2009.html">DoC: lc-2009</a></div>
+      </div>
+    </div>
+    <div class="spec" data-ts="0" data-shortname="web-animations-css-integration" data-dir="web-animations-css-integration" data-level="0" data-group-size="1">
+      <div class="spec-header">
+        <span class="activity-dot" data-ts="0"></span>
+        <a class="spec-title" href="web-animations-css-integration/index.html">Web Animations CSS Integration</a>
+        <code class="spec-shortname">web-animations-css-integration</code>
+        <time class="spec-date" datetime="" data-ts="0"></time>
+        <span class="chevron" aria-hidden="true">›</span>
+      </div>
+      <div class="spec-details">
+        <div class="spec-links"><a href="https://github.com/w3c/csswg-drafts/issues?q=is%3Aissue+is%3Aopen+label%3Aweb-animations-css-integration">Issues</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/pulls?q=is%3Apr+is%3Aopen+label%3Aweb-animations-css-integration">PRs</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/commits/main/web-animations-css-integration/">History</a></div>
+      </div>
+    </div>
+    <div class="spec" data-ts="0" data-shortname="css-fonts" data-dir="css-fonts-3" data-level="3" data-group-size="3">
+      <div class="spec-header">
+        <span class="activity-dot" data-ts="0"></span>
+        <a class="spec-title" href="css-fonts-3/index.html">CSS Fonts Module Level 3</a>
+        <code class="spec-shortname">css-fonts-3</code>
+        <time class="spec-date" datetime="" data-ts="0"></time>
+        <span class="chevron" aria-hidden="true">›</span>
+      </div>
+      <div class="spec-details">
+        <div class="spec-links"><a href="https://github.com/w3c/csswg-drafts/issues?q=is%3Aissue+is%3Aopen+label%3Acss-fonts-3">Issues</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/pulls?q=is%3Apr+is%3Aopen+label%3Acss-fonts-3">PRs</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/commits/main/css-fonts-3/">History</a></div>
+      </div>
+    </div>
+    <div class="spec" data-ts="0" data-shortname="css-preslev" data-dir="css-preslev-1" data-level="1" data-group-size="1">
+      <div class="spec-header">
+        <span class="activity-dot" data-ts="0"></span>
+        <a class="spec-title" href="css-preslev-1/index.html">CSS Presentation Levels Module</a>
+        <code class="spec-shortname">css-preslev-1</code>
+        <time class="spec-date" datetime="" data-ts="0"></time>
+        <span class="chevron" aria-hidden="true">›</span>
+      </div>
+      <div class="spec-details">
+        <div class="spec-links"><a href="https://github.com/w3c/csswg-drafts/issues?q=is%3Aissue+is%3Aopen+label%3Acss-preslev-1">Issues</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/pulls?q=is%3Apr+is%3Aopen+label%3Acss-preslev-1">PRs</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/commits/main/css-preslev-1/">History</a></div>
+      </div>
+    </div>
+    <div class="spec" data-ts="0" data-shortname="css-shadow-parts" data-dir="css-shadow-parts-1" data-level="1" data-group-size="1">
+      <div class="spec-header">
+        <span class="activity-dot" data-ts="0"></span>
+        <a class="spec-title" href="css-shadow-parts-1/index.html">Merged into CSS Shadow Module Level 1</a>
+        <code class="spec-shortname">css-shadow-parts-1</code>
+        <time class="spec-date" datetime="" data-ts="0"></time>
+        <span class="chevron" aria-hidden="true">›</span>
+      </div>
+      <div class="spec-details">
+        <div class="spec-links"><a href="https://github.com/w3c/csswg-drafts/issues?q=is%3Aissue+is%3Aopen+label%3Acss-shadow-parts-1">Issues</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/pulls?q=is%3Apr+is%3Aopen+label%3Acss-shadow-parts-1">PRs</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/commits/main/css-shadow-parts-1/">History</a></div>
+      </div>
+    </div>
+    <div class="spec" data-ts="0" data-shortname="css-scoping" data-dir="css-scoping-1" data-level="1" data-group-size="1">
+      <div class="spec-header">
+        <span class="activity-dot" data-ts="0"></span>
+        <a class="spec-title" href="css-scoping-1/index.html">Moved to CSS Shadow Module Level 1</a>
+        <code class="spec-shortname">css-scoping-1</code>
+        <time class="spec-date" datetime="" data-ts="0"></time>
+        <span class="chevron" aria-hidden="true">›</span>
+      </div>
+      <div class="spec-details">
+        <div class="spec-links"><a href="https://github.com/w3c/csswg-drafts/issues?q=is%3Aissue+is%3Aopen+label%3Acss-scoping-1">Issues</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/pulls?q=is%3Apr+is%3Aopen+label%3Acss-scoping-1">PRs</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/commits/main/css-scoping-1/">History</a></div>
+      </div>
+    </div>
+    <div class="spec" data-ts="0" data-shortname="mediaqueries" data-dir="mediaqueries-3" data-level="3" data-group-size="3">
+      <div class="spec-header">
+        <span class="activity-dot" data-ts="0"></span>
+        <a class="spec-title" href="mediaqueries-3/index.html">Media Queries Level 3</a>
+        <code class="spec-shortname">mediaqueries-3</code>
+        <time class="spec-date" datetime="" data-ts="0"></time>
+        <span class="chevron" aria-hidden="true">›</span>
+      </div>
+      <div class="spec-details">
+        <div class="spec-links"><a href="https://github.com/w3c/csswg-drafts/issues?q=is%3Aissue+is%3Aopen+label%3Amediaqueries-3">Issues</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/pulls?q=is%3Apr+is%3Aopen+label%3Amediaqueries-3">PRs</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/commits/main/mediaqueries-3/">History</a> <span class="sep">·</span> <a href="https://drafts.csswg.org/mediaqueries-3/issues-2012-and-later.html">DoC: 2012-and-later</a></div>
+      </div>
+    </div>
+    <div class="spec" data-ts="0" data-shortname="css-page-template" data-dir="css-page-template-1" data-level="1" data-group-size="1">
+      <div class="spec-header">
+        <span class="activity-dot" data-ts="0"></span>
+        <a class="spec-title" href="css-page-template-1/index.html">CSS Pagination Templates Module Level 3</a>
+        <code class="spec-shortname">css-page-template-1</code>
+        <time class="spec-date" datetime="" data-ts="0"></time>
+        <span class="chevron" aria-hidden="true">›</span>
+      </div>
+      <div class="spec-details">
+        <div class="spec-links"><a href="https://github.com/w3c/csswg-drafts/issues?q=is%3Aissue+is%3Aopen+label%3Acss-page-template-1">Issues</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/pulls?q=is%3Apr+is%3Aopen+label%3Acss-page-template-1">PRs</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/commits/main/css-page-template-1/">History</a></div>
+      </div>
+    </div>
+    <div class="spec" data-ts="0" data-shortname="css-tv" data-dir="css-tv" data-level="0" data-group-size="1">
+      <div class="spec-header">
+        <span class="activity-dot" data-ts="0"></span>
+        <a class="spec-title" href="css-tv/index.html">CSS TV Profile 1.0</a>
+        <code class="spec-shortname">css-tv</code>
+        <time class="spec-date" datetime="" data-ts="0"></time>
+        <span class="chevron" aria-hidden="true">›</span>
+      </div>
+      <div class="spec-details">
+        <div class="spec-links"><a href="https://github.com/w3c/csswg-drafts/issues?q=is%3Aissue+is%3Aopen+label%3Acss-tv">Issues</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/pulls?q=is%3Apr+is%3Aopen+label%3Acss-tv">PRs</a> <span class="sep">·</span> <a href="https://github.com/w3c/csswg-drafts/commits/main/css-tv/">History</a></div>
+      </div>
+    </div>  </div>
+  <div class="no-results" id="no-results">No matching specifications.</div>
+  <script>
+  (function() {
+    var searchInput = document.getElementById('search');
+    var specList = document.getElementById('spec-list');
+    var specs = Array.from(specList.querySelectorAll('.spec'));
+    var btnRecent = document.getElementById('sort-recent');
+    var btnGrouped = document.getElementById('sort-grouped');
+    var countEl = document.getElementById('spec-count');
+    var noResults = document.getElementById('no-results');
+    var totalCount = specs.length;
+    var mobileQuery = window.matchMedia('(max-width: 640px)');
+
+    var now = Date.now() / 1000;
+    var DAY = 86400;
+    specs.forEach(function(el) {
+      var ts = parseInt(el.dataset.ts);
+      if (!ts) return;
+      var age = now - ts;
+      var dot = el.querySelector('.activity-dot');
+      var timeEl = el.querySelector('.spec-date');
+
+      if (age < 30 * DAY) {
+        dot.className = 'activity-dot recent';
+        dot.title = 'Updated recently';
+      } else if (age < 180 * DAY) {
+        dot.className = 'activity-dot moderate';
+        dot.title = 'Updated in the last 6 months';
+      } else {
+        dot.className = 'activity-dot stale';
+        dot.title = 'Not updated in 6+ months';
+      }
+
+      var rel;
+      if (age < DAY) rel = 'today';
+      else if (age < 2 * DAY) rel = 'yesterday';
+      else if (age < 7 * DAY) rel = Math.floor(age / DAY) + ' days ago';
+      else if (age < 30 * DAY) {
+        var w = Math.floor(age / (7 * DAY));
+        rel = w === 1 ? 'last week' : w + ' weeks ago';
+      } else if (age < 365 * DAY) {
+        var m = Math.floor(age / (30 * DAY));
+        rel = m === 1 ? 'last month' : m + ' months ago';
+      } else {
+        var y = Math.floor(age / (365 * DAY));
+        rel = y === 1 ? 'last year' : y + ' years ago';
+      }
+      timeEl.title = timeEl.textContent;
+      timeEl.textContent = rel;
+    });
+
+    function updateCount() {
+      var visible = specs.filter(function(s) {
+        return !s.classList.contains('hidden');
+      }).length;
+      countEl.textContent = visible === totalCount
+        ? totalCount + ' specs' : visible + ' of ' + totalCount;
+      noResults.style.display = visible === 0 ? 'block' : 'none';
+    }
+    updateCount();
+
+    searchInput.addEventListener('input', function() {
+      var q = searchInput.value.toLowerCase();
+      specs.forEach(function(el) {
+        var text = el.dataset.dir + ' ' + el.dataset.shortname + ' ' +
+                   el.querySelector('.spec-title').textContent.toLowerCase();
+        if (text.indexOf(q) >= 0) el.classList.remove('hidden');
+        else el.classList.add('hidden');
+      });
+      specList.querySelectorAll('.group-header').forEach(function(h) {
+        var sn = h.dataset.shortname;
+        var any = specs.some(function(s) {
+          return s.dataset.shortname === sn && !s.classList.contains('hidden');
+        });
+        h.style.display = any ? '' : 'none';
+      });
+      specs.forEach(function(s) { s.classList.remove('expanded'); });
+      updateCount();
+    });
+
+    function sortRecent() {
+      window.localStorage.setItem('index-sort', 'recent');
+      specList.querySelectorAll('.group-header').forEach(function(h) { h.remove(); });
+      specs.sort(function(a, b) {
+        return parseInt(b.dataset.ts) - parseInt(a.dataset.ts);
+      });
+      specs.forEach(function(el) {
+        el.classList.remove('grouped-spec');
+        specList.appendChild(el);
+      });
+      btnRecent.classList.add('active');
+      btnGrouped.classList.remove('active');
+    }
+
+    function sortGrouped() {
+      window.localStorage.setItem('index-sort', 'grouped');
+      specList.querySelectorAll('.group-header').forEach(function(h) { h.remove(); });
+      specs.sort(function(a, b) {
+        var c = a.dataset.shortname.localeCompare(b.dataset.shortname);
+        if (c !== 0) return c;
+        return parseInt(a.dataset.level) - parseInt(b.dataset.level);
+      });
+      var lastSn = null;
+      specs.forEach(function(el) {
+        var sn = el.dataset.shortname;
+        var gs = parseInt(el.dataset.groupSize);
+        if (sn !== lastSn && gs > 1) {
+          var header = document.createElement('div');
+          header.className = 'group-header';
+          header.dataset.shortname = sn;
+          header.textContent = sn;
+          specList.appendChild(header);
+        }
+        if (gs > 1) el.classList.add('grouped-spec');
+        else el.classList.remove('grouped-spec');
+        specList.appendChild(el);
+        lastSn = sn;
+      });
+      btnGrouped.classList.add('active');
+      btnRecent.classList.remove('active');
+    }
+
+    btnRecent.addEventListener('click', sortRecent);
+    btnGrouped.addEventListener('click', sortGrouped);
+    if (window.localStorage.getItem('index-sort') === 'grouped') {
+      sortGrouped();
+    }
+
+    // Mobile: tap spec header to expand/collapse (accordion)
+    specs.forEach(function(el) {
+      var header = el.querySelector('.spec-header');
+      header.addEventListener('click', function(e) {
+        if (e.target.closest('a')) return;
+        if (!mobileQuery.matches) return;
+        var wasExpanded = el.classList.contains('expanded');
+        specs.forEach(function(s) { s.classList.remove('expanded'); });
+        if (!wasExpanded) el.classList.add('expanded');
+      });
+    });
+
+    // Auto-expand first spec on mobile to demonstrate the pattern
+    if (mobileQuery.matches && specs.length > 0) {
+      specs[0].classList.add('expanded');
+    }
+  })();
+  </script>
+</body>
+</html>

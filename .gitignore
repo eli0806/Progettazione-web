@@ -1,0 +1,8 @@
+*.exe 
+*.dll 
+*.asar 
+node_modules/ 
+pweb/VSCode* 
+pweb/browsers/ 
+pweb/dbeaver* 
+pweb/node* 

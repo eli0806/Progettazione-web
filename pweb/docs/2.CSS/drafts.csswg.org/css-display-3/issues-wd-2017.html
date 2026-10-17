@@ -1,0 +1,929 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<title>CSS Display Module Level 3 Disposition of Comments for 2015-10-15 WD</title>
+<style>
+  .a  { background: lightgreen }
+  .d  { background: lightblue  }
+  .r  { background: orange     }
+  .fo { background: red        }
+  .open   { border: solid red; padding: 0.2em; }
+  :target { box-shadow: 0.25em 0.25em 0.25em;  }
+</style>
+
+<h1>CSS Display Module Level 3 Disposition of Comments for 2015-10-15 WD</h1>
+
+<p>Review document: <a href="https://www.w3.org/TR/2015/WD-css-display-3-20151015/">https://www.w3.org/TR/2015/WD-css-display-3-20151015/</a>
+
+<p>Editor's draft: <a href="http://dev.w3.org/csswg/css-display-3/">http://dev.w3.org/csswg/css-display-3/</a></p>
+
+
+
+<p>The following color coding convention is used for comments:</p>
+
+<ul>
+ <li class="a">Accepted or Rejected and positive response
+ <li class="r">Rejected and no response
+ <li class="fo">Rejected and negative response
+ <li class="d">Deferred
+ <li class="oi">Out-of-Scope or Invalid and not verified
+</ul>
+
+<p class=open>Open issues are marked like this</p>
+
+<p>An issue can be closed as <code>Accepted</code>, <code>OutOfScope</code>,
+<code>Invalid</code>, <code>Rejected</code>, or <code>Retracted</code>.
+<code>Verified</code> indicates commentor's acceptance of the response.</p>
+<pre class='a' id='issue-1'>
+Issue 1. <a href='issues-wd-2017.html#issue-1'>#</a>
+Summary:  table-caption &amp; table-cell should use flow-root not flow
+From:     Oriol
+Comment:  <a href='https://lists.w3.org/Archives/Public/www-style/2015Jul/0372.html'>https://lists.w3.org/Archives/Public/www-style/2015Jul/0372.html</a>
+Response: <a href='https://lists.w3.org/Archives/Public/www-style/2017Feb/0064.html'>https://lists.w3.org/Archives/Public/www-style/2017Feb/0064.html</a>
+Closed:   Accepted
+Resolved: <a href='https://lists.w3.org/Archives/Public/www-style/2017Feb/0062.html'>https://lists.w3.org/Archives/Public/www-style/2017Feb/0062.html</a></pre>
+<pre class='d' id='issue-2'>
+Issue 2. <a href='issues-wd-2017.html#issue-2'>#</a>
+Summary:  Define &lt;br> and &lt;wbr>
+From:     Ian Hickson, Tab Atkins
+Comment:  <a href='https://lists.w3.org/Archives/Public/www-style/2014Jun/0155.html'>https://lists.w3.org/Archives/Public/www-style/2014Jun/0155.html</a>
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/610'>https://github.com/w3c/csswg-drafts/issues/610</a>
+Response: <a href='https://github.com/w3c/csswg-drafts/issues/610#issuecomment-274911199'>https://github.com/w3c/csswg-drafts/issues/610#issuecomment-274911199</a>
+Response: <a href='https://lists.w3.org/Archives/Public/www-style/2017Feb/0065.html'>https://lists.w3.org/Archives/Public/www-style/2017Feb/0065.html</a>
+Comment:  <a href='https://lists.w3.org/Archives/Public/www-style/2017Feb/0066.html'>https://lists.w3.org/Archives/Public/www-style/2017Feb/0066.html</a>
+Closed:   Deferred to HTML <a href='https://github.com/whatwg/html/issues/2291'>https://github.com/whatwg/html/issues/2291</a>
+Resolved: <a href='https://lists.w3.org/Archives/Public/www-style/2017Feb/0062.html'>https://lists.w3.org/Archives/Public/www-style/2017Feb/0062.html</a></pre>
+<pre class='a' id='issue-3'>
+Issue 3. <a href='issues-wd-2017.html#issue-3'>#</a>
+Summary:  Shouldn't root be in-flow?
+From:     fantasai
+Comment:  <a href='https://lists.w3.org/Archives/Public/www-style/2015Aug/0332.html'>https://lists.w3.org/Archives/Public/www-style/2015Aug/0332.html</a>
+Response: <a href='https://lists.w3.org/Archives/Public/www-style/2017Feb/0062.html'>https://lists.w3.org/Archives/Public/www-style/2017Feb/0062.html</a>
+Closed:   Accepted
+Resolved: <a href='https://lists.w3.org/Archives/Public/www-style/2017Feb/0062.html'>https://lists.w3.org/Archives/Public/www-style/2017Feb/0062.html</a></pre>
+<pre class='a' id='issue-5'>
+Issue 5. <a href='issues-wd-2017.html#issue-5'>#</a>
+Summary:  Interaction of run-in and ::first-letter
+From:     Florian Rivoal
+Comment:  <a href='https://lists.w3.org/Archives/Public/www-style/2015Feb/0330.html'>https://lists.w3.org/Archives/Public/www-style/2015Feb/0330.html</a>
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/650'>https://github.com/w3c/csswg-drafts/issues/650</a>
+Response: <a href='https://github.com/w3c/csswg-drafts/issues/650#issuecomment-274908554'>https://github.com/w3c/csswg-drafts/issues/650#issuecomment-274908554</a>
+Closed:   Accepted
+Resolved: <a href='https://lists.w3.org/Archives/Public/www-style/2017Feb/0062.html'>https://lists.w3.org/Archives/Public/www-style/2017Feb/0062.html</a></pre>
+<pre class='oi' id='issue-6'>
+Issue 6. <a href='issues-wd-2017.html#issue-6'>#</a>
+Summary:  Inconsistent implementation of 'display: flex' on &lt;fieldset>
+From:     glanbin
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/321'>https://github.com/w3c/csswg-drafts/issues/321</a>
+Response: <a href='https://github.com/w3c/csswg-drafts/issues/321#issuecomment-232788709'>https://github.com/w3c/csswg-drafts/issues/321#issuecomment-232788709</a>
+Closed:   Invalid
+Resolved: Editor discretion</pre>
+<pre class='r' id='issue-7'>
+Issue 7. <a href='issues-wd-2017.html#issue-7'>#</a>
+Summary:  Consider removing 'display: run-in'
+From:     Ms2ger
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/339'>https://github.com/w3c/csswg-drafts/issues/339</a>
+Response: <a href='https://github.com/w3c/csswg-drafts/issues/339#issuecomment-234783783'>https://github.com/w3c/csswg-drafts/issues/339#issuecomment-234783783</a>
+Closed:   Rejected
+Resolved: Editor discretion
+-</pre>
+<pre class='a' id='issue-8'>
+Issue 8. <a href='issues-wd-2017.html#issue-8'>#</a>
+Summary:  Define interaction of 'display: contents' and replaced elements
+From:     Simon Pieters
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/540'>https://github.com/w3c/csswg-drafts/issues/540</a>
+Response: <a href='https://github.com/w3c/csswg-drafts/issues/540#issuecomment-285214950'>https://github.com/w3c/csswg-drafts/issues/540#issuecomment-285214950</a>
+Closed:   Accepted
+Resolved: <a href='https://www.w3.org/mid/CADhPm3sQbKYcM6mmRueGJBozPGer_UwQDMyv+eww3kOBAHC7mg@mail.gmail.com'>https://www.w3.org/mid/CADhPm3sQbKYcM6mmRueGJBozPGer_UwQDMyv+eww3kOBAHC7mg@mail.gmail.com</a>
+-</pre>
+<pre class='oi' id='issue-9'>
+Issue 9. <a href='issues-wd-2017.html#issue-9'>#</a>
+Summary:  Display value visible to AT
+From:     Dave Cramer, Sara Soueidan
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/560'>https://github.com/w3c/csswg-drafts/issues/560</a>
+Response: <a href='https://github.com/w3c/csswg-drafts/issues/560#issuecomment-270094051'>https://github.com/w3c/csswg-drafts/issues/560#issuecomment-270094051</a>
+Closed:   OutOfScope
+Resolved: Editor discretion</pre>
+<pre class='a' id='issue-10'>
+Issue 10. <a href='issues-wd-2017.html#issue-10'>#</a>
+Summary:  Effect of 'display: contents' on counter scoping
+From:     Xidorn Quan
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/674'>https://github.com/w3c/csswg-drafts/issues/674</a>
+Response:
+Closed:   Accepted
+Note:     Still needs edits in css-lists-3.
+Resolved: <a href='https://lists.w3.org/Archives/Public/www-style/2017Feb/0062.html'>https://lists.w3.org/Archives/Public/www-style/2017Feb/0062.html</a></pre>
+<pre class='a' id='issue-11'>
+Issue 11. <a href='issues-wd-2017.html#issue-11'>#</a>
+Summary:  Why is introduction normative? Also defining “element”?
+From:     Anne van Kesteren
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/680'>https://github.com/w3c/csswg-drafts/issues/680</a>
+Response: <a href='https://github.com/w3c/csswg-drafts/issues/680#issuecomment-270103941'>https://github.com/w3c/csswg-drafts/issues/680#issuecomment-270103941</a>
+Closed:   Accepted
+Resolved: Editor discretion</pre>
+<pre class='oi' id='issue-12'>
+Issue 12. <a href='issues-wd-2017.html#issue-12'>#</a>
+Summary:  'display: contents' on root element
+From:     Emilio Cobos Álvarez
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/805'>https://github.com/w3c/csswg-drafts/issues/805</a>
+Response: <a href='https://github.com/w3c/csswg-drafts/issues/805#issuecomment-266991346'>https://github.com/w3c/csswg-drafts/issues/805#issuecomment-266991346</a>
+Closed:   Invalid</pre>
+<pre class='a' id='issue-13'>
+Issue 13. <a href='issues-wd-2017.html#issue-13'>#</a>
+Summary:  “run-in box with 'display: flow'” nonsensical
+From:     Mats Palmgren
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/832'>https://github.com/w3c/csswg-drafts/issues/832</a>
+Response: <a href='https://github.com/w3c/csswg-drafts/issues/832#issuecomment-270106512'>https://github.com/w3c/csswg-drafts/issues/832#issuecomment-270106512</a>
+Closed:   Accepted
+Resolved: Bugfix</pre>
+<pre class='a' id='issue-14'>
+Issue 14. <a href='issues-wd-2017.html#issue-14'>#</a>
+Summary:  "flow-root" harmful
+From:     Binyammin Laukstein
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/983'>https://github.com/w3c/csswg-drafts/issues/983</a>
+Response: <a href='https://github.com/w3c/csswg-drafts/issues/983#issuecomment-275141140'>https://github.com/w3c/csswg-drafts/issues/983#issuecomment-275141140</a>
+Closed:   Invalid
+Verified: <a href='https://github.com/w3c/csswg-drafts/issues/983#issuecomment-275208753'>https://github.com/w3c/csswg-drafts/issues/983#issuecomment-275208753</a></pre>
+<pre class='a' id='issue-15'>
+Issue 15. <a href='issues-wd-2017.html#issue-15'>#</a>
+Summary:  Rename flow-root
+From:     Simon Fraser
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/964'>https://github.com/w3c/csswg-drafts/issues/964</a>
+Response: <a href='https://github.com/w3c/csswg-drafts/issues/964#issuecomment-274638719'>https://github.com/w3c/csswg-drafts/issues/964#issuecomment-274638719</a>
+Closed:   Rejected
+Resolved: <a href='https://www.w3.org/mid/CADhPm3sTiUi9iibZpc+G0F4=Pn6y9VMbeBaQQ4SKNKPGyOMowA@mail.gmail.com'>https://www.w3.org/mid/CADhPm3sTiUi9iibZpc+G0F4=Pn6y9VMbeBaQQ4SKNKPGyOMowA@mail.gmail.com</a>
+Verified: <a href='https://www.w3.org/mid/CADhPm3sTiUi9iibZpc+G0F4=Pn6y9VMbeBaQQ4SKNKPGyOMowA@mail.gmail.com'>https://www.w3.org/mid/CADhPm3sTiUi9iibZpc+G0F4=Pn6y9VMbeBaQQ4SKNKPGyOMowA@mail.gmail.com</a></pre>
+<pre class='a' id='issue-16'>
+Issue 16. <a href='issues-wd-2017.html#issue-16'>#</a>
+Summary:  Tooltips are wrong
+From:     Mats Palmgren
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/834'>https://github.com/w3c/csswg-drafts/issues/834</a>
+Response: <a href='https://github.com/w3c/csswg-drafts/issues/834#issuecomment-280431244'>https://github.com/w3c/csswg-drafts/issues/834#issuecomment-280431244</a>
+Closed:   Accepted
+Resolved: Editorial</pre>
+<pre class='a' id='issue-17'>
+Issue 17. <a href='issues-wd-2017.html#issue-17'>#</a>
+Summary:  HTML shouldn't be a normative reference
+From:     Bert Bos
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/1011'>https://github.com/w3c/csswg-drafts/issues/1011</a>
+Response: <a href='https://github.com/w3c/csswg-drafts/issues/1011#issuecomment-286501361'>https://github.com/w3c/csswg-drafts/issues/1011#issuecomment-286501361</a>
+Closed:   Accepted
+Resolved: Editorial</pre>
+<pre class='a' id='issue-18'>
+Issue 18. <a href='issues-wd-2017.html#issue-18'>#</a>
+Summary:  What are form controls?
+From:     Boris Zbarsky
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/1024'>https://github.com/w3c/csswg-drafts/issues/1024</a>
+Response: <a href='https://github.com/w3c/csswg-drafts/issues/1024#issuecomment-285215276'>https://github.com/w3c/csswg-drafts/issues/1024#issuecomment-285215276</a>
+Closed:   Accepted
+Resolved: Editor discretion</pre>
+<pre class='a' id='issue-19'>
+Issue 19. <a href='issues-wd-2017.html#issue-19'>#</a>
+Summary:  Anonymous boxes inheriting from `display: contents`
+From:     Oriol, Boris Zbarsky
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/1118'>https://github.com/w3c/csswg-drafts/issues/1118</a>
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/1249'>https://github.com/w3c/csswg-drafts/issues/1249</a>
+Response: <a href='https://github.com/w3c/csswg-drafts/issues/1118#issuecomment-301942276'>https://github.com/w3c/csswg-drafts/issues/1118#issuecomment-301942276</a>
+Closed:   Accepted
+Resolved: <a href='https://lists.w3.org/Archives/Public/www-style/2017Jun/0009.html'>https://lists.w3.org/Archives/Public/www-style/2017Jun/0009.html</a>
+Verified: <a href='https://github.com/w3c/csswg-drafts/issues/1118#issuecomment-301953751'>https://github.com/w3c/csswg-drafts/issues/1118#issuecomment-301953751</a></pre>
+<pre class='a' id='issue-20'>
+Issue 20. <a href='issues-wd-2017.html#issue-20'>#</a>
+Summary:  Propagation of text-decoration applied to `display: contents`
+From:     Oriol
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/1136'>https://github.com/w3c/csswg-drafts/issues/1136</a>
+Response: <a href='https://github.com/w3c/csswg-drafts/issues/1136#issuecomment-301938274'>https://github.com/w3c/csswg-drafts/issues/1136#issuecomment-301938274</a>
+Changes:  <a href='https://github.com/w3c/csswg-drafts/commit/a9a8bdda32c4d22a2cbc98d6c3724b72f651b6b3'>https://github.com/w3c/csswg-drafts/commit/a9a8bdda32c4d22a2cbc98d6c3724b72f651b6b3</a>
+Closed:   Accepted
+Resolved: <a href='https://lists.w3.org/Archives/Public/www-style/2017Jun/0009.html'>https://lists.w3.org/Archives/Public/www-style/2017Jun/0009.html</a></pre>
+<pre class='a' id='issue-21'>
+Issue 21. <a href='issues-wd-2017.html#issue-21'>#</a>
+Summary:  `display: block` seems to define flex and grid items as block-level
+From:     Oriol
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/1175'>https://github.com/w3c/csswg-drafts/issues/1175</a>
+Response: <a href='https://github.com/w3c/csswg-drafts/issues/1175#issuecomment-292656095'>https://github.com/w3c/csswg-drafts/issues/1175#issuecomment-292656095</a>
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/1175#issuecomment-292738919'>https://github.com/w3c/csswg-drafts/issues/1175#issuecomment-292738919</a>
+Response:
+Closed:   Accepted
+Resolved: Editorial</pre>
+<pre class='a' id='issue-22'>
+Issue 22. <a href='issues-wd-2017.html#issue-22'>#</a>
+Summary:  Display erroneously groups ruby with atomic inlines
+From:     Oriol
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/1180'>https://github.com/w3c/csswg-drafts/issues/1180</a>
+Response: <a href='https://github.com/w3c/csswg-drafts/issues/1180#issuecomment-292638199'>https://github.com/w3c/csswg-drafts/issues/1180#issuecomment-292638199</a>
+Closed:   Accepted
+Resolved: Bugfix</pre>
+<pre class='a' id='issue-23'>
+Issue 23. <a href='issues-wd-2017.html#issue-23'>#</a>
+Summary:  Block containers can also establish an inline formatting context
+From:     Oriol
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/1185'>https://github.com/w3c/csswg-drafts/issues/1185</a>
+Response: <a href='https://github.com/w3c/csswg-drafts/issues/1185#issuecomment-301622704'>https://github.com/w3c/csswg-drafts/issues/1185#issuecomment-301622704</a>
+Closed:   Accepted
+Resolved: Bugfix
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/1185#issuecomment-301630234'>https://github.com/w3c/csswg-drafts/issues/1185#issuecomment-301630234</a>
+Response: <a href='https://github.com/w3c/csswg-drafts/issues/1185#issuecomment-314583112'>https://github.com/w3c/csswg-drafts/issues/1185#issuecomment-314583112</a>
+Closed:   Accepted
+Resolved: Editorial</pre>
+<pre class='oi' id='issue-24'>
+Issue 24. <a href='issues-wd-2017.html#issue-24'>#</a>
+Summary:  Revisions to *-level definitions
+From:     Oriol
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/1186'>https://github.com/w3c/csswg-drafts/issues/1186</a>
+Response: <a href='https://github.com/w3c/csswg-drafts/issues/1186#issuecomment-294637052'>https://github.com/w3c/csswg-drafts/issues/1186#issuecomment-294637052</a>
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/1186#issuecomment-294646968'>https://github.com/w3c/csswg-drafts/issues/1186#issuecomment-294646968</a>
+Response: <a href='https://github.com/w3c/csswg-drafts/issues/1186#issuecomment-301623329'>https://github.com/w3c/csswg-drafts/issues/1186#issuecomment-301623329</a>
+Closed:   Invalid</pre>
+<pre class='a' id='issue-25'>
+Issue 25. <a href='issues-wd-2017.html#issue-25'>#</a>
+Summary:  Do table captions participate in BFC or TFC?
+From:     Oriol
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/1189'>https://github.com/w3c/csswg-drafts/issues/1189</a>
+Response: <a href='https://github.com/w3c/csswg-drafts/issues/1189#issuecomment-301626461'>https://github.com/w3c/csswg-drafts/issues/1189#issuecomment-301626461</a>
+Closed:   Accepted
+Resolved: Bugfix</pre>
+<pre class='a' id='issue-26'>
+Issue 26. <a href='issues-wd-2017.html#issue-26'>#</a>
+Summary:  Table contains invalid values
+From:     Oriol
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/1225'>https://github.com/w3c/csswg-drafts/issues/1225</a>
+Response: <a href='https://github.com/w3c/csswg-drafts/issues/1225#issuecomment-301631015'>https://github.com/w3c/csswg-drafts/issues/1225#issuecomment-301631015</a>
+Closed:   Accepted
+Resolved: Editorial</pre>
+<pre class='a' id='issue-27'>
+Issue 27. <a href='issues-wd-2017.html#issue-27'>#</a>
+Summary:  list-item definition implies invalid keyword combos are valid
+From:     Oriol
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/1226'>https://github.com/w3c/csswg-drafts/issues/1226</a>
+Response: <a href='https://github.com/w3c/csswg-drafts/issues/1226#issuecomment-301631288'>https://github.com/w3c/csswg-drafts/issues/1226#issuecomment-301631288</a>
+Closed:   Accepted
+Resolved: Editorial</pre>
+<pre class='a' id='issue-28'>
+Issue 28. <a href='issues-wd-2017.html#issue-28'>#</a>
+Summary:  Do contents and none have outer display type?
+From:     Oriol
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/1227'>https://github.com/w3c/csswg-drafts/issues/1227</a>
+Response: <a href='https://github.com/w3c/csswg-drafts/issues/1227#issuecomment-301631748'>https://github.com/w3c/csswg-drafts/issues/1227#issuecomment-301631748</a>
+Closed:   Accepted
+Resolved: Editorial</pre>
+<pre class='a' id='issue-29'>
+Issue 29. <a href='issues-wd-2017.html#issue-29'>#</a>
+Summary:  Run-in erroneously excludes blocks that establish inline formatting context
+From:     Oriol
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/1228'>https://github.com/w3c/csswg-drafts/issues/1228</a>
+Response: <a href='https://github.com/w3c/csswg-drafts/issues/1228#issuecomment-301632605'>https://github.com/w3c/csswg-drafts/issues/1228#issuecomment-301632605</a>
+Changes:  <a href='https://github.com/w3c/csswg-drafts/commit/2f6354014360662e2aef0e25da433852d4fa8b3a'>https://github.com/w3c/csswg-drafts/commit/2f6354014360662e2aef0e25da433852d4fa8b3a</a>
+Closed:   Accepted
+Resolved: Bugfix</pre>
+<pre class='a' id='issue-30'>
+Issue 30. <a href='issues-wd-2017.html#issue-30'>#</a>
+Summary:  Blockification rules not backwards-compatible for inline-block
+From:     Boris Zbarsky
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/1246'>https://github.com/w3c/csswg-drafts/issues/1246</a>
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/1246#issuecomment-301634850'>https://github.com/w3c/csswg-drafts/issues/1246#issuecomment-301634850</a>
+Response: <a href='https://github.com/w3c/csswg-drafts/issues/1246#issuecomment-305246779'>https://github.com/w3c/csswg-drafts/issues/1246#issuecomment-305246779</a>
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/1246#issuecomment-313211986'>https://github.com/w3c/csswg-drafts/issues/1246#issuecomment-313211986</a>
+Closed:   Accepted
+Resolved: <a href='https://lists.w3.org/Archives/Public/www-style/2017Aug/0042.html'>https://lists.w3.org/Archives/Public/www-style/2017Aug/0042.html</a></pre>
+<pre class='a' id='issue-31'>
+Issue 31. <a href='issues-wd-2017.html#issue-31'>#</a>
+Summary:  Rename “block container” to “flow container”
+From:     Oriol
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/1265'>https://github.com/w3c/csswg-drafts/issues/1265</a>
+Response: <a href='https://github.com/w3c/csswg-drafts/issues/1265#issuecomment-301635795'>https://github.com/w3c/csswg-drafts/issues/1265#issuecomment-301635795</a>
+Closed:   Rejected
+Resolved: Editor discretion
+Verified: <a href='https://github.com/w3c/csswg-drafts/issues/1265#issuecomment-301639507'>https://github.com/w3c/csswg-drafts/issues/1265#issuecomment-301639507</a></pre>
+<pre class='a' id='issue-32'>
+Issue 32. <a href='issues-wd-2017.html#issue-32'>#</a>
+Summary:  Text nodes vs text runs
+From:     Oriol
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/1281'>https://github.com/w3c/csswg-drafts/issues/1281</a>
+Response: <a href='https://github.com/w3c/csswg-drafts/issues/1281#issuecomment-301942809'>https://github.com/w3c/csswg-drafts/issues/1281#issuecomment-301942809</a>
+Closed:   Accepted
+Resolved: <a href='https://lists.w3.org/Archives/Public/www-style/2017Jun/0009.html'>https://lists.w3.org/Archives/Public/www-style/2017Jun/0009.html</a></pre>
+<pre class='oi' id='issue-33'>
+Issue 33. <a href='issues-wd-2017.html#issue-33'>#</a>
+Summary:  Inheritance with 'display: contents' and ::first-line
+From:     Oriol
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/1310'>https://github.com/w3c/csswg-drafts/issues/1310</a>
+Response: <a href='https://github.com/w3c/csswg-drafts/issues/1310#issuecomment-301641199'>https://github.com/w3c/csswg-drafts/issues/1310#issuecomment-301641199</a>
+Closed:   OutOfScope
+Notes:    Deferred to css-pseudo-4, as ::first-line in general needs tighter definition
+Resolved: <a href='https://lists.w3.org/Archives/Public/www-style/2018May/0036.html'>https://lists.w3.org/Archives/Public/www-style/2018May/0036.html</a></pre>
+<pre class='a' id='issue-34'>
+Issue 34. <a href='issues-wd-2017.html#issue-34'>#</a>
+Summary:  Define 'display: contents' as a type of box
+From:     Oriol
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/1313'>https://github.com/w3c/csswg-drafts/issues/1313</a>
+Response: <a href='https://github.com/w3c/csswg-drafts/issues/1313#issuecomment-299120942'>https://github.com/w3c/csswg-drafts/issues/1313#issuecomment-299120942</a>
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/1313#issuecomment-299247618'>https://github.com/w3c/csswg-drafts/issues/1313#issuecomment-299247618</a>
+Closed:   Retracted</pre>
+<pre class='a' id='issue-35'>
+Issue 35. <a href='issues-wd-2017.html#issue-35'>#</a>
+Summary:  Define more sensible blockification for layout-internal types
+From:     Oriol
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/1340'>https://github.com/w3c/csswg-drafts/issues/1340</a>
+Response: <a href='https://github.com/w3c/csswg-drafts/issues/1340#issuecomment-301641681'>https://github.com/w3c/csswg-drafts/issues/1340#issuecomment-301641681</a>
+Changes:  <a href='https://github.com/w3c/csswg-drafts/commit/5aaca4a7030e818cd02ac2d93137e1cd1d295bae'>https://github.com/w3c/csswg-drafts/commit/5aaca4a7030e818cd02ac2d93137e1cd1d295bae</a>
+Closed:   Accepted
+Resolved: Editor discretion</pre>
+<pre class='a' id='issue-36'>
+Issue 36. <a href='issues-wd-2017.html#issue-36'>#</a>
+Summary:  Inlinification, recursion, and ruby vs display definitions
+From:     Oriol
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/1341'>https://github.com/w3c/csswg-drafts/issues/1341</a>
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/1341#issuecomment-301643296'>https://github.com/w3c/csswg-drafts/issues/1341#issuecomment-301643296</a>
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/1341#issuecomment-301944521'>https://github.com/w3c/csswg-drafts/issues/1341#issuecomment-301944521</a>
+Response: <a href='https://github.com/w3c/csswg-drafts/issues/1341#issuecomment-313204672'>https://github.com/w3c/csswg-drafts/issues/1341#issuecomment-313204672</a>
+Closed:   Accepted
+Resolved: <a href='https://lists.w3.org/Archives/Public/www-style/2017Jun/0009.html'>https://lists.w3.org/Archives/Public/www-style/2017Jun/0009.html</a></pre>
+<pre class='a' id='issue-37'>
+Issue 37. <a href='issues-wd-2017.html#issue-37'>#</a>
+Summary:  Does display: contents apply to ::before ::after
+From:     Emilio
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/1345'>https://github.com/w3c/csswg-drafts/issues/1345</a>
+Response: <a href='https://github.com/w3c/csswg-drafts/issues/1345#issuecomment-313205067'>https://github.com/w3c/csswg-drafts/issues/1345#issuecomment-313205067</a>
+Closed:   Accepted
+Resolved: <a href='https://lists.w3.org/Archives/Public/www-style/2017May/0057.html'>https://lists.w3.org/Archives/Public/www-style/2017May/0057.html</a></pre>
+<pre class='a' id='issue-38'>
+Issue 38. <a href='issues-wd-2017.html#issue-38'>#</a>
+Summary:  Define interaction of various box tree fixups
+From:     Boris Zbarsky
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/1355'>https://github.com/w3c/csswg-drafts/issues/1355</a>
+Response: <a href='https://github.com/w3c/csswg-drafts/issues/1355#issuecomment-301878155'>https://github.com/w3c/csswg-drafts/issues/1355#issuecomment-301878155</a>
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/1355#issuecomment-301888405'>https://github.com/w3c/csswg-drafts/issues/1355#issuecomment-301888405</a>
+Response: <a href='https://github.com/w3c/csswg-drafts/issues/1355#issuecomment-302250667'>https://github.com/w3c/csswg-drafts/issues/1355#issuecomment-302250667</a>
+Response: <a href='https://github.com/w3c/csswg-drafts/issues/1355#issuecomment-302748058'>https://github.com/w3c/csswg-drafts/issues/1355#issuecomment-302748058</a>
+Changes:  <a href='https://github.com/w3c/csswg-drafts/commit/f5b79e99bb8fc9ebea4ed956ed3420bc69b90786'>https://github.com/w3c/csswg-drafts/commit/f5b79e99bb8fc9ebea4ed956ed3420bc69b90786</a>
+Closed:   Accepted
+Resolved: Editorial</pre>
+<pre class='a' id='issue-39'>
+Issue 39. <a href='issues-wd-2017.html#issue-39'>#</a>
+Summary:  Root inline box vs anonymous inline boxes
+From:     Oriol
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/1383'>https://github.com/w3c/csswg-drafts/issues/1383</a>
+Response: <a href='https://github.com/w3c/csswg-drafts/issues/1383#issuecomment-301832460'>https://github.com/w3c/csswg-drafts/issues/1383#issuecomment-301832460</a>
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/1383#issuecomment-301833956'>https://github.com/w3c/csswg-drafts/issues/1383#issuecomment-301833956</a>
+Response: <a href='https://github.com/w3c/csswg-drafts/issues/1383#issuecomment-301872204'>https://github.com/w3c/csswg-drafts/issues/1383#issuecomment-301872204</a>
+Changes:  <a href='https://github.com/w3c/csswg-drafts/commit/6aeeabe060c8d8c1397ef2196a4e3a62da964d5e'>https://github.com/w3c/csswg-drafts/commit/6aeeabe060c8d8c1397ef2196a4e3a62da964d5e</a>
+Closed:   Accepted
+Resolved: Editorial</pre>
+<pre class='a' id='issue-40'>
+Issue 40. <a href='issues-wd-2017.html#issue-40'>#</a>
+Summary:  Inlinification by display type or anon box fixup?
+From:     fantasai
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/1390'>https://github.com/w3c/csswg-drafts/issues/1390</a>
+Response: <a href='https://github.com/w3c/csswg-drafts/issues/1390#issuecomment-313211238'>https://github.com/w3c/csswg-drafts/issues/1390#issuecomment-313211238</a>
+Closed:   Retracted</pre>
+<pre class='oi' id='issue-41'>
+Issue 41. <a href='issues-wd-2017.html#issue-41'>#</a>
+Summary:  Computation of 'float' vs 'position' without a box
+From:     Oriol
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/1436'>https://github.com/w3c/csswg-drafts/issues/1436</a>
+Response: <a href='https://github.com/w3c/csswg-drafts/issues/1436#issuecomment-313215820'>https://github.com/w3c/csswg-drafts/issues/1436#issuecomment-313215820</a>
+Closed:   OutOfScope
+Notes:    Accepted, pending edits to css-2 and css-position-3
+Resolved: <a href='https://lists.w3.org/Archives/Public/www-style/2017Jul/0015.html'>https://lists.w3.org/Archives/Public/www-style/2017Jul/0015.html</a></pre>
+<pre class='a' id='issue-42'>
+Issue 42. <a href='issues-wd-2017.html#issue-42'>#</a>
+Summary:  Are run-in contents inside ::first-line?
+From:     Oriol
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/1441'>https://github.com/w3c/csswg-drafts/issues/1441</a>
+Response: <a href='https://github.com/w3c/csswg-drafts/issues/1441#issuecomment-313246128'>https://github.com/w3c/csswg-drafts/issues/1441#issuecomment-313246128</a>
+Closed:   Accepted
+Resolved: Editor discretion
+Verified: <a href='https://github.com/w3c/csswg-drafts/issues/1441#issuecomment-313249402'>https://github.com/w3c/csswg-drafts/issues/1441#issuecomment-313249402</a></pre>
+<pre class='a' id='issue-43'>
+Issue 43. <a href='issues-wd-2017.html#issue-43'>#</a>
+Summary:  “Becoming a formatting context” section is a mess
+From:     Oriol, fantasai
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/1457'>https://github.com/w3c/csswg-drafts/issues/1457</a>
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/1457#issuecomment-313225448'>https://github.com/w3c/csswg-drafts/issues/1457#issuecomment-313225448</a>
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/1563'>https://github.com/w3c/csswg-drafts/issues/1563</a>
+Response: <a href='https://github.com/w3c/csswg-drafts/issues/1563#issuecomment-314573128'>https://github.com/w3c/csswg-drafts/issues/1563#issuecomment-314573128</a>
+Changes:  <a href='https://github.com/w3c/csswg-drafts/commit/94982e838a558e6c66516b3b13e403eae32e27ad'>https://github.com/w3c/csswg-drafts/commit/94982e838a558e6c66516b3b13e403eae32e27ad</a>
+Closed:   Accepted
+Resolved: <a href='https://lists.w3.org/Archives/Public/www-style/2018May/0030.html'>https://lists.w3.org/Archives/Public/www-style/2018May/0030.html</a></pre>
+<pre class='a' id='issue-44'>
+Issue 44. <a href='issues-wd-2017.html#issue-44'>#</a>
+Summary:  Is 'position: marker' out-of-flow?
+From:     Oriol
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/1458'>https://github.com/w3c/csswg-drafts/issues/1458</a>
+Response: <a href='https://github.com/w3c/csswg-drafts/issues/1458#issuecomment-313224602'>https://github.com/w3c/csswg-drafts/issues/1458#issuecomment-313224602</a>
+Closed:   Accepted
+Resolved: Bugfix</pre>
+<pre class='a' id='issue-45'>
+Issue 45. <a href='issues-wd-2017.html#issue-45'>#</a>
+Summary:  Does run-in algo recurse?
+From:     Oriol
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/1460'>https://github.com/w3c/csswg-drafts/issues/1460</a>
+Response: <a href='https://github.com/w3c/csswg-drafts/issues/1460#issuecomment-314593762'>https://github.com/w3c/csswg-drafts/issues/1460#issuecomment-314593762</a>
+Changes:  <a href='https://github.com/w3c/csswg-drafts/commit/c9f1bb16d0e5077b9bca7027a7d7252eeff5abf1'>https://github.com/w3c/csswg-drafts/commit/c9f1bb16d0e5077b9bca7027a7d7252eeff5abf1</a>
+Closed:   Accepted
+Resolved: Bugfix</pre>
+<pre class='' id='issue-46'>
+Issue 46. <a href='issues-wd-2017.html#issue-46'>#</a>
+Summary:  Parallel construction should be pairwise disjoint (editorial)
+From:     Oriol
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/1470'>https://github.com/w3c/csswg-drafts/issues/1470</a>
+Changes:  <a href='https://github.com/w3c/csswg-drafts/commit/09212af80e10e4e3e57965bb27b2de3fdcd86e06'>https://github.com/w3c/csswg-drafts/commit/09212af80e10e4e3e57965bb27b2de3fdcd86e06</a>
+Closed:   Fixed
+Resolved: Editorial</pre>
+<pre class='a' id='issue-47'>
+Issue 47. <a href='issues-wd-2017.html#issue-47'>#</a>
+Summary:  BFC definition not quite right
+From:     Oriol
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/1471'>https://github.com/w3c/csswg-drafts/issues/1471</a>
+Response: <a href='https://github.com/w3c/csswg-drafts/issues/1471#issuecomment-313240736'>https://github.com/w3c/csswg-drafts/issues/1471#issuecomment-313240736</a>
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/1471#issuecomment-313247457'>https://github.com/w3c/csswg-drafts/issues/1471#issuecomment-313247457</a>
+Response: <a href='https://github.com/w3c/csswg-drafts/issues/1471#issuecomment-313263022'>https://github.com/w3c/csswg-drafts/issues/1471#issuecomment-313263022</a>
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/1471#issuecomment-313252408'>https://github.com/w3c/csswg-drafts/issues/1471#issuecomment-313252408</a>
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/1471#issuecomment-313266528'>https://github.com/w3c/csswg-drafts/issues/1471#issuecomment-313266528</a>
+Response: <a href='https://github.com/w3c/csswg-drafts/commit/ffc79e46b2f691d334b00d69ed23dde50a4068b3'>https://github.com/w3c/csswg-drafts/commit/ffc79e46b2f691d334b00d69ed23dde50a4068b3</a>
+Closed:   Accepted
+Verified: <a href='https://github.com/w3c/csswg-drafts/commit/ffc79e46b2f691d334b00d69ed23dde50a4068b3'>https://github.com/w3c/csswg-drafts/commit/ffc79e46b2f691d334b00d69ed23dde50a4068b3</a>
+Resolved: Editorial</pre>
+<pre class='a' id='issue-48'>
+Issue 48. <a href='issues-wd-2017.html#issue-48'>#</a>
+Summary:  Run-in fixup vs block-in-inline fixup
+From:     Oriol
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/1472'>https://github.com/w3c/csswg-drafts/issues/1472</a>
+Response: <a href='https://github.com/w3c/csswg-drafts/issues/1472#issuecomment-313242917'>https://github.com/w3c/csswg-drafts/issues/1472#issuecomment-313242917</a>
+Closed:   Accepted
+Resolved: Bugfix</pre>
+<pre class='a' id='issue-49'>
+Issue 49. <a href='issues-wd-2017.html#issue-49'>#</a>
+Summary:  Note wrt inheritance of ::first-line through 'display: contents'.
+From:     Oriol
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/1473'>https://github.com/w3c/csswg-drafts/issues/1473</a>
+Response: <a href='https://github.com/w3c/csswg-drafts/issues/1473#issuecomment-313247421'>https://github.com/w3c/csswg-drafts/issues/1473#issuecomment-313247421</a>
+Closed:   Accepted
+Resolved: Editorial</pre>
+<pre class='a' id='issue-50'>
+Issue 50. <a href='issues-wd-2017.html#issue-50'>#</a>
+Summary:  Display types: on elements or on boxes?
+From:     Oriol
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/1480'>https://github.com/w3c/csswg-drafts/issues/1480</a>
+Response: <a href='https://github.com/w3c/csswg-drafts/issues/1480#issuecomment-314569164'>https://github.com/w3c/csswg-drafts/issues/1480#issuecomment-314569164</a>
+Closed:   Accepted
+Resolved: Editorial
+Verified: <a href='https://github.com/w3c/csswg-drafts/issues/1480#issuecomment-314583675'>https://github.com/w3c/csswg-drafts/issues/1480#issuecomment-314583675</a></pre>
+<pre class='oi' id='issue-51'>
+Issue 51. <a href='issues-wd-2017.html#issue-51'>#</a>
+Summary:  Should 'inline-foo' and 'inline foo' be distinct?
+From:     David Baron
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/1486'>https://github.com/w3c/csswg-drafts/issues/1486</a>
+Response: <a href='https://github.com/w3c/csswg-drafts/issues/1486#issuecomment-320022628'>https://github.com/w3c/csswg-drafts/issues/1486#issuecomment-320022628</a>
+Closed:   Invalid</pre>
+<pre class='a' id='issue-52'>
+Issue 52. <a href='issues-wd-2017.html#issue-52'>#</a>
+Summary:  At-risk list omits three-component values
+From:     Oriol
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/1490'>https://github.com/w3c/csswg-drafts/issues/1490</a>
+Changes:  <a href='https://github.com/w3c/csswg-drafts/commit/394c62f72fda4ac824c9ce204a99bf991b9e6471'>https://github.com/w3c/csswg-drafts/commit/394c62f72fda4ac824c9ce204a99bf991b9e6471</a>
+Closed:   Accepted
+Resolved: Editorial</pre>
+<pre class='a' id='issue-53'>
+Issue 53. <a href='issues-wd-2017.html#issue-53'>#</a>
+Summary:  Discrepancies in run-in
+From:     Oriol
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/1491'>https://github.com/w3c/csswg-drafts/issues/1491</a>
+Response: <a href='https://github.com/w3c/csswg-drafts/issues/1491#issuecomment-314570280'>https://github.com/w3c/csswg-drafts/issues/1491#issuecomment-314570280</a>
+Closed:   Accepted
+Resolved: Bugfix</pre>
+<pre class='oi' id='issue-54'>
+Issue 54. <a href='issues-wd-2017.html#issue-54'>#</a>
+Summary:  Serialization of list-item values not listed
+From:     Oriol
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/1493'>https://github.com/w3c/csswg-drafts/issues/1493</a>
+Response: <a href='https://github.com/w3c/csswg-drafts/issues/1493#issuecomment-314572350'>https://github.com/w3c/csswg-drafts/issues/1493#issuecomment-314572350</a>
+Closed:   OutOfScope (to CSSOM) / Rejected (for editorial)
+Resolved: Bugfix / Editorial</pre>
+<pre class='a' id='issue-55'>
+Issue 55. <a href='issues-wd-2017.html#issue-55'>#</a>
+Summary:  Missing definition of 'inline-list-item'
+From:     Oriol
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/1495'>https://github.com/w3c/csswg-drafts/issues/1495</a>
+Response: <a href='https://github.com/w3c/csswg-drafts/issues/1495#issuecomment-306282449'>https://github.com/w3c/csswg-drafts/issues/1495#issuecomment-306282449</a>
+Closed:   Accepted
+Resolved: <a href='https://lists.w3.org/Archives/Public/www-style/2017Jul/0015.html'>https://lists.w3.org/Archives/Public/www-style/2017Jul/0015.html</a></pre>
+<pre class='a' id='issue-56'>
+Issue 56. <a href='issues-wd-2017.html#issue-56'>#</a>
+Summary:  Redesign 'flow-root' keyword and related features
+From:     Oriol
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/1496'>https://github.com/w3c/csswg-drafts/issues/1496</a>
+Response: <a href='https://github.com/w3c/csswg-drafts/issues/1496#issuecomment-319986260'>https://github.com/w3c/csswg-drafts/issues/1496#issuecomment-319986260</a>
+Closed:   Rejected
+Verified: <a href='https://github.com/w3c/csswg-drafts/issues/1496#issuecomment-320027059'>https://github.com/w3c/csswg-drafts/issues/1496#issuecomment-320027059</a></pre>
+<pre class='a' id='issue-57'>
+Issue 57. <a href='issues-wd-2017.html#issue-57'>#</a>
+Summary:  Inlinification doesn't inlinify layout-internal boxes
+From:     Oriol
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/1582'>https://github.com/w3c/csswg-drafts/issues/1582</a>
+Response: <a href='https://github.com/w3c/csswg-drafts/issues/1582#issuecomment-314605575'>https://github.com/w3c/csswg-drafts/issues/1582#issuecomment-314605575</a>
+Closed:   Accepted
+Resolved: Editorial</pre>
+<pre class='a' id='issue-58'>
+Issue 58. <a href='issues-wd-2017.html#issue-58'>#</a>
+Summary:  &lt;legend> with no box example is confusing
+From:     Oriol
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/1584'>https://github.com/w3c/csswg-drafts/issues/1584</a>
+Response: <a href='https://github.com/w3c/csswg-drafts/issues/1584#issuecomment-313494427'>https://github.com/w3c/csswg-drafts/issues/1584#issuecomment-313494427</a>
+Response: <a href='https://github.com/w3c/csswg-drafts/issues/1584#issuecomment-313494885'>https://github.com/w3c/csswg-drafts/issues/1584#issuecomment-313494885</a>
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/1584#issuecomment-313498359'>https://github.com/w3c/csswg-drafts/issues/1584#issuecomment-313498359</a>
+Response: <a href='https://github.com/w3c/csswg-drafts/issues/1584#issuecomment-391181313'>https://github.com/w3c/csswg-drafts/issues/1584#issuecomment-391181313</a>
+Changes:  <a href='https://github.com/w3c/csswg-drafts/commit/beb5964179f6fc815e59e23a1de501cddab7355a'>https://github.com/w3c/csswg-drafts/commit/beb5964179f6fc815e59e23a1de501cddab7355a</a>
+Closed:   Accepted
+Notes:    See also <a href='https://github.com/whatwg/html/issues/3702'>https://github.com/whatwg/html/issues/3702</a>
+Resolved: Editorial</pre>
+<pre class='a' id='issue-59'>
+Issue 59. <a href='issues-wd-2017.html#issue-59'>#</a>
+Summary:  Blocks that contain only inlines, establishing BFC+IFC?
+From:     Oriol
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/1553'>https://github.com/w3c/csswg-drafts/issues/1553</a>
+Response: <a href='https://github.com/w3c/csswg-drafts/issues/1553#issuecomment-375120025'>https://github.com/w3c/csswg-drafts/issues/1553#issuecomment-375120025</a>
+Changes:  <a href='https://github.com/w3c/csswg-drafts/commit/8bb4d824180eccee53864aa40b883d0eb7140c0a'>https://github.com/w3c/csswg-drafts/commit/8bb4d824180eccee53864aa40b883d0eb7140c0a</a>
+Closed:   Accepted
+Resolved: Editorial</pre>
+<pre class='a' id='issue-60'>
+Issue 60. <a href='issues-wd-2017.html#issue-60'>#</a>
+Summary:  Define establishing a BFC as a flow-root only thing via used values
+From:     Oriol
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/1550'>https://github.com/w3c/csswg-drafts/issues/1550</a>
+Response: <a href='https://github.com/w3c/csswg-drafts/issues/1550#issuecomment-387160020'>https://github.com/w3c/csswg-drafts/issues/1550#issuecomment-387160020</a>
+Changes:  <a href='https://github.com/w3c/csswg-drafts/commit/0258e7ac526cffce6e81d13110ba79a681504fff'>https://github.com/w3c/csswg-drafts/commit/0258e7ac526cffce6e81d13110ba79a681504fff</a>
+Changes:  <a href='https://github.com/w3c/csswg-drafts/commit/72141508e866058bd9a431abdb97c3406d9e34b2'>https://github.com/w3c/csswg-drafts/commit/72141508e866058bd9a431abdb97c3406d9e34b2</a>
+Closed:   Accepted
+Resolved: <a href='https://lists.w3.org/Archives/Public/www-style/2018May/0036.html'>https://lists.w3.org/Archives/Public/www-style/2018May/0036.html</a></pre>
+<pre class='oi' id='issue-61'>
+Issue 61. <a href='issues-wd-2017.html#issue-61'>#</a>
+Summary:  Is the principal box unique?
+From:     Oriol
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/1604'>https://github.com/w3c/csswg-drafts/issues/1604</a>
+Response: <a href='https://github.com/w3c/csswg-drafts/issues/1604#issuecomment-374366647'>https://github.com/w3c/csswg-drafts/issues/1604#issuecomment-374366647</a>
+Closed:   OutOfScope
+Notes:    Follow-up for css-flow-3 <a href='https://github.com/w3c/csswg-drafts/issues/1477'>https://github.com/w3c/csswg-drafts/issues/1477</a></pre>
+<pre class='oi' id='issue-62'>
+Issue 62. <a href='issues-wd-2017.html#issue-62'>#</a>
+Summary:  run-in fixup should create inline-block when parent inlinifies
+From:     Oriol
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/1607'>https://github.com/w3c/csswg-drafts/issues/1607</a>
+Response: <a href='https://github.com/w3c/csswg-drafts/issues/1607#issuecomment-374368323'>https://github.com/w3c/csswg-drafts/issues/1607#issuecomment-374368323</a>
+Closed:   Invalid</pre>
+<pre class='a' id='issue-63'>
+Issue 63. <a href='issues-wd-2017.html#issue-63'>#</a>
+Summary:  Define how block containers establish an inline formatting context
+From:     Oriol
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/1617'>https://github.com/w3c/csswg-drafts/issues/1617</a>
+Response: <a href='https://github.com/w3c/csswg-drafts/issues/1617#issuecomment-374369526'>https://github.com/w3c/csswg-drafts/issues/1617#issuecomment-374369526</a>
+Closed:   Accepted
+Verified: <a href='https://github.com/w3c/csswg-drafts/issues/1617#issuecomment-374376423'>https://github.com/w3c/csswg-drafts/issues/1617#issuecomment-374376423</a>
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/1617#issuecomment-374385637'>https://github.com/w3c/csswg-drafts/issues/1617#issuecomment-374385637</a>
+Response: <a href='https://github.com/w3c/csswg-drafts/issues/1617#issuecomment-398958073'>https://github.com/w3c/csswg-drafts/issues/1617#issuecomment-398958073</a>
+Resolved: Editor discretion</pre>
+<pre class='a' id='issue-64'>
+Issue 64. <a href='issues-wd-2017.html#issue-64'>#</a>
+Summary:  Position of 'list-item' when serializing 'display'
+From:     Oriol
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/1621'>https://github.com/w3c/csswg-drafts/issues/1621</a>
+Response: <a href='https://github.com/w3c/csswg-drafts/issues/1621#issuecomment-374730492'>https://github.com/w3c/csswg-drafts/issues/1621#issuecomment-374730492</a>
+Closed:   Accepted
+Resolved: Bugfix</pre>
+<pre class='a' id='issue-65'>
+Issue 65. <a href='issues-wd-2017.html#issue-65'>#</a>
+Summary:  Clarify that outer display type only affects principal box
+From:     Oriol
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/1622'>https://github.com/w3c/csswg-drafts/issues/1622</a>
+Changes:  <a href='https://github.com/w3c/csswg-drafts/commit/c5d8900d4cc8dedd4f7a02d506d0e0cd2cb5a639'>https://github.com/w3c/csswg-drafts/commit/c5d8900d4cc8dedd4f7a02d506d0e0cd2cb5a639</a>
+Closed:   Accepted
+Resolved: Editorial</pre>
+<pre class='a' id='issue-66'>
+Issue 66. <a href='issues-wd-2017.html#issue-66'>#</a>
+Summary:  Compact at-risk list
+From:     Oriol
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/1623'>https://github.com/w3c/csswg-drafts/issues/1623</a>
+Changes:  <a href='https://github.com/w3c/csswg-drafts/commit/9f72f245cba50a173813c36b771f552fe8104964'>https://github.com/w3c/csswg-drafts/commit/9f72f245cba50a173813c36b771f552fe8104964</a>
+Closed:   Accepted
+Resolved: Editorial</pre>
+<pre class='a' id='issue-67'>
+Issue 67. <a href='issues-wd-2017.html#issue-67'>#</a>
+Summary:  list-item generates ::marker pseudo-element (not necessarily box)
+From:     Oriol
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/1625'>https://github.com/w3c/csswg-drafts/issues/1625</a>
+Changes:  <a href='https://github.com/w3c/csswg-drafts/commit/ed5c6a31724e014f3336dbf7901c5ef5cb1eaf20'>https://github.com/w3c/csswg-drafts/commit/ed5c6a31724e014f3336dbf7901c5ef5cb1eaf20</a>
+Closed:   Accepted
+Resolved: Bugfix</pre>
+<pre class='a' id='issue-68'>
+Issue 68. <a href='issues-wd-2017.html#issue-68'>#</a>
+Summary:  Mismatched references (to CSS2 vs css-lists-3)
+From:     Oriol
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/1626'>https://github.com/w3c/csswg-drafts/issues/1626</a>
+Response: <a href='https://github.com/w3c/csswg-drafts/issues/1626#issuecomment-374373751'>https://github.com/w3c/csswg-drafts/issues/1626#issuecomment-374373751</a>
+Changes:  <a href='https://github.com/w3c/csswg-drafts/commit/7af6650e9ad441bac22fe833cb413112262f9149'>https://github.com/w3c/csswg-drafts/commit/7af6650e9ad441bac22fe833cb413112262f9149</a>
+Closed:   Accepted
+Resolved: Editorial</pre>
+<pre class='a' id='issue-69'>
+Issue 69. <a href='issues-wd-2017.html#issue-69'>#</a>
+Summary:  Mention that block ruby generates principal block box
+From:     Oriol
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/1629'>https://github.com/w3c/csswg-drafts/issues/1629</a>
+Changes:  <a href='https://github.com/w3c/csswg-drafts/commit/5e90348a26aecbed6d878cce89cbbc7db1b058ff'>https://github.com/w3c/csswg-drafts/commit/5e90348a26aecbed6d878cce89cbbc7db1b058ff</a>
+Closed:   Accepted
+Resolved: Bugfix</pre>
+<pre class='a' id='issue-70'>
+Issue 70. <a href='issues-wd-2017.html#issue-70'>#</a>
+Summary:  run-in insertion point vs ::marker with 'display'
+From:     Oriol
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/1638'>https://github.com/w3c/csswg-drafts/issues/1638</a>
+Response: <a href='https://github.com/w3c/csswg-drafts/issues/1638#issuecomment-316979494'>https://github.com/w3c/csswg-drafts/issues/1638#issuecomment-316979494</a>
+Closed:   Retracted</pre>
+<pre class='a' id='issue-71'>
+Issue 71. <a href='issues-wd-2017.html#issue-71'>#</a>
+Summary:  Are run-in sequences merged during reparenting?
+From:     Oriol
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/1639'>https://github.com/w3c/csswg-drafts/issues/1639</a>
+Changes:  <a href='https://github.com/w3c/csswg-drafts/commit/ef3c8fd8b2fe85c32a2dc393ca3b2810a414ea88'>https://github.com/w3c/csswg-drafts/commit/ef3c8fd8b2fe85c32a2dc393ca3b2810a414ea88</a>
+Closed:   Accepted
+Resolved: Editorial</pre>
+<pre class='a' id='issue-72'>
+Issue 72. <a href='issues-wd-2017.html#issue-72'>#</a>
+Summary:  Clarify run-in recursion vs anonymous-block wrapping
+From:     Oriol
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/1640'>https://github.com/w3c/csswg-drafts/issues/1640</a>
+Response: <a href='https://github.com/w3c/csswg-drafts/issues/1640#issuecomment-374384660'>https://github.com/w3c/csswg-drafts/issues/1640#issuecomment-374384660</a>
+Changes:  <a href='https://github.com/w3c/csswg-drafts/commit/c7841af7ab963a5e91b2436ffe60ece80700cc7e'>https://github.com/w3c/csswg-drafts/commit/c7841af7ab963a5e91b2436ffe60ece80700cc7e</a>
+Closed:   Accepted
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/1640#issuecomment-374390920'>https://github.com/w3c/csswg-drafts/issues/1640#issuecomment-374390920</a>
+Response: <a href='https://github.com/w3c/csswg-drafts/issues/1640#issuecomment-398963365'>https://github.com/w3c/csswg-drafts/issues/1640#issuecomment-398963365</a>
+Closed:   Rejected
+Resolved: Editorial</pre>
+<pre class='oi' id='issue-73'>
+Issue 73. <a href='issues-wd-2017.html#issue-73'>#</a>
+Summary:  Define inner display type of replaced elements
+From:     Oriol
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/1642'>https://github.com/w3c/csswg-drafts/issues/1642</a>
+Response: <a href='https://github.com/w3c/csswg-drafts/issues/1642#issuecomment-374399290'>https://github.com/w3c/csswg-drafts/issues/1642#issuecomment-374399290</a>
+Closed:   Invalid</pre>
+<pre class='oi' id='issue-74'>
+Issue 74. <a href='issues-wd-2017.html#issue-74'>#</a>
+Summary:  How does inner display type compute on replaced elements if out of scope?
+From:     Sebastien Zartner
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/1642#issuecomment-317237475'>https://github.com/w3c/csswg-drafts/issues/1642#issuecomment-317237475</a>
+Response: <a href='https://github.com/w3c/csswg-drafts/issues/1642#issuecomment-398964350'>https://github.com/w3c/csswg-drafts/issues/1642#issuecomment-398964350</a>
+Closed:   Invalid
+Resolved: Editorial</pre>
+<pre class='a' id='issue-75'>
+Issue 75. <a href='issues-wd-2017.html#issue-75'>#</a>
+Summary:  Define style computation reflection between boxes and elements
+From:     Oriol
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/1643'>https://github.com/w3c/csswg-drafts/issues/1643</a>
+Response: <a href='https://github.com/w3c/csswg-drafts/issues/1643#issuecomment-350398313'>https://github.com/w3c/csswg-drafts/issues/1643#issuecomment-350398313</a>
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/1702'>https://github.com/w3c/csswg-drafts/issues/1702</a>
+Response: <a href='https://github.com/w3c/csswg-drafts/issues/1702#issuecomment-374415941'>https://github.com/w3c/csswg-drafts/issues/1702#issuecomment-374415941</a>
+Changes:  <a href='https://github.com/w3c/csswg-drafts/commit/b2d484c6ab9c4dbdb8fdca899e2d37d59d6953e3'>https://github.com/w3c/csswg-drafts/commit/b2d484c6ab9c4dbdb8fdca899e2d37d59d6953e3</a>
+Closed:   Accepted
+Resolved: <a href='https://lists.w3.org/Archives/Public/www-style/2018Apr/0005.html'>https://lists.w3.org/Archives/Public/www-style/2018Apr/0005.html</a></pre>
+<pre class='' id='issue-76'>
+Issue 76. <a href='issues-wd-2017.html#issue-76'>#</a>
+Summary:  Define some box construction guidance for specs
+From:     Oriol
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/1643'>https://github.com/w3c/csswg-drafts/issues/1643</a>
+Response: <a href='https://github.com/w3c/csswg-drafts/issues/1643#issuecomment-350398313'>https://github.com/w3c/csswg-drafts/issues/1643#issuecomment-350398313</a>
+Changes:  <a href='https://github.com/w3c/csswg-drafts/commit/533ac0a31b0262c4a0d09c77e19604666fe35e14'>https://github.com/w3c/csswg-drafts/commit/533ac0a31b0262c4a0d09c77e19604666fe35e14</a>
+Resolved: <a href='https://lists.w3.org/Archives/Public/www-style/2018Apr/0005.html'>https://lists.w3.org/Archives/Public/www-style/2018Apr/0005.html</a></pre>
+<pre class='a' id='issue-77'>
+Issue 77. <a href='issues-wd-2017.html#issue-77'>#</a>
+Summary:  table grid box is not a defined term
+From:     David Baron
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/1643#issuecomment-376733708'>https://github.com/w3c/csswg-drafts/issues/1643#issuecomment-376733708</a>
+Response: <a href='https://github.com/w3c/csswg-drafts/issues/1643#issuecomment-378768000'>https://github.com/w3c/csswg-drafts/issues/1643#issuecomment-378768000</a>
+Changes:  <a href='https://github.com/w3c/csswg-drafts/commit/193022f623acd1b95a1fddae76fd98408a618d8b'>https://github.com/w3c/csswg-drafts/commit/193022f623acd1b95a1fddae76fd98408a618d8b</a>
+Closed:   Accepted
+Resolved: Editorial</pre>
+<pre class=' open' id='issue-78'>
+Issue 78. <a href='issues-wd-2017.html#issue-78'>#</a>
+Summary:  Rename table box to table grid box (in CSS2 &amp; CSS Tables L3)
+From:     fantasai
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/2501'>https://github.com/w3c/csswg-drafts/issues/2501</a>
+Response: <a href='https://github.com/w3c/csswg-drafts/issues/2501#issuecomment-380792875'>https://github.com/w3c/csswg-drafts/issues/2501#issuecomment-380792875</a>
+Open:     Changing back is pending edits to CSS2 and css-tables-3
+Resolved: <a href='https://lists.w3.org/Archives/Public/www-style/2018May/0044.html'>https://lists.w3.org/Archives/Public/www-style/2018May/0044.html</a></pre>
+<pre class='r' id='issue-79'>
+Issue 79. <a href='issues-wd-2017.html#issue-79'>#</a>
+Summary:  Boxes shouldn't have display types, should only have levels/FC-types
+From:     Oriol
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/1643#issuecomment-374423595'>https://github.com/w3c/csswg-drafts/issues/1643#issuecomment-374423595</a>
+Response: <a href='https://github.com/w3c/csswg-drafts/issues/1643#issuecomment-407597682'>https://github.com/w3c/csswg-drafts/issues/1643#issuecomment-407597682</a>
+Closed:   Rejected
+Resolved: Editorial</pre>
+<pre class='a' id='issue-80'>
+Issue 80. <a href='issues-wd-2017.html#issue-80'>#</a>
+Summary:  Explicitly exclude non-zero sequences of run-ins from processing
+From:     Oriol
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/1663'>https://github.com/w3c/csswg-drafts/issues/1663</a>
+Response: <a href='https://github.com/w3c/csswg-drafts/issues/1663#issuecomment-398970537'>https://github.com/w3c/csswg-drafts/issues/1663#issuecomment-398970537</a>
+Closed:   Rejected
+Verified: <a href='https://github.com/w3c/csswg-drafts/issues/1663#issuecomment-398982401'>https://github.com/w3c/csswg-drafts/issues/1663#issuecomment-398982401</a>
+Resolved: Editorial</pre>
+<pre class='a' id='issue-81'>
+Issue 81. <a href='issues-wd-2017.html#issue-81'>#</a>
+Summary:  Link to definition of white space
+From:     Oriol
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/1664'>https://github.com/w3c/csswg-drafts/issues/1664</a>
+Changes:  <a href='https://github.com/w3c/csswg-drafts/commit/ada381e196c8ed510977cb55916ee5fb96447b25'>https://github.com/w3c/csswg-drafts/commit/ada381e196c8ed510977cb55916ee5fb96447b25</a>
+Closed:   Accepted
+Resolved: Bugfix</pre>
+<pre class='a' id='issue-82'>
+Issue 82. <a href='issues-wd-2017.html#issue-82'>#</a>
+Summary:  s/text/text run/ now that text run is defined
+From:     Oriol
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/1667'>https://github.com/w3c/csswg-drafts/issues/1667</a>
+Changes:  <a href='https://github.com/w3c/csswg-drafts/commit/c3a695c65170e1667090d87310b87df79d93d398'>https://github.com/w3c/csswg-drafts/commit/c3a695c65170e1667090d87310b87df79d93d398</a>
+Closed:   Accepted
+Resolved: Editorial</pre>
+<pre class='oi' id='issue-83'>
+Issue 83. <a href='issues-wd-2017.html#issue-83'>#</a>
+Summary:  What if containing block is not ICB and not generated from a box?
+From:     Oriol
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/1672'>https://github.com/w3c/csswg-drafts/issues/1672</a>
+Response: <a href='https://github.com/w3c/csswg-drafts/issues/1672#issuecomment-319916887'>https://github.com/w3c/csswg-drafts/issues/1672#issuecomment-319916887</a>
+Closed:   Invalid
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/1672#issuecomment-350404179'>https://github.com/w3c/csswg-drafts/issues/1672#issuecomment-350404179</a>
+Response: <a href='https://github.com/w3c/csswg-drafts/issues/1672#issuecomment-374790036'>https://github.com/w3c/csswg-drafts/issues/1672#issuecomment-374790036</a>
+Closed:   Rejected
+Resolved: Editor discretion</pre>
+<pre class='r' id='issue-84'>
+Issue 84. <a href='issues-wd-2017.html#issue-84'>#</a>
+Summary:  Make inlinified 'block ruby' an inline-block instead of inline
+From:     Oriol
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/1700'>https://github.com/w3c/csswg-drafts/issues/1700</a>
+Response: <a href='https://github.com/w3c/csswg-drafts/issues/1700#issuecomment-374415499'>https://github.com/w3c/csswg-drafts/issues/1700#issuecomment-374415499</a>
+Closed:   Rejected
+Resolved: Editor discretion</pre>
+<pre class='a' id='issue-85'>
+Issue 85. <a href='issues-wd-2017.html#issue-85'>#</a>
+Summary:  'block' only generates block-level boxes in flow layout
+From:     Oriol
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/1704'>https://github.com/w3c/csswg-drafts/issues/1704</a>
+Response: <a href='https://github.com/w3c/csswg-drafts/issues/1704#issuecomment-374418771'>https://github.com/w3c/csswg-drafts/issues/1704#issuecomment-374418771</a>
+Changes:  <a href='https://github.com/w3c/csswg-drafts/commit/4358d72a927b265d9b7482a57277dc635c076b76'>https://github.com/w3c/csswg-drafts/commit/4358d72a927b265d9b7482a57277dc635c076b76</a>
+Closed:   Accepted
+Resolved: Bugfix</pre>
+<pre class='a' id='issue-86'>
+Issue 86. <a href='issues-wd-2017.html#issue-86'>#</a>
+Summary:  Clarify blockification of 'run-in flow-root'
+From:     Oriol
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/1715'>https://github.com/w3c/csswg-drafts/issues/1715</a>
+Response: <a href='https://github.com/w3c/csswg-drafts/issues/1715#issuecomment-374420463'>https://github.com/w3c/csswg-drafts/issues/1715#issuecomment-374420463</a>
+Closed:   Accepted
+Resolved: <a href='https://lists.w3.org/Archives/Public/www-style/2018Apr/0005.html'>https://lists.w3.org/Archives/Public/www-style/2018Apr/0005.html</a></pre>
+<pre class='a' id='issue-87'>
+Issue 87. <a href='issues-wd-2017.html#issue-87'>#</a>
+Summary:  'display' computed value wrong in propdef table
+From:     Oriol
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/1716'>https://github.com/w3c/csswg-drafts/issues/1716</a>
+Changes:  <a href='https://github.com/w3c/csswg-drafts/issues/1716'>https://github.com/w3c/csswg-drafts/issues/1716</a>
+Closed:   Accepted
+Resolved: Bugfix</pre>
+<pre class='a' id='issue-89'>
+Issue 89. <a href='issues-wd-2017.html#issue-89'>#</a>
+Summary:  Do empty text nodes generate text runs?
+From:     Oriol
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/1808'>https://github.com/w3c/csswg-drafts/issues/1808</a>
+Response: <a href='https://github.com/w3c/csswg-drafts/issues/1808#issuecomment-329345715'>https://github.com/w3c/csswg-drafts/issues/1808#issuecomment-329345715</a>
+Changes:  <a href='https://github.com/w3c/csswg-drafts/commit/4c21a2aa923a757c577bf4a4e33a6291a78c8690'>https://github.com/w3c/csswg-drafts/commit/4c21a2aa923a757c577bf4a4e33a6291a78c8690</a>
+Closed:   Accepted</pre>
+<pre class='oi' id='issue-90'>
+Issue 90. <a href='issues-wd-2017.html#issue-90'>#</a>
+Summary:  Clarify element tree definition
+From:     Oriol
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/1810'>https://github.com/w3c/csswg-drafts/issues/1810</a>
+Response: <a href='https://github.com/w3c/csswg-drafts/issues/1810#issuecomment-375137826'>https://github.com/w3c/csswg-drafts/issues/1810#issuecomment-375137826</a>
+Closed:   OutOfScope
+Resolved: <a href='https://lists.w3.org/Archives/Public/www-style/2018May/0036.html'>https://lists.w3.org/Archives/Public/www-style/2018May/0036.html</a></pre>
+<pre class='a' id='issue-91'>
+Issue 91. <a href='issues-wd-2017.html#issue-91'>#</a>
+Summary:  SVG 'display: contents' interaction incompletely defined
+From:     Rune Lillesveen
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/2118'>https://github.com/w3c/csswg-drafts/issues/2118</a>
+Response: <a href='https://github.com/w3c/csswg-drafts/issues/2118#issuecomment-374802030'>https://github.com/w3c/csswg-drafts/issues/2118#issuecomment-374802030</a>
+Changes:  <a href='https://github.com/w3c/csswg-drafts/commit/2cdf747bbbfe0c58a87455beca9c35b72555b09a'>https://github.com/w3c/csswg-drafts/commit/2cdf747bbbfe0c58a87455beca9c35b72555b09a</a>
+Closed:   Accepted</pre>
+<pre class='a' id='issue-92'>
+Issue 92. <a href='issues-wd-2017.html#issue-92'>#</a>
+Summary:  Define interaction of 'display: contents' and MathML
+From:     Emilio Álvarez
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/2167'>https://github.com/w3c/csswg-drafts/issues/2167</a>
+Response: <a href='https://github.com/w3c/csswg-drafts/issues/2167#issuecomment-375119086'>https://github.com/w3c/csswg-drafts/issues/2167#issuecomment-375119086</a>
+Changes:  <a href='https://github.com/w3c/csswg-drafts/commit/1d3e6a04c847df82fa3c4023e23f4ea55dcab169'>https://github.com/w3c/csswg-drafts/commit/1d3e6a04c847df82fa3c4023e23f4ea55dcab169</a>
+Verified: <a href='https://github.com/w3c/csswg-drafts/issues/2167#issuecomment-375792285'>https://github.com/w3c/csswg-drafts/issues/2167#issuecomment-375792285</a>
+Resolved: <a href='https://lists.w3.org/Archives/Public/www-style/2018Apr/0005.html'>https://lists.w3.org/Archives/Public/www-style/2018Apr/0005.html</a></pre>
+<pre class='a' id='issue-93'>
+Issue 93. <a href='issues-wd-2017.html#issue-93'>#</a>
+Summary:  Does 'display' affect screen reader semantics?
+From:     Ilya Streltsyn
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/2355'>https://github.com/w3c/csswg-drafts/issues/2355</a>
+Response: <a href='https://github.com/w3c/csswg-drafts/issues/2355#issuecomment-368287740'>https://github.com/w3c/csswg-drafts/issues/2355#issuecomment-368287740</a>
+Response: <a href='https://github.com/w3c/csswg-drafts/issues/2355#issuecomment-375084853'>https://github.com/w3c/csswg-drafts/issues/2355#issuecomment-375084853</a>
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/2355#issuecomment-378670370'>https://github.com/w3c/csswg-drafts/issues/2355#issuecomment-378670370</a>
+Response: <a href='https://github.com/w3c/csswg-drafts/issues/2355#issuecomment-378778909'>https://github.com/w3c/csswg-drafts/issues/2355#issuecomment-378778909</a>
+Closed:   Accepted
+Resolved: Editorial</pre>
+<pre class='a' id='issue-94'>
+Issue 94. <a href='issues-wd-2017.html#issue-94'>#</a>
+Summary:  Does 'display: contents' affect anchor targeting?
+From:     Ilya Streltsyn
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/2355#issuecomment-378842501'>https://github.com/w3c/csswg-drafts/issues/2355#issuecomment-378842501</a>
+Response: <a href='https://github.com/w3c/csswg-drafts/issues/2355#issuecomment-378992876'>https://github.com/w3c/csswg-drafts/issues/2355#issuecomment-378992876</a>
+Changes:  <a href='https://github.com/fergald/csswg-drafts/commit/2343af6382b55e8ce5caf9c0ee40d68ef032b421'>https://github.com/fergald/csswg-drafts/commit/2343af6382b55e8ce5caf9c0ee40d68ef032b421</a>
+Closed:   Accepted
+Resolved: Editor discretion</pre>
+<pre class='a' id='issue-95'>
+Issue 95. <a href='issues-wd-2017.html#issue-95'>#</a>
+Summary:  Effect of 'display: contents' on SVG layout attributes
+From:     Amelia Bellamy-Royds
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/2502'>https://github.com/w3c/csswg-drafts/issues/2502</a>
+Response: <a href='https://github.com/w3c/csswg-drafts/issues/2502#issuecomment-378809174'>https://github.com/w3c/csswg-drafts/issues/2502#issuecomment-378809174</a>
+Closed:   Accepted
+Verified: <a href='https://github.com/w3c/csswg-drafts/issues/2502#issuecomment-399498551'>https://github.com/w3c/csswg-drafts/issues/2502#issuecomment-399498551</a></pre>
+<pre class='oi' id='issue-96'>
+Issue 96. <a href='issues-wd-2017.html#issue-96'>#</a>
+Summary:  Integrate definition of Shadow Trees
+From:     Anne van Kesteren
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/2365'>https://github.com/w3c/csswg-drafts/issues/2365</a>
+Closed:   OutOfScope
+Resolved: <a href='https://lists.w3.org/Archives/Public/www-style/2018May/0036.html'>https://lists.w3.org/Archives/Public/www-style/2018May/0036.html</a></pre>
+<pre class='oi' id='issue-97'>
+Issue 97. <a href='issues-wd-2017.html#issue-97'>#</a>
+Summary:  Blockification should establish a new formatting context
+From:     Oriol
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/2598'>https://github.com/w3c/csswg-drafts/issues/2598</a>
+Response: <a href='https://github.com/w3c/csswg-drafts/issues/2598#issuecomment-387157017'>https://github.com/w3c/csswg-drafts/issues/2598#issuecomment-387157017</a>
+Closed:   Invalid</pre>
+<pre class='a' id='issue-98'>
+Issue 98. <a href='issues-wd-2017.html#issue-98'>#</a>
+Summary:  Swap where default inner/outer display types are defined
+From:     Oriol
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/2658'>https://github.com/w3c/csswg-drafts/issues/2658</a>
+Response: <a href='https://github.com/w3c/csswg-drafts/issues/2658#issuecomment-391175246'>https://github.com/w3c/csswg-drafts/issues/2658#issuecomment-391175246</a>
+Closed:   Rejected
+Verified: <a href='https://github.com/w3c/csswg-drafts/issues/2658#issuecomment-393271657'>https://github.com/w3c/csswg-drafts/issues/2658#issuecomment-393271657</a>
+Resolved: Editorial
+---
+Issue 99. <a href='issues-wd-2017.html#issue-99'>#</a>
+Summary:  Blockification of blocks should establish new FC
+From:     Oriol
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/2673'>https://github.com/w3c/csswg-drafts/issues/2673</a>
+Response: <a href='https://github.com/w3c/csswg-drafts/issues/2673#issuecomment-389935782'>https://github.com/w3c/csswg-drafts/issues/2673#issuecomment-389935782</a>
+Closed:   Rejected
+Verified: <a href='https://lists.w3.org/Archives/Public/www-style/2018Jul/0017.html'>https://lists.w3.org/Archives/Public/www-style/2018Jul/0017.html</a>
+Resolved: <a href='https://lists.w3.org/Archives/Public/www-style/2018Jul/0017.html'>https://lists.w3.org/Archives/Public/www-style/2018Jul/0017.html</a></pre>
+<pre class='a' id='issue-100'>
+Issue 100. <a href='issues-wd-2017.html#issue-100'>#</a>
+Summary:  Compute 'display: contents' on elided elements to 'none'
+From:     Emlio Álvarez
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/2755'>https://github.com/w3c/csswg-drafts/issues/2755</a>
+Changes:  <a href='https://github.com/w3c/csswg-drafts/commit/f13b84237c6a17823ebdd55919d15d3bac83275b'>https://github.com/w3c/csswg-drafts/commit/f13b84237c6a17823ebdd55919d15d3bac83275b</a>
+Closed:   Accepted
+Resolved: <a href='https://lists.w3.org/Archives/Public/www-style/2018Jun/0032.html'>https://lists.w3.org/Archives/Public/www-style/2018Jun/0032.html</a></pre>
+<pre class='a' id='issue-101'>
+Issue 101. <a href='issues-wd-2017.html#issue-101'>#</a>
+Summary:  Revisit equivalency of `inline-block` and `inline flow-root`
+From:     Oriol Brufau
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/2947'>https://github.com/w3c/csswg-drafts/issues/2947</a>
+Closed:   Rejected
+Notes:    See also earlier issues / discussion.
+Resolved: <a href='https://lists.w3.org/Archives/Public/www-style/2018Aug/0018.html'>https://lists.w3.org/Archives/Public/www-style/2018Aug/0018.html</a>
+Verified: <a href='https://lists.w3.org/Archives/Public/www-style/2018Aug/0018.html'>https://lists.w3.org/Archives/Public/www-style/2018Aug/0018.html</a></pre>
+<script>
+(function () {
+    var sheet = document.styleSheets[0];
+    function addCheckbox(className) {
+        var element = document.querySelector('*.' + className);
+        var label = document.createElement('label');
+        label.innerHTML = element.innerHTML;
+        element.innerHTML = null;
+        var check = document.createElement('input');
+        check.type = 'checkbox';
+        if (className == 'open') {
+            check.checked = false;
+            sheet.insertRule('pre:not(.open)' + '{}', sheet.cssRules.length);
+            check.onchange = function (e) {
+                rule.style.display = this.checked ? 'none' : 'block';
+            }
+        }
+        else {
+            check.checked = true;
+            sheet.insertRule('pre.' + className + '{}', sheet.cssRules.length);
+            check.onchange = function (e) {
+                rule.style.display = this.checked ? 'block' : 'none';
+            }
+        }
+        var rule = sheet.cssRules[sheet.cssRules.length - 1];
+        element.appendChild(label);
+        label.insertBefore(check, label.firstChild);
+    }
+    ['a', 'd', 'fo', 'oi', 'r', 'open'].forEach(addCheckbox);
+}());
+</script>

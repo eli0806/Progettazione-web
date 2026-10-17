@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<title>CSS Flexible Box Module Level 1 Disposition of Comments for 2018-11-19 CR</title>
+<style>
+  .a  { background: lightgreen }
+  .d  { background: lightblue  }
+  .r  { background: orange     }
+  .fo { background: red        }
+  .open   { border: solid red; padding: 0.2em; }
+  :target { box-shadow: 0.25em 0.25em 0.25em;  }
+</style>
+
+<h1>CSS Flexible Box Module Level 1 Disposition of Comments for 2018-11-19 CR</h1>
+
+<p>Review document: <a href="https://www.w3.org/TR/2018/CR-css-flexbox-1-20181119/">https://www.w3.org/TR/2018/CR-css-flexbox-1-20181119/</a>
+
+<p>Editor's draft: <a href="http://dev.w3.org/csswg/css-flexbox-1/">http://dev.w3.org/csswg/css-flexbox-1/</a></p>
+
+
+
+<p>The following color coding convention is used for comments:</p>
+
+<ul>
+ <li class="a">Accepted or Rejected and positive response
+ <li class="r">Rejected and no response
+ <li class="fo">Rejected and negative response
+ <li class="d">Deferred
+ <li class="oi">Out-of-Scope or Invalid and not verified
+</ul>
+
+<p class=open>Open issues are marked like this</p>
+
+<p>An issue can be closed as <code>Accepted</code>, <code>OutOfScope</code>,
+<code>Invalid</code>, <code>Rejected</code>, or <code>Retracted</code>.
+<code>Verified</code> indicates commentor's acceptance of the response.</p>
+<pre class=' open' id='issue-1'>
+Issue 1. <a href='issues-cr-2018.html#issue-1'>#</a>
+Summary:  Clarifications to size computation dependencies
+From:     dbaron
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/2890'>https://github.com/w3c/csswg-drafts/issues/2890</a>
+Open:     Pending deeper investigation, scope of edits unknown
+Previous: <a href='issues-cr-2017.html#issue-14'>https://drafts.csswg.org/css-flexbox-1/issues-cr-2017#issue-14</a></pre>
+<pre class=' open' id='issue-2'>
+Issue 2. <a href='issues-cr-2018.html#issue-2'>#</a>
+Summary:  Investigate applying align-content to single-line flex containers
+From:     Tab Atkins and fantasai
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/3052'>https://github.com/w3c/csswg-drafts/issues/3052</a>
+Open:     Pending Web-compat investigation
+Previous: <a href='issues-cr-2017.html#issue-16'>https://drafts.csswg.org/css-flexbox-1/issues-cr-2017#issue-16</a></pre>
+<pre class='a' id='issue-3'>
+Issue 3. <a href='issues-cr-2018.html#issue-3'>#</a>
+Summary:  Baseline alignment of inline flex containers
+From:     Manuel Rego Casasnovas
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/3416'>https://github.com/w3c/csswg-drafts/issues/3416</a>
+Response: <a href='https://github.com/w3c/csswg-drafts/issues/3416'>https://github.com/w3c/csswg-drafts/issues/3416</a>
+Closed:   Retracted</pre>
+<pre class='a' id='issue-4'>
+Issue 4. <a href='issues-cr-2018.html#issue-4'>#</a>
+Summary:  Clarify referent in definite sizes section
+From:     Christian Biesinger
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/3531'>https://github.com/w3c/csswg-drafts/issues/3531</a>
+Changes:  <a href='https://github.com/w3c/csswg-drafts/commit/dbd98f29f7d4cea59078a03b262c8b75f63ee66a'>https://github.com/w3c/csswg-drafts/commit/dbd98f29f7d4cea59078a03b262c8b75f63ee66a</a>
+Closed:   Accepted
+Resolved: Editorial</pre>
+<pre class='oi' id='issue-5'>
+Issue 5. <a href='issues-cr-2018.html#issue-5'>#</a>
+Summary:  Collapse bullets 1 &amp; 3 in definite sizes section
+From:     Christian Biesinger
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/3531'>https://github.com/w3c/csswg-drafts/issues/3531</a>
+Response: <a href='https://github.com/w3c/csswg-drafts/issues/3531#issuecomment-657785333'>https://github.com/w3c/csswg-drafts/issues/3531#issuecomment-657785333</a>
+Closed:   Invalid</pre>
+<pre class='a' id='issue-6'>
+Issue 6. <a href='issues-cr-2018.html#issue-6'>#</a>
+Summary:  Initial values inconsistent with css-align
+From:     Eric Willigers
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/3636'>https://github.com/w3c/csswg-drafts/issues/3636</a>
+Response: <a href='https://github.com/w3c/csswg-drafts/issues/3636#issuecomment-463050318'>https://github.com/w3c/csswg-drafts/issues/3636#issuecomment-463050318</a>
+Closed:   Deferred
+Verified: <a href='https://github.com/w3c/csswg-drafts/issues/3636#issuecomment-466987045'>https://github.com/w3c/csswg-drafts/issues/3636#issuecomment-466987045</a></pre>
+<pre class='a' id='issue-7'>
+Issue 7. <a href='issues-cr-2018.html#issue-7'>#</a>
+Summary:  Include padding in scrollable overflow area
+From:     fantasai
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/3665'>https://github.com/w3c/csswg-drafts/issues/3665</a>
+Response: <a href='https://github.com/w3c/csswg-drafts/issues/3665#issuecomment-484360912'>https://github.com/w3c/csswg-drafts/issues/3665#issuecomment-484360912</a>
+Closed:   Accepted / OutOfScope
+Verified: Reporter is editor</pre>
+<pre class='oi' id='issue-8'>
+Issue 8. <a href='issues-cr-2018.html#issue-8'>#</a>
+Summary:  Missing change in changes section
+From:     Christian Biesinger
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/3668'>https://github.com/w3c/csswg-drafts/issues/3668</a>
+Response: <a href='https://github.com/w3c/csswg-drafts/issues/3668#issuecomment-624938271'>https://github.com/w3c/csswg-drafts/issues/3668#issuecomment-624938271</a>
+Resolved: Editorial
+Closed:   Invalid</pre>
+<pre class='a' id='issue-9'>
+Issue 9. <a href='issues-cr-2018.html#issue-9'>#</a>
+Summary:  Max-size clamping of specified size is superfluous
+From:     David Grogan
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/3669'>https://github.com/w3c/csswg-drafts/issues/3669</a>
+Response: <a href='https://github.com/w3c/csswg-drafts/issues/3669#issuecomment-484308507'>https://github.com/w3c/csswg-drafts/issues/3669#issuecomment-484308507</a>
+Closed:   Rejected
+Resolved: Editorial
+Verified: <a href='https://github.com/w3c/csswg-drafts/issues/3669#issuecomment-484577682'>https://github.com/w3c/csswg-drafts/issues/3669#issuecomment-484577682</a></pre>
+<pre class='a' id='issue-10'>
+Issue 10. <a href='issues-cr-2018.html#issue-10'>#</a>
+Summary:  Cross-axis max-size not taken into account
+From:     Christian Biesinger
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/3736'>https://github.com/w3c/csswg-drafts/issues/3736</a>
+Response: <a href='https://github.com/w3c/csswg-drafts/issues/3736#issuecomment-502849251'>https://github.com/w3c/csswg-drafts/issues/3736#issuecomment-502849251</a>
+Closed:   Accepted
+Resolved: Bugfix
+Verified: <a href='https://github.com/w3c/csswg-drafts/issues/3736#issuecomment-502854165'>https://github.com/w3c/csswg-drafts/issues/3736#issuecomment-502854165</a></pre>
+<pre class='oi' id='issue-11'>
+Issue 11. <a href='issues-cr-2018.html#issue-11'>#</a>
+Summary:  Example characters are Chinese not Japanese
+From:     ringbell
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/3957'>https://github.com/w3c/csswg-drafts/issues/3957</a>
+Response: <a href='https://github.com/w3c/csswg-drafts/issues/3957#issuecomment-495062702'>https://github.com/w3c/csswg-drafts/issues/3957#issuecomment-495062702</a>
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/3957#issuecomment-495265608'>https://github.com/w3c/csswg-drafts/issues/3957#issuecomment-495265608</a>
+Response: <a href='https://github.com/w3c/csswg-drafts/issues/3957#issuecomment-495303500'>https://github.com/w3c/csswg-drafts/issues/3957#issuecomment-495303500</a>
+Closed:   Invalid
+Resolved: Editorial</pre>
+<pre class='a' id='issue-12'>
+Issue 12. <a href='issues-cr-2018.html#issue-12'>#</a>
+Summary:  Blockification should be based on computed value, not box display
+From:     Emilio Cobos Àlvarez
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/4065'>https://github.com/w3c/csswg-drafts/issues/4065</a>
+Response: <a href='https://github.com/w3c/csswg-drafts/issues/4065#issuecomment-548924024'>https://github.com/w3c/csswg-drafts/issues/4065#issuecomment-548924024</a>
+Changes:  <a href='https://github.com/w3c/csswg-drafts/commit/0db00e1870bcb74bd820f89beed168514d9a6ec5'>https://github.com/w3c/csswg-drafts/commit/0db00e1870bcb74bd820f89beed168514d9a6ec5</a>
+Closed:   Accepted
+Resolved: <a href='https://lists.w3.org/Archives/Public/www-style/2019Nov/0009.html'>https://lists.w3.org/Archives/Public/www-style/2019Nov/0009.html</a>
+Verified: <a href='https://github.com/w3c/csswg-drafts/issues/4065#issuecomment-553319697'>https://github.com/w3c/csswg-drafts/issues/4065#issuecomment-553319697</a></pre>
+<pre class='a' id='issue-13'>
+Issue 13. <a href='issues-cr-2018.html#issue-13'>#</a>
+Summary:  ICB clamping of orthogonal flows should apply to flex container itself
+From:     Tab Atkins
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/4221'>https://github.com/w3c/csswg-drafts/issues/4221</a>
+Closed:   Accepted / OutOfScope (css-writing-modes-4)
+Changes:  <a href='https://github.com/w3c/csswg-drafts/commit/de44f988b329fe6c4b98b3ddc40a90322abdb2d4'>https://github.com/w3c/csswg-drafts/commit/de44f988b329fe6c4b98b3ddc40a90322abdb2d4</a>
+Resolved: 29 July 2021 vF2F</pre>
+<pre class='a' id='issue-14'>
+Issue 14. <a href='issues-cr-2018.html#issue-14'>#</a>
+Summary:  aspect ratio rules should also apply to other content-based sizes
+From:     Tab Atkins
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/4226'>https://github.com/w3c/csswg-drafts/issues/4226</a>
+Closed:   Retracted</pre>
+<pre class='a' id='issue-15'>
+Issue 15. <a href='issues-cr-2018.html#issue-15'>#</a>
+Summary:  Definiteness of inflexible item with min-height: auto
+From:     Christian Biesinger
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/4305'>https://github.com/w3c/csswg-drafts/issues/4305</a>
+Closed:   Duplicate
+Verified: <a href='https://github.com/w3c/csswg-drafts/issues/4305#issuecomment-898011507'>https://github.com/w3c/csswg-drafts/issues/4305#issuecomment-898011507</a></pre>
+<pre class='a' id='issue-16'>
+Issue 16. <a href='issues-cr-2018.html#issue-16'>#</a>
+Summary:  min-height:auto should use "definite" rather than "percentage resolution"
+From:     Christian Biesinger
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/4310'>https://github.com/w3c/csswg-drafts/issues/4310</a>
+Response: <a href='https://github.com/w3c/csswg-drafts/issues/4310#issuecomment-881066054'>https://github.com/w3c/csswg-drafts/issues/4310#issuecomment-881066054</a>
+Changes:  <a href='https://github.com/w3c/csswg-drafts/commit/f6ff4e1b001a1a391bf8131d25f0c65a9d60fa9e'>https://github.com/w3c/csswg-drafts/commit/f6ff4e1b001a1a391bf8131d25f0c65a9d60fa9e</a>
+Closed:   Accepted
+Resolved: Editorial
+Verified: <a href='https://github.com/w3c/csswg-drafts/issues/4310#issuecomment-897985279'>https://github.com/w3c/csswg-drafts/issues/4310#issuecomment-897985279</a></pre>
+<pre class='a' id='issue-17'>
+Issue 17. <a href='issues-cr-2018.html#issue-17'>#</a>
+Summary:  Should definite flex-basis always make main size definite?
+From:     Christian Biesinger
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/4311'>https://github.com/w3c/csswg-drafts/issues/4311</a>
+Response: <a href='https://github.com/w3c/csswg-drafts/issues/4311#issuecomment-896372435'>https://github.com/w3c/csswg-drafts/issues/4311#issuecomment-896372435</a>
+Closed:   Accepted
+Resolved: 29 July 2021 vF2F</pre>
+<pre class='a' id='issue-18'>
+Issue 18. <a href='issues-cr-2018.html#issue-18'>#</a>
+Summary:  Do unresolvable percentages prevent stretching?
+From:     Christian Biesinger
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/4312'>https://github.com/w3c/csswg-drafts/issues/4312</a>
+Response: <a href='https://github.com/w3c/csswg-drafts/issues/4312#issuecomment-531981125'>https://github.com/w3c/csswg-drafts/issues/4312#issuecomment-531981125</a>
+Response: <a href='https://github.com/w3c/csswg-drafts/issues/4525#issuecomment-572762219'>https://github.com/w3c/csswg-drafts/issues/4525#issuecomment-572762219</a>
+Closed:   Accepted / no spec changes
+Resolved: <a href='https://lists.w3.org/Archives/Public/www-style/2020Feb/0008.html'>https://lists.w3.org/Archives/Public/www-style/2020Feb/0008.html</a>
+Verified: <a href='https://github.com/w3c/csswg-drafts/issues/4312#issuecomment-577645403'>https://github.com/w3c/csswg-drafts/issues/4312#issuecomment-577645403</a></pre>
+<pre class='' id='issue-19'>
+Issue 19. <a href='issues-cr-2018.html#issue-19'>#</a>
+Summary:  Implementations don't include item margins in scrolling area
+From:     Takao Baba
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/4577#issue-534711823'>https://github.com/w3c/csswg-drafts/issues/4577#issue-534711823</a>
+Response: <a href='https://github.com/w3c/csswg-drafts/issues/4577#issuecomment-624946612'>https://github.com/w3c/csswg-drafts/issues/4577#issuecomment-624946612</a>
+Closed:   Question</pre>
+<pre class='a' id='issue-20'>
+Issue 20. <a href='issues-cr-2018.html#issue-20'>#</a>
+Summary:  Indefiniteness when sizing grid tracks in a flexible flex item
+From:     Oriol Brufau
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/4852'>https://github.com/w3c/csswg-drafts/issues/4852</a>
+Response: <a href='https://github.com/w3c/csswg-drafts/issues/4852#issuecomment-881005699'>https://github.com/w3c/csswg-drafts/issues/4852#issuecomment-881005699</a>
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/4852#issuecomment-881087521'>https://github.com/w3c/csswg-drafts/issues/4852#issuecomment-881087521</a>
+Closed:   Retracted</pre>
+<pre class='a' id='issue-21'>
+Issue 21. <a href='issues-cr-2018.html#issue-21'>#</a>
+Summary:  Clamp all of specified/transferred/content sizes by max-size at once
+From:     Christian Biesinger
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/4901'>https://github.com/w3c/csswg-drafts/issues/4901</a>
+Response: <a href='https://github.com/w3c/csswg-drafts/issues/4901#issuecomment-721998482'>https://github.com/w3c/csswg-drafts/issues/4901#issuecomment-721998482</a>
+Closed:   Accepted
+Resolved: Editorial</pre>
+<pre class='a' id='issue-22'>
+Issue 22. <a href='issues-cr-2018.html#issue-22'>#</a>
+Summary:  target main size is undefined at beginning of flexible length resolution
+From:     Simon Sapin
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/5179'>https://github.com/w3c/csswg-drafts/issues/5179</a>
+Response: <a href='https://github.com/w3c/csswg-drafts/issues/5179#issuecomment-642918532'>https://github.com/w3c/csswg-drafts/issues/5179#issuecomment-642918532</a>
+Changes:  <a href='https://github.com/w3c/csswg-drafts/commit/91bab66ac6081f971c07f0d0007287439b04e6f7'>https://github.com/w3c/csswg-drafts/commit/91bab66ac6081f971c07f0d0007287439b04e6f7</a>
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/5179#issuecomment-643255222'>https://github.com/w3c/csswg-drafts/issues/5179#issuecomment-643255222</a>
+Response: <a href='https://github.com/w3c/csswg-drafts/issues/5179#issuecomment-858168593'>https://github.com/w3c/csswg-drafts/issues/5179#issuecomment-858168593</a>
+Changes:  <a href='https://github.com/w3c/csswg-drafts/commit/88cb91df1257cf2dc03506169c1fa55ab52cecf7'>https://github.com/w3c/csswg-drafts/commit/88cb91df1257cf2dc03506169c1fa55ab52cecf7</a>
+Closed:   Accepted
+Resolved: Bugfix
+Verified: <a href='https://github.com/w3c/csswg-drafts/issues/5179#issuecomment-882476818'>https://github.com/w3c/csswg-drafts/issues/5179#issuecomment-882476818</a></pre>
+<pre class='a' id='issue-23'>
+Issue 23. <a href='issues-cr-2018.html#issue-23'>#</a>
+Summary:  Sizing replaced flex items: "perform layout" underdefined
+From:     Simon Sapin
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/5188'>https://github.com/w3c/csswg-drafts/issues/5188</a>
+Response: <a href='https://github.com/w3c/csswg-drafts/issues/5188#issuecomment-642924434'>https://github.com/w3c/csswg-drafts/issues/5188#issuecomment-642924434</a>
+Changes:  <a href='https://github.com/w3c/csswg-drafts/commit/ab0e4fe2142c730374cd106fbabac848c9e3c8f9'>https://github.com/w3c/csswg-drafts/commit/ab0e4fe2142c730374cd106fbabac848c9e3c8f9</a>
+Closed:   Accepted
+Resolved: Editorial
+Verified: <a href='https://github.com/w3c/csswg-drafts/issues/5188#issuecomment-643258449'>https://github.com/w3c/csswg-drafts/issues/5188#issuecomment-643258449</a></pre>
+<pre class='a' id='issue-24'>
+Issue 24. <a href='issues-cr-2018.html#issue-24'>#</a>
+Summary:  Conflicting definitions of used cross size
+From:     Simon Sapin
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/5190'>https://github.com/w3c/csswg-drafts/issues/5190</a>
+Response: <a href='https://github.com/w3c/csswg-drafts/issues/5190#issuecomment-642929504'>https://github.com/w3c/csswg-drafts/issues/5190#issuecomment-642929504</a>
+Changes:  <a href='https://github.com/w3c/csswg-drafts/commit/dbc8f6df5c759a53808c6562c550f6e1d695ef50'>https://github.com/w3c/csswg-drafts/commit/dbc8f6df5c759a53808c6562c550f6e1d695ef50</a>
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/5190#issuecomment-643269004'>https://github.com/w3c/csswg-drafts/issues/5190#issuecomment-643269004</a>
+Response: <a href='https://github.com/w3c/csswg-drafts/issues/5190#issuecomment-858162321'>https://github.com/w3c/csswg-drafts/issues/5190#issuecomment-858162321</a>
+Closed:   Accepted
+Resolved: Bugfix
+Verified: <a href='https://github.com/w3c/csswg-drafts/issues/5190#issuecomment-882479837'>https://github.com/w3c/csswg-drafts/issues/5190#issuecomment-882479837</a></pre>
+<pre class='a' id='issue-25'>
+Issue 25. <a href='issues-cr-2018.html#issue-25'>#</a>
+Summary:  Clarify aspect ratio calculations box
+From:     Christian Biesinger
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/5246'>https://github.com/w3c/csswg-drafts/issues/5246</a>
+Response: <a href='https://github.com/w3c/csswg-drafts/issues/5246#issuecomment-668848636'>https://github.com/w3c/csswg-drafts/issues/5246#issuecomment-668848636</a>
+Closed:   Accepted
+Resolved: Editorial
+Verified: <a href='https://github.com/w3c/csswg-drafts/issues/5246#issuecomment-682211322'>https://github.com/w3c/csswg-drafts/issues/5246#issuecomment-682211322</a></pre>
+<pre class='a' id='issue-26'>
+Issue 26. <a href='issues-cr-2018.html#issue-26'>#</a>
+Summary:  Undefined transferred size suggestion
+From:     David Grogan
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/5347'>https://github.com/w3c/csswg-drafts/issues/5347</a>
+Response: <a href='https://github.com/w3c/csswg-drafts/issues/5347#issuecomment-722005487'>https://github.com/w3c/csswg-drafts/issues/5347#issuecomment-722005487</a>
+Resolved: Editorial
+Verified: <a href='https://github.com/w3c/csswg-drafts/issues/5347#issuecomment-722015784'>https://github.com/w3c/csswg-drafts/issues/5347#issuecomment-722015784</a></pre>
+<pre class='r' id='issue-27'>
+Issue 27. <a href='issues-cr-2018.html#issue-27'>#</a>
+Summary:  Percentages don't account for gaps
+From:     Jacob Bearce
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/5399'>https://github.com/w3c/csswg-drafts/issues/5399</a>
+Response: <a href='https://github.com/w3c/csswg-drafts/issues/5399#issuecomment-669258207'>https://github.com/w3c/csswg-drafts/issues/5399#issuecomment-669258207</a>
+Closed:   Rejected
+Resolved: Editor discretion</pre>
+<pre class=' open' id='issue-28'>
+Issue 28. <a href='issues-cr-2018.html#issue-28'>#</a>
+Summary:  Avoid percentage height quirk in new layout models
+From:     Oriol Brufau
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/5545'>https://github.com/w3c/csswg-drafts/issues/5545</a>
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/5545#issuecomment-866353633'>https://github.com/w3c/csswg-drafts/issues/5545#issuecomment-866353633</a>
+Open:     <a href='https://github.com/whatwg/quirks/pull/76'>https://github.com/whatwg/quirks/pull/76</a>
+Resolved: <a href='https://github.com/w3c/csswg-drafts/issues/5545#issuecomment-1939708351'>https://github.com/w3c/csswg-drafts/issues/5545#issuecomment-1939708351</a></pre>
+<pre class='a' id='issue-29'>
+Issue 29. <a href='issues-cr-2018.html#issue-29'>#</a>
+Summary:  Initial value of flex-grow incorrect?
+From:     Louis Lazaris
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/5602'>https://github.com/w3c/csswg-drafts/issues/5602</a>
+Response: <a href='https://github.com/w3c/csswg-drafts/issues/5602#issuecomment-706440060'>https://github.com/w3c/csswg-drafts/issues/5602#issuecomment-706440060</a>
+Closed:   Invalid
+Verified: <a href='https://github.com/w3c/csswg-drafts/issues/5602#issuecomment-706580966'>https://github.com/w3c/csswg-drafts/issues/5602#issuecomment-706580966</a></pre>
+<pre class='a' id='issue-30'>
+Issue 30. <a href='issues-cr-2018.html#issue-30'>#</a>
+Summary:  Define -webkit- aliases in css-flexbox-1
+From:     Sam Sneddon
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/5634'>https://github.com/w3c/csswg-drafts/issues/5634</a>
+Response: <a href='https://github.com/w3c/csswg-drafts/issues/5634#issuecomment-722049318'>https://github.com/w3c/csswg-drafts/issues/5634#issuecomment-722049318</a>
+Changes:  <a href='https://github.com/w3c/csswg-drafts/commit/cd97478183c75a8cde070d91fad4c3f1e55b6765'>https://github.com/w3c/csswg-drafts/commit/cd97478183c75a8cde070d91fad4c3f1e55b6765</a>
+Closed:   Accepted
+Resolved: <a href='https://lists.w3.org/Archives/Public/www-style/2020Nov/0007.html'>https://lists.w3.org/Archives/Public/www-style/2020Nov/0007.html</a></pre>
+<pre class='a' id='issue-31'>
+Issue 31. <a href='issues-cr-2018.html#issue-31'>#</a>
+Summary:  Does definite cross-size from container transfer across ratio?
+From:     Ting-yu Lin
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/5663'>https://github.com/w3c/csswg-drafts/issues/5663</a>
+Response: <a href='https://github.com/w3c/csswg-drafts/issues/5663#issuecomment-721453016'>https://github.com/w3c/csswg-drafts/issues/5663#issuecomment-721453016</a>
+Closed:   Accepted
+Resolved: Editorial</pre>
+<pre class='d open' id='issue-32'>
+Issue 32. <a href='issues-cr-2018.html#issue-32'>#</a>
+Summary:  Omitted flex-basis from flex shorthand: 0 or 0%?
+From:     Emilio Cobos Álvarez
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/5742'>https://github.com/w3c/csswg-drafts/issues/5742</a>
+Open:     Deferred
+Note:     Waiting for implementations to catch up on intrinsic sizing</pre>
+<pre class='d open' id='issue-33'>
+Issue 33. <a href='issues-cr-2018.html#issue-33'>#</a>
+Summary:  Alignment vs static position of abspos flex container children
+From:     Daniel Holbert
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/5843'>https://github.com/w3c/csswg-drafts/issues/5843</a>
+Open:     Deferred
+Note:     Needs compat data</pre>
+<pre class='a' id='issue-34'>
+Issue 34. <a href='issues-cr-2018.html#issue-34'>#</a>
+Summary:  order applies-to doesn't mention grid items
+From:     Julian Descottes
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/5865'>https://github.com/w3c/csswg-drafts/issues/5865</a>
+Response: <a href='https://github.com/w3c/csswg-drafts/issues/5865#issuecomment-884323316'>https://github.com/w3c/csswg-drafts/issues/5865#issuecomment-884323316</a>
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/5865#issuecomment-884524335'>https://github.com/w3c/csswg-drafts/issues/5865#issuecomment-884524335</a>
+Response: <a href='https://github.com/w3c/csswg-drafts/issues/5865#issuecomment-885235341'>https://github.com/w3c/csswg-drafts/issues/5865#issuecomment-885235341</a>
+Changes:  <a href='https://github.com/w3c/csswg-drafts/commit/0259f1f7df9fc4649501c3a4735261418e667a3a'>https://github.com/w3c/csswg-drafts/commit/0259f1f7df9fc4649501c3a4735261418e667a3a</a>
+Changes:  <a href='https://github.com/w3c/csswg-drafts/commit/cf784533604d82add454a04078f6810637209e97'>https://github.com/w3c/csswg-drafts/commit/cf784533604d82add454a04078f6810637209e97</a>
+Closed:   Accepted
+Resolved: <a href='https://lists.w3.org/Archives/Public/www-style/2021Jul/0011.html'>https://lists.w3.org/Archives/Public/www-style/2021Jul/0011.html</a></pre>
+<pre class='a' id='issue-35'>
+Issue 35. <a href='issues-cr-2018.html#issue-35'>#</a>
+Summary:  collapsed flex items influence on containers intrinsic main size
+From:     Daniel Holbert
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/5985'>https://github.com/w3c/csswg-drafts/issues/5985</a>
+Response: <a href='https://github.com/w3c/csswg-drafts/issues/5985#issuecomment-858135479'>https://github.com/w3c/csswg-drafts/issues/5985#issuecomment-858135479</a>
+Changes:  <a href='https://github.com/w3c/csswg-drafts/commit/60ffc4058780d832d880a076fe02788f0cc6e8a7'>https://github.com/w3c/csswg-drafts/commit/60ffc4058780d832d880a076fe02788f0cc6e8a7</a>
+Closed:   Accepted
+Resolved: <a href='https://lists.w3.org/Archives/Public/www-style/2021Jun/0010.html'>https://lists.w3.org/Archives/Public/www-style/2021Jun/0010.html</a>
+Verified: <a href='https://github.com/w3c/csswg-drafts/issues/5985#issuecomment-862543001'>https://github.com/w3c/csswg-drafts/issues/5985#issuecomment-862543001</a></pre>
+<pre class='a' id='issue-36'>
+Issue 36. <a href='issues-cr-2018.html#issue-36'>#</a>
+Summary:  preferred aspect ratio doesn't include aspect-ratio property
+From:     Christian Biesinger
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/6058'>https://github.com/w3c/csswg-drafts/issues/6058</a>
+Response: <a href='https://github.com/w3c/csswg-drafts/issues/6058#issuecomment-788160821'>https://github.com/w3c/csswg-drafts/issues/6058#issuecomment-788160821</a>
+Closed:   Invalid
+Verified: <a href='https://github.com/w3c/csswg-drafts/issues/6058#issuecomment-788163962'>https://github.com/w3c/csswg-drafts/issues/6058#issuecomment-788163962</a></pre>
+<pre class='a' id='issue-37'>
+Issue 37. <a href='issues-cr-2018.html#issue-37'>#</a>
+Summary:  Clarify handling of aspect ratio without definite cross size
+From:     fantasai
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/6109'>https://github.com/w3c/csswg-drafts/issues/6109</a>
+Changes:  <a href='https://github.com/w3c/csswg-drafts/commit/2cbe6b3964d07df1190fefb201b720b86675a513'>https://github.com/w3c/csswg-drafts/commit/2cbe6b3964d07df1190fefb201b720b86675a513</a>
+Closed:   Accepted
+Resolved: Editorial
+Verified: commenter is editor</pre>
+<pre class='r' id='issue-38'>
+Issue 38. <a href='issues-cr-2018.html#issue-38'>#</a>
+Summary:  content overflows flex container instead of flex item
+From:     Joe Pea
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/6260'>https://github.com/w3c/csswg-drafts/issues/6260</a>
+Response: <a href='https://github.com/w3c/csswg-drafts/issues/6260#issuecomment-858829549'>https://github.com/w3c/csswg-drafts/issues/6260#issuecomment-858829549</a>
+Closed:   Rejected
+Note:     Cannot change behavior at this point anyway
+Resolved: Editor discretion</pre>
+<pre class='a' id='issue-39'>
+Issue 39. <a href='issues-cr-2018.html#issue-39'>#</a>
+Summary:  Example 4 unreadable in dark mode
+From:     Daniel Holbert
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/6387'>https://github.com/w3c/csswg-drafts/issues/6387</a>
+Changes:  <a href='https://github.com/w3c/csswg-drafts/commit/38cab179f81ccd3aeda7f5d25589ef233b607a7a'>https://github.com/w3c/csswg-drafts/commit/38cab179f81ccd3aeda7f5d25589ef233b607a7a</a>
+Closed:   Accepted
+Resolved: Editorial</pre>
+<pre class='a' id='issue-40'>
+Issue 40. <a href='issues-cr-2018.html#issue-40'>#</a>
+Summary:  resolving flex item auto preferred size for max-content contribution
+From:     Andy Jakubowski
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/6455'>https://github.com/w3c/csswg-drafts/issues/6455</a>
+Response: <a href='https://github.com/w3c/csswg-drafts/issues/6455#issuecomment-896378575'>https://github.com/w3c/csswg-drafts/issues/6455#issuecomment-896378575</a>
+Changes:  <a href='https://github.com/w3c/csswg-drafts/commit/fe5ad42fe7568e3864f793b6b6b257ad5c3b9f81'>https://github.com/w3c/csswg-drafts/commit/fe5ad42fe7568e3864f793b6b6b257ad5c3b9f81</a>
+Closed:   Accepted
+Resolved: Bugfix
+Verified: <a href='https://github.com/w3c/csswg-drafts/issues/6455#issuecomment-896378575'>https://github.com/w3c/csswg-drafts/issues/6455#issuecomment-896378575</a> (thumbs up)</pre>
+<pre class=' open' id='issue-41'>
+Issue 41. <a href='issues-cr-2018.html#issue-41'>#</a>
+Summary:  Definiteness of min-height: min-content/max-content undefined
+From:     fantasai
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/6457'>https://github.com/w3c/csswg-drafts/issues/6457</a>
+Changes:  <a href='https://github.com/w3c/csswg-drafts/commit/d0f304031403ac1e286bb5f0beafdeca3d0e6e14'>https://github.com/w3c/csswg-drafts/commit/d0f304031403ac1e286bb5f0beafdeca3d0e6e14</a>
+Open:     <a href='https://github.com/w3c/csswg-drafts/issues/6457#issuecomment-1992500598'>https://github.com/w3c/csswg-drafts/issues/6457#issuecomment-1992500598</a>
+Resolved: <a href='https://lists.w3.org/Archives/Public/www-style/2021Oct/0004.html'>https://lists.w3.org/Archives/Public/www-style/2021Oct/0004.html</a></pre>
+<pre class='' id='issue-42'>
+Issue 42. <a href='issues-cr-2018.html#issue-42'>#</a>
+Summary:  When can available space for flex items be infinite?
+From:     Andy Jakubowski
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/6476'>https://github.com/w3c/csswg-drafts/issues/6476</a>
+Response: <a href='https://github.com/w3c/csswg-drafts/issues/6476#issuecomment-897880817'>https://github.com/w3c/csswg-drafts/issues/6476#issuecomment-897880817</a>
+Closed:   Answered</pre>
+<pre class='' id='issue-43'>
+Issue 43. <a href='issues-cr-2018.html#issue-43'>#</a>
+Summary:  Resolving percentage padding on flex items
+From:     Andy Jakubowski
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/6510'>https://github.com/w3c/csswg-drafts/issues/6510</a>
+Response: <a href='https://github.com/w3c/csswg-drafts/issues/6510#issuecomment-897885776'>https://github.com/w3c/csswg-drafts/issues/6510#issuecomment-897885776</a>
+Closed:   Answered</pre>
+<pre class='a' id='issue-44'>
+Issue 44. <a href='issues-cr-2018.html#issue-44'>#</a>
+Summary:  Add flex layout aliases for alignment properties
+From:     Tab Atkins
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/6514'>https://github.com/w3c/csswg-drafts/issues/6514</a>
+Response: <a href='https://github.com/w3c/csswg-drafts/issues/6514#issuecomment-917222064'>https://github.com/w3c/csswg-drafts/issues/6514#issuecomment-917222064</a>
+Closed:   Retracted</pre>
+<pre class='a' id='issue-45'>
+Issue 45. <a href='issues-cr-2018.html#issue-45'>#</a>
+Summary:  flex shorthand defaults conflict with flex-grow/shrink initial values
+From:     pnabbefeld
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/6639'>https://github.com/w3c/csswg-drafts/issues/6639</a>
+Response: <a href='https://github.com/w3c/csswg-drafts/issues/6639#issuecomment-922242306'>https://github.com/w3c/csswg-drafts/issues/6639#issuecomment-922242306</a>
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/6639#issuecomment-922256842'>https://github.com/w3c/csswg-drafts/issues/6639#issuecomment-922256842</a>
+Response: <a href='https://github.com/w3c/csswg-drafts/issues/6639#issuecomment-1220029390'>https://github.com/w3c/csswg-drafts/issues/6639#issuecomment-1220029390</a>
+Changes:  <a href='https://github.com/w3c/csswg-drafts/commit/ef78972c3944f98919f41a4a9b6c841989f28168'>https://github.com/w3c/csswg-drafts/commit/ef78972c3944f98919f41a4a9b6c841989f28168</a>
+Closed:   Accepted
+Resolved: Editorial</pre>
+<pre class='oi' id='issue-46'>
+Issue 46. <a href='issues-cr-2018.html#issue-46'>#</a>
+Summary:  Serialization of &lt;number> in flex-grow/flex-shrink not interoperable
+From:     Sergio Villar
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/6706'>https://github.com/w3c/csswg-drafts/issues/6706</a>
+Response: <a href='https://github.com/w3c/csswg-drafts/issues/6706#issuecomment-932644943'>https://github.com/w3c/csswg-drafts/issues/6706#issuecomment-932644943</a>
+Closed:   OutOfScope
+Note:     CSSOM issue <a href='https://github.com/w3c/csswg-drafts/issues/6471'>https://github.com/w3c/csswg-drafts/issues/6471</a></pre>
+<pre class='a' id='issue-47'>
+Issue 47. <a href='issues-cr-2018.html#issue-47'>#</a>
+Summary:  Bad results from intrinsic cross size algo for column wrap flex containers
+From:     David Grogan
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/6777'>https://github.com/w3c/csswg-drafts/issues/6777</a>
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/6777#issuecomment-1071211730'>https://github.com/w3c/csswg-drafts/issues/6777#issuecomment-1071211730</a>
+Response: <a href='https://github.com/w3c/csswg-drafts/issues/6777#issuecomment-1220003107'>https://github.com/w3c/csswg-drafts/issues/6777#issuecomment-1220003107</a>
+Changes:  <a href='https://github.com/w3c/csswg-drafts/commit/5630e7b064addc6f2f9f57e68935e3cb3e778b65'>https://github.com/w3c/csswg-drafts/commit/5630e7b064addc6f2f9f57e68935e3cb3e778b65</a>
+Closed:   Accepted
+Resolved: <a href='https://lists.w3.org/Archives/Public/www-style/2022Oct/0015.html'>https://lists.w3.org/Archives/Public/www-style/2022Oct/0015.html</a></pre>
+<pre class='a' id='issue-48'>
+Issue 48. <a href='issues-cr-2018.html#issue-48'>#</a>
+Summary:  Parenthetical wrt preferred sizes is imprecise
+From:     David Grogan
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/6778'>https://github.com/w3c/csswg-drafts/issues/6778</a>
+Response: <a href='https://github.com/w3c/csswg-drafts/issues/6778#issuecomment-954875571'>https://github.com/w3c/csswg-drafts/issues/6778#issuecomment-954875571</a>
+Changes:  <a href='https://github.com/w3c/csswg-drafts/commit/f17ec7afe72fd14a2445354ec5e1feb34c09b597'>https://github.com/w3c/csswg-drafts/commit/f17ec7afe72fd14a2445354ec5e1feb34c09b597</a>
+Closed:   Accepted
+Resolved: Editorial</pre>
+<pre class='a' id='issue-49'>
+Issue 49. <a href='issues-cr-2018.html#issue-49'>#</a>
+Summary:  Automatic min size should use min-intrinsic instead of min-content
+From:     David Grogan
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/6794#issuecomment-1063323692'>https://github.com/w3c/csswg-drafts/issues/6794#issuecomment-1063323692</a>
+Response: <a href='https://github.com/w3c/csswg-drafts/issues/6794#issuecomment-1063323692'>https://github.com/w3c/csswg-drafts/issues/6794#issuecomment-1063323692</a>
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/6794#issuecomment-1218597495'>https://github.com/w3c/csswg-drafts/issues/6794#issuecomment-1218597495</a>
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/6794#issuecomment-1219962451'>https://github.com/w3c/csswg-drafts/issues/6794#issuecomment-1219962451</a>
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/6794#issuecomment-1220038900'>https://github.com/w3c/csswg-drafts/issues/6794#issuecomment-1220038900</a>
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/6794#issuecomment-1226273138'>https://github.com/w3c/csswg-drafts/issues/6794#issuecomment-1226273138</a>
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/6794#issuecomment-1248742930'>https://github.com/w3c/csswg-drafts/issues/6794#issuecomment-1248742930</a>
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/6794#issuecomment-2010318313'>https://github.com/w3c/csswg-drafts/issues/6794#issuecomment-2010318313</a>
+Response: <a href='https://github.com/w3c/csswg-drafts/issues/6794#issuecomment-2125293490'>https://github.com/w3c/csswg-drafts/issues/6794#issuecomment-2125293490</a>
+Changes:  <a href='https://github.com/w3c/csswg-drafts/pull/11690'>https://github.com/w3c/csswg-drafts/pull/11690</a>
+Closed:   Accepted
+Resolved: <a href='https://lists.w3.org/Archives/Public/www-style/2024May/0017.html'>https://lists.w3.org/Archives/Public/www-style/2024May/0017.html</a></pre>
+<pre class=' open' id='issue-50'>
+Issue 50. <a href='issues-cr-2018.html#issue-50'>#</a>
+Summary:  Flexbox alignment and margins across fragmentation breaks
+From:     Alison Maher
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/6812'>https://github.com/w3c/csswg-drafts/issues/6812</a>
+Response: <a href='https://github.com/w3c/csswg-drafts/issues/6812#issuecomment-973631150'>https://github.com/w3c/csswg-drafts/issues/6812#issuecomment-973631150</a>
+Open:     <a href='https://github.com/w3c/csswg-drafts/issues/6812#issuecomment-2584970370'>https://github.com/w3c/csswg-drafts/issues/6812#issuecomment-2584970370</a>
+Resolved: <a href='https://lists.w3.org/Archives/Public/www-style/2022Jan/0004.html'>https://lists.w3.org/Archives/Public/www-style/2022Jan/0004.html</a></pre>
+<pre class='a' id='issue-51'>
+Issue 51. <a href='issues-cr-2018.html#issue-51'>#</a>
+Summary:  Percentage height resolution inside flex items with indefinite basis
+From:     Sergio Villar
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/6822'>https://github.com/w3c/csswg-drafts/issues/6822</a>
+Response: <a href='https://github.com/w3c/csswg-drafts/issues/6822#issuecomment-1021925726'>https://github.com/w3c/csswg-drafts/issues/6822#issuecomment-1021925726</a>
+Changes:  <a href='https://github.com/w3c/csswg-drafts/commit/82b921239055547e72e4de0d47ab8fa0ada3e60a'>https://github.com/w3c/csswg-drafts/commit/82b921239055547e72e4de0d47ab8fa0ada3e60a</a>
+Closed:   Rejected
+Resolved: <a href='https://lists.w3.org/Archives/Public/www-style/2022Jan/0016.html'>https://lists.w3.org/Archives/Public/www-style/2022Jan/0016.html</a>
+Verified: <a href='https://github.com/w3c/csswg-drafts/issues/6822#issuecomment-1218371795'>https://github.com/w3c/csswg-drafts/issues/6822#issuecomment-1218371795</a></pre>
+<pre class=' open' id='issue-52'>
+Issue 52. <a href='issues-cr-2018.html#issue-52'>#</a>
+Summary:  Multi-line column flex fragmentation
+From:     Alison Maher
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/6855'>https://github.com/w3c/csswg-drafts/issues/6855</a>
+Response: <a href='https://github.com/w3c/csswg-drafts/issues/6855#issuecomment-1102928864'>https://github.com/w3c/csswg-drafts/issues/6855#issuecomment-1102928864</a>
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/6855#issuecomment-1102959875'>https://github.com/w3c/csswg-drafts/issues/6855#issuecomment-1102959875</a>
+Changes:  <a href='https://github.com/w3c/csswg-drafts/commit/da573d2689150c1163c24faed834c7d91fe52cda'>https://github.com/w3c/csswg-drafts/commit/da573d2689150c1163c24faed834c7d91fe52cda</a>
+Open
+Resolved: <a href='https://lists.w3.org/Archives/Public/www-style/2022Mar/0001.html'>https://lists.w3.org/Archives/Public/www-style/2022Mar/0001.html</a>
+Resolved: <a href='https://lists.w3.org/Archives/Public/www-style/2022May/0002.html'>https://lists.w3.org/Archives/Public/www-style/2022May/0002.html</a></pre>
+<pre class='a' id='issue-53'>
+Issue 53. <a href='issues-cr-2018.html#issue-53'>#</a>
+Summary:  Inconsistent units for flex fractions is confusing
+From:     David Grogan
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/6909'>https://github.com/w3c/csswg-drafts/issues/6909</a>
+Response: <a href='https://github.com/w3c/csswg-drafts/issues/6909#issuecomment-1009378118'>https://github.com/w3c/csswg-drafts/issues/6909#issuecomment-1009378118</a>
+Closed:   Retracted
+Verified: <a href='https://github.com/w3c/csswg-drafts/issues/6909#issuecomment-1015027475'>https://github.com/w3c/csswg-drafts/issues/6909#issuecomment-1015027475</a>
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/6909#issuecomment-1015674529'>https://github.com/w3c/csswg-drafts/issues/6909#issuecomment-1015674529</a>
+Response: <a href='https://github.com/w3c/csswg-drafts/issues/6909#issuecomment-1079498318'>https://github.com/w3c/csswg-drafts/issues/6909#issuecomment-1079498318</a>
+Changes:  <a href='https://github.com/w3c/csswg-drafts/commit/034e66671f05c4ba0c45cc20c79611c4747f18dc'>https://github.com/w3c/csswg-drafts/commit/034e66671f05c4ba0c45cc20c79611c4747f18dc</a>
+Closed:   Accepted
+Resolved: Editorial</pre>
+<script>
+(function () {
+    var sheet = document.styleSheets[0];
+    function addCheckbox(className) {
+        var element = document.querySelector('*.' + className);
+        var label = document.createElement('label');
+        label.innerHTML = element.innerHTML;
+        element.innerHTML = null;
+        var check = document.createElement('input');
+        check.type = 'checkbox';
+        if (className == 'open') {
+            check.checked = false;
+            sheet.insertRule('pre:not(.open)' + '{}', sheet.cssRules.length);
+            check.onchange = function (e) {
+                rule.style.display = this.checked ? 'none' : 'block';
+            }
+        }
+        else {
+            check.checked = true;
+            sheet.insertRule('pre.' + className + '{}', sheet.cssRules.length);
+            check.onchange = function (e) {
+                rule.style.display = this.checked ? 'block' : 'none';
+            }
+        }
+        var rule = sheet.cssRules[sheet.cssRules.length - 1];
+        element.appendChild(label);
+        label.insertBefore(check, label.firstChild);
+    }
+    ['a', 'd', 'fo', 'oi', 'r', 'open'].forEach(addCheckbox);
+}());
+</script>

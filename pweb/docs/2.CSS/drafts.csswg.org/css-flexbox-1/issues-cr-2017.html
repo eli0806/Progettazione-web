@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<title>CSS Flexible Box Module Level 1 Disposition of Comments for 2017-10-19 CR</title>
+<style>
+  .a  { background: lightgreen }
+  .d  { background: lightblue  }
+  .r  { background: orange     }
+  .fo { background: red        }
+  .open   { border: solid red; padding: 0.2em; }
+  :target { box-shadow: 0.25em 0.25em 0.25em;  }
+</style>
+
+<h1>CSS Flexible Box Module Level 1 Disposition of Comments for 2017-10-19 CR</h1>
+
+<p>Review document: <a href="https://www.w3.org/TR/2017/CR-css-flexbox-1-20171019/">https://www.w3.org/TR/2017/CR-css-flexbox-1-20171019/</a>
+
+<p>Editor's draft: <a href="http://dev.w3.org/csswg/css-flexbox-1/">http://dev.w3.org/csswg/css-flexbox-1/</a></p>
+
+
+
+<p>The following color coding convention is used for comments:</p>
+
+<ul>
+ <li class="a">Accepted or Rejected and positive response
+ <li class="r">Rejected and no response
+ <li class="fo">Rejected and negative response
+ <li class="d">Deferred
+ <li class="oi">Out-of-Scope or Invalid and not verified
+</ul>
+
+<p class=open>Open issues are marked like this</p>
+
+<p>An issue can be closed as <code>Accepted</code>, <code>OutOfScope</code>,
+<code>Invalid</code>, <code>Rejected</code>, or <code>Retracted</code>.
+<code>Verified</code> indicates commentor's acceptance of the response.</p>
+<pre class='a' id='issue-1'>
+Issue 1. <a href='issues-cr-2017.html#issue-1'>#</a>
+Summary:  Move min-width/min-height: auto definitions to css-sizing
+From:     Oriol Brufau
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/1920'>https://github.com/w3c/csswg-drafts/issues/1920</a>
+Response: <a href='https://github.com/w3c/csswg-drafts/issues/1920#issuecomment-342008468'>https://github.com/w3c/csswg-drafts/issues/1920#issuecomment-342008468</a>
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/2103'>https://github.com/w3c/csswg-drafts/issues/2103</a>
+Response: <a href='https://github.com/w3c/csswg-drafts/issues/2103#issuecomment-360955736'>https://github.com/w3c/csswg-drafts/issues/2103#issuecomment-360955736</a>
+Closed:   Accepted
+Resolved: <a href='https://lists.w3.org/Archives/Public/www-style/2017Dec/0004.html'>https://lists.w3.org/Archives/Public/www-style/2017Dec/0004.html</a></pre>
+<pre class='a' id='issue-2'>
+Issue 2. <a href='issues-cr-2017.html#issue-2'>#</a>
+Summary:  Choose single option for resolving margin/padding percentages
+From:     Rossen Atanassov
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/2085'>https://github.com/w3c/csswg-drafts/issues/2085</a>
+Response: <a href='https://github.com/w3c/csswg-drafts/issues/2085#issuecomment-362000362'>https://github.com/w3c/csswg-drafts/issues/2085#issuecomment-362000362</a>
+Changes:  <a href='https://github.com/w3c/csswg-drafts/commit/db68ee43e752fabf68fd1e776a0ac840f4d3e971'>https://github.com/w3c/csswg-drafts/commit/db68ee43e752fabf68fd1e776a0ac840f4d3e971</a>
+Closed:   Accepted
+Resolved: <a href='https://lists.w3.org/Archives/Public/www-style/2018Feb/0000.html'>https://lists.w3.org/Archives/Public/www-style/2018Feb/0000.html</a></pre>
+<pre class='a' id='issue-3'>
+Issue 3. <a href='issues-cr-2017.html#issue-3'>#</a>
+Summary:  When does min-width/min-height: auto compute to auto vs zero?
+From:     fantasai
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/2230'>https://github.com/w3c/csswg-drafts/issues/2230</a>
+Changes:  <a href='https://github.com/w3c/csswg-drafts/commit/cf709be33562b27fddd4200824d876378f47fe6d'>https://github.com/w3c/csswg-drafts/commit/cf709be33562b27fddd4200824d876378f47fe6d</a>
+Closed:   Accepted
+Resolved: <a href='https://lists.w3.org/Archives/Public/www-style/2018Feb/0000.html'>https://lists.w3.org/Archives/Public/www-style/2018Feb/0000.html</a></pre>
+<pre class='a' id='issue-4'>
+Issue 4. <a href='issues-cr-2017.html#issue-4'>#</a>
+Summary:  Make min-width: auto compute to auto always, resolve to zero as needed
+From:     Daniel Holbert
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/2248#issuecomment-362114572'>https://github.com/w3c/csswg-drafts/issues/2248#issuecomment-362114572</a>
+Closed:   Accepted
+Resolved: <a href='https://github.com/w3c/csswg-drafts/issues/2248#issuecomment-365688138'>https://github.com/w3c/csswg-drafts/issues/2248#issuecomment-365688138</a>
+Verified: <a href='https://github.com/w3c/csswg-drafts/issues/2248#issuecomment-370625542'>https://github.com/w3c/csswg-drafts/issues/2248#issuecomment-370625542</a></pre>
+<pre class='a' id='issue-5'>
+Issue 5. <a href='issues-cr-2017.html#issue-5'>#</a>
+Summary:  Min-content sizing too smart to be web compatible
+From:     François Remy
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/2353'>https://github.com/w3c/csswg-drafts/issues/2353</a>
+Response: <a href='https://github.com/w3c/csswg-drafts/issues/2353#issuecomment-378742623'>https://github.com/w3c/csswg-drafts/issues/2353#issuecomment-378742623</a>
+Closed:   Accepted
+Resolved: <a href='https://lists.w3.org/Archives/Public/www-style/2018May/0041.html'>https://lists.w3.org/Archives/Public/www-style/2018May/0041.html</a></pre>
+<pre class='r' id='issue-6'>
+Issue 6. <a href='issues-cr-2017.html#issue-6'>#</a>
+Summary:  Make order do semantic reordering
+From:     Robert Utasi
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/2405'>https://github.com/w3c/csswg-drafts/issues/2405</a>
+Response: <a href='https://github.com/w3c/csswg-drafts/issues/2405#issuecomment-371528202'>https://github.com/w3c/csswg-drafts/issues/2405#issuecomment-371528202</a>
+???:      <a href='https://github.com/w3c/csswg-drafts/issues/2405#issuecomment-371590054'>https://github.com/w3c/csswg-drafts/issues/2405#issuecomment-371590054</a>
+Closed:   Rejected
+Resolved: previous CSSWG resolutions, Web platform architectural principles, etc.</pre>
+<pre class='a' id='issue-7'>
+Issue 7. <a href='issues-cr-2017.html#issue-7'>#</a>
+Summary:  Use more formal language in note
+From:     Nadya678
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/2431'>https://github.com/w3c/csswg-drafts/issues/2431</a>
+Response: <a href='https://github.com/w3c/csswg-drafts/issues/2431#issuecomment-372120318'>https://github.com/w3c/csswg-drafts/issues/2431#issuecomment-372120318</a>
+Closed:   Accepted
+Changes:  (note was removed entirely due to issue 2)</pre>
+<pre class='a' id='issue-8'>
+Issue 8. <a href='issues-cr-2017.html#issue-8'>#</a>
+Summary:  Clarify interaction of table flex items and sizing algorithm
+From:     Morten Stenshorne
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/2442'>https://github.com/w3c/csswg-drafts/issues/2442</a>
+Response: <a href='https://github.com/w3c/csswg-drafts/issues/2442#issuecomment-385829501'>https://github.com/w3c/csswg-drafts/issues/2442#issuecomment-385829501</a>
+Closed:   Accepted</pre>
+<pre class='a' id='issue-9'>
+Issue 9. <a href='issues-cr-2017.html#issue-9'>#</a>
+Summary:  Interaction of table wrapper box and flex sizing
+From:     Daniel Holbert
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/2604'>https://github.com/w3c/csswg-drafts/issues/2604</a>
+Response: <a href='https://github.com/w3c/csswg-drafts/issues/2604#issuecomment-385824058'>https://github.com/w3c/csswg-drafts/issues/2604#issuecomment-385824058</a>
+Closed:   Invalid
+Verified: <a href='https://github.com/w3c/csswg-drafts/issues/2604#issuecomment-398896174'>https://github.com/w3c/csswg-drafts/issues/2604#issuecomment-398896174</a></pre>
+<pre class='a' id='issue-10'>
+Issue 10. <a href='issues-cr-2017.html#issue-10'>#</a>
+Summary:  Clarify break propagation
+From:     claytron5000
+Comment:  <a href='https://github.com/web-platform-tests/wpt/issues/7958#issuecomment-384413748'>https://github.com/web-platform-tests/wpt/issues/7958#issuecomment-384413748</a>
+Response: <a href='https://github.com/web-platform-tests/wpt/issues/7958#issuecomment-385836225'>https://github.com/web-platform-tests/wpt/issues/7958#issuecomment-385836225</a>
+Response: <a href='https://github.com/w3c/csswg-drafts/issues/2614'>https://github.com/w3c/csswg-drafts/issues/2614</a>
+Changes:  <a href='https://hg.csswg.org/drafts/rev/fa5bc2b61b56'>https://hg.csswg.org/drafts/rev/fa5bc2b61b56</a>
+Closed:   Accepted
+Resolved: <a href='https://lists.w3.org/Archives/Public/www-style/2018May/0029.html'>https://lists.w3.org/Archives/Public/www-style/2018May/0029.html</a></pre>
+<pre class='a' id='issue-11'>
+Issue 11. <a href='issues-cr-2017.html#issue-11'>#</a>
+Summary:  Add a note to explain flex values &lt; 1
+From:     fantasai
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/2617'>https://github.com/w3c/csswg-drafts/issues/2617</a>
+Changes:  <a href='https://github.com/w3c/csswg-drafts/commit/cfdc4a228acbabd1c4a7bda9ea467ae858396301'>https://github.com/w3c/csswg-drafts/commit/cfdc4a228acbabd1c4a7bda9ea467ae858396301</a>
+Closed:   Accepted
+Resolved: Editorial</pre>
+<pre class='a' id='issue-12'>
+Issue 12. <a href='issues-cr-2017.html#issue-12'>#</a>
+Summary:  Floor outer sizes where needed
+From:     fantasai
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/2655'>https://github.com/w3c/csswg-drafts/issues/2655</a>
+Response: <a href='https://github.com/w3c/csswg-drafts/issues/2655#issuecomment-415902551'>https://github.com/w3c/csswg-drafts/issues/2655#issuecomment-415902551</a>
+Closed:   Retracted (no changes to flexbox, only grid)
+Resolved: Bugfix</pre>
+<pre class='oi' id='issue-13'>
+Issue 13. <a href='issues-cr-2017.html#issue-13'>#</a>
+Summary:  Bidi vs anonymous wrappers
+From:     François Remy
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/2702'>https://github.com/w3c/csswg-drafts/issues/2702</a>
+Response: <a href='https://github.com/w3c/csswg-drafts/issues/2702#issuecomment-393706915'>https://github.com/w3c/csswg-drafts/issues/2702#issuecomment-393706915</a>
+Closed:   Invalid</pre>
+<pre class=' open' id='issue-14'>
+Issue 14. <a href='issues-cr-2017.html#issue-14'>#</a>
+Summary:  Clarifications to size computation dependencies
+From:     dbaron
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/2890'>https://github.com/w3c/csswg-drafts/issues/2890</a>
+Open:     Pending deeper investigation, scope of edits unknown</pre>
+<pre class='oi' id='issue-15'>
+Issue 15. <a href='issues-cr-2017.html#issue-15'>#</a>
+Summary:  Does overflow change the baseline on flex items?
+From:     Daniel Holbert
+Comment:  <a href='https://github.com/w3c/csswg-drafts/issues/2902'>https://github.com/w3c/csswg-drafts/issues/2902</a>
+Response: <a href='https://github.com/w3c/csswg-drafts/issues/2902#issuecomment-407576395'>https://github.com/w3c/csswg-drafts/issues/2902#issuecomment-407576395</a>
+Closed:   Invalid
+Notes:    Resulted in bugfix to css-align-3 wrt inline-block, no changes to flexbox</pre>
+<pre class=' open' id='issue-16'>
+Issue 16. <a href='issues-cr-2017.html#issue-16'>#</a>
+Summary: Investigate applying align-content to single-line flex containers
+From:    Tab Atkins and fantasai
+Comment: <a href='https://github.com/w3c/csswg-drafts/issues/3052'>https://github.com/w3c/csswg-drafts/issues/3052</a>
+Open:    Pending Web-compat investigation</pre>
+<script>
+(function () {
+    var sheet = document.styleSheets[0];
+    function addCheckbox(className) {
+        var element = document.querySelector('*.' + className);
+        var label = document.createElement('label');
+        label.innerHTML = element.innerHTML;
+        element.innerHTML = null;
+        var check = document.createElement('input');
+        check.type = 'checkbox';
+        if (className == 'open') {
+            check.checked = false;
+            sheet.insertRule('pre:not(.open)' + '{}', sheet.cssRules.length);
+            check.onchange = function (e) {
+                rule.style.display = this.checked ? 'none' : 'block';
+            }
+        }
+        else {
+            check.checked = true;
+            sheet.insertRule('pre.' + className + '{}', sheet.cssRules.length);
+            check.onchange = function (e) {
+                rule.style.display = this.checked ? 'block' : 'none';
+            }
+        }
+        var rule = sheet.cssRules[sheet.cssRules.length - 1];
+        element.appendChild(label);
+        label.insertBefore(check, label.firstChild);
+    }
+    ['a', 'd', 'fo', 'oi', 'r', 'open'].forEach(addCheckbox);
+}());
+</script>

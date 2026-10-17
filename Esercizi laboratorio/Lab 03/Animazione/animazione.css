@@ -1,0 +1,28 @@
+.animated{
+    position: relative;
+    animation-iteration-count: infinite;
+    animation-name: myAnimation;
+    animation-play-state: running;
+    animation-duration: 2s;
+    animation-timing-function: ease-out;
+    animation-delay: 0;
+    
+}
+
+p{
+    animation: 3s infinite alternate myAnimation;
+}
+
+.animated:hover{
+    animation-play-state: paused;
+}
+
+@keyframes myAnimation {
+from{
+        top:0;
+        left:0;
+}
+to{
+    transform: translate(2000px,600px) scale(2.5);
+    }
+}
