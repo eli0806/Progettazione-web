@@ -1,0 +1,21 @@
+div{
+    left:0px;
+    top:0px;
+    position:absolute;
+    height:10px;
+    width: 10px;
+    background-color: blue;
+}
+
+section{
+    border: 0.5px solid black;
+    height:400px;
+    width: 250px;
+    position: relative;
+
+}
+
+h1{
+    font-style:italic;
+}
+
